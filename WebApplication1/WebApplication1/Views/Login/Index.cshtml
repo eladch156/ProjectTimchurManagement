@@ -12,12 +12,13 @@
         height: 319px;
          
         border-style:none;
-    }
+            margin-right: 0px;
+        }
     .auto-style2 {
         width: 361px;
     }
     .auto-style3 {
-        width: 339px;
+        width: 417px;
         padding-bottom:10px;
         background:white;
     }
@@ -26,31 +27,59 @@
         height: 179px;
     }
     .auto-style5 {
-        width: 294px;
+        width: 234px;
           background:white;
           text-align:center;
     }
     .auto-style6 {
-        width: 68%;
+        width: 97%;
         margin-bottom:0px;
 
     border-radius: 10px 10px 0px 0px;
             height: 35px;
             margin-top: 0px;
+            
         }
      .auto-style7 {
-        width: 68%;
+        width: 97%;
         margin-top:0px;
             height: 35px;
               border-radius: 0px 0px 10px 10px;
+            margin-left: 0px;
         }
      .auto-style8 {
-        width: 30%;
+        width: 31%;
         margin-top:0px;
             height: 35px;
             float: right;
               border-radius: 20px 20px 20px 20px; 
               margin-right:105px;
+        }
+         .auto-style13 {
+            padding: 10px;
+            /*height:150px;*/
+            border:1px solid black;
+            border-radius:10px;
+            box-shadow:0px 0px 2px #777;
+            width: 319px;
+        }
+        .auto-style14 {
+            width: 113px;
+            height: 27px;
+            text-align:center;
+        }
+        .auto-style15 {
+            width: 312px;
+            height: 27px;
+        }
+        .auto-style16 {
+            width: 113px;
+            height: 16px;
+            text-align:center;
+        }
+        .auto-style17 {
+            width: 312px;
+            height: 16px;
         }
     </style>
 </head>
@@ -77,15 +106,29 @@
     <table cellspacing="0" class="auto-style1">
         <tr>
             <td class="auto-style2">&nbsp;</td>
-            <td class="auto-style5">
+            <td class="auto-style5" headers="Username">
                 <img alt="" class="auto-style4" src="@Url.Content("~/Images/Emblem_of_Israel.svg.png")" />
                 <br />
                 מערכת לניהול מכרז</td>
             <td class="auto-style3">
+                <table class="auto-style13">
 
+                    <tr>
+                        <td class="auto-style14"> <i>&nbsp;Username:</i></td>
+                        <td class="auto-style15">  <input id="Text1" class="auto-style6" type="text" /></td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style16">  <i>Password:</i></td>
+                        <td class="auto-style17"> <input id="Text2" class="auto-style7" type="text" /></td>
+                    </tr>
+                </table>
 
-                <input id="Text1" class="auto-style6" type="text" />
-                <input id="Text2" class="auto-style7" type="text" /><br />
+                   
+                
+              
+               
+                
+               <br />
                 <br />
                 <br />
                 <input id="Button1" type="button" value="Login" class="auto-style8" />
