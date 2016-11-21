@@ -130,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Infrastructure\AuthAbstract\AuthRestriections.cs" />
     <Compile Include="Infrastructure\AuthAbstract\IAuthProvider.cs" />
     <Compile Include="Infrastructure\AuthAbstract\TestProvider.cs" />
     <Compile Include="Controllers\LoginController.cs" />
