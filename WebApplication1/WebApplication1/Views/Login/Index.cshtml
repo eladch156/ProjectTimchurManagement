@@ -1,4 +1,4 @@
-﻿
+﻿@model WebApplication1.Models.LoginModel
 <head>
     <style type="text/css">
         .main_class
@@ -61,6 +61,7 @@
             border:1px solid black;
             border-radius:10px;
             box-shadow:0px 0px 2px #777;
+            padding-top:10px;
             width: 319px;
         }
         .auto-style14 {
@@ -103,6 +104,9 @@
     <p>
         &nbsp;
     </p>
+      @using(Html.BeginForm())
+        {
+   
     <table cellspacing="0" class="auto-style1">
         <tr>
             <td class="auto-style2">&nbsp;</td>
@@ -115,11 +119,11 @@
 
                     <tr>
                         <td class="auto-style14"> <i>&nbsp;Username:</i></td>
-                        <td class="auto-style15">  <input id="Text1" class="auto-style6" type="text" /></td>
+                        <td class="auto-style15"> @Html.EditorFor(model => model.Username) @Html.ValidationMessageFor(model => model.Username)</td>
                     </tr>
                     <tr>
                         <td class="auto-style16">  <i>Password:</i></td>
-                        <td class="auto-style17"> <input id="Text2" class="auto-style7" type="text" /></td>
+                        <td class="auto-style17"> @Html.EditorFor(model => model.Password)    @Html.ValidationMessageFor(model => model.Password)</td>
                     </tr>
                 </table>
 
@@ -131,9 +135,10 @@
                <br />
                 <br />
                 <br />
-                <input id="Button1" type="button" value="Login" class="auto-style8" />
+                <input id="Button1" type="submit" value="Login" class="auto-style8" />
             </td>
             <td>&nbsp;</td>
         </tr>
     </table>
+      }
 </body>
