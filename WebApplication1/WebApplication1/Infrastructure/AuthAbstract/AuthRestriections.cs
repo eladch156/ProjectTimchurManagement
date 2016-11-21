@@ -16,11 +16,18 @@ namespace WebApplication1.Infrastructure.AuthAbstract
             if (!isAuthorized)
                 return false;
 
-            string premission="";
-            string username = FormsAuthentication.GetAuthCookie().Value();
-                // get premission levels
+            
+            string[] prem_list = AccessLevel.Split(',');
 
-            if ()
+            string username = HttpContext.Current.User.Identity.Name;
+            Console.WriteLine(username);
+            string prem_user = "Accoutant"; // get premission levels for user - need to edit
+            //redirection to error page in this case
+           if(!prem_list.Contains(prem_user))
+            {
+                return false; 
+            }
+            return true;
         }
         
     }
