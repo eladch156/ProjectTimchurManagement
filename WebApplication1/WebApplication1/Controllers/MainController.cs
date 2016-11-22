@@ -124,5 +124,9 @@ namespace WebApplication1.Controllers
             return View();
 
         }
+        public ActionResult UnAuthError()
+        {
+            return View();
+        }
     }
 }
