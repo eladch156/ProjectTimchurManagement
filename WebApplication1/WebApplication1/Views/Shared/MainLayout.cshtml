@@ -31,7 +31,7 @@ var isUser=(@Model.Job=="Accoutant" );
     }
 
     li a:hover, .dropdown:hover .dropbtn {
-        background-color: red;
+        background-color: darkslategray;
     }
 
     li.dropdown {
@@ -95,7 +95,7 @@ var isUser=(@Model.Job=="Accoutant" );
                     <a href="/Main/MangClusters">ניהול סלים</a>
                     <a href="/Main/MangUnits">ניהול יחידות</a>
                 </div>
-            </li>";
+            </li>
             <li class="li_user"> שלום, @Model.Name (תפקיד: @Model.Job ) זוהי מערכת לניהול מכרזים ושליפות ספקים - @ViewBag.Title</li>
         </ul>
         </div>
