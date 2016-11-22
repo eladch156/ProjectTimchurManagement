@@ -1,11 +1,104 @@
 ﻿<!DOCTYPE html>
 
+@{
+var isAdmin=(@Model.Job=="Purchase Manager");
+var isUser=(@Model.Job=="Accoutant" );
+
+
+}
 <html>
 <head>
+    <script src="~/scripts/dropdown_code.js"></script>
+    <style type="text/css">
+       ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color:  	#87CEEB;
+    }
+
+    li {
+        float: right;
+    }
+
+    li a, .dropbtn {
+        display: inline-block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    li a:hover, .dropdown:hover .dropbtn {
+        background-color: red;
+    }
+
+    li.dropdown {
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    }
+    .li_user
+    {
+        float:left;
+        display: inline-block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        direction:rtl;
+    }
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: right;
+    }
+
+    .dropdown-content a:hover {background-color: #f1f1f1}
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+    </style>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
 </head>
 <body>
+  
+    <div class="toolbar_cont" >
+        <ul>
+          
+            <li><a href="/Main/MainIndex">עמוד ראשי</a></li>
+            <li class="dropdown" hidden="@(isUser ? " ": "hidden")">
+                <a href="#" class="dropbtn">ניהול שליפות</a>
+                <div class="dropdown-content">
+                    <a href="/Main/TichurSuppCreate">יצירת רשימת ספקים לתיחור</a>
+                    <a href="/Main/TichurExisting">צפייה ברשימות קיימות</a>
+
+                </div>
+            </li>
+            <li class="dropdown" hidden="@( isAdmin ? " ":" hidden")">
+                <a href="#" class="dropbtn">ניהול מערכת</a>
+                <div class="dropdown-content">
+                    <a href="/Main/MangUsers">ניהול משתמשים</a>
+                    <a href="/Main/MangSuppliers">ניהול ספקים</a>
+                    <a href="/Main/MangAuctions">ניהול מכרזים</a>
+                    <a href="/Main/MangClusters">ניהול סלים</a>
+                    <a href="/Main/MangUnits">ניהול יחידות</a>
+                </div>
+            </li>";
+            <li class="li_user"> שלום, @Model.Name (תפקיד: @Model.Job ) זוהי מערכת לניהול מכרזים ושליפות ספקים - @ViewBag.Title</li>
+        </ul>
+        </div>
     <div>
         @RenderBody()
     </div>

@@ -32,7 +32,7 @@ namespace WebApplication1.Controllers
 
                 {
                     FormsAuthentication.SetAuthCookie(mod.Username, false);
-                    
+                   
                     
                     return Redirect(Url.Action("MainIndex", "Main"));
                 }

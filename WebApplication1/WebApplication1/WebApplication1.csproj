@@ -130,6 +130,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Database\Database.cs" />
+    <Compile Include="Database\SingletonDatabase.cs" />
     <Compile Include="Infrastructure\AuthAbstract\AuthRestriections.cs" />
     <Compile Include="Infrastructure\AuthAbstract\IAuthProvider.cs" />
     <Compile Include="Infrastructure\AuthAbstract\TestProvider.cs" />
@@ -139,6 +141,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
+    <Compile Include="Models\UserGenData.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -153,6 +156,13 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Shared\MainLayout.cshtml" />
     <Content Include="Views\Main\MainIndex.cshtml" />
+    <Content Include="Views\Main\TichurSuppCreate.cshtml" />
+    <Content Include="Views\Main\TichurExisting.cshtml" />
+    <Content Include="Views\Main\MangUsers.cshtml" />
+    <Content Include="Views\Main\MangSuppliers.cshtml" />
+    <Content Include="Views\Main\MangAuctions.cshtml" />
+    <Content Include="Views\Main\MangClusters.cshtml" />
+    <Content Include="Views\Main\MangUnits.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -162,7 +172,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Database\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

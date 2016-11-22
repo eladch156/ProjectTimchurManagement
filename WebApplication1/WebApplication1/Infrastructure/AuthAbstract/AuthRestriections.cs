@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using WebApplication1.Database;
 
 namespace WebApplication1.Infrastructure.AuthAbstract
 {
@@ -18,10 +19,12 @@ namespace WebApplication1.Infrastructure.AuthAbstract
 
             
             string[] prem_list = AccessLevel.Split(',');
-
+            
+            
             string username = HttpContext.Current.User.Identity.Name;
-            Console.WriteLine(username);
+          
             string prem_user = "Accoutant"; // get premission levels for user - need to edit
+            SingletonDatabase.Instance().list.Add(new Models.UserGenData() { Name = username, Job = prem_user });
             //redirection to error page in this case
            if(!prem_list.Contains(prem_user))
             {
