@@ -20,11 +20,13 @@ namespace WebApplication1.Infrastructure.AuthAbstract
 
             
             string[] prem_list = AccessLevel.Split(',');
-            
-            
+
+            string prem_user="";
             string username = HttpContext.Current.User.Identity.Name;
-          
-            string prem_user = "Accoutant"; // get premission levels for user - need to edit
+            if (username.Equals("Admin"))
+                prem_user = "Purchase Manager"; // get premission levels for user - need to edit
+            else if (username.Equals("RegUser"))
+                prem_user = "Accountant";
             SingletonDatabase.Instance().list.Add(new Models.UserGenData() { Name = username, Job = prem_user });
             //redirection to error page in this case
            if(!prem_list.Contains(prem_user))

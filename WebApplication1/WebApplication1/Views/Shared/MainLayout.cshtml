@@ -1,8 +1,8 @@
 ﻿<!DOCTYPE html>
 
 @{
-var isAdmin=(@Model.Job=="Purchase Manager");
-var isUser=(@Model.Job=="Accoutant" );
+    var isAdmin=(@Model.Job=="Purchase Manager");
+    var isUser=(@Model.Job== "Accountant");
 
 
 }
@@ -76,30 +76,38 @@ var isUser=(@Model.Job=="Accoutant" );
   
     <div class="toolbar_cont" >
         <ul>
-          
-            <li><a href="/Main/MainIndex">עמוד ראשי</a></li>
-            <li class="dropdown" hidden="@(isUser ? " ": "hidden")">
-                <a href="#" class="dropbtn">ניהול שליפות</a>
-                <div class="dropdown-content">
-                    <a href="/Main/TichurSuppCreate">יצירת רשימת ספקים לתיחור</a>
-                    <a href="/Main/TichurExisting">צפייה ברשימות קיימות</a>
+            @if (isUser || isAdmin)
+            {
+                <li><a href="/Main/MainIndex">עמוד ראשי</a></li>
+                <li class="dropdown" hidden="@(isUser ? " " : "hidden")">
+                    <a href="#" class="dropbtn">ניהול שליפות</a>
+                    <div class="dropdown-content">
+                        <a href="/Main/TichurSuppCreate">יצירת רשימת ספקים לתיחור</a>
+                        <a href="/Main/TichurExisting">צפייה ברשימות קיימות</a>
 
-                </div>
-            </li>
-            <li class="dropdown" hidden="@( isAdmin ? " ":" hidden")">
-                <a href="#" class="dropbtn">ניהול מערכת</a>
-                <div class="dropdown-content">
-                    <a href="/Main/MangUsers">ניהול משתמשים</a>
-                    <a href="/Main/MangSuppliers">ניהול ספקים</a>
-                    <a href="/Main/MangAuctions">ניהול מכרזים</a>
-                    <a href="/Main/MangClusters">ניהול סלים</a>
-                    <a href="/Main/MangUnits">ניהול יחידות</a>
-                </div>
-            </li>
+                    </div>
+                </li>
+            }
+            @if (isAdmin)
+            {
+                <li class="dropdown" hidden="@( isAdmin ? " " : " hidden")">
+                    <a href="#" class="dropbtn">ניהול מערכת</a>
+                    <div class="dropdown-content">
+                        <a href="/Main/MangUsers">ניהול משתמשים</a>
+                        <a href="/Main/MangSuppliers">ניהול ספקים</a>
+                        <a href="/Main/MangAuctions">ניהול מכרזים</a>
+                        <a href="/Main/MangClusters">ניהול סלים</a>
+                        <a href="/Main/MangUnits">ניהול יחידות</a>
+                    </div>
+                </li>
+              
+
+            }
             <li class="li_user"> שלום, @Model.Name (תפקיד: @Model.Job ) זוהי מערכת לניהול מכרזים ושליפות ספקים - @ViewBag.Title</li>
         </ul>
         </div>
     <div>
+
         @RenderBody()
     </div>
 </body>

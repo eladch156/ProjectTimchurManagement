@@ -13,6 +13,10 @@ namespace WebApplication1.AuthAbstract
             {
                 return true;
             }
+            if (Username.Equals("RegUser") && Password.Equals("root1234"))
+            {
+                return true;
+            }
             return false;
         }
     }

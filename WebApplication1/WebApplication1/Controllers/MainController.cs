@@ -13,7 +13,7 @@ namespace WebApplication1.Controllers
     {
         // GET: Main
        [Authorize]
-       [AuthRestriections(AccessLevel="Accoutant,Purchase Manager")]
+       [AuthRestriections(AccessLevel= "Accountant,Purchase Manager")]
         public ActionResult MainIndex()
         {
             foreach (UserGenData item in SingletonDatabase.Instance().list )
@@ -26,7 +26,7 @@ namespace WebApplication1.Controllers
             return View();
         }
         [Authorize]
-        [AuthRestriections(AccessLevel = "Accoutant,Purchase Manager")]
+        [AuthRestriections(AccessLevel = "Accountant,Purchase Manager")]
         public ActionResult TichurSuppCreate()
         {
             foreach (UserGenData item in SingletonDatabase.Instance().list)
@@ -40,7 +40,7 @@ namespace WebApplication1.Controllers
 
         }
         [Authorize]
-        [AuthRestriections(AccessLevel = "Accoutant,Purchase Manager")]
+        [AuthRestriections(AccessLevel = "Accountant,Purchase Manager")]
         public ActionResult TichurExisting()
         {
             foreach (UserGenData item in SingletonDatabase.Instance().list)
