@@ -6,37 +6,74 @@
 
 
 }
-<html>
-<head>
-    <script src="~/scripts/dropdown_code.js"></script>
-    <style type="text/css">
-       ul {
+<style type="text/css">
+    html, body {
+        height: 100%;
+    }
+    .main_div
+    {
+        height:100%;
+    }
+    .section1 {
+        direction: rtl;
+        background-color: orange;
+        color: white;
+        height: 7.1%;
+    }
+
+    .section2 {
+        color: white;
+        direction: rtl;
+        background-color: blue;
+        height: 7.1%;
+    }
+
+    .section3 {
+        height: 35.8%;
+    }
+
+    .section4 {
+        color: white;
+        direction: rtl;
+        background-color: blue;
+        height: 7.1%;
+    }
+
+    .section5 {
+        height: 35.8%;
+    }
+
+    .toolbar_cont {
+        height: 7.1%;
+    }
+
+    ul {
         list-style-type: none;
         margin: 0;
         padding: 0;
         overflow: hidden;
-        background-color:  	#87CEEB;
+        background-color: #87CEEB;
     }
 
     li {
         float: right;
     }
 
-    li a, .dropbtn {
-        display: inline-block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-    }
+        li a, .dropbtn {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
 
-    li a:hover, .dropdown:hover .dropbtn {
-        background-color: darkslategray;
-    }
+            li a:hover, .dropdown:hover .dropbtn {
+                background-color: darkslategray;
+            }
 
-    li.dropdown {
-        display: inline-block;
-    }
+        li.dropdown {
+            display: inline-block;
+        }
 
     .dropdown-content {
         display: none;
@@ -45,16 +82,17 @@
         min-width: 160px;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     }
-    .li_user
-    {
-        float:left;
+
+    .li_user {
+        float: left;
         display: inline-block;
         color: white;
         text-align: center;
         padding: 14px 16px;
         text-decoration: none;
-        direction:rtl;
+        direction: rtl;
     }
+
     .dropdown-content a {
         color: black;
         padding: 12px 16px;
@@ -63,52 +101,61 @@
         text-align: right;
     }
 
-    .dropdown-content a:hover {background-color: #f1f1f1}
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
 
     .dropdown:hover .dropdown-content {
         display: block;
     }
-    </style>
+</style>
+<html>
+<head>
+    <script src="~/scripts/dropdown_code.js"></script>
+   
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
 </head>
 <body>
-  
-    <div class="toolbar_cont" >
-        <ul>
-            @if (isUser || isAdmin)
+   
+        <div class="main_div">
+            <section class="toolbar_cont">
+                <ul>
+                    @if (isUser || isAdmin)
             {
-                <li><a href="/Main/MainIndex">עמוד ראשי</a></li>
-                <li class="dropdown" hidden="@(isUser ? " " : "hidden")">
-                    <a href="#" class="dropbtn">ניהול שליפות</a>
-                    <div class="dropdown-content">
-                        <a href="/Main/TichurSuppCreate">יצירת רשימת ספקים לתיחור</a>
-                        <a href="/Main/TichurExisting">צפייה ברשימות קיימות</a>
+                        <li><a href="/Main/MainIndex">עמוד ראשי</a></li>
+                        <li class="dropdown" hidden="@(isUser ? " " : "hidden")">
+                            <a href="#" class="dropbtn">ניהול שליפות</a>
+                            <div class="dropdown-content">
+                                <a href="/Main/TichurSuppCreate">יצירת רשימת ספקים לתיחור</a>
+                                <a href="/Main/TichurExisting">צפייה ברשימות קיימות</a>
 
-                    </div>
-                </li>
-            }
-            @if (isAdmin)
+                            </div>
+                        </li>
+                    }
+                    @if (isAdmin)
             {
-                <li class="dropdown" hidden="@( isAdmin ? " " : " hidden")">
-                    <a href="#" class="dropbtn">ניהול מערכת</a>
-                    <div class="dropdown-content">
-                        <a href="/Main/MangUsers">ניהול משתמשים</a>
-                        <a href="/Main/MangSuppliers">ניהול ספקים</a>
-                        <a href="/Main/MangAuctions">ניהול מכרזים</a>
-                        <a href="/Main/MangClusters">ניהול סלים</a>
-                        <a href="/Main/MangUnits">ניהול יחידות</a>
-                    </div>
-                </li>
-              
+                        <li class="dropdown" hidden="@( isAdmin ? " " : " hidden")">
+                            <a href="#" class="dropbtn">ניהול מערכת</a>
+                            <div class="dropdown-content">
+                                <a href="/Main/MangUsers">ניהול משתמשים</a>
+                                <a href="/Main/MangSuppliers">ניהול ספקים</a>
+                                <a href="/Main/MangAuctions">ניהול מכרזים</a>
+                                <a href="/Main/MangClusters">ניהול סלים</a>
+                                <a href="/Main/MangUnits">ניהול יחידות</a>
+                            </div>
+                        </li>
 
-            }
-            <li class="li_user"> שלום, @Model.Name (תפקיד: @Model.Job ) זוהי מערכת לניהול מכרזים ושליפות ספקים - @ViewBag.Title</li>
-        </ul>
-        </div>
-    <div>
+
+                    }
+                    <li class="li_user"> שלום, @Model.Name (תפקיד: @Model.Job ) זוהי מערכת לניהול מכרזים ושליפות ספקים - @ViewBag.Title</li>
+                </ul>
+            </section>
+        
+
 
         @RenderBody()
     </div>
+
 </body>
 </html>
