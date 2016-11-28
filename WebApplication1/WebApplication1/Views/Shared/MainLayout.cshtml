@@ -18,8 +18,11 @@
         direction: rtl;
         background-color: orange;
         color: white;
-        height: 7.1%;
-    }
+        height:4.1%;
+            display: flex;
+            align-items: center;
+            padding-right:5px;
+         }
 
     .section2 {
         color: white;
@@ -111,7 +114,7 @@
 </style>
 <html>
 <head>
-    <script src="~/scripts/dropdown_code.js"></script>
+    <script src="~/scripts/dropdown_menu.js"></script>
    
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
@@ -124,7 +127,7 @@
                     @if (isUser || isAdmin)
             {
                         <li><a href="/Main/MainIndex">עמוד ראשי</a></li>
-                        <li class="dropdown" hidden="@(isUser ? " " : "hidden")">
+                        <li class="dropdown" hidden="">
                             <a href="#" class="dropbtn">ניהול שליפות</a>
                             <div class="dropdown-content">
                                 <a href="/Main/TichurSuppCreate">יצירת רשימת ספקים לתיחור</a>
@@ -135,7 +138,7 @@
                     }
                     @if (isAdmin)
             {
-                        <li class="dropdown" hidden="@( isAdmin ? " " : " hidden")">
+                        <li class="dropdown" hidden="">
                             <a href="#" class="dropbtn">ניהול מערכת</a>
                             <div class="dropdown-content">
                                 <a href="/Main/MangUsers">ניהול משתמשים</a>
