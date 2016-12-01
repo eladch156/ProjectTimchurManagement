@@ -32,6 +32,7 @@
     }
 
     .section3 {
+
         height: 35.8%;
     }
 
@@ -40,11 +41,50 @@
         direction: rtl;
         background-color: blue;
         height: 7.1%;
+           display: flex;
+            align-items: center;
+            
     }
 
     .section5 {
         height: 35.8%;
+        direction:rtl;
     }
+    #tabhigh
+    {
+          background-color:blue;
+    }
+    #tabhigh td
+    {
+          width: 7%;
+    }
+     #lowtab
+    {
+       
+           border-collapse: collapse;
+        direction:rtl;width:100%;
+
+    }
+    #lowtab tr:nth-child(even){background-color: lightblue;}
+    #lowtab td
+    {
+        width: 7%;
+        height: 30px;
+    }
+    #combtab
+    {
+      border-collapse: collapse;
+        direction:rtl;width:100%;
+    }
+      #combtab tr:nth-child(2n+2){background-color: lightblue;}
+      #combtab tr:nth-child(1){background-color: blue; color:white;}
+    #combtab td
+    {
+   
+        width: 7%;
+        height: 30px;
+    }
+
 
     .toolbar_cont {
         height: 7.1%;
@@ -103,7 +143,14 @@
         display: block;
         text-align: right;
     }
-
+    #exc_but
+    {
+        background-image: url( '@Url.Content("~/Images/xsl_icon.png")' );
+    background-size: 37px 37px;
+    float:left;
+    height: 40px;  
+    width: 40px;
+    }
         .dropdown-content a:hover {
             background-color: #f1f1f1;
         }
@@ -115,7 +162,21 @@
 <html>
 <head>
     <script src="~/scripts/dropdown_menu.js"></script>
-   
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/scripts/libs/FileSaver/FileSaver.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/scripts/libs/js-xlsx/xlsx.core.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/scripts/tableExport.min.js")"></script>
+    <script>
+     
+        $(function () {
+         
+      $("#datepicker").datepicker();
+      $("#datepicker2").datepicker();
+  } );
+    </script>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
 </head>

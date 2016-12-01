@@ -5,18 +5,97 @@
 }
 
 <section class="section1">
-    כותרת משנה
+    <b>  צפייה ברשימות קיימות</b>
 </section>
-<section class="section2">
-    כותרת 1
+<section class="section2" style="display:flex;padding-right:45px;align-items:center;">
+    <b> פרטי שליפה</b>
 </section>
-<section class="section3">
-    חלון א'
+<section class="section3" style="text-align:right;direction:rtl">
+    <form>
+        <br />
+        <br />
+        יחידה&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <select style="width:140px;">
+            <option>בחר/י ערך</option>
+        </select>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="radio" name="tichur_num_op" />
+       
+        מספר תיחור&nbsp;&nbsp;&nbsp;
+        <input style="width:140px;">
+       <br /><br />
+        מכרז&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <select style="width:140px;">
+            <option>בחר/י ערך</option>
+        </select>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="radio" name="tichur_num_op" />
+
+        תיחורים שרשימת הספקים שלהם נשלפה בין התאריכים:&nbsp;&nbsp;&nbsp;
+     
+        <br /><br />
+        סל&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <select style="width:140px;">
+            <option>בחר/י ערך</option>
+        </select>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        מ:<input type="text" id="datepicker"> &nbsp;&nbsp;&nbsp; עד: <input type="text" id="datepicker2">
+      <br /><br />
+        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" style="width:100px; height:25px" value="חדש"> </input>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<input type="submit" style="width:100px; height:25px" value="שלוף רשימה">&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" style="width:100px; height:25px" value="בטל שליפה"> </input>
+        
+    </form>
 </section>
 <section class="section4">
-    כותרת 2
+    <div style="float:right;width:50%;padding-left:1px;">
+        &nbsp; &nbsp; &nbsp; &nbsp; <b>תוצאות שליפה</b>
+    </div>
+    <div style="float:left;width:50%;padding-left:1px;">
+    <button  id="exc_but" ></button>
+        
+    </div>
+   
 </section>
+<br />
 <section class="section5">
-    חלון ב'
+    <table id="combtab" style="direction:rtl;width:100%;">
+      
+            <tr>
+                <td><b>מספר שורה</b></td>
+
+                <td><b>יחידה</b></td>
+                <td><b>מס מכרז</b></td>
+                <td><b>שם מכרז</b></td>
+                <td><b>תיחור</b></td>
+                <td><b>מס אשכול</b></td>
+                <td><b>שם אשכול</b></td>
+                <td><b>שם ספק</b></td>
+                <td><b>ח.פ.</b></td>
+                <td><b>איש קשר</b></td>
+                <td><b>כתובת אימייל</b></td>
+                <td><b>טלפון</b></td>
+                <td><b>תאריך ושעה</b></td>
+            </tr>
+           
+     
+            @for (var i = 0; i < 10; i++)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            }
+          
+</table>
 </section>
 

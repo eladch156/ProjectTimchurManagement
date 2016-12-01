@@ -31,13 +31,13 @@
        </select>
        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
        מספר תיחור&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-       <input style="width:140px;"></input><br /><br />
+       <input style="width:140px;" /><br /><br />
        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" style="width:100px; height:25px" value="חדש"> </input>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<input type="submit" style="width:100px; height:25px" value="שלוף רשימה"> </input>
 
    </form>
 </section>
 <section class="section4">
-  <table style="direction:rtl">
+  <table id="tabhigh" style="direction:rtl;width:100%;">
       <tr>
           <td><b>מספר שורה</b></td>
           <td><b>מספר תוצאות בשליפה</b></td>
@@ -57,5 +57,27 @@
   </table>
 </section>
 <section class="section5">
-    חלון ב'
+   
+    <table id="lowtab">
+      
+@for (var i = 0; i < 10; i++)
+{
+    <tr>
+        <td>@i</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+}
+    </table>
 </section>
