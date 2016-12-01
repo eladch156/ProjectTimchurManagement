@@ -166,16 +166,24 @@
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript" src="@Url.Content("~/scripts/libs/FileSaver/FileSaver.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/scripts/libs/js-xlsx/xlsx.core.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/scripts/tableExport.min.js")"></script>
+    
+    <script src="@Url.Content("~/scripts/jquery.table2excel.js")"></script>
     <script>
-     
         $(function () {
-         
-      $("#datepicker").datepicker();
-      $("#datepicker2").datepicker();
-  } );
+
+            $('#exc_but').click(function () {
+                $('#combtab').table2excel({
+                    exclude: ".noExl",
+                    name: "TichurExist Name",
+                    filename: "TichurExist"
+                });
+            });
+            $("#datepicker").datepicker();
+            $("#datepicker2").datepicker();
+
+        });
+      
+     
     </script>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
