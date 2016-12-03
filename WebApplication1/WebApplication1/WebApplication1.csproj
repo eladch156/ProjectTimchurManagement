@@ -129,6 +129,9 @@
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="scripts\dropdown_menu.js" />
+    <Content Include="scripts\jquery-1.12.4.js" />
+    <Content Include="scripts\jquery-ui.css" />
+    <Content Include="scripts\jquery-ui.js" />
     <Content Include="scripts\jquery.table2excel.js" />
     <Content Include="Web.config" />
   </ItemGroup>
