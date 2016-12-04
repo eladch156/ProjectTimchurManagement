@@ -171,6 +171,7 @@
     <Content Include="Views\Main\MangClusters.cshtml" />
     <Content Include="Views\Main\MangUnits.cshtml" />
     <Content Include="Views\Main\UnAuthError.cshtml" />
+    <Content Include="Views\Main\ApproveMsg.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

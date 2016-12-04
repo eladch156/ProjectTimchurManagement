@@ -12,6 +12,11 @@ namespace WebApplication1.Controllers
 {
     public class MainController : Controller
     {
+        public ActionResult ApproveMsg()
+        {
+
+            return View();
+        }
         // GET: Main
        [Authorize]
        [AuthRestriections(AccessLevel= "Accountant,Purchase Manager")]

@@ -188,8 +188,8 @@
     <title>@ViewBag.Title</title>
 </head>
 <body>
-   
-        <div class="main_div">
+      @Html.Partial("ApproveMsg")
+        <div class="main_div" style="z-index:1">
             <section class="toolbar_cont">
                 <ul>
                     @if (isUser || isAdmin)
