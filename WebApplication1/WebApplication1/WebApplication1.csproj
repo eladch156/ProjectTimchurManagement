@@ -172,6 +172,9 @@
     <Content Include="Views\Main\MangUnits.cshtml" />
     <Content Include="Views\Main\UnAuthError.cshtml" />
     <Content Include="Views\Main\ApproveMsg.cshtml" />
+    <Content Include="Views\Main\TichurimAccToDate.cshtml" />
+    <Content Include="Views\Main\TichurimAccToTichurNum.cshtml" />
+    <Content Include="Views\Main\Button.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
