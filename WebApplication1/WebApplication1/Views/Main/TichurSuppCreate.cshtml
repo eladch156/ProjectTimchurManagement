@@ -1,83 +1,8 @@
 ﻿
 @{
-    ViewBag.Title = "יצירת רשימות ספקים לתיחור";
+    ViewBag.Title = "TichurSuppCreate";
     Layout = "~/Views/Shared/MainLayout.cshtml";
 }
 
-<section class="section1">
-      <b>  יצירת רשימת ספקים לתיחור</b>
- 
-</section>
-<section class="section2" style="display:flex;padding-right:45px;align-items:center;">
-    <b> פרטי תיחור</b>
-</section>
-<section class="section3" style="text-align:right;direction:rtl">
-   <form><br />
-    <br />
-       יחידה&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-       <select style="width:140px;" >
-           <option>בחר/י ערך</option>
-       </select>
-       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      סל&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-       <select  style="width:140px;">
-           <option>בחר/י ערך</option>
-       </select ><br />
-       <br />
-       <br />
-        מכרז&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-       <select  style="width:140px;">
-           <option>בחר/י ערך</option>
-       </select>
-       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-       מספר תיחור&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-       <input style="width:140px;" /><br /><br />
-       &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" style="width:100px; height:25px" value="חדש"> </input>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<input type="submit" style="width:100px; height:25px" value="שלוף רשימה"> </input>
+<h2>TichurSuppCreate</h2>
 
-   </form>
-</section>
-<section class="section4">
-  <table id="tabhigh" style="direction:rtl;width:100%;">
-      <tr>
-          <td><b>מספר שורה</b></td>
-          <td><b>מספר תוצאות בשליפה</b></td>
-          <td><b>יחידה</b></td>
-          <td><b>מס מכרז</b></td>
-          <td><b>שם מכרז</b></td>
-          <td><b>תיחור</b></td>
-          <td><b>מס סל</b></td>
-          <td><b>שם סל</b></td>
-          <td><b>שם ספק</b></td>
-          <td><b>ח.פ.</b></td>
-          <td><b>איש קשר</b></td>
-          <td><b>כתובת אימייל</b></td>
-          <td><b>טלפון</b></td>
-          <td><b>תאריך ושעה</b></td>
-      </tr>
-  </table>
-</section>
-<section class="section5">
-   
-    <table id="lowtab">
-      
-@for (var i = 0; i < 10; i++)
-{
-    <tr>
-        <td>@i</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-}
-    </table>
-</section>

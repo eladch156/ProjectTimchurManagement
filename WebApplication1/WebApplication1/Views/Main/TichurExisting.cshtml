@@ -1,60 +1,8 @@
 ﻿
 @{
-    ViewBag.Title = "צפייה ברשימות קיימות";
+    ViewBag.Title = "TichurExisting";
     Layout = "~/Views/Shared/MainLayout.cshtml";
 }
 
-<section class="section1">
-    <b>  צפייה ברשימות קיימות</b>
-</section>
-<section class="section2" style="display:flex;padding-right:45px;align-items:center;">
-    <b> פרטי שליפה</b>
-</section>
-<section class="section3" style="text-align:right;direction:rtl">
-    
-        <br />
-        <br />
-        יחידה&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <select style="width:140px;">
-            <option>בחר/י ערך</option>
-        </select>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="radio" name="tichur_num_op" />
-       
-        מספר תיחור&nbsp;&nbsp;&nbsp;
-        <input style="width:140px;">
-       <br /><br />
-        מכרז&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <select style="width:140px;">
-            <option>בחר/י ערך</option>
-        </select>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="radio" name="tichur_num_op" />
-
-        תיחורים שרשימת הספקים שלהם נשלפה בין התאריכים:&nbsp;&nbsp;&nbsp;
-     
-        <br /><br />
-        סל&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <select style="width:140px;">
-            <option>בחר/י ערך</option>
-        </select>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        מ:<input type="text" id="datepicker"> &nbsp;&nbsp;&nbsp; עד: <input type="text" id="datepicker2">
-      <br /><br />
-        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" style="width:100px; height:25px" value="חדש"> </input>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<input type="submit" style="width:100px; height:25px" value="שלוף רשימה">&nbsp;&nbsp;&nbsp;&nbsp; <button id="tichur_canc" style="width:100px; height:25px" >בטל שליפה</button> 
-        
-   
-</section>
-<section class="section4">
-    <div style="float:right;width:50%;padding-left:1px;">
-        &nbsp; &nbsp; &nbsp; &nbsp; <b>תוצאות שליפה</b>
-    </div>
-    <div style="float:left;width:50%;padding-left:1px;">
-    <button  id="exc_but" ></button>
-        
-    </div>
-   
-</section>
-@Html.Partial("TichurimAccToDate")
-
+<h2>TichurExisting</h2>
 
