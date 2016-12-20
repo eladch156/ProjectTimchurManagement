@@ -1,12 +1,7 @@
 ﻿<!DOCTYPE html>
 
 @{
-    var isAdmin=(@Model.Job=="Purchase Manager");
-    var isUser=(@Model.Job== "Accountant");
-    if (isAdmin)
-    {
-        PageData["UseSecret"] = true;
-    }
+    PageData["UserData"] = true;
 
 }
 <style>
@@ -34,8 +29,7 @@
         <div class="main_div">
             <section class="toolbar_cont">
                 <ul>
-                    @if (isUser || isAdmin)
-            {
+                   
                         <li><a href="/Main/MainIndex">עמוד ראשי</a></li>
                         <li class="dropdown" hidden="">
                             <a href="#" class="dropbtn">ניהול שליפות</a>
@@ -45,9 +39,7 @@
 
                             </div>
                         </li>
-                    }
-                    @if (isAdmin)
-            {
+                  
                         <li class="dropdown" hidden="">
                             <a href="#" class="dropbtn">ניהול מערכת</a>
                             <div class="dropdown-content">
@@ -60,8 +52,8 @@
                         </li>
 
 
-                    }
-                    <li class="li_user"> שלום, @Model.Name (תפקיד: @Model.Job ) זוהי מערכת לניהול מכרזים ושליפות ספקים - @ViewBag.Title</li>
+                    
+                    <li class="li_user"> שלום, XXXXXX (תפקיד:XXXXXX ) זוהי מערכת לניהול מכרזים ושליפות ספקים - @ViewBag.Title</li>
                 </ul>
             </section>
             <br />
