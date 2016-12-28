@@ -6,28 +6,23 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
 using WebApplication1.Database;
+using WebApplication1.Models;
 
 namespace WebApplication1.Infrastructure.AuthAbstract
 {
     public class AuthRestriections : AuthorizeAttribute
     {
-        public string AccessLevel { get; set; }
+        public string Name { get; set; }
         protected override bool AuthorizeCore(HttpContextBase context)
         {
             var isAuthorized=base.AuthorizeCore(context);
             if (!isAuthorized)
                 return false;
+            var claimsIdentity = context.User.Identity as System.Security.Claims.ClaimsIdentity;
+            var name = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);
 
-            
-            string[] prem_list = AccessLevel.Split(',');
-
-            string prem_user="";
-            string username = HttpContext.Current.User.Identity.Name;
-            if (username.Equals("Admin"))
-                prem_user = "Purchase Manager"; // get premission levels for user - need to edit
-            else if (username.Equals("RegUser"))
-                prem_user = "Accountant";
-            SingletonDatabase.Instance().list.Add(new Models.UserGenData() { Name = username, Job = prem_user });
+            string[] prem_list = SingletonDatabase.Instance().role_map[Name].Split(',');
+            string prem_user = SingletonDatabase.Instance().list.Find((RoleModel mod) => { return mod.Name == (string)name.Value; }).Role;
             //redirection to error page in this case
            if(!prem_list.Contains(prem_user))
             {

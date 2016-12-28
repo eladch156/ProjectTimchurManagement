@@ -1,92 +1,65 @@
 ﻿<!DOCTYPE html>
-
+@using System.Security.Claims;
 @{
-    PageData["UserData"] = true;
-
+    var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+    var name = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.GivenName);
 }
-<style>
-
-
-</style>
-<link rel="stylesheet" type="text/css" href="@Url.Content("~/Style/MainLayoutStyle.css")">
 <html>
 <head>
-    <script src="~/scripts/dropdown_menu.js"></script>
     <link rel="stylesheet" href="@Url.Content("~/scripts/jquery-ui.css")">
     <script src="@Url.Content("~/scripts/jquery-1.12.4.js")"></script>
     <script src="@Url.Content("~/scripts/jquery-ui.js")"></script>
-
     <script src="@Url.Content("~/scripts/jquery.table2excel.js")"></script>
-    <script src="@Url.Content("~/scripts/excel_but.js")">
-
-
-    </script>
+    <script src="@Url.Content("~/scripts/excel_but.js")"></script>
+<link rel="stylesheet" href="@Url.Content("~/Style/bootstrap.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Style/bootstrap-rtl.css")">
+<script src="@Url.Content("~/scripts/bootstrap.min.js")"></script>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
 </head>
 <body>
-
-        <div class="main_div">
-            <section class="toolbar_cont">
-                <ul>
-                   
-                        <li><a href="/Main/MainIndex">עמוד ראשי</a></li>
-                        <li class="dropdown" hidden="">
-                            <a href="#" class="dropbtn">ניהול שליפות</a>
-                            <div class="dropdown-content">
-                                <a href="/Main/TichurSuppCreate">יצירת רשימת ספקים לתיחור</a>
-                                <a href="/Main/TichurExisting">צפייה ברשימות קיימות</a>
-
-                            </div>
-                        </li>
-                  
-                        <li class="dropdown" hidden="">
-                            <a href="#" class="dropbtn">ניהול מערכת</a>
-                            <div class="dropdown-content">
-                                <a href="/Main/MangUsers">ניהול משתמשים</a>
-                                <a href="/Main/MangSuppliers">ניהול ספקים</a>
-                                <a href="/Main/MangAuctions">ניהול מכרזים</a>
-                                <a href="/Main/MangClusters">ניהול סלים</a>
-                                <a href="/Main/MangUnits">ניהול יחידות</a>
-                            </div>
-                        </li>
-
-
-                    
-                    <li class="li_user"> שלום, XXXXXX (תפקיד:XXXXXX ) זוהי מערכת לניהול מכרזים ושליפות ספקים - @ViewBag.Title</li>
-                </ul>
-            </section>
-            <br />
-
-            <fieldset id="upper_area">
-
-                <legend id="upper_area_title">@PageData["UpperTitle"]</legend>
-
-                @RenderSection("Upper")
-            </fieldset>
-           <br />
-
-            <br />
-            <br />
-            <br />
-
-            <br />
-
-
-
-            <fieldset id="lower_area">
-
-                <legend id="lower_area_title">@PageData["LowerTitle"]</legend>
-
-                    @if (PageData["ExtraButtons"] == true)
+<nav class="navbar navbar-default"><div class="container-fluid"><ul class="nav navbar-nav">
+                <li class="active"><a href="/Main/MainIndex">עמוד ראשי</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">ניהול שליפות<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/Main/TichurSuppCreate">יצירת רשימת ספקים לתיחור</a></li>
+                        <li><a href="/Main/TichurExisting">צפייה ברשימות קיימות</a></li>
+                    </ul>
+                </li>
+                @if (User.IsInRole("Admin"))
+                {
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">ניהול מערכת<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/Main/MangUsers">ניהול משתמשים</a></li>
+                            <li><a href="/Main/MangSuppliers">ניהול ספקים</a></li>
+                            <li><a href="/Main/MangAuctions">ניהול מכרזים</a></li>
+                            <li><a href="/Main/MangClusters">ניהול סלים</a></li>
+                            <li><a href="/Main/MangUnits">ניהול יחידות</a></li>
+                        </ul>
+                    </li>
+                }
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                @{
+                    var job = "Unkown";
+                    if (User.IsInRole("Admin"))
                     {
-
-                        @RenderPage(@Url.Content("~/Views/Main/ExtraButtons.cshtml"));
+                        job = "מנהל רכש";
 
                     }
-                @RenderSection("Lower")
-            </fieldset>
-</div>
-
+                    else if (User.IsInRole("User"))
+                    {
+                        job = "חשב";
+                    }
+                }
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> @name.Value,@job</a></li>
+                <li><a href="/Login/LoginOut"><span class="glyphicon glyphicon-log-out"></span> התנתק</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-globe"></span> @ViewBag.Title</a></li>
+            </ul>
+        </div>
+    </nav>
+    @RenderBody()
 </body>
 </html>

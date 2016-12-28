@@ -16,7 +16,6 @@ namespace WebApplication1.Models
         [Required]
         [DataType(DataType.Password)]
         public String Password { get; set; }
-
         [HiddenInput]
         public string ReturnUrl { get; set; }
     }

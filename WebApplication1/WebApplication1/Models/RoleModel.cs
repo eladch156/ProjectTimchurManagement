@@ -5,9 +5,10 @@ using System.Web;
 
 namespace WebApplication1.Models
 {
-    public class UserGenData
+    public class RoleModel
     {
         public String Name { get; set; }
-        public String Job { get; set; }
+        public String GivenName { get; set; }
+        public String Role { get; set; }
     }
 }

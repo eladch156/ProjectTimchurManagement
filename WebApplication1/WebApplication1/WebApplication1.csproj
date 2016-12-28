@@ -183,19 +183,34 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\Emblem_of_Israel.svg.png" />
     <Content Include="Images\warn_unauth.jpg" />
     <Content Include="Images\xsl_icon.png" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
+    <Content Include="scripts\bootstrap.js" />
+    <Content Include="scripts\bootstrap.min.js" />
     <Content Include="scripts\execl_but.js" />
+    <Content Include="scripts\holder.js" />
+    <Content Include="scripts\html5shiv.js" />
     <Content Include="scripts\jquery-1.12.4.js" />
     <Content Include="scripts\jquery-ui.css" />
     <Content Include="scripts\jquery-ui.js" />
-    <Content Include="scripts\jquery.table2excel.js" />
+    <Content Include="scripts\jquery.min.js" />
+    <Content Include="scripts\respond.min.js" />
+    <Content Include="Style\bootstrap-flipped.css" />
+    <Content Include="Style\bootstrap-flipped.min.css" />
+    <Content Include="Style\bootstrap-rtl.css" />
+    <Content Include="Style\bootstrap-rtl.min.css" />
+    <Content Include="Style\bootstrap-theme.css" />
+    <Content Include="Style\bootstrap-theme.min.css" />
+    <Content Include="Style\bootstrap.css" />
+    <Content Include="Style\bootstrap.min.css" />
     <Content Include="Style\MainLayoutStyle.css" />
     <Content Include="Style\LoginStyle.css" />
+    <Content Include="Style\Table.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -213,8 +228,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
-    <Compile Include="Models\UserGenData.cs" />
+    <Compile Include="Models\RoleModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\TableModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -238,6 +254,17 @@
     <Content Include="Views\Main\UnAuthError.cshtml" />
     <Content Include="Views\Main\ExtraButtons.cshtml" />
     <Content Include="Views\Main\SecretButton.cshtml" />
+    <Content Include="Views\Main\Table.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Style\bootstrap-flipped.css.map" />
+    <Content Include="Style\bootstrap-rtl.css.map" />
+    <Content Include="Style\bootstrap-theme.css.map" />
+    <Content Include="Style\bootstrap-theme.min.css.map" />
+    <Content Include="Style\bootstrap.css.map" />
+    <Content Include="Style\bootstrap.min.css.map" />
+    <Content Include="Views\Login\LoginOut.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -247,6 +274,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\App\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
