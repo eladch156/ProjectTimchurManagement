@@ -4,6 +4,83 @@
     Layout = "~/Views/Shared/MainLayout.cshtml";
 }
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="input-group" id="adv-search">
+                <input type="text" class="form-control" placeholder="ליצירת רשימה לחץ על התפריט" />
+                <div id="search_grop_butts" class="input-group-btn">
+                    <div  id="search_contain_buttns"  class="btn-group" role="group">
+                        <div id="search_contain" class="dropdown dropdown-lg">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                            <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                <form id="form_search_area" class="form-horizontal" role="form">
+<div class="form-group">
+    @if (!User.IsInRole("Admin"))
+    {
+        <div class="form-group">
+            <label class="control-label" for="sel_unit">יחידה:</label>
+
+            <select class="form-control" id="sel_unit">
+                <option>בחר/י ערך</option>
+
+            </select>
+            </div>
+
+    }
+    else
+    {
+
+        <div class="form-group">
+            <label class="control-label" for="sel_unit">יחידה:</label>
+
+            <select class="form-control" id="sel_unit">
+                <option>בחר/י ערך</option>
+
+            </select>
+            </div>
+    }
+
+    <div class="form-group">
+        <label class="control-label" for="sel_clust">סל:</label>
+
+
+        <select class="form-control" id="sel_clust">
+            <option>בחר/י ערך</option>
+        </select>
+        </div>
+
+
+    <div class="form-group">
+        <label class="control-label" for="sel_auct">מכרז:</label>
+
+
+        <select class="form-control" id="sel_unit">
+            <option>בחר/י ערך</option>
+
+        </select>
+        </div>
+
+    <div class="form-group">
+        <label class="control-label" for="tichur_num">מס' תיחור:</label>
+
+        <input type="text" class="form-control" id="tichur_num">
+
+    </div>
+
+
+                                </form>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true">&nbsp;</span>שלוף רשימה</button>
+                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-new-window" aria-hidden="true">&nbsp;</span>חדש</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @Html.Partial("Table", new TableModel()
 {
     header = new List<string>() { "מס' שורה", "מס' תוצאות בשליפה", "יחידה", "מספר מכרז", "שם מכרז", "תיחור", "מס' סל", "שם סל", "שם ספק", "ת.פ.", "איש קשר", "כתובת אימייל", "טלפון", "תאריך ושעה" },
@@ -11,67 +88,3 @@
     values = new List<List<string>>() { new List<string>() { "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa" },
     new List<string>() { "aaaaa", "abbaa", "aabaa", "aaaba", "abbaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa" }},
 })
-
-<form class="form-horizontal">
-    <br />
-    @if (!User.IsInRole("Admin"))
-    {
-        <div class="form-group ui-state-disabled">
-            <label class="control-label col-sm-1" for="sel_unit">יחידה:</label>
-            <div class="col-sm-5">
-
-                <select class="form-control" id="sel_unit">
-                    <option>בחר/י ערך</option>
-
-                </select>
-            </div>
-           
-      
-            </div>
-    }
-    else
-    {
-        <div class="form-group">
-            <label class="control-label col-sm-1" for="sel_unit">יחידה:</label>
-            <div class="col-sm-5">
-                <select class="form-control" id="sel_unit">
-                    <option>בחר/י ערך</option>
-
-                </select>
-            </div>
-           
-            <label class="control-label col-sm-1" for="sel_clust">סל:</label>
-
-            <div class="col-sm-5">
-                <select class="form-control" id="sel_clust">
-                    <option>בחר/י ערך</option>
-                </select>
-            </div>
-        </div>
-    }
-    <div class="form-group">
-
-        <label class="control-label col-sm-1" for="sel_auct">מכרז:</label>
-
-        <div class="col-sm-5">
-            <select class="form-control" id="sel_unit">
-                <option>בחר/י ערך</option>
-
-            </select>
-        </div> 
-        <label class="control-label col-sm-1" for="tichur_num">מס' תיחור:</label>
-        <div class="col-sm-5">
-            <input type="text" class="form-control" id="tichur_num">
-        </div>
-    </div>
-  
-    <div class="form-group">
-        <div class="col-sm-1"></div>
-            <div class="col-sm-6">
-                <button type="submit" class="btn btn-default">חדש</button>
-            </div>
-            <div class="col-sm-5">
-                <button type="submit" class="btn btn-default">שלוף רשימה</button>
-            </div>
-        </div>
-</form>
