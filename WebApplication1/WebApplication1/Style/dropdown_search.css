@@ -31,12 +31,14 @@
     #adv-search {
         width: 500px;
         margin: 0 auto;
+       
     }
     #search_contain {
         position: static !important;
     }
         #search_contain .dropdown-menu {
             min-width: 500px;
+
         }
 
 }

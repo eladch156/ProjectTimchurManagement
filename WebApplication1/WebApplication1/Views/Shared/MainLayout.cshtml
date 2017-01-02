@@ -9,12 +9,56 @@
     <link rel="stylesheet" href="@Url.Content("~/scripts/jquery-ui.css")">
     <script src="@Url.Content("~/scripts/jquery-1.12.4.js")"></script>
     <script src="@Url.Content("~/scripts/jquery-ui.js")"></script>
-    <script src="@Url.Content("~/scripts/jquery.table2excel.js")"></script>
-    <script src="@Url.Content("~/scripts/excel_but.js")"></script>
+
 <link rel="stylesheet" href="@Url.Content("~/Style/bootstrap.css")">
     <link rel="stylesheet" href="@Url.Content("~/Style/bootstrap-rtl.css")">
     <link rel="stylesheet" href="@Url.Content("~/Style/dropdown_search.css")">
 <script src="@Url.Content("~/scripts/bootstrap.min.js")"></script>
+    <script type="text/javascript">
+        var closable = true;
+        jQuery.fn.extend({
+            disable: function (state) {
+                return this.each(function () {
+                    var $this = $(this);
+                    $this.toggleClass('disabled', state);
+                });
+            }
+        });
+
+        $(document).ready(function(){
+            $('.send-mod-but').disable(true);
+            $(".datepicker").datepicker({
+                showOtherMonths: true
+
+            });
+            $('.stayopenbut').click(function () {
+                closable = !closable;
+
+            });
+            $('.stayopen').on({
+                
+      
+                "hide.bs.dropdown": function () { return closable; }
+            });
+            $('#comment').change(function () {
+                
+                var count = $("#comment").val().length;
+                if(count==0)
+                {
+                    $('.send-mod-but').disable(true);
+                }
+                else
+                {
+                    $('.send-mod-but').disable(false);
+                }
+                
+            });
+        });
+           
+            
+       
+      
+    </script>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
 </head>

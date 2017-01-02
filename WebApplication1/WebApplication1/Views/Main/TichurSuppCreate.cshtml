@@ -8,68 +8,106 @@
     <div class="row">
         <div class="col-md-12">
             <div class="input-group" id="adv-search">
-                <input type="text" class="form-control" placeholder="ליצירת רשימה לחץ על התפריט" />
+                <label class="form-control"  >ליצירת רשימה לחץ על <span class="glyphicon glyphicon-arrow-left"></span></label>
                 <div id="search_grop_butts" class="input-group-btn">
                     <div  id="search_contain_buttns"  class="btn-group" role="group">
                         <div id="search_contain" class="dropdown dropdown-lg">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-                            <div class="dropdown-menu dropdown-menu-right" role="menu">
+                            <div class="dropdown-menu dropdown-menu-left" role="menu">
                                 <form id="form_search_area" class="form-horizontal" role="form">
-<div class="form-group">
-    @if (!User.IsInRole("Admin"))
-    {
-        <div class="form-group">
-            <label class="control-label" for="sel_unit">יחידה:</label>
+                                    
+                                        @if (!User.IsInRole("Admin"))
+                                        {
 
-            <select class="form-control" id="sel_unit">
-                <option>בחר/י ערך</option>
+                                            <div class="form-group">
+                                                <div class="row">
 
-            </select>
-            </div>
+                                                    <div class="col-sm-2">
+                                                        <label class="control-label" for="sel_unit">יחידה:</label>
 
-    }
-    else
-    {
+                                                    </div>
+                                                    <div class="col-sm-4">
 
-        <div class="form-group">
-            <label class="control-label" for="sel_unit">יחידה:</label>
+                                                        <select class="form-control" id="sel_unit">
+                                                            <option>בחר/י ערך</option>
 
-            <select class="form-control" id="sel_unit">
-                <option>בחר/י ערך</option>
+                                                        </select>
 
-            </select>
-            </div>
-    }
-
-    <div class="form-group">
-        <label class="control-label" for="sel_clust">סל:</label>
-
-
-        <select class="form-control" id="sel_clust">
-            <option>בחר/י ערך</option>
-        </select>
-        </div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label class="control-label" for="sel_clust">סל:</label>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <select class="form-control" id="sel_clust">
+                                                            <option>בחר/י ערך</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
 
 
-    <div class="form-group">
-        <label class="control-label" for="sel_auct">מכרז:</label>
+                                        }
+                                        else
+                                        {
+
+                                                <div class="form-group">
+                                                    <div class="row">
+
+                                                        <div class="col-sm-1">
+                                                            <label class="control-label" for="sel_unit">יחידה:</label>
+
+                                                        </div>
+                                                        <div class="col-sm-5">
+
+                                                            <select class="form-control disabled" id="sel_unit">
+                                                                <option>בחר/י ערך</option>
+
+                                                            </select>
+                                                            </div>
+                                                            <div class="col-sm-1">
+                                                                <label class="control-label" for="sel_clust">סל:</label>
+                                                            </div>
+                                                            <div class="col-sm-5">
+                                                                <select class="form-control" id="sel_clust">
+                                                                    <option>בחר/י ערך</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                   
+                                                    </div>
+
+                                                }
+
+                                         
+
+                                            <div class="form-group">
 
 
-        <select class="form-control" id="sel_unit">
-            <option>בחר/י ערך</option>
-
-        </select>
-        </div>
-
-    <div class="form-group">
-        <label class="control-label" for="tichur_num">מס' תיחור:</label>
-
-        <input type="text" class="form-control" id="tichur_num">
-
-    </div>
 
 
-                                </form>
+                                                <div class="row">
+                                                    <div class="col-sm-1">
+                                                        <label class="control-label" for="sel_auct">מכרז:</label>
+                                                    </div>
+                                                    <div class="col-sm-5">
+                                                        <select class="form-control" id="sel_unit">
+                                                            <option>בחר/י ערך</option>
+                                                        </select>
+                                                    </div>
+                                                
+
+                                            
+                                                    <div class="col-sm-2">
+                                                        <label class="control-label" for="tichur_num">מס' תיחור:</label>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <input type="text" class="form-control" id="tichur_num">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+</form>
                             </div>
                         </div>
                         <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true">&nbsp;</span>שלוף רשימה</button>

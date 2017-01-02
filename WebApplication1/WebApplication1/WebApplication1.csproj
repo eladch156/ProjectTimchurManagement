@@ -186,6 +186,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\Emblem_of_Israel.svg.png" />
+    <Content Include="scripts\images\ui-icons_444444_256x240.png" />
+    <Content Include="scripts\images\ui-icons_555555_256x240.png" />
+    <Content Include="scripts\images\ui-icons_777620_256x240.png" />
+    <Content Include="scripts\images\ui-icons_777777_256x240.png" />
+    <Content Include="scripts\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="scripts\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Images\warn_unauth.jpg" />
     <Content Include="Images\xsl_icon.png" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
@@ -199,8 +205,8 @@
     <Content Include="scripts\jquery-ui.css" />
     <Content Include="scripts\jquery-ui.js" />
     <Content Include="scripts\jquery.min.js" />
+    <Content Include="scripts\npm.js" />
     <Content Include="scripts\respond.min.js" />
-    <Content Include="Style\bootstrap-flipped.css" />
     <Content Include="Style\bootstrap-flipped.min.css" />
     <Content Include="Style\bootstrap-rtl.css" />
     <Content Include="Style\bootstrap-rtl.min.css" />
@@ -242,10 +248,8 @@
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\Shared\LoginLayout.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
-    <Content Include="Views\Shared\MainLayout.cshtml" />
     <Content Include="Views\Main\MainIndex.cshtml" />
     <Content Include="Views\Main\TichurSuppCreate.cshtml" />
-    <Content Include="Views\Main\TichurExisting.cshtml" />
     <Content Include="Views\Main\MangUsers.cshtml" />
     <Content Include="Views\Main\MangSuppliers.cshtml" />
     <Content Include="Views\Main\MangAuctions.cshtml" />
@@ -265,6 +269,9 @@
     <Content Include="Style\bootstrap.css.map" />
     <Content Include="Style\bootstrap.min.css.map" />
     <Content Include="Views\Login\LoginOut.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Views\Shared\MainLayout.cshtml" />
+    <Content Include="Views\Main\TichurExisting.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -274,7 +281,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\App\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
