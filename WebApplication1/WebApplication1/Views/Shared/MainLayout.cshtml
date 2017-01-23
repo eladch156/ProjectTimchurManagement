@@ -10,11 +10,20 @@
     <script src="@Url.Content("~/scripts/jquery-1.12.4.js")"></script>
     <script src="@Url.Content("~/scripts/jquery-ui.js")"></script>
 
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Style/datatables.min.css")" />
+    
 <link rel="stylesheet" href="@Url.Content("~/Style/bootstrap.css")">
     <link rel="stylesheet" href="@Url.Content("~/Style/bootstrap-rtl.css")">
     <link rel="stylesheet" href="@Url.Content("~/Style/dropdown_search.css")">
 <script src="@Url.Content("~/scripts/bootstrap.min.js")"></script>
+   
+
+   <script src="@Url.Content("~/scripts/datatables.min.js")"></script>
+     
     <script type="text/javascript">
+
+
+
         var closable = true;
         jQuery.fn.extend({
             disable: function (state) {
@@ -25,23 +34,35 @@
             }
         });
 
-        $(document).ready(function(){
-            $('.send-mod-but').disable(true);
-            $(".datepicker").datepicker({
-                showOtherMonths: true
+        $(document).ready(function () {
 
-            });
+          var table = $('.tabExcel').DataTable({
+                    buttons: ['copy', {
+                        extend: 'excel',
+                        title: "MyTitle"
+                    }],
+                    "oLanguage": {
+                        "sUrl":"//cdn.datatables.net/plug-ins/1.10.13/i18n/Hebrew.json"
+                    },
+                    "dom": "<'row'<'col-sm-12'tr>><'row'<'col-sm-5'><'col-sm-2'i><'col-sm-5'>><'row'<'col-sm-4'><'col-sm-2'f><'col-sm-2'B><'col-sm-4'>><'row'<'col-sm-5'><'col-sm-2'p><'col-sm-5'>>"
+
+                });
+
+                
+
+            $('.send-mod-but').disable(true);
+        
             $('.stayopenbut').click(function () {
                 closable = !closable;
 
             });
             $('.stayopen').on({
-                
-      
+
+
                 "hide.bs.dropdown": function () { return closable; }
             });
             $('#comment').change(function () {
-                
+
                 var count = $("#comment").val().length;
                 if(count==0)
                 {
@@ -51,13 +72,18 @@
                 {
                     $('.send-mod-but').disable(false);
                 }
-                
+
+            });
+
+            $(".datepicker").datepicker({
+                showOtherMonths: true
+
             });
         });
-           
-            
-       
-      
+
+
+
+
     </script>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>

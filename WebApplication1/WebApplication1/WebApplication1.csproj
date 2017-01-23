@@ -134,6 +134,8 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -183,9 +185,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Database\Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Database\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\Emblem_of_Israel.svg.png" />
+    <Content Include="scripts\datatables.min.js" />
+    <Content Include="scripts\html2canvas.js" />
     <Content Include="scripts\images\ui-icons_444444_256x240.png" />
     <Content Include="scripts\images\ui-icons_555555_256x240.png" />
     <Content Include="scripts\images\ui-icons_777620_256x240.png" />
@@ -204,9 +218,36 @@
     <Content Include="scripts\jquery-1.12.4.js" />
     <Content Include="scripts\jquery-ui.css" />
     <Content Include="scripts\jquery-ui.js" />
+    <Content Include="scripts\jquery.base64.js" />
     <Content Include="scripts\jquery.min.js" />
     <Content Include="scripts\npm.js" />
     <Content Include="scripts\respond.min.js" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\libs\FileSaver\FileSaver.min.js" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\libs\html2canvas\html2canvas.min.js" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\libs\js-xlsx\xlsx.core.min.js" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\libs\jsPDF-AutoTable\jspdf.plugin.autotable.js" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\libs\jsPDF-AutoTable\LICENSE.txt" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\libs\jsPDF\jspdf.min.js" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\libs\jsPDF\MIT-LICENSE.txt" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\tableExport.js" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\tableExport.min.js" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\test\bootstrap.html" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\test\icons\csv.png" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\test\icons\json.png" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\test\icons\pdf.png" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\test\icons\png.png" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\test\icons\sql.png" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\test\icons\txt.png" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\test\icons\word.png" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\test\icons\xls.png" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\test\icons\xml.png" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\test\index.html" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\test\massExcel.html" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\test\multipleExcel.html" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\test\sidebyside.html" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\test\singleExcel.html" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\tools\minify2.py" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\tools\minify3.py" />
     <Content Include="Style\bootstrap-flipped.min.css" />
     <Content Include="Style\bootstrap-rtl.css" />
     <Content Include="Style\bootstrap-rtl.min.css" />
@@ -214,6 +255,7 @@
     <Content Include="Style\bootstrap-theme.min.css" />
     <Content Include="Style\bootstrap.css" />
     <Content Include="Style\bootstrap.min.css" />
+    <Content Include="Style\datatables.min.css" />
     <Content Include="Style\dropdown_search.css" />
     <Content Include="Style\MainLayoutStyle.css" />
     <Content Include="Style\LoginStyle.css" />
@@ -223,8 +265,63 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
+    <Compile Include="Database\Auctions.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Cache.cs" />
+    <Compile Include="Database\Clusetrs.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\Database.cs" />
-    <Compile Include="Database\SingletonDatabase.cs" />
+    <Compile Include="Database\Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Roles.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\SingletonCache.cs" />
+    <Compile Include="Database\Statuses.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Suppliers.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\SuppliersClusetrs.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\SuppliersTichurim.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\SuppliersTimchurim.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Tichurim.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Timchurim.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Units.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\UnitsAuctions.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Users.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Infrastructure\AuthAbstract\AuthRestriections.cs" />
     <Compile Include="Infrastructure\AuthAbstract\IAuthProvider.cs" />
     <Compile Include="Infrastructure\AuthAbstract\TestProvider.cs" />
@@ -237,6 +334,7 @@
     <Compile Include="Models\RoleModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\TableModel.cs" />
+    <Compile Include="Models\WebUserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -272,6 +370,23 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Views\Shared\MainLayout.cshtml" />
     <Content Include="Views\Main\TichurExisting.cshtml" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\libs\FileSaver\LICENSE.md" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\libs\html2canvas\LICENSE" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\libs\js-xlsx\LICENSE" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\test\icons\Thumbs.db" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\test\tableExport.json" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\.gitignore" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\bower.json" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\package.json" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\README.md" />
+    <Content Include="Style\lang_datab.json" />
+    <EntityDeploy Include="Database\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Database\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -281,6 +396,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="SQL\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -313,6 +429,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -21,8 +21,8 @@ namespace WebApplication1.Infrastructure.AuthAbstract
             var claimsIdentity = context.User.Identity as System.Security.Claims.ClaimsIdentity;
             var name = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);
 
-            string[] prem_list = SingletonDatabase.Instance().role_map[Name].Split(',');
-            string prem_user = SingletonDatabase.Instance().list.Find((RoleModel mod) => { return mod.Name == (string)name.Value; }).Role;
+            string[] prem_list = SingletonCache.Instance().role_map[Name].Split(',');
+            string prem_user = SingletonCache.Instance().list.Find((RoleModel mod) => { return mod.Name == (string)name.Value; }).Role;
             //redirection to error page in this case
            if(!prem_list.Contains(prem_user))
             {

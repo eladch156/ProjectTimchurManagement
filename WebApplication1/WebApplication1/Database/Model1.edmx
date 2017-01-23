@@ -1,0 +1,1414 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TimchurDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Auctions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="AuctionNumber" Type="nvarchar" MaxLength="8" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="StatusID" Type="int" />
+        </EntityType>
+        <EntityType Name="Clusetrs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="AuctionID" Type="int" />
+          <Property Name="StatusID" Type="int" />
+          <Property Name="DisplayNumber" Type="tinyint" />
+          <Property Name="SuppliersInTichur" Type="tinyint" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Statuses">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Suppliers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="CompanyNumber" Type="nvarchar" MaxLength="9" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="10" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="100" />
+          <Property Name="StatusID" Type="int" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SuppliersClusetrs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ClusetrID" Type="int" />
+          <Property Name="SupplierID" Type="int" />
+          <Property Name="LastTimeInList" Type="datetime" />
+          <Property Name="FormarLastTimeInList" Type="datetime" />
+          <Property Name="StatusID" Type="int" />
+        </EntityType>
+        <EntityType Name="SuppliersTichurim">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="SupplierID" Type="int" />
+          <Property Name="TichurID" Type="int" />
+          <Property Name="PositionInList" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="SuppliersTimchurim">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="SupplierID" Type="int" />
+          <Property Name="TichurID" Type="int" />
+          <Property Name="PositionInList" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Tichurim">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="TichurNumber" Type="nvarchar" MaxLength="8" />
+          <Property Name="ClusterID" Type="int" />
+          <Property Name="UnitID" Type="int" />
+          <Property Name="StatusID" Type="int" />
+          <Property Name="DateTimeCreated" Type="datetime" />
+          <Property Name="CreatedUserID" Type="int" />
+          <Property Name="DateTimeSelected" Type="datetime" />
+          <Property Name="DateTimeUpdated" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="int" />
+          <Property Name="UpdatedComment" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Timchurim">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="TichurNumber" Type="nvarchar" MaxLength="8" />
+          <Property Name="ClusterID" Type="int" />
+          <Property Name="UnitID" Type="int" />
+          <Property Name="StatusID" Type="int" />
+          <Property Name="DateTimeCreated" Type="datetime" />
+          <Property Name="CreatedUserID" Type="int" />
+          <Property Name="DateTimeSelected" Type="datetime" />
+          <Property Name="DateTimeUpdated" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="int" />
+          <Property Name="UpdatedComment" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Units">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="StatusID" Type="int" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="MerkavaID" Type="nvarchar" MaxLength="4" />
+        </EntityType>
+        <EntityType Name="UnitsAuctions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="UnitID" Type="int" />
+          <Property Name="AuctionID" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="UnitID" Type="int" />
+          <Property Name="RoleID" Type="int" />
+          <Property Name="StatusID" Type="int" />
+          <Property Name="IDCardNumber" Type="nvarchar" MaxLength="9" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="10" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="Auctions_FK1">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="0..1" />
+          <End Role="Auctions" Type="Self.Auctions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Auctions">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Clusetrs_FK1">
+          <End Role="Auctions" Type="Self.Auctions" Multiplicity="0..1" />
+          <End Role="Clusetrs" Type="Self.Clusetrs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auctions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Clusetrs">
+              <PropertyRef Name="AuctionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Clusetrs_FK2">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="0..1" />
+          <End Role="Clusetrs" Type="Self.Clusetrs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Clusetrs">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Suppliers_FK1">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="0..1" />
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Suppliers">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SuppliersClusetrs_FK1">
+          <End Role="Clusetrs" Type="Self.Clusetrs" Multiplicity="0..1" />
+          <End Role="SuppliersClusetrs" Type="Self.SuppliersClusetrs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clusetrs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SuppliersClusetrs">
+              <PropertyRef Name="ClusetrID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SuppliersClusetrs_FK2">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
+          <End Role="SuppliersClusetrs" Type="Self.SuppliersClusetrs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SuppliersClusetrs">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SuppliersClusetrs_FK3">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="0..1" />
+          <End Role="SuppliersClusetrs" Type="Self.SuppliersClusetrs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SuppliersClusetrs">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SuppliersTichurim_FK1">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
+          <End Role="SuppliersTichurim" Type="Self.SuppliersTichurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SuppliersTichurim">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SuppliersTichurim_FK2">
+          <End Role="Tichurim" Type="Self.Tichurim" Multiplicity="0..1" />
+          <End Role="SuppliersTichurim" Type="Self.SuppliersTichurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tichurim">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SuppliersTichurim">
+              <PropertyRef Name="TichurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SuppliersTimchurim_FK1">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
+          <End Role="SuppliersTimchurim" Type="Self.SuppliersTimchurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SuppliersTimchurim">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SuppliersTimchurim_FK2">
+          <End Role="Timchurim" Type="Self.Timchurim" Multiplicity="0..1" />
+          <End Role="SuppliersTimchurim" Type="Self.SuppliersTimchurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Timchurim">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SuppliersTimchurim">
+              <PropertyRef Name="TichurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tichurim_FK1">
+          <End Role="Clusetrs" Type="Self.Clusetrs" Multiplicity="0..1" />
+          <End Role="Tichurim" Type="Self.Tichurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clusetrs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tichurim">
+              <PropertyRef Name="ClusterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tichurim_FK2">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Tichurim" Type="Self.Tichurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tichurim">
+              <PropertyRef Name="UpdatedUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tichurim_FK3">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="0..1" />
+          <End Role="Tichurim" Type="Self.Tichurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tichurim">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tichurim_FK4">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Tichurim" Type="Self.Tichurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tichurim">
+              <PropertyRef Name="CreatedUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tichurim_FK5">
+          <End Role="Units" Type="Self.Units" Multiplicity="0..1" />
+          <End Role="Tichurim" Type="Self.Tichurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tichurim">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Timchurim_FK1">
+          <End Role="Clusetrs" Type="Self.Clusetrs" Multiplicity="0..1" />
+          <End Role="Timchurim" Type="Self.Timchurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clusetrs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Timchurim">
+              <PropertyRef Name="ClusterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Timchurim_FK2">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Timchurim" Type="Self.Timchurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Timchurim">
+              <PropertyRef Name="UpdatedUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Timchurim_FK3">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="0..1" />
+          <End Role="Timchurim" Type="Self.Timchurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Timchurim">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Timchurim_FK4">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Timchurim" Type="Self.Timchurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Timchurim">
+              <PropertyRef Name="CreatedUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Timchurim_FK5">
+          <End Role="Units" Type="Self.Units" Multiplicity="0..1" />
+          <End Role="Timchurim" Type="Self.Timchurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Timchurim">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Units_FK1">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="0..1" />
+          <End Role="Units" Type="Self.Units" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Units">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UnitsAuctions_FK1">
+          <End Role="Units" Type="Self.Units" Multiplicity="0..1" />
+          <End Role="UnitsAuctions" Type="Self.UnitsAuctions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UnitsAuctions">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UnitsAuctions_FK2">
+          <End Role="Auctions" Type="Self.Auctions" Multiplicity="0..1" />
+          <End Role="UnitsAuctions" Type="Self.UnitsAuctions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auctions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UnitsAuctions">
+              <PropertyRef Name="AuctionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Users_FK1">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Users_FK2">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Users_FK3">
+          <End Role="Units" Type="Self.Units" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TimchurDatabaseModelStoreContainer">
+          <EntitySet Name="Auctions" EntityType="Self.Auctions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clusetrs" EntityType="Self.Clusetrs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Statuses" EntityType="Self.Statuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Suppliers" EntityType="Self.Suppliers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SuppliersClusetrs" EntityType="Self.SuppliersClusetrs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SuppliersTichurim" EntityType="Self.SuppliersTichurim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SuppliersTimchurim" EntityType="Self.SuppliersTimchurim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tichurim" EntityType="Self.Tichurim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Timchurim" EntityType="Self.Timchurim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Units" EntityType="Self.Units" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UnitsAuctions" EntityType="Self.UnitsAuctions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Auctions_FK1" Association="Self.Auctions_FK1">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Auctions" EntitySet="Auctions" />
+          </AssociationSet>
+          <AssociationSet Name="Clusetrs_FK1" Association="Self.Clusetrs_FK1">
+            <End Role="Auctions" EntitySet="Auctions" />
+            <End Role="Clusetrs" EntitySet="Clusetrs" />
+          </AssociationSet>
+          <AssociationSet Name="Clusetrs_FK2" Association="Self.Clusetrs_FK2">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Clusetrs" EntitySet="Clusetrs" />
+          </AssociationSet>
+          <AssociationSet Name="Suppliers_FK1" Association="Self.Suppliers_FK1">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Suppliers" EntitySet="Suppliers" />
+          </AssociationSet>
+          <AssociationSet Name="SuppliersClusetrs_FK1" Association="Self.SuppliersClusetrs_FK1">
+            <End Role="Clusetrs" EntitySet="Clusetrs" />
+            <End Role="SuppliersClusetrs" EntitySet="SuppliersClusetrs" />
+          </AssociationSet>
+          <AssociationSet Name="SuppliersClusetrs_FK2" Association="Self.SuppliersClusetrs_FK2">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="SuppliersClusetrs" EntitySet="SuppliersClusetrs" />
+          </AssociationSet>
+          <AssociationSet Name="SuppliersClusetrs_FK3" Association="Self.SuppliersClusetrs_FK3">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="SuppliersClusetrs" EntitySet="SuppliersClusetrs" />
+          </AssociationSet>
+          <AssociationSet Name="SuppliersTichurim_FK1" Association="Self.SuppliersTichurim_FK1">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="SuppliersTichurim" EntitySet="SuppliersTichurim" />
+          </AssociationSet>
+          <AssociationSet Name="SuppliersTichurim_FK2" Association="Self.SuppliersTichurim_FK2">
+            <End Role="Tichurim" EntitySet="Tichurim" />
+            <End Role="SuppliersTichurim" EntitySet="SuppliersTichurim" />
+          </AssociationSet>
+          <AssociationSet Name="SuppliersTimchurim_FK1" Association="Self.SuppliersTimchurim_FK1">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="SuppliersTimchurim" EntitySet="SuppliersTimchurim" />
+          </AssociationSet>
+          <AssociationSet Name="SuppliersTimchurim_FK2" Association="Self.SuppliersTimchurim_FK2">
+            <End Role="Timchurim" EntitySet="Timchurim" />
+            <End Role="SuppliersTimchurim" EntitySet="SuppliersTimchurim" />
+          </AssociationSet>
+          <AssociationSet Name="Tichurim_FK1" Association="Self.Tichurim_FK1">
+            <End Role="Clusetrs" EntitySet="Clusetrs" />
+            <End Role="Tichurim" EntitySet="Tichurim" />
+          </AssociationSet>
+          <AssociationSet Name="Tichurim_FK2" Association="Self.Tichurim_FK2">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tichurim" EntitySet="Tichurim" />
+          </AssociationSet>
+          <AssociationSet Name="Tichurim_FK3" Association="Self.Tichurim_FK3">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Tichurim" EntitySet="Tichurim" />
+          </AssociationSet>
+          <AssociationSet Name="Tichurim_FK4" Association="Self.Tichurim_FK4">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tichurim" EntitySet="Tichurim" />
+          </AssociationSet>
+          <AssociationSet Name="Tichurim_FK5" Association="Self.Tichurim_FK5">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Tichurim" EntitySet="Tichurim" />
+          </AssociationSet>
+          <AssociationSet Name="Timchurim_FK1" Association="Self.Timchurim_FK1">
+            <End Role="Clusetrs" EntitySet="Clusetrs" />
+            <End Role="Timchurim" EntitySet="Timchurim" />
+          </AssociationSet>
+          <AssociationSet Name="Timchurim_FK2" Association="Self.Timchurim_FK2">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Timchurim" EntitySet="Timchurim" />
+          </AssociationSet>
+          <AssociationSet Name="Timchurim_FK3" Association="Self.Timchurim_FK3">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Timchurim" EntitySet="Timchurim" />
+          </AssociationSet>
+          <AssociationSet Name="Timchurim_FK4" Association="Self.Timchurim_FK4">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Timchurim" EntitySet="Timchurim" />
+          </AssociationSet>
+          <AssociationSet Name="Timchurim_FK5" Association="Self.Timchurim_FK5">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Timchurim" EntitySet="Timchurim" />
+          </AssociationSet>
+          <AssociationSet Name="Units_FK1" Association="Self.Units_FK1">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Units" EntitySet="Units" />
+          </AssociationSet>
+          <AssociationSet Name="UnitsAuctions_FK1" Association="Self.UnitsAuctions_FK1">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="UnitsAuctions" EntitySet="UnitsAuctions" />
+          </AssociationSet>
+          <AssociationSet Name="UnitsAuctions_FK2" Association="Self.UnitsAuctions_FK2">
+            <End Role="Auctions" EntitySet="Auctions" />
+            <End Role="UnitsAuctions" EntitySet="UnitsAuctions" />
+          </AssociationSet>
+          <AssociationSet Name="Users_FK1" Association="Self.Users_FK1">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="Users_FK2" Association="Self.Users_FK2">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="Users_FK3" Association="Self.Users_FK3">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TimchurDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Auctions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="AuctionNumber" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StatusID" Type="Int32" />
+          <NavigationProperty Name="Statuses" Relationship="Self.Auctions_FK1" FromRole="Auctions" ToRole="Statuses" />
+          <NavigationProperty Name="Clusetrs" Relationship="Self.Clusetrs_FK1" FromRole="Auctions" ToRole="Clusetrs" />
+          <NavigationProperty Name="UnitsAuctions" Relationship="Self.UnitsAuctions_FK2" FromRole="Auctions" ToRole="UnitsAuctions" />
+        </EntityType>
+        <EntityType Name="Clusetrs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="AuctionID" Type="Int32" />
+          <Property Name="StatusID" Type="Int32" />
+          <Property Name="DisplayNumber" Type="Byte" />
+          <Property Name="SuppliersInTichur" Type="Byte" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Auctions" Relationship="Self.Clusetrs_FK1" FromRole="Clusetrs" ToRole="Auctions" />
+          <NavigationProperty Name="Statuses" Relationship="Self.Clusetrs_FK2" FromRole="Clusetrs" ToRole="Statuses" />
+          <NavigationProperty Name="SuppliersClusetrs" Relationship="Self.SuppliersClusetrs_FK1" FromRole="Clusetrs" ToRole="SuppliersClusetrs" />
+          <NavigationProperty Name="Tichurim" Relationship="Self.Tichurim_FK1" FromRole="Clusetrs" ToRole="Tichurim" />
+          <NavigationProperty Name="Timchurim" Relationship="Self.Timchurim_FK1" FromRole="Clusetrs" ToRole="Timchurim" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.Users_FK2" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Statuses">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Auctions" Relationship="Self.Auctions_FK1" FromRole="Statuses" ToRole="Auctions" />
+          <NavigationProperty Name="Clusetrs" Relationship="Self.Clusetrs_FK2" FromRole="Statuses" ToRole="Clusetrs" />
+          <NavigationProperty Name="Suppliers" Relationship="Self.Suppliers_FK1" FromRole="Statuses" ToRole="Suppliers" />
+          <NavigationProperty Name="SuppliersClusetrs" Relationship="Self.SuppliersClusetrs_FK3" FromRole="Statuses" ToRole="SuppliersClusetrs" />
+          <NavigationProperty Name="Tichurim" Relationship="Self.Tichurim_FK3" FromRole="Statuses" ToRole="Tichurim" />
+          <NavigationProperty Name="Timchurim" Relationship="Self.Timchurim_FK3" FromRole="Statuses" ToRole="Timchurim" />
+          <NavigationProperty Name="Units" Relationship="Self.Units_FK1" FromRole="Statuses" ToRole="Units" />
+          <NavigationProperty Name="Users" Relationship="Self.Users_FK1" FromRole="Statuses" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Suppliers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="CompanyNumber" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ContactName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StatusID" Type="Int32" />
+          <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Statuses" Relationship="Self.Suppliers_FK1" FromRole="Suppliers" ToRole="Statuses" />
+          <NavigationProperty Name="SuppliersClusetrs" Relationship="Self.SuppliersClusetrs_FK2" FromRole="Suppliers" ToRole="SuppliersClusetrs" />
+          <NavigationProperty Name="SuppliersTichurim" Relationship="Self.SuppliersTichurim_FK1" FromRole="Suppliers" ToRole="SuppliersTichurim" />
+          <NavigationProperty Name="SuppliersTimchurim" Relationship="Self.SuppliersTimchurim_FK1" FromRole="Suppliers" ToRole="SuppliersTimchurim" />
+        </EntityType>
+        <EntityType Name="SuppliersClusetrs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ClusetrID" Type="Int32" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="LastTimeInList" Type="DateTime" Precision="3" />
+          <Property Name="FormarLastTimeInList" Type="DateTime" Precision="3" />
+          <Property Name="StatusID" Type="Int32" />
+          <NavigationProperty Name="Clusetrs" Relationship="Self.SuppliersClusetrs_FK1" FromRole="SuppliersClusetrs" ToRole="Clusetrs" />
+          <NavigationProperty Name="Statuses" Relationship="Self.SuppliersClusetrs_FK3" FromRole="SuppliersClusetrs" ToRole="Statuses" />
+          <NavigationProperty Name="Suppliers" Relationship="Self.SuppliersClusetrs_FK2" FromRole="SuppliersClusetrs" ToRole="Suppliers" />
+        </EntityType>
+        <EntityType Name="SuppliersTichurim">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="TichurID" Type="Int32" />
+          <Property Name="PositionInList" Type="Byte" />
+          <NavigationProperty Name="Suppliers" Relationship="Self.SuppliersTichurim_FK1" FromRole="SuppliersTichurim" ToRole="Suppliers" />
+          <NavigationProperty Name="Tichurim" Relationship="Self.SuppliersTichurim_FK2" FromRole="SuppliersTichurim" ToRole="Tichurim" />
+        </EntityType>
+        <EntityType Name="SuppliersTimchurim">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="TichurID" Type="Int32" />
+          <Property Name="PositionInList" Type="Byte" />
+          <NavigationProperty Name="Suppliers" Relationship="Self.SuppliersTimchurim_FK1" FromRole="SuppliersTimchurim" ToRole="Suppliers" />
+          <NavigationProperty Name="Timchurim" Relationship="Self.SuppliersTimchurim_FK2" FromRole="SuppliersTimchurim" ToRole="Timchurim" />
+        </EntityType>
+        <EntityType Name="Tichurim">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="TichurNumber" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="ClusterID" Type="Int32" />
+          <Property Name="UnitID" Type="Int32" />
+          <Property Name="StatusID" Type="Int32" />
+          <Property Name="DateTimeCreated" Type="DateTime" Precision="3" />
+          <Property Name="CreatedUserID" Type="Int32" />
+          <Property Name="DateTimeSelected" Type="DateTime" Precision="3" />
+          <Property Name="DateTimeUpdated" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="Int32" />
+          <Property Name="UpdatedComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Clusetrs" Relationship="Self.Tichurim_FK1" FromRole="Tichurim" ToRole="Clusetrs" />
+          <NavigationProperty Name="Statuses" Relationship="Self.Tichurim_FK3" FromRole="Tichurim" ToRole="Statuses" />
+          <NavigationProperty Name="SuppliersTichurim" Relationship="Self.SuppliersTichurim_FK2" FromRole="Tichurim" ToRole="SuppliersTichurim" />
+          <NavigationProperty Name="Users" Relationship="Self.Tichurim_FK2" FromRole="Tichurim" ToRole="Users" />
+          <NavigationProperty Name="Users1" Relationship="Self.Tichurim_FK4" FromRole="Tichurim" ToRole="Users" />
+          <NavigationProperty Name="Units" Relationship="Self.Tichurim_FK5" FromRole="Tichurim" ToRole="Units" />
+        </EntityType>
+        <EntityType Name="Timchurim">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="TichurNumber" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="ClusterID" Type="Int32" />
+          <Property Name="UnitID" Type="Int32" />
+          <Property Name="StatusID" Type="Int32" />
+          <Property Name="DateTimeCreated" Type="DateTime" Precision="3" />
+          <Property Name="CreatedUserID" Type="Int32" />
+          <Property Name="DateTimeSelected" Type="DateTime" Precision="3" />
+          <Property Name="DateTimeUpdated" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="Int32" />
+          <Property Name="UpdatedComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Clusetrs" Relationship="Self.Timchurim_FK1" FromRole="Timchurim" ToRole="Clusetrs" />
+          <NavigationProperty Name="Statuses" Relationship="Self.Timchurim_FK3" FromRole="Timchurim" ToRole="Statuses" />
+          <NavigationProperty Name="SuppliersTimchurim" Relationship="Self.SuppliersTimchurim_FK2" FromRole="Timchurim" ToRole="SuppliersTimchurim" />
+          <NavigationProperty Name="Users" Relationship="Self.Timchurim_FK2" FromRole="Timchurim" ToRole="Users" />
+          <NavigationProperty Name="Users1" Relationship="Self.Timchurim_FK4" FromRole="Timchurim" ToRole="Users" />
+          <NavigationProperty Name="Units" Relationship="Self.Timchurim_FK5" FromRole="Timchurim" ToRole="Units" />
+        </EntityType>
+        <EntityType Name="Units">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="StatusID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MerkavaID" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Statuses" Relationship="Self.Units_FK1" FromRole="Units" ToRole="Statuses" />
+          <NavigationProperty Name="Tichurim" Relationship="Self.Tichurim_FK5" FromRole="Units" ToRole="Tichurim" />
+          <NavigationProperty Name="Timchurim" Relationship="Self.Timchurim_FK5" FromRole="Units" ToRole="Timchurim" />
+          <NavigationProperty Name="UnitsAuctions" Relationship="Self.UnitsAuctions_FK1" FromRole="Units" ToRole="UnitsAuctions" />
+          <NavigationProperty Name="Users" Relationship="Self.Users_FK3" FromRole="Units" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="UnitsAuctions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="UnitID" Type="Int32" />
+          <Property Name="AuctionID" Type="Int32" />
+          <NavigationProperty Name="Auctions" Relationship="Self.UnitsAuctions_FK2" FromRole="UnitsAuctions" ToRole="Auctions" />
+          <NavigationProperty Name="Units" Relationship="Self.UnitsAuctions_FK1" FromRole="UnitsAuctions" ToRole="Units" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="UnitID" Type="Int32" />
+          <Property Name="RoleID" Type="Int32" />
+          <Property Name="StatusID" Type="Int32" />
+          <Property Name="IDCardNumber" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Roles" Relationship="Self.Users_FK2" FromRole="Users" ToRole="Roles" />
+          <NavigationProperty Name="Statuses" Relationship="Self.Users_FK1" FromRole="Users" ToRole="Statuses" />
+          <NavigationProperty Name="Tichurim" Relationship="Self.Tichurim_FK2" FromRole="Users" ToRole="Tichurim" />
+          <NavigationProperty Name="Tichurim1" Relationship="Self.Tichurim_FK4" FromRole="Users" ToRole="Tichurim" />
+          <NavigationProperty Name="Timchurim" Relationship="Self.Timchurim_FK2" FromRole="Users" ToRole="Timchurim" />
+          <NavigationProperty Name="Timchurim1" Relationship="Self.Timchurim_FK4" FromRole="Users" ToRole="Timchurim" />
+          <NavigationProperty Name="Units" Relationship="Self.Users_FK3" FromRole="Users" ToRole="Units" />
+        </EntityType>
+        <Association Name="Auctions_FK1">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="0..1" />
+          <End Role="Auctions" Type="Self.Auctions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Auctions">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Clusetrs_FK1">
+          <End Role="Auctions" Type="Self.Auctions" Multiplicity="0..1" />
+          <End Role="Clusetrs" Type="Self.Clusetrs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auctions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Clusetrs">
+              <PropertyRef Name="AuctionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UnitsAuctions_FK2">
+          <End Role="Auctions" Type="Self.Auctions" Multiplicity="0..1" />
+          <End Role="UnitsAuctions" Type="Self.UnitsAuctions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auctions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UnitsAuctions">
+              <PropertyRef Name="AuctionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Clusetrs_FK2">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="0..1" />
+          <End Role="Clusetrs" Type="Self.Clusetrs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Clusetrs">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SuppliersClusetrs_FK1">
+          <End Role="Clusetrs" Type="Self.Clusetrs" Multiplicity="0..1" />
+          <End Role="SuppliersClusetrs" Type="Self.SuppliersClusetrs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clusetrs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SuppliersClusetrs">
+              <PropertyRef Name="ClusetrID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tichurim_FK1">
+          <End Role="Clusetrs" Type="Self.Clusetrs" Multiplicity="0..1" />
+          <End Role="Tichurim" Type="Self.Tichurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clusetrs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tichurim">
+              <PropertyRef Name="ClusterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Timchurim_FK1">
+          <End Role="Clusetrs" Type="Self.Clusetrs" Multiplicity="0..1" />
+          <End Role="Timchurim" Type="Self.Timchurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clusetrs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Timchurim">
+              <PropertyRef Name="ClusterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Users_FK2">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Suppliers_FK1">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="0..1" />
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Suppliers">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SuppliersClusetrs_FK3">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="0..1" />
+          <End Role="SuppliersClusetrs" Type="Self.SuppliersClusetrs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SuppliersClusetrs">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tichurim_FK3">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="0..1" />
+          <End Role="Tichurim" Type="Self.Tichurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tichurim">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Timchurim_FK3">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="0..1" />
+          <End Role="Timchurim" Type="Self.Timchurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Timchurim">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Units_FK1">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="0..1" />
+          <End Role="Units" Type="Self.Units" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Units">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Users_FK1">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SuppliersClusetrs_FK2">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
+          <End Role="SuppliersClusetrs" Type="Self.SuppliersClusetrs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SuppliersClusetrs">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SuppliersTichurim_FK1">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
+          <End Role="SuppliersTichurim" Type="Self.SuppliersTichurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SuppliersTichurim">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SuppliersTimchurim_FK1">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
+          <End Role="SuppliersTimchurim" Type="Self.SuppliersTimchurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SuppliersTimchurim">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SuppliersTichurim_FK2">
+          <End Role="Tichurim" Type="Self.Tichurim" Multiplicity="0..1" />
+          <End Role="SuppliersTichurim" Type="Self.SuppliersTichurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tichurim">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SuppliersTichurim">
+              <PropertyRef Name="TichurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SuppliersTimchurim_FK2">
+          <End Role="Timchurim" Type="Self.Timchurim" Multiplicity="0..1" />
+          <End Role="SuppliersTimchurim" Type="Self.SuppliersTimchurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Timchurim">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SuppliersTimchurim">
+              <PropertyRef Name="TichurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tichurim_FK2">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Tichurim" Type="Self.Tichurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tichurim">
+              <PropertyRef Name="UpdatedUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tichurim_FK4">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Tichurim" Type="Self.Tichurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tichurim">
+              <PropertyRef Name="CreatedUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tichurim_FK5">
+          <End Role="Units" Type="Self.Units" Multiplicity="0..1" />
+          <End Role="Tichurim" Type="Self.Tichurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tichurim">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Timchurim_FK2">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Timchurim" Type="Self.Timchurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Timchurim">
+              <PropertyRef Name="UpdatedUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Timchurim_FK4">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Timchurim" Type="Self.Timchurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Timchurim">
+              <PropertyRef Name="CreatedUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Timchurim_FK5">
+          <End Role="Units" Type="Self.Units" Multiplicity="0..1" />
+          <End Role="Timchurim" Type="Self.Timchurim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Timchurim">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UnitsAuctions_FK1">
+          <End Role="Units" Type="Self.Units" Multiplicity="0..1" />
+          <End Role="UnitsAuctions" Type="Self.UnitsAuctions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UnitsAuctions">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Users_FK3">
+          <End Role="Units" Type="Self.Units" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TimchurDatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Auctions" EntityType="Self.Auctions" />
+          <EntitySet Name="Clusetrs" EntityType="Self.Clusetrs" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="Statuses" EntityType="Self.Statuses" />
+          <EntitySet Name="Suppliers" EntityType="Self.Suppliers" />
+          <EntitySet Name="SuppliersClusetrs" EntityType="Self.SuppliersClusetrs" />
+          <EntitySet Name="SuppliersTichurim" EntityType="Self.SuppliersTichurim" />
+          <EntitySet Name="SuppliersTimchurim" EntityType="Self.SuppliersTimchurim" />
+          <EntitySet Name="Tichurim" EntityType="Self.Tichurim" />
+          <EntitySet Name="Timchurim" EntityType="Self.Timchurim" />
+          <EntitySet Name="Units" EntityType="Self.Units" />
+          <EntitySet Name="UnitsAuctions" EntityType="Self.UnitsAuctions" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="Auctions_FK1" Association="Self.Auctions_FK1">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Auctions" EntitySet="Auctions" />
+          </AssociationSet>
+          <AssociationSet Name="Clusetrs_FK1" Association="Self.Clusetrs_FK1">
+            <End Role="Auctions" EntitySet="Auctions" />
+            <End Role="Clusetrs" EntitySet="Clusetrs" />
+          </AssociationSet>
+          <AssociationSet Name="UnitsAuctions_FK2" Association="Self.UnitsAuctions_FK2">
+            <End Role="Auctions" EntitySet="Auctions" />
+            <End Role="UnitsAuctions" EntitySet="UnitsAuctions" />
+          </AssociationSet>
+          <AssociationSet Name="Clusetrs_FK2" Association="Self.Clusetrs_FK2">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Clusetrs" EntitySet="Clusetrs" />
+          </AssociationSet>
+          <AssociationSet Name="SuppliersClusetrs_FK1" Association="Self.SuppliersClusetrs_FK1">
+            <End Role="Clusetrs" EntitySet="Clusetrs" />
+            <End Role="SuppliersClusetrs" EntitySet="SuppliersClusetrs" />
+          </AssociationSet>
+          <AssociationSet Name="Tichurim_FK1" Association="Self.Tichurim_FK1">
+            <End Role="Clusetrs" EntitySet="Clusetrs" />
+            <End Role="Tichurim" EntitySet="Tichurim" />
+          </AssociationSet>
+          <AssociationSet Name="Timchurim_FK1" Association="Self.Timchurim_FK1">
+            <End Role="Clusetrs" EntitySet="Clusetrs" />
+            <End Role="Timchurim" EntitySet="Timchurim" />
+          </AssociationSet>
+          <AssociationSet Name="Users_FK2" Association="Self.Users_FK2">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="Suppliers_FK1" Association="Self.Suppliers_FK1">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Suppliers" EntitySet="Suppliers" />
+          </AssociationSet>
+          <AssociationSet Name="SuppliersClusetrs_FK3" Association="Self.SuppliersClusetrs_FK3">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="SuppliersClusetrs" EntitySet="SuppliersClusetrs" />
+          </AssociationSet>
+          <AssociationSet Name="Tichurim_FK3" Association="Self.Tichurim_FK3">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Tichurim" EntitySet="Tichurim" />
+          </AssociationSet>
+          <AssociationSet Name="Timchurim_FK3" Association="Self.Timchurim_FK3">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Timchurim" EntitySet="Timchurim" />
+          </AssociationSet>
+          <AssociationSet Name="Units_FK1" Association="Self.Units_FK1">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Units" EntitySet="Units" />
+          </AssociationSet>
+          <AssociationSet Name="Users_FK1" Association="Self.Users_FK1">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="SuppliersClusetrs_FK2" Association="Self.SuppliersClusetrs_FK2">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="SuppliersClusetrs" EntitySet="SuppliersClusetrs" />
+          </AssociationSet>
+          <AssociationSet Name="SuppliersTichurim_FK1" Association="Self.SuppliersTichurim_FK1">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="SuppliersTichurim" EntitySet="SuppliersTichurim" />
+          </AssociationSet>
+          <AssociationSet Name="SuppliersTimchurim_FK1" Association="Self.SuppliersTimchurim_FK1">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="SuppliersTimchurim" EntitySet="SuppliersTimchurim" />
+          </AssociationSet>
+          <AssociationSet Name="SuppliersTichurim_FK2" Association="Self.SuppliersTichurim_FK2">
+            <End Role="Tichurim" EntitySet="Tichurim" />
+            <End Role="SuppliersTichurim" EntitySet="SuppliersTichurim" />
+          </AssociationSet>
+          <AssociationSet Name="SuppliersTimchurim_FK2" Association="Self.SuppliersTimchurim_FK2">
+            <End Role="Timchurim" EntitySet="Timchurim" />
+            <End Role="SuppliersTimchurim" EntitySet="SuppliersTimchurim" />
+          </AssociationSet>
+          <AssociationSet Name="Tichurim_FK2" Association="Self.Tichurim_FK2">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tichurim" EntitySet="Tichurim" />
+          </AssociationSet>
+          <AssociationSet Name="Tichurim_FK4" Association="Self.Tichurim_FK4">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tichurim" EntitySet="Tichurim" />
+          </AssociationSet>
+          <AssociationSet Name="Tichurim_FK5" Association="Self.Tichurim_FK5">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Tichurim" EntitySet="Tichurim" />
+          </AssociationSet>
+          <AssociationSet Name="Timchurim_FK2" Association="Self.Timchurim_FK2">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Timchurim" EntitySet="Timchurim" />
+          </AssociationSet>
+          <AssociationSet Name="Timchurim_FK4" Association="Self.Timchurim_FK4">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Timchurim" EntitySet="Timchurim" />
+          </AssociationSet>
+          <AssociationSet Name="Timchurim_FK5" Association="Self.Timchurim_FK5">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Timchurim" EntitySet="Timchurim" />
+          </AssociationSet>
+          <AssociationSet Name="UnitsAuctions_FK1" Association="Self.UnitsAuctions_FK1">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="UnitsAuctions" EntitySet="UnitsAuctions" />
+          </AssociationSet>
+          <AssociationSet Name="Users_FK3" Association="Self.Users_FK3">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TimchurDatabaseModelStoreContainer" CdmEntityContainer="TimchurDatabaseEntities">
+          <EntitySetMapping Name="Auctions">
+            <EntityTypeMapping TypeName="TimchurDatabaseModel.Auctions">
+              <MappingFragment StoreEntitySet="Auctions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AuctionNumber" ColumnName="AuctionNumber" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clusetrs">
+            <EntityTypeMapping TypeName="TimchurDatabaseModel.Clusetrs">
+              <MappingFragment StoreEntitySet="Clusetrs">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AuctionID" ColumnName="AuctionID" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="DisplayNumber" ColumnName="DisplayNumber" />
+                <ScalarProperty Name="SuppliersInTichur" ColumnName="SuppliersInTichur" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="TimchurDatabaseModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Statuses">
+            <EntityTypeMapping TypeName="TimchurDatabaseModel.Statuses">
+              <MappingFragment StoreEntitySet="Statuses">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="TimchurDatabaseModel.Suppliers">
+              <MappingFragment StoreEntitySet="Suppliers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CompanyNumber" ColumnName="CompanyNumber" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SuppliersClusetrs">
+            <EntityTypeMapping TypeName="TimchurDatabaseModel.SuppliersClusetrs">
+              <MappingFragment StoreEntitySet="SuppliersClusetrs">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ClusetrID" ColumnName="ClusetrID" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="LastTimeInList" ColumnName="LastTimeInList" />
+                <ScalarProperty Name="FormarLastTimeInList" ColumnName="FormarLastTimeInList" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SuppliersTichurim">
+            <EntityTypeMapping TypeName="TimchurDatabaseModel.SuppliersTichurim">
+              <MappingFragment StoreEntitySet="SuppliersTichurim">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="TichurID" ColumnName="TichurID" />
+                <ScalarProperty Name="PositionInList" ColumnName="PositionInList" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SuppliersTimchurim">
+            <EntityTypeMapping TypeName="TimchurDatabaseModel.SuppliersTimchurim">
+              <MappingFragment StoreEntitySet="SuppliersTimchurim">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="TichurID" ColumnName="TichurID" />
+                <ScalarProperty Name="PositionInList" ColumnName="PositionInList" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tichurim">
+            <EntityTypeMapping TypeName="TimchurDatabaseModel.Tichurim">
+              <MappingFragment StoreEntitySet="Tichurim">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TichurNumber" ColumnName="TichurNumber" />
+                <ScalarProperty Name="ClusterID" ColumnName="ClusterID" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="DateTimeCreated" ColumnName="DateTimeCreated" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="DateTimeSelected" ColumnName="DateTimeSelected" />
+                <ScalarProperty Name="DateTimeUpdated" ColumnName="DateTimeUpdated" />
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedComment" ColumnName="UpdatedComment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Timchurim">
+            <EntityTypeMapping TypeName="TimchurDatabaseModel.Timchurim">
+              <MappingFragment StoreEntitySet="Timchurim">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TichurNumber" ColumnName="TichurNumber" />
+                <ScalarProperty Name="ClusterID" ColumnName="ClusterID" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="DateTimeCreated" ColumnName="DateTimeCreated" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="DateTimeSelected" ColumnName="DateTimeSelected" />
+                <ScalarProperty Name="DateTimeUpdated" ColumnName="DateTimeUpdated" />
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedComment" ColumnName="UpdatedComment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Units">
+            <EntityTypeMapping TypeName="TimchurDatabaseModel.Units">
+              <MappingFragment StoreEntitySet="Units">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MerkavaID" ColumnName="MerkavaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnitsAuctions">
+            <EntityTypeMapping TypeName="TimchurDatabaseModel.UnitsAuctions">
+              <MappingFragment StoreEntitySet="UnitsAuctions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="AuctionID" ColumnName="AuctionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="TimchurDatabaseModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="IDCardNumber" ColumnName="IDCardNumber" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

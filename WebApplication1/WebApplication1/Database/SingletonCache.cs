@@ -5,15 +5,15 @@ using System.Web;
 
 namespace WebApplication1.Database
 {
-    public class SingletonDatabase
+    public class SingletonCache
     {
-        private static Database _instance;
+        private static Cache _instance;
 
 
 
         // Constructor is 'protected'
 
-        protected SingletonDatabase() 
+        protected SingletonCache() 
 
         {
 
@@ -21,7 +21,7 @@ namespace WebApplication1.Database
 
 
 
-        public static Database Instance()
+        public static Cache Instance()
 
         {
 
@@ -33,7 +33,7 @@ namespace WebApplication1.Database
 
             {
 
-                _instance = new Database();
+                _instance = new Cache();
 
             }
 

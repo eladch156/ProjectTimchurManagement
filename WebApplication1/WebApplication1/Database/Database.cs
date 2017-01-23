@@ -7,7 +7,9 @@ namespace WebApplication1.Database
 {
     public class Database
     {
+        public Database()
+        {
 
-        public List<Models.UserGenData> list = new List<Models.UserGenData>();
+        }
     }
 }

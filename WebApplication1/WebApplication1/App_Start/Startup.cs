@@ -13,8 +13,8 @@ namespace WebApplication1.App_Start
     {
         public void Configuration(IAppBuilder app)
         {
-            SingletonDatabase.Instance().list.Add(new Models.RoleModel() { Name="Admin", Role="Admin",GivenName = "אדם בלוע " });
-            SingletonDatabase.Instance().list.Add(new Models.RoleModel() { Name = "RegUser", Role = "User",GivenName="צ'רנחוסבקי שמוליק " });
+            SingletonCache.Instance().list.Add(new Models.RoleModel() { Name="Admin", Role="Admin",GivenName = "אדם בלוע " });
+            SingletonCache.Instance().list.Add(new Models.RoleModel() { Name = "RegUser", Role = "User",GivenName="צ'רנחוסבקי שמוליק " });
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = "ApplicationCookie",
