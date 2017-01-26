@@ -7,7 +7,7 @@ using WebApplication1.AuthAbstract;
 using Ninject.Parameters;
 using Ninject.Syntax;
 using System.Configuration;
-
+using WebApplication1.Infrastructure.AuthAbstract;
 
 namespace WebApplication1.Infrastructure
 {
@@ -41,7 +41,7 @@ namespace WebApplication1.Infrastructure
         
         private void AddBindings()
         {
-            kernel.Bind<IAuthProvider>().To<TestProvider>();
+            kernel.Bind<IAuthProvider>().To<DatabaseProvider>();
         }
 
         #endregion

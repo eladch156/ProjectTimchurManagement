@@ -5,7 +5,22 @@
     Layout = "~/Views/Shared/MainLayout.cshtml";
 
 }
+@section Code1
+{
+    
+    var table = $('.tabExcel').DataTable({
+    buttons: ['copy', {
+    extend: 'excel',
+    title: "מערכת שליפת ספקים לתיחור – רשימת משתמשים מורשים" +dstr
+    }],
+    "oLanguage": {
+    "sUrl": "//cdn.datatables.net/plug-ins/1.10.13/i18n/Hebrew.json"
+    },
+    "dom": "<'row'<'col-sm-12'tr>><'row'<'col-sm-5'><'col-sm-2'i><'col-sm-5'>><'row'<'col-sm-4'><'col-sm-2'f><'col-sm-2'B><'col-sm-4'>><'row'<'col-sm-5'><'col-sm-2'p><'col-sm-5'>>"
 
+    });
+
+}
 
 <div class="container">
     <div class="row">

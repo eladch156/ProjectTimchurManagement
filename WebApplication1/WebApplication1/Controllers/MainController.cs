@@ -19,7 +19,7 @@ namespace WebApplication1.Controllers
 {
     public class MainController : Controller
     {
-        
+        private TimchurDatabaseEntities db = new TimchurDatabaseEntities();
         [Authorize]
         [AuthRestriections(Name = "/Main/ApproveMsg")]
         public ActionResult ApproveMsg()
@@ -57,13 +57,15 @@ namespace WebApplication1.Controllers
         [AuthRestriections(Name = "/Main/MangUsers")]
         public ActionResult MangUsers()
         {
-            var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
-            var username = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);
-            /** load from database user list **/
-            /** transform loaded data into model fit for edit + present **/
-            List<WebUserModel> li = new List<WebUserModel>() { new WebUserModel() { ID = 1, Name = "a", Role = "Mate", Status = "sss", Unit = "Beach diving" }, new WebUserModel() { ID = 13, Name = "b", Role = "Mate", Status = "sss", Unit = "Beach diving" }, new WebUserModel() { ID = 12, Name = "c", Role = "Mate", Status = "sss", Unit = "Beach diving" }, new WebUserModel() { ID = 14, Name = "a1", Role = "Mate", Status = "sss", Unit = "Beach diving" }, new WebUserModel() { ID = 1, Name = "a", Role = "Mate", Status = "sss", Unit = "Beach diving" }, new WebUserModel() { ID = 16, Name = "a2", Role = "Mate", Status = "sss", Unit = "aBeach diving" } }; 
-            return View(li);
 
+            db = new TimchurDatabaseEntities();
+            List<Users> li = db.Users.OrderBy(s=>s.IDCardNumber).ToList();
+            
+                /** load from database user list **/
+                /** transform loaded data into model fit for edit + present **/
+
+                return View(li);
+            
         }
         [Authorize]
         [AuthRestriections(Name = "/Main/MangSuppliers")]

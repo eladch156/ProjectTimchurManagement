@@ -22,9 +22,9 @@ namespace WebApplication1.Infrastructure.AuthAbstract
             var name = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);
 
             string[] prem_list = SingletonCache.Instance().role_map[Name].Split(',');
-            string prem_user = SingletonCache.Instance().list.Find((RoleModel mod) => { return mod.Name == (string)name.Value; }).Role;
+            string role= claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Role).Value;
             //redirection to error page in this case
-           if(!prem_list.Contains(prem_user))
+            if (!prem_list.Contains(role))
             {
                
                 return false; 
