@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="AuctionNumber" Type="nvarchar" MaxLength="8" />
           <Property Name="Name" Type="nvarchar(max)" />
           <Property Name="StatusID" Type="int" />
@@ -18,7 +18,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="AuctionID" Type="int" />
           <Property Name="StatusID" Type="int" />
           <Property Name="DisplayNumber" Type="tinyint" />
@@ -29,21 +29,21 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Statuses">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Suppliers">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="CompanyNumber" Type="nvarchar" MaxLength="9" />
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="10" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" />
@@ -55,7 +55,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ClusetrID" Type="int" />
           <Property Name="SupplierID" Type="int" />
           <Property Name="LastTimeInList" Type="datetime" />
@@ -66,7 +66,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="SupplierID" Type="int" />
           <Property Name="TichurID" Type="int" />
           <Property Name="PositionInList" Type="tinyint" />
@@ -75,7 +75,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="SupplierID" Type="int" />
           <Property Name="TichurID" Type="int" />
           <Property Name="PositionInList" Type="tinyint" />
@@ -84,7 +84,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="TichurNumber" Type="nvarchar" MaxLength="8" />
           <Property Name="ClusterID" Type="int" />
           <Property Name="UnitID" Type="int" />
@@ -100,7 +100,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="TichurNumber" Type="nvarchar" MaxLength="8" />
           <Property Name="ClusterID" Type="int" />
           <Property Name="UnitID" Type="int" />
@@ -116,7 +116,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="StatusID" Type="int" />
           <Property Name="Name" Type="nvarchar(max)" />
           <Property Name="MerkavaID" Type="nvarchar" MaxLength="4" />
@@ -125,7 +125,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UnitID" Type="int" />
           <Property Name="AuctionID" Type="int" />
         </EntityType>
@@ -133,7 +133,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UnitID" Type="int" />
           <Property Name="RoleID" Type="int" />
           <Property Name="StatusID" Type="int" />
@@ -598,7 +598,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AuctionNumber" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="StatusID" Type="Int32" />
@@ -610,7 +610,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AuctionID" Type="Int32" />
           <Property Name="StatusID" Type="Int32" />
           <Property Name="DisplayNumber" Type="Byte" />
@@ -626,7 +626,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Users" Relationship="Self.Users_FK2" FromRole="Roles" ToRole="Users" />
         </EntityType>
@@ -634,7 +634,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Auctions" Relationship="Self.Auctions_FK1" FromRole="Statuses" ToRole="Auctions" />
           <NavigationProperty Name="Clusetrs" Relationship="Self.Clusetrs_FK2" FromRole="Statuses" ToRole="Clusetrs" />
@@ -649,7 +649,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CompanyNumber" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -665,7 +665,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ClusetrID" Type="Int32" />
           <Property Name="SupplierID" Type="Int32" />
           <Property Name="LastTimeInList" Type="DateTime" Precision="3" />
@@ -679,7 +679,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SupplierID" Type="Int32" />
           <Property Name="TichurID" Type="Int32" />
           <Property Name="PositionInList" Type="Byte" />
@@ -690,7 +690,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SupplierID" Type="Int32" />
           <Property Name="TichurID" Type="Int32" />
           <Property Name="PositionInList" Type="Byte" />
@@ -701,7 +701,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TichurNumber" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
           <Property Name="ClusterID" Type="Int32" />
           <Property Name="UnitID" Type="Int32" />
@@ -723,7 +723,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TichurNumber" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
           <Property Name="ClusterID" Type="Int32" />
           <Property Name="UnitID" Type="Int32" />
@@ -745,7 +745,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StatusID" Type="Int32" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="MerkavaID" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
@@ -759,7 +759,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UnitID" Type="Int32" />
           <Property Name="AuctionID" Type="Int32" />
           <NavigationProperty Name="Auctions" Relationship="Self.UnitsAuctions_FK2" FromRole="UnitsAuctions" ToRole="Auctions" />
@@ -769,7 +769,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UnitID" Type="Int32" />
           <Property Name="RoleID" Type="Int32" />
           <Property Name="StatusID" Type="Int32" />

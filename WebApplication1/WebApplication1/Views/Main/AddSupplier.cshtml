@@ -1,0 +1,343 @@
+﻿@model WebApplication1.Models.SupplierFModel
+@using WebApplication1.Database
+@{
+    ViewBag.Title = "הוסף ספק";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+@{
+
+    List<WebApplication1.Database.Statuses> sl;
+    List<WebApplication1.Database.Auctions> al;
+    List<WebApplication1.Database.Clusetrs> cl;
+    using (TimchurDatabaseEntities ent = new TimchurDatabaseEntities())
+    {
+        al = ent.Auctions.ToList();
+        sl = ent.Statuses.ToList();
+        cl = ent.Clusetrs.ToList();
+    }
+
+    List<SelectListItem> slsl = new List<SelectListItem>();
+    foreach (WebApplication1.Database.Statuses sli in sl)
+    {
+        SelectListItem item = new SelectListItem()
+        {
+            Text = sli.Name,
+            Value = (sli.ID).ToString(),
+            Selected = false,
+        };
+        if (sli.Name == "פעיל")
+        {
+            item.Selected = true;
+        }
+        slsl.Add(item);
+
+    }
+    List<SelectListItem> pre_li = new List<SelectListItem>()
+    {
+        new SelectListItem() { Text="02",Value="02" },
+         new SelectListItem() { Text="03",Value="03" },
+          new SelectListItem() { Text="04",Value="04" },
+           new SelectListItem() { Text="08",Value="08" },
+            new SelectListItem() { Text="09",Value="09" },
+            new SelectListItem() { Text="071",Value="071" },
+              new SelectListItem() { Text="072",Value="072" },
+             new SelectListItem() { Text="073",Value="073" },
+             new SelectListItem() { Text="074",Value="074" },
+          new SelectListItem() { Text="076",Value="076" },
+        new SelectListItem() { Text="077",Value="077" },
+         new SelectListItem() { Text="078",Value="078" },
+        new SelectListItem() { Text="079",Value="079" },
+         new SelectListItem() { Text="050",Value="050" },
+          new SelectListItem() { Text="051",Value="051" },
+           new SelectListItem() { Text="052",Value="052" },
+              new SelectListItem() { Text="053",Value="053" },
+           new SelectListItem() { Text="054",Value="054" },
+                new SelectListItem() { Text="055",Value="055" },
+                   new SelectListItem() { Text="056",Value="056" },
+               new SelectListItem() { Text="058",Value="058" },
+             new SelectListItem() { Text="059",Value="059" },
+
+
+    };
+    if(Model!=null && Model.supliers!=null && Model.supliers.PhoneNumber!=null)
+    {
+        foreach(SelectListItem si in pre_li)
+        {
+            if(Model.supliers.PhoneNumber.StartsWith(si.Value))
+            {
+                si.Selected = true;
+                Model.ActualNumber= Model.supliers.PhoneNumber.Trim().Replace(si.Value, "");
+
+            }
+        }
+    }
+    var coun = 0;
+    var str_tabs = "";
+    foreach (WebApplication1.Database.Auctions ali in al)
+    {
+        if (coun == 0)
+        {
+            str_tabs = str_tabs + ali.ID;
+        }
+        else
+        {
+            str_tabs = str_tabs + "," + ali.ID;
+        }
+        coun += 1;
+    }
+
+
+    var x = 0;
+    using (TimchurDatabaseEntities entit = new TimchurDatabaseEntities())
+    {
+        if (Model != null && Model.supliers != null && Model.supliers.CompanyNumber != null)
+        {
+            if (entit.Units.Where(x2 => x2.Name == Model.supliers.CompanyNumber).Count() > 0)
+            {
+                x = entit.Units.Where(x2 => x2.Name == Model.supliers.CompanyNumber).ToList().First().ID;
+
+            }
+        }
+    }
+}
+<script>
+    function ex_co()
+    {
+        var r = confirm("האם אתה בטוח שאתה רוצה לבטל?");
+        if (r == true) {
+            $('form')
+  .trigger('reset');
+        } else {
+
+        }
+    }
+    function Select_func(val)
+    {
+       
+        var tabs =[@str_tabs];
+        for(var i=0;i<tabs.length;i++)
+        {
+            $('#auctab_' + tabs[i]).css('display', 'none');
+
+        }
+        $('#'+val).css('display', 'inline-block');
+
+    }
+</script>
+@if (ViewData.ModelState.Keys.Contains("Exist"))
+{
+    <script>
+        var r = confirm("הפריט קיים במסד,האם תרצה לערוך אותו?");
+        if (r == true) {
+            window.location = "/Main/EditSupplier/"+@x ;
+        } else {
+
+        }
+
+    </script>
+}
+<style>
+    input.input-validation-error,
+    textarea.input-validation-error,
+    select.input-validation-error {
+        background: #FEF1EC;
+        border: 1px solid #CD0A0A;
+    }
+</style>
+@section Code1
+{
+    var full="מ ספקים לתיחור – רשימת משתמשים מורשים" + dstr;
+    var table = $('.tabExcel').DataTable({
+    buttons: ['copy', {
+    extend: 'excel',
+    title: full
+    }],
+    "oLanguage": {
+    "sUrl": "//cdn.datatables.net/plug-ins/1.10.13/i18n/Hebrew.json"
+    },
+    "dom": "<'row'<'col-sm-12'tr>><'row'<'col-sm-5'><'col-sm-2'i><'col-sm-5'>><'row'<'col-sm-4'><'col-sm-2'f><'col-sm-2'B><'col-sm-4'>><'row'<'col-sm-5'><'col-sm-2'p><'col-sm-5'>>"
+
+    });
+
+}
+<meta charset="ISO-8859-1">
+
+<div class="row">
+    <div class="col-lg-6">
+        <h4>&nbsp;&nbsp;&nbsp; הוסף ספק</h4>
+    </div>
+    <div class="col-lg-offset-5 pull-right"><button onclick="ex_co()" class="btn btn-default">ביטול</button></div>
+
+</div>
+@using (Html.BeginForm())
+{
+
+
+    
+
+    <hr />
+    <div class="col-sm-offset-5">
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <h4>שגיאות:</h4>
+        }
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-sm-offset-5 form-group">
+        @Html.LabelFor(model => Model.supliers.Name, "שם ספק:")
+        <div>
+            @Html.EditorFor(model => Model.supliers.Name, new { htmlAttributes = new { @class = "form-control col-sm-2" } })
+            @Html.ValidationMessage("supliers.Name", "", new { @class = "text-danger" })
+            </div>
+            </div>
+            <br />
+            <br />
+            <div class="col-sm-offset-5 form-group">
+                @Html.LabelFor(model => Model.supliers.StatusID, "סטאטוס:")
+                <div>
+                    @Html.DropDownListFor(model => Model.supliers.StatusID, slsl, "בחר/י ערך", new { htmlAttributes = new { @class = "form-control col-sm-1" } })
+                    @Html.ValidationMessage("supliers.StatusID", "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            <div class="col-sm-offset-5 form-group">
+                @Html.LabelFor(model => Model.supliers.CompanyNumber, "ח.פ.:")
+                <div>
+                    @Html.EditorFor(model => Model.supliers.CompanyNumber, new { htmlAttributes = new { @class = "form-control col-sm-2" } })
+                    @Html.ValidationMessage("supliers.CompanyNumber", "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            <br />
+            <br />
+            <div class="col-sm-offset-5 form-group">
+                @Html.LabelFor(model => Model.ActualNumber, "טלפון:")
+                <div>
+                    @Html.EditorFor(model => Model.ActualNumber, new { htmlAttributes = new { @class = "form-control col-sm-2" } })
+                    @Html.ValidationMessage("ActualNumber", "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(model => Model.Prefix, pre_li, "קידומת", new { @style="width:90px;",@class = "form-control" })
+                    @Html.ValidationMessage("Prefix", "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            <br />
+            <div class="col-sm-offset-5 form-group">
+                @Html.LabelFor(model => Model.supliers.ContactName, "איש קשר:")
+                <div>
+                    @Html.EditorFor(model => Model.supliers.ContactName, new { htmlAttributes = new { @class = "form-control col-sm-2" } })
+                    @Html.ValidationMessage("supliers.ContactName", "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            <br />
+            <br />
+            <div class="col-sm-offset-5 form-group">
+                @Html.LabelFor(model => Model.ActualEmail, "כתובת אימייל:")
+                <div>
+                    @Html.EditorFor(model => Model.ActualEmail, new { htmlAttributes = new { @class = "form-control col-sm-2" } })
+                    @Html.ValidationMessage("ActualEmail", "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            <br />
+            <br />
+            <div class="row bg-primary col-sm-offset-4 col-md-5">
+                שיוך ספק לסל
+            </div>
+            <br />
+            <div class="row col-lg-8 col-sm-offset-4 form-group">
+
+                <div class="col-lg-4">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    בחר
+                                </th>
+                                <th>
+                                    מס' מכרז
+                                </th>
+                                <th>
+                                    שם מכרז
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (WebApplication1.Database.Auctions ali in al)
+                            {
+                                <tr>
+                                    <th>
+                                        <input type="radio" name="tabmark" onchange="Select_func('auctab_@ali.ID')" value="@ali.ID">
+                                    </th>
+                                    <th>
+                                        @ali.AuctionNumber
+                                    </th>
+                                    <th>
+                                        @ali.Name
+                                    </th>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-lg-1">
+                    <br />
+                    
+                    <img style="width:50px;height:50px;" src="@Url.Content("~/images/left_arrow.png")"/>
+                </div>
+                <div class="col-lg-4">
+                     @foreach (WebApplication1.Database.Auctions ali in al)
+                     {
+                         if (ali.StatusID == 1) { 
+                    <table class="table" id="auctab_@ali.ID" style="display:none;">
+                        <thead>
+                            <tr>
+                                <th>
+                                    שיוך
+                                </th>
+                                <th>
+                                    מס' סל
+                                </th>
+                                <th>
+                                    שם סל
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          @foreach (WebApplication1.Database.Clusetrs cli in cl)
+                          {
+                              if (cli.AuctionID == ali.ID && cli.StatusID==1)
+                              {
+                                <tr>
+                                    <th>
+                                        @if (Model != null && Model.Limitions != null && Model.Limitions.Where(x4 => x4.Value == cli.ID).Count() > 0)
+                                        { <input type="checkbox" checked="checked" name="Limitions" value="@cli.ID">}
+                                        else
+                                        { <input type="checkbox" name="Limitions" value="@cli.ID">}
+                                    </th>
+                                    <th>
+                                        @cli.DisplayNumber
+                                    </th>
+                                    <th>
+                                        @cli.Name
+                                    </th>
+                                </tr>
+                              }
+                          }
+                          
+                        </tbody>
+                    </table>
+                         }
+                     }
+                </div>
+            
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-5 col-md-7">
+                    <input type="submit" value="שמירה" class="btn btn-default" />
+
+                </div>
+            </div>
+
+}
+
+

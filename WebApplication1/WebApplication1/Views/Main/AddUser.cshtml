@@ -1,0 +1,208 @@
+﻿@model WebApplication1.Database.Users
+@using WebApplication1.Database
+@{
+    ViewBag.Title = "הוסף משתמש";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+@{
+    List<WebApplication1.Database.Roles> rl;
+    List<WebApplication1.Database.Statuses> sl;
+    List<WebApplication1.Database.Units> ul;
+    using (TimchurDatabaseEntities ent = new TimchurDatabaseEntities())
+    {
+        rl = ent.Roles.ToList();
+        sl = ent.Statuses.ToList();
+        ul = ent.Units.ToList();
+    }
+    List<SelectListItem> rlsl = new List<SelectListItem>();
+    foreach (WebApplication1.Database.Roles rli in rl)
+    {
+        SelectListItem item = new SelectListItem()
+        {
+            Text = rli.Name,
+            Value = (rli.ID).ToString(),
+            Selected = false,
+        };
+        rlsl.Add(item);
+    }
+    List<SelectListItem> ulsl = new List<SelectListItem>();
+    foreach (WebApplication1.Database.Units uli in ul)
+    {
+        SelectListItem item = new SelectListItem()
+        {
+            Text = uli.Name,
+            Value = (uli.ID).ToString(),
+            Selected = false,
+        };
+        ulsl.Add(item);
+    }
+    List<SelectListItem> slsl = new List<SelectListItem>();
+    foreach (WebApplication1.Database.Statuses sli in sl)
+    {
+        SelectListItem item = new SelectListItem()
+        {
+            Text = sli.Name,
+            Value = (sli.ID).ToString(),
+            Selected = false,
+        };
+        slsl.Add(item);
+
+    }
+    var x = 0;
+    using (TimchurDatabaseEntities entit = new TimchurDatabaseEntities())
+    {
+        if (Model != null && Model.IDCardNumber != null)
+        {
+            if (entit.Users.Where(x2 => x2.IDCardNumber == Model.IDCardNumber).Count() > 0)
+            {
+                x = entit.Users.Where(x2 => x2.IDCardNumber == Model.IDCardNumber).ToList().First().ID;
+
+            }
+        }
+    }
+}
+<script>
+    function ex_co()
+    {
+        var r = confirm("האם אתה בטוח שאתה רוצה לבטל?");
+        if (r == true) {
+            $('form')
+  .trigger('reset');
+        } else {
+
+        }
+    }
+</script>
+@if (ViewData.ModelState.Keys.Contains("Exist"))
+{
+    <script>
+        var r = confirm("הפריט קיים במסד,האם תרצה לערוך אותו?");
+        if (r == true) {
+            window.location = "/Main/EditUser/"+@x ; 
+        } else {
+           
+        }
+
+    </script>
+}
+<style>
+    input.input-validation-error,
+textarea.input-validation-error,
+select.input-validation-error
+{
+    background: #FEF1EC;
+    border: 1px solid #CD0A0A;
+}
+</style>
+@section Code1
+{
+    var full="מערכת שליפת ספקים לתיחור – רשימת משתמשים מורשים" + dstr;
+    var table = $('.tabExcel').DataTable({
+    buttons: ['copy', {
+    extend: 'excel',
+    title: full
+    }],
+    "oLanguage": {
+    "sUrl": "//cdn.datatables.net/plug-ins/1.10.13/i18n/Hebrew.json"
+    },
+    "dom": "<'row'<'col-sm-12'tr>><'row'<'col-sm-5'><'col-sm-2'i><'col-sm-5'>><'row'<'col-sm-4'><'col-sm-2'f><'col-sm-2'B><'col-sm-4'>><'row'<'col-sm-5'><'col-sm-2'p><'col-sm-5'>>"
+
+    });
+
+}
+<meta charset="ISO-8859-1">
+
+<div class="row">
+    <div class="col-lg-6">
+        <h4>&nbsp;&nbsp;&nbsp; הוסף משתמש</h4>
+    </div>
+    <div class="col-lg-offset-5 pull-right"><button onclick="ex_co()" class="btn btn-default">ביטול</button></div>
+
+</div>
+@using (Html.BeginForm())
+{
+
+  
+
+   
+        <hr />
+        <div class="col-sm-offset-5">
+            @if(!ViewData.ModelState.IsValid)
+            {
+                <h4>שגיאות:</h4>
+            }
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-sm-offset-5 form-group">
+                @Html.LabelFor(model => model.IDCardNumber, "ת.ז.:")
+                <div>
+                    @Html.EditorFor(model => model.IDCardNumber, new { htmlAttributes = new { @class = "form-control col-sm-2" } })
+                    @Html.ValidationMessage("IDCardNumber", "", new { @class = "text-danger" })
+                </div>
+                <br />
+                <br />
+            </div>
+            <div class="col-sm-offset-5 form-group">
+                @Html.LabelFor(model => model.PhoneNumber, "טלפון:")
+                <div>
+                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control col-sm-2" } })
+                    @Html.ValidationMessage("PhoneNumber", "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+
+            <br />
+            <br />
+            <div class="col-sm-offset-5 form-group">
+                @Html.LabelFor(model => model.Password, "סיסמא:")
+                <div>
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control col-sm-2" } })
+                    @Html.ValidationMessage("Password", "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            <br />
+            <br />
+            <div class="col-sm-offset-5 form-group">
+                @Html.LabelFor(model => model.StatusID, "סטאטוס:")
+
+                @Html.DropDownListFor(model => model.StatusID, slsl, "בחר/י ערך", new { htmlAttributes = new { @class = "form-control col-sm-1" } })
+                @Html.ValidationMessage("StatusID", "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="col-sm-offset-5 form-group">
+                @Html.LabelFor(model => model.FullName, "שם מלא:")
+                <div>
+                    @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control col-sm-2" } })
+                    @Html.ValidationMessage("FullName", "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="col-sm-offset-5 form-group">
+                @Html.LabelFor(model => model.RoleID, "תפקיד:")
+
+                @Html.DropDownListFor(model => model.RoleID, rlsl, "בחר/י ערך", new { htmlAttributes = new { @class = "form-control col-sm-1" } })
+                @Html.ValidationMessage("RoleID", "", new { @class = "text-danger" })
+
+            </div>
+            <div class="col-sm-offset-5 form-group">
+                @Html.LabelFor(model => model.UnitID, "יחידה:")
+
+                @Html.DropDownListFor(model => model.UnitID, ulsl, "בחר/י ערך", new { htmlAttributes = new { @class = "form-control col-sm-1" } })
+                @Html.ValidationMessage("UnitID", "", new { @class = "text-danger" })
+
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-5 col-md-7">
+                    <input type="submit" value="שמירה" class="btn btn-default" />
+                 
+                </div>
+            </div>
+
+            }
+
+

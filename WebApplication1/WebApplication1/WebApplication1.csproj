@@ -45,11 +45,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.0.1011, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -90,6 +90,14 @@
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.1.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.1.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -198,6 +206,23 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\Emblem_of_Israel.svg.png" />
+    <Content Include="Images\left_arrow.png" />
+    <Content Include="Images\Loading_icon.gif" />
+    <Content Include="scripts\angular-mocks.js" />
+    <Content Include="scripts\angular.js" />
+    <Content Include="scripts\angular.min.js" />
+    <Content Include="scripts\AUTHORS.txt" />
+    <Content Include="scripts\chatAuction.js" />
+    <Content Include="scripts\chatCle.js" />
+    <Content Include="scripts\chatEAuction.js" />
+    <Content Include="scripts\chatECle.js" />
+    <Content Include="scripts\chatESupplier.js" />
+    <Content Include="scripts\chatEUnit.js" />
+    <Content Include="scripts\chatEUser.js" />
+    <Content Include="scripts\chatGen.js" />
+    <Content Include="scripts\chatSupplier.js" />
+    <Content Include="scripts\chatUnit.js" />
+    <Content Include="scripts\chatUser.js" />
     <Content Include="scripts\datatables.min.js" />
     <Content Include="scripts\html2canvas.js" />
     <Content Include="scripts\images\ui-icons_444444_256x240.png" />
@@ -215,13 +240,40 @@
     <Content Include="scripts\execl_but.js" />
     <Content Include="scripts\holder.js" />
     <Content Include="scripts\html5shiv.js" />
+    <Content Include="scripts\index.html" />
+    <Content Include="scripts\angular.min.js.map" />
+    <None Include="scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="scripts\jquery-1.10.2.js" />
+    <Content Include="scripts\jquery-1.10.2.min.js" />
     <Content Include="scripts\jquery-1.12.4.js" />
+    <Content Include="scripts\jquery-bootstrap-purr.js" />
+    <Content Include="scripts\jquery-bootstrap-purr.min.js" />
     <Content Include="scripts\jquery-ui.css" />
     <Content Include="scripts\jquery-ui.js" />
+    <Content Include="scripts\jquery-ui.min.css" />
+    <Content Include="scripts\jquery-ui.min.js" />
+    <Content Include="scripts\jquery-ui.structure.css" />
+    <Content Include="scripts\jquery-ui.structure.min.css" />
+    <Content Include="scripts\jquery-ui.theme.css" />
+    <Content Include="scripts\jquery-ui.theme.min.css" />
     <Content Include="scripts\jquery.base64.js" />
     <Content Include="scripts\jquery.min.js" />
+    <Content Include="scripts\jquery-1.10.2.min.map" />
+    <None Include="scripts\jquery.validate-vsdoc.js" />
+    <Content Include="scripts\jquery.signalR-2.1.2.js" />
+    <Content Include="scripts\jquery.signalR-2.1.2.min.js" />
+    <Content Include="scripts\jquery.validate.js" />
+    <Content Include="scripts\jquery.validate.min.js" />
+    <Content Include="scripts\jquery.validate.mvc.js" />
+    <Content Include="scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="scripts\LICENSE.txt" />
+    <Content Include="scripts\modernizr-2.6.2.js" />
     <Content Include="scripts\npm.js" />
+    <Content Include="scripts\respond.js" />
     <Content Include="scripts\respond.min.js" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\jquery-ui.css" />
+    <Content Include="scripts\tableExport.jquery.plugin-master\jquery-ui.min.css" />
     <Content Include="scripts\tableExport.jquery.plugin-master\libs\FileSaver\FileSaver.min.js" />
     <Content Include="scripts\tableExport.jquery.plugin-master\libs\html2canvas\html2canvas.min.js" />
     <Content Include="scripts\tableExport.jquery.plugin-master\libs\js-xlsx\xlsx.core.min.js" />
@@ -229,8 +281,8 @@
     <Content Include="scripts\tableExport.jquery.plugin-master\libs\jsPDF-AutoTable\LICENSE.txt" />
     <Content Include="scripts\tableExport.jquery.plugin-master\libs\jsPDF\jspdf.min.js" />
     <Content Include="scripts\tableExport.jquery.plugin-master\libs\jsPDF\MIT-LICENSE.txt" />
-    <Content Include="scripts\tableExport.jquery.plugin-master\tableExport.js" />
-    <Content Include="scripts\tableExport.jquery.plugin-master\tableExport.min.js" />
+    <Content Include="scripts\tableExport.js" />
+    <Content Include="scripts\tableExport.min.js" />
     <Content Include="scripts\tableExport.jquery.plugin-master\test\bootstrap.html" />
     <Content Include="scripts\tableExport.jquery.plugin-master\test\icons\csv.png" />
     <Content Include="scripts\tableExport.jquery.plugin-master\test\icons\json.png" />
@@ -262,6 +314,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlgoTimchur\PullSuppList.cs" />
+    <Compile Include="AlgoTimchur\TablePullResult.cs" />
+    <Compile Include="AlgoTimchur\TichurInfo.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
@@ -273,7 +328,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Database.cs" />
-    <Compile Include="Database\DatabaseUpdater.cs" />
     <Compile Include="Database\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -332,12 +386,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\CustomIdErrorAttribu.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
+    <Compile Include="Infrastructure\UpdateAndEditProcess.cs" />
     <Compile Include="Models\RoleModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\SupplierFModel.cs" />
     <Compile Include="Models\TableModel.cs" />
+    <Compile Include="Models\UnitFModel.cs" />
     <Compile Include="Models\WebUserModel.cs" />
+    <Compile Include="NotificationsHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\BasicAno.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BasicAno.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -353,7 +417,7 @@
     <Content Include="Views\Main\MangUsers.cshtml" />
     <Content Include="Views\Main\MangSuppliers.cshtml" />
     <Content Include="Views\Main\MangAuctions.cshtml" />
-    <Content Include="Views\Main\MangClusters.cshtml" />
+    <Content Include="Views\Main\MangClusetrs.cshtml" />
     <Content Include="Views\Main\MangUnits.cshtml" />
     <Content Include="Views\Main\UnAuthError.cshtml" />
     <Content Include="Views\Main\ExtraButtons.cshtml" />
@@ -389,6 +453,27 @@
     <Content Include="Database\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="Views\Main\EditUser.cshtml" />
+    <Content Include="Views\Main\AddUser.cshtml" />
+    <Content Include="Style\package.json" />
+    <Content Include="Views\Main\UserLoadingScreen.cshtml" />
+    <Content Include="Views\Main\EUserLoadingScreen.cshtml" />
+    <Content Include="Views\Main\AddAuction.cshtml" />
+    <Content Include="Views\Main\EditAuction.cshtml" />
+    <Content Include="Views\Main\AuctionLoadingScreen.cshtml" />
+    <Content Include="Views\Main\EAuctionLoadingScreen.cshtml" />
+    <Content Include="Views\Main\EditClusetr.cshtml" />
+    <Content Include="Views\Main\AddClusetr.cshtml" />
+    <Content Include="Views\Main\ClusetrLoadingScreen.cshtml" />
+    <Content Include="Views\Main\EClusetrLoadingScreen.cshtml" />
+    <Content Include="Views\Main\EditUnit.cshtml" />
+    <Content Include="Views\Main\AddUnit.cshtml" />
+    <Content Include="Views\Main\UnitLoadingScreen.cshtml" />
+    <Content Include="Views\Main\EUnitLoadingScreen.cshtml" />
+    <Content Include="Views\Main\EditSupplier.cshtml" />
+    <Content Include="Views\Main\AddSupplier.cshtml" />
+    <Content Include="Views\Main\SupplierLoadingScreen.cshtml" />
+    <Content Include="Views\Main\ESupplierLoadingScreen.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -398,6 +483,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="scripts\external\" />
     <Folder Include="SQL\" />
   </ItemGroup>
   <ItemGroup>
@@ -434,6 +520,13 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\BasicAno.resx">
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BasicAno.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

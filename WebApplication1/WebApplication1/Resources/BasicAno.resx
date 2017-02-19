@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="GenError" xml:space="preserve">
+    <value> &amp;nbsp;*</value>
+  </data>
+  <data name="InDatabase" xml:space="preserve">
+    <value>הערך כבר קיים בתוך המסד</value>
+  </data>
+  <data name="notValidId" xml:space="preserve">
+    <value>הערך אינו ת"ז תקינה</value>
+  </data>
+  <data name="numberExpe" xml:space="preserve">
+    <value>הערך חייב ליהיות ביטוי מספרי</value>
+  </data>
+  <data name="USFullName" xml:space="preserve">
+    <value>שם מלא</value>
+  </data>
+  <data name="USIDCardNumber" xml:space="preserve">
+    <value>ת.ז.</value>
+  </data>
+  <data name="USPassword" xml:space="preserve">
+    <value>סיסמא</value>
+  </data>
+  <data name="USPhoneNumber" xml:space="preserve">
+    <value>טלפון</value>
+  </data>
+  <data name="USRoleID" xml:space="preserve">
+    <value>תפקיד</value>
+  </data>
+  <data name="USStatusID" xml:space="preserve">
+    <value>סטאטוס</value>
+  </data>
+  <data name="USUnitID" xml:space="preserve">
+    <value>יחידה</value>
+  </data>
+  <data name="AUAuctionNumber" xml:space="preserve">
+    <value>מספר מכרז</value>
+  </data>
+  <data name="AUName" xml:space="preserve">
+    <value>שם המכרז</value>
+  </data>
+  <data name="AUStatusID" xml:space="preserve">
+    <value>סטאטוס</value>
+  </data>
+  <data name="patrNotMa" xml:space="preserve">
+    <value>הערך הניתן אינו מתאים לדפוס</value>
+  </data>
+  <data name="CLAuctionID" xml:space="preserve">
+    <value>מכרז</value>
+  </data>
+  <data name="CLDisplayNumber" xml:space="preserve">
+    <value>מספר סל</value>
+  </data>
+  <data name="CLName" xml:space="preserve">
+    <value>שם הסל</value>
+  </data>
+  <data name="CLStatusID" xml:space="preserve">
+    <value>סטאטוס</value>
+  </data>
+  <data name="CLSuppliersInTichur" xml:space="preserve">
+    <value>מספר ספקים בתיחור</value>
+  </data>
+  <data name="NotZEPDig" xml:space="preserve">
+    <value>המספר הנ"ל קטן שווה לאפס</value>
+  </data>
+  <data name="NotThrDig" xml:space="preserve">
+    <value>המספר אינו בטווח בין 1 ל 999</value>
+  </data>
+  <data name="CLWro" xml:space="preserve">
+    <value>הערך אינו תקין.</value>
+  </data>
+  <data name="UNIMerkavaID" xml:space="preserve">
+    <value>קוד מרכב"ה</value>
+  </data>
+  <data name="UNIName" xml:space="preserve">
+    <value>שם יחידה</value>
+  </data>
+  <data name="UNIStatusID" xml:space="preserve">
+    <value>סטאטוס</value>
+  </data>
+  <data name="NotMarkevaFit" xml:space="preserve">
+    <value>קוד מרכב"ה אינו לפי תבנית</value>
+  </data>
+  <data name="InvalidCN" xml:space="preserve">
+    <value>נא להכניס 9 ספרות</value>
+  </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>אימייל לא תקין</value>
+  </data>
+  <data name="InvalidPN" xml:space="preserve">
+    <value>מס' טלפון אינו תקין</value>
+  </data>
+  <data name="SUPANumberID" xml:space="preserve">
+    <value>מס' טלפון</value>
+  </data>
+  <data name="SUPAuctionID" xml:space="preserve">
+    <value>מס' מכרז</value>
+  </data>
+  <data name="SUPCompanyNumber" xml:space="preserve">
+    <value>ח.פ.</value>
+  </data>
+  <data name="SUPContactName" xml:space="preserve">
+    <value>שם איש קשר</value>
+  </data>
+  <data name="SUPName" xml:space="preserve">
+    <value>שם הספק</value>
+  </data>
+  <data name="SUPPrefixID" xml:space="preserve">
+    <value>קידומת</value>
+  </data>
+  <data name="SUPStatusID" xml:space="preserve">
+    <value>סטאטוס</value>
+  </data>
+  <data name="SUPEmail" xml:space="preserve">
+    <value>אימייל</value>
+  </data>
+</root>

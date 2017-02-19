@@ -1,0 +1,159 @@
+﻿@model WebApplication1.Database.Clusetrs
+@using WebApplication1.Database
+@{
+    ViewBag.Title = "הוסף סל";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+@{
+    List<WebApplication1.Database.Auctions> al;
+    List<WebApplication1.Database.Statuses> sl;
+
+    using (TimchurDatabaseEntities ent = new TimchurDatabaseEntities())
+    {
+        al = ent.Auctions.ToList();
+        sl = ent.Statuses.ToList();
+
+    }
+    List<SelectListItem> alsl = new List<SelectListItem>();
+    foreach (WebApplication1.Database.Auctions ali in al)
+    {
+        SelectListItem item = new SelectListItem()
+        {
+            Text = ali.AuctionNumber + " " + ali.Name,
+            Value = (ali.ID).ToString(),
+            Selected = false,
+        };
+        alsl.Add(item);
+    }
+    List<SelectListItem> slsl = new List<SelectListItem>();
+    foreach (WebApplication1.Database.Statuses sli in sl)
+    {
+        SelectListItem item = new SelectListItem()
+        {
+            Text = sli.Name,
+            Value = (sli.ID).ToString(),
+            Selected = false,
+        };
+        slsl.Add(item);
+
+    }
+
+
+}
+<script>
+    function ex_co() {
+        var r = confirm("האם אתה בטוח שאתה רוצה לבטל?");
+        if (r == true) {
+            $('form')
+  .trigger('reset');
+        } else {
+
+        }
+    }
+</script>
+<style>
+    input.input-validation-error,
+    textarea.input-validation-error,
+    select.input-validation-error {
+        background: #FEF1EC;
+        border: 1px solid #CD0A0A;
+    }
+</style>
+@section Code1
+{
+    var full="מערכת שליפת ספקים לתיחור – רשימת משתמשים מורשים" + dstr;
+    var table = $('.tabExcel').DataTable({
+    buttons: ['copy', {
+    extend: 'excel',
+    title: full
+    }],
+    "oLanguage": {
+    "sUrl": "//cdn.datatables.net/plug-ins/1.10.13/i18n/Hebrew.json"
+    },
+    "dom": "<'row'<'col-sm-12'tr>><'row'<'col-sm-5'><'col-sm-2'i><'col-sm-5'>><'row'<'col-sm-4'><'col-sm-2'f><'col-sm-2'B><'col-sm-4'>><'row'<'col-sm-5'><'col-sm-2'p><'col-sm-5'>>"
+
+    });
+
+}
+<meta charset="ISO-8859-1">
+
+<div class="row">
+    <div class="col-lg-6">
+        <h4>&nbsp;&nbsp;&nbsp; הוסף סל</h4>
+    </div>
+    <div class="col-lg-offset-5 pull-right"><button onclick="ex_co()" class="btn btn-default">ביטול</button></div>
+
+</div>
+@using (Html.BeginForm())
+{
+
+
+
+
+    <hr />
+    <div class="col-sm-offset-5">
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <h4>שגיאות:</h4>
+        }
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    </div>
+        <div class="col-sm-offset-5 form-group">
+            @Html.LabelFor(model => model.AuctionID, "מכרז:")
+
+            @Html.DropDownListFor(model => model.AuctionID, alsl, "בחר/י ערך", new { htmlAttributes = new { @class = "form-control col-sm-1" } })
+            @Html.ValidationMessage("AuctionID", "", new { @class = "text-danger" })
+
+        </div>
+
+        <div class="col-sm-offset-5 form-group">
+            @Html.LabelFor(model => model.StatusID, "סטאטוס:")
+
+            @Html.DropDownListFor(model => model.StatusID, slsl, "בחר/י ערך", new { htmlAttributes = new { @class = "form-control col-sm-1" } })
+            @Html.ValidationMessage("StatusID", "", new { @class = "text-danger" })
+
+        </div>
+        <div class="col-sm-offset-5 form-group">
+            @Html.LabelFor(model => model.DisplayNumber, "מספר סל:")
+            <div>
+                @Html.EditorFor(model => model.DisplayNumber, new { htmlAttributes = new { @class = "form-control col-sm-2" } })
+                @Html.ValidationMessage("DisplayNumber", "", new { @class = "text-danger" })
+            </div>
+            <br />
+            <br />
+        </div>
+            <div class="col-sm-offset-5 form-group">
+                @Html.LabelFor(model => model.Name, "שם סל:")
+                <div>
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control col-sm-2" } })
+                    @Html.ValidationMessage("Name", "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+
+            <br />
+            <br />
+            <div class="col-sm-offset-5 form-group">
+                @Html.LabelFor(model => model.SuppliersInTichur, "מס' ספקים בכל תיחור:")
+                <div>
+                    @Html.EditorFor(model => model.SuppliersInTichur, new { htmlAttributes = new { @class = "form-control col-sm-2" } })
+                    @Html.ValidationMessage("SuppliersInTichur", "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+
+            <br />
+            <br />
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-5 col-md-7">
+                    <input type="submit" value="שמירה" class="btn btn-default" />
+
+                </div>
+            </div>
+
+}
+
+

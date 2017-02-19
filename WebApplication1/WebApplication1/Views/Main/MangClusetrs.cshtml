@@ -1,0 +1,88 @@
+﻿@using WebApplication1.Database
+@model List<WebApplication1.Database.Clusetrs>
+@{
+    ViewBag.Title = "ניהול סלים";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+    var i = 1;
+}
+@section Code1
+{
+    var full="מערכת שליפת ספקים לתיחור – רשימת סלים" + dstr;
+    var table = $('.tabExcel').DataTable({
+    buttons: ['copy', {
+    extend: 'excel',
+    title: full
+    }],
+    "oLanguage": {
+    "sUrl": "//cdn.datatables.net/plug-ins/1.10.13/i18n/Hebrew.json"
+    },
+    "dom": "<'row'<'col-sm-12'tr>><'row'<'col-sm-5'><'col-sm-2'i><'col-sm-5'>><'row'<'col-sm-4'><'col-sm-2'f><'col-sm-2'B><'col-sm-4'>><'row'<'col-sm-5'><'col-sm-2'p><'col-sm-5'>>"
+
+    });
+
+}
+<style>
+    .center {
+        width: 42px;
+        height: 42px;
+        display: table-cell;
+        vertical-align: middle;
+        float: none;
+    }
+</style>
+<div id="toExcel_wrapper" class="col-md-6 wrap_tab">
+
+</div>
+<div class="row bg-primary"><h4 class="col-sm-11">&nbsp;&nbsp;&nbsp;&nbsp;@ViewBag.Title</h4><div class="col-sm-1 center"><button class="btn-default" onclick="location.href='@Url.Action("AddClusetr", "Main", null)';return false;"><span class="glyphicon glyphicon-plus"></span></button></div></div>
+
+
+<table class="table tabExcel" id="toExcel">
+    <thead>
+        <tr>
+            <th>
+                מספר שורה
+            </th>
+            <th>
+                מספר מכרז
+            </th>
+            <th>
+                שם מכרז
+            </th>
+            <th>
+                מספר סל 
+            </th>
+            <th>
+                שם סל
+            </th>
+            <th>
+                מספר ספקים בתיחור
+            </th>
+            <th>
+                סטאטוס
+            </th>
+            <th>
+
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Clusetrs Elem in Model)
+        {
+            <tr>
+                <td>@i</td>
+                <td>@Elem.Auctions.AuctionNumber</td>
+                <td>@Elem.Auctions.Name</td>
+                <td>@Elem.DisplayNumber</td>
+                <td>@Elem.Name</td>
+                <td>@Elem.SuppliersInTichur</td>
+                <td>@Elem.Statuses.Name</td>
+                <td>@Html.ActionLink("ערוך", "EditClusetr", new { id = Elem.ID })</td>
+            </tr>
+            {
+                i += 1;
+            }
+        }
+    </tbody>
+</table>
+<!-- Modal -->

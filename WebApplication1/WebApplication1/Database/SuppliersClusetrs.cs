@@ -11,9 +11,12 @@ namespace WebApplication1.Database
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     public partial class SuppliersClusetrs
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
         public Nullable<int> ClusetrID { get; set; }
         public Nullable<int> SupplierID { get; set; }
