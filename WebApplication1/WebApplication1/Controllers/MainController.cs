@@ -15,6 +15,7 @@ using System.Web.UI;
 using System.Collections;
 using System.Data;
 using System.Threading;
+using System.Text.RegularExpressions;
 
 namespace WebApplication1.Controllers
 {
@@ -667,6 +668,405 @@ namespace WebApplication1.Controllers
         public ActionResult ESupplierLoadingScreen(SupplierFModel target)
         {
             return View(target);
+        }
+        [Authorize]
+        [HttpPost]
+        [AuthRestriections(Name = "/Main/TichurSuppCreate")]
+        public ActionResult GetCluByAuc(int auctionId)
+        {
+            using (TimchurDatabaseEntities ent = new TimchurDatabaseEntities())
+            {
+                
+                List<SelectListItem> li = new List<SelectListItem>();
+                foreach(Clusetrs clu in ent.Clusetrs.Where(x => x.AuctionID == auctionId && x.StatusID==1).OrderBy(x=>x.DisplayNumber))
+                {
+                    li.Add(new SelectListItem() { Value = clu.ID.ToString(), Text = clu.DisplayNumber+"-"+clu.Name });
+                }
+                return Json(li);
+            }
+           
+        }
+        public class TNData
+        {
+            public string id { get; set; }
+            public string unit_field { get; set; }
+        }
+        [Authorize]
+        [HttpPost]
+        [AuthRestriections(Name = "/Main/TichurExisting")]
+        public ActionResult GetByTichurNumber(TNData data)
+        {
+           
+            using (TimchurDatabaseEntities ent = new TimchurDatabaseEntities())
+            {
+
+                Users use = ent.Users.Where(x => x.IDCardNumber == User.Identity.Name).First();
+                bool f = User.IsInRole("Admin");
+                string uni_fin = User.IsInRole("Admin") ? data.unit_field : use.UnitID.ToString();
+                int tem = 0;
+                if (uni_fin!=null)
+               tem= Int32.Parse(uni_fin);
+                if (tem==0 || ent.Tichurim.Where(x => x.UnitID == tem && x.TichurNumber == data.id && (f || x.StatusID == 1)).Count()==0)
+                {
+                    GenModel failRes = new GenModel();
+                    failRes.data = new List<string[]>();
+                    failRes.data.Add(new string[] { "תיחור אינו קיים בתוך השרת(או תחת היחידה הנתונה של המשתמש או שהוכנסה)" });
+                    failRes.Status = "error";
+                    return Json(failRes); 
+                }
+              
+                if (!User.IsInRole("User"))
+                {
+                    if (data.unit_field == null)
+                    {
+                        GenModel failRes = new GenModel();
+                        failRes.data = new List<string[]>();
+                        failRes.data.Add(new string[] { "אנא בחר ערך בשדה יחידה" });
+                        failRes.Status = "error";
+                        return Json(failRes);
+                    }
+                }
+               
+                Tichurim tic = ent.Tichurim.Where(x => x.UnitID == tem && x.TichurNumber == data.id && (f || x.StatusID == 1)).First();
+                if (ent.UnitsAuctions.Where(x => x.UnitID==tem && x.AuctionID==tic.Clusetrs.AuctionID).Count()>0)
+                {
+                    if (User.IsInRole("User"))
+                    {
+                        Cache.gen_lock.WaitOne();
+                        ent.Tichurim.Where(x => x.UnitID == tem && x.TichurNumber == data.id &&  x.StatusID == 1).First().DateTimeSelected = DateTime.Now;
+                        ent.SaveChanges();
+                        Cache.gen_lock.ReleaseMutex();
+                    }
+                    tic = ent.Tichurim.Where(x => x.UnitID == tem && x.TichurNumber == data.id && (f || x.StatusID == 1)).First();
+                    GenModel Res = new GenModel();
+                    Res.Status = "K";
+                    Res.data = new List<string[]>();
+                    Res.data.Add(new string[] { "מספר שורה", "מס' בתוצאת שליפה", "יחידה", "מס' מכרז", "שם מכרז", "תיחור", "מספר סל", "שם סל", "שם ספק", "ח.פ", "איש קשר", "אימייל", "טלפון", "תאריך ושעה" });
+                    int i = 0;
+                    foreach (SuppliersTichurim st in tic.SuppliersTichurim)
+                    {
+                        Suppliers sup = ent.Suppliers.Where(x => x.ID == st.SupplierID).First();
+                        i++;
+                        Res.data.Add(new string[] { i.ToString(), st.PositionInList.ToString(), tic.Units.Name, tic.Clusetrs.Auctions.AuctionNumber, tic.Clusetrs.Auctions.Name, tic.TichurNumber, tic.Clusetrs.DisplayNumber.Value.ToString(), tic.Clusetrs.Name, sup.Name, sup.CompanyNumber, sup.ContactName, sup.EmailAddress, sup.PhoneNumber, tic.DateTimeCreated.Value.ToString() });
+
+
+                    }
+                    return Json(Res);
+                }
+                else
+                {
+                    GenModel failRes = new GenModel();
+                    failRes.data = new List<string[]>();
+                    failRes.data.Add(new string[] { "משתמש אינו רשאי לצפות בתיחור" });
+                    failRes.Status = "error";
+                    return Json(failRes);
+                }
+              
+            }
+                
+        }
+        public class TEBDData
+        {
+            public string From { get; set; }
+            public string To { get; set; }
+            public string unit_field { get; set; }
+            public string clu_field { get; set; }
+            public string auc_field { get; set; }
+        }
+        [Authorize]
+        [HttpPost]
+        [AuthRestriections(Name = "/Main/TichurExisting")]
+        public ActionResult GetByTichurDates(TEBDData data)
+        {
+        
+            DateTime to;
+            string[] to_str = data.To.Split('/');
+            to = new DateTime(Int32.Parse(to_str[2]), Int32.Parse(to_str[0]), Int32.Parse(to_str[1]));
+            DateTime from;
+            string[] from_str = data.From.Split('/');
+            from = new DateTime(Int32.Parse(from_str[2]), Int32.Parse(from_str[0]), Int32.Parse(from_str[1]));
+            if (from>to)
+            {
+                GenModel failRes = new GenModel();
+                failRes.data = new List<string[]>();
+                failRes.data.Add(new string[] { "טווח תאריכים אינו תקין" });
+                failRes.Status = "error";
+                return Json(failRes);
+            }
+
+            using (TimchurDatabaseEntities ent = new TimchurDatabaseEntities())
+            {
+                GenModel Res = new GenModel();
+                Users use = ent.Users.Where(x => x.IDCardNumber == User.Identity.Name).First();
+                bool f = User.IsInRole("Admin");
+                string uni_fin = User.IsInRole("Admin") ? data.unit_field : use.UnitID.ToString();
+                int tem = 0;
+                if (uni_fin!=null)
+                tem = Int32.Parse(uni_fin);
+                int i;
+                if (User.IsInRole("User"))
+                {
+                    if (data.clu_field == null && data.auc_field == null)
+                    {
+                       Res = new GenModel();
+                        Res.Status = "K";
+                        Res.data = new List<string[]>();
+                        Res.data.Add(new string[] { "", "", "", "", "", "", "", "", "" });
+                        i = 0;
+                        foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.UnitID==tem && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
+                        {
+
+                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusetrs.Auctions.AuctionNumber, tic.Clusetrs.Auctions.Name, tic.TichurNumber, tic.Clusetrs.DisplayNumber.Value.ToString(), tic.Clusetrs.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
+                            i++;
+
+                        }
+                        return Json(Res);
+                    }
+                    else if (data.clu_field == null)
+                    {
+                        Res = new GenModel();
+                        Res.Status = "K";
+                        Res.data = new List<string[]>();
+                        Res.data.Add(new string[] { "", "", "", "", "", "", "", "", "" });
+                        i = 0;
+                        int al = Int32.Parse(data.auc_field);
+                        foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.Clusetrs.AuctionID== al && x.UnitID == tem && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x =>x.DateTimeCreated))
+                        {
+
+                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusetrs.Auctions.AuctionNumber, tic.Clusetrs.Auctions.Name, tic.TichurNumber, tic.Clusetrs.DisplayNumber.Value.ToString(), tic.Clusetrs.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
+                            i++;
+
+                        }
+                        return Json(Res);
+                    }
+                    else if (data.auc_field == null)
+                    {
+                        Res = new GenModel();
+                        Res.Status = "K";
+                        Res.data = new List<string[]>();
+                        Res.data.Add(new string[] { "", "", "", "", "", "", "", "", "" });
+                        i = 0;
+                        int cl = Int32.Parse(data.clu_field);
+                        foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.ClusterID == cl && x.UnitID == tem && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
+                        {
+
+                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusetrs.Auctions.AuctionNumber, tic.Clusetrs.Auctions.Name, tic.TichurNumber, tic.Clusetrs.DisplayNumber.Value.ToString(), tic.Clusetrs.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
+                            i++;
+
+                        }
+                        return Json(Res);
+                    }
+                    else
+                    {
+                        Res = new GenModel();
+                        Res.Status = "K";
+                        Res.data = new List<string[]>();
+                        Res.data.Add(new string[] { "", "", "", "", "", "", "", "", "" });
+                        i = 0;
+                        int al = Int32.Parse(data.auc_field);
+                        int cl = Int32.Parse(data.clu_field);
+                        foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.Clusetrs.AuctionID == al && x.ClusterID == cl && x.UnitID == tem && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
+                        {
+
+                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusetrs.Auctions.AuctionNumber, tic.Clusetrs.Auctions.Name, tic.TichurNumber, tic.Clusetrs.DisplayNumber.Value.ToString(), tic.Clusetrs.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
+                            i++;
+
+                        }
+                        return Json(Res);
+                    }
+                }
+                if (data.unit_field == null)
+                {
+                    if (data.clu_field == null && data.auc_field == null)
+                    {
+                        Res = new GenModel();
+                        Res.Status = "K";
+                        Res.data = new List<string[]>();
+                        Res.data.Add(new string[] { "", "", "", "", "", "", "", "", "" });
+                        i = 0;
+                        foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
+                        {
+
+                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusetrs.Auctions.AuctionNumber, tic.Clusetrs.Auctions.Name, tic.TichurNumber, tic.Clusetrs.DisplayNumber.Value.ToString(), tic.Clusetrs.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
+                            i++;
+
+                        }
+                        return Json(Res);
+                    }
+                    else if (data.clu_field == null)
+                    {
+                        Res = new GenModel();
+                        Res.Status = "K";
+                        Res.data = new List<string[]>();
+                        Res.data.Add(new string[] { "", "", "", "", "", "", "", "", "" });
+                        i = 0;
+                        int al = Int32.Parse(data.auc_field);
+                        foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.Clusetrs.AuctionID == al && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
+                        {
+
+                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusetrs.Auctions.AuctionNumber, tic.Clusetrs.Auctions.Name, tic.TichurNumber, tic.Clusetrs.DisplayNumber.Value.ToString(), tic.Clusetrs.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
+                            i++;
+
+                        }
+                        return Json(Res);
+                    }
+                    else if (data.auc_field == null)
+                    {
+                        Res = new GenModel();
+                        Res.Status = "K";
+                        Res.data = new List<string[]>();
+                        Res.data.Add(new string[] { "", "", "", "", "", "", "", "", "" });
+                        i = 0;
+                        int cl = Int32.Parse(data.clu_field);
+                        foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.ClusterID == cl && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
+                        {
+
+                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusetrs.Auctions.AuctionNumber, tic.Clusetrs.Auctions.Name, tic.TichurNumber, tic.Clusetrs.DisplayNumber.Value.ToString(), tic.Clusetrs.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
+                            i++;
+
+                        }
+                        return Json(Res);
+                    }
+                    else
+                    {
+                        Res = new GenModel();
+                        Res.Status = "K";
+                        Res.data = new List<string[]>();
+                        Res.data.Add(new string[] { "", "", "", "", "", "", "", "", "" });
+                        i = 0;
+                        int al = Int32.Parse(data.auc_field);
+                        int cl = Int32.Parse(data.clu_field);
+                        foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.Clusetrs.AuctionID == al && x.ClusterID == cl && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
+                        {
+
+                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusetrs.Auctions.AuctionNumber, tic.Clusetrs.Auctions.Name, tic.TichurNumber, tic.Clusetrs.DisplayNumber.Value.ToString(), tic.Clusetrs.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
+                            i++;
+
+                        }
+                        return Json(Res);
+                    }
+                }
+                else
+                {
+                    if (data.clu_field == null && data.auc_field == null)
+                    {
+                        Res = new GenModel();
+                        Res.Status = "K";
+                        Res.data = new List<string[]>();
+                        Res.data.Add(new string[] { "", "", "", "", "", "", "", "", "" });
+                        i = 0;
+                        foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.UnitID == tem && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
+                        {
+
+                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusetrs.Auctions.AuctionNumber, tic.Clusetrs.Auctions.Name, tic.TichurNumber, tic.Clusetrs.DisplayNumber.Value.ToString(), tic.Clusetrs.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
+                            i++;
+
+                        }
+                        return Json(Res);
+                    }
+                    else if (data.clu_field == null)
+                    {
+                        Res = new GenModel();
+                        Res.Status = "K";
+                        Res.data = new List<string[]>();
+                        Res.data.Add(new string[] { "", "", "", "", "", "", "", "", "" });
+                        i = 0;
+                        int al = Int32.Parse(data.auc_field);
+                        foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.Clusetrs.AuctionID == al && x.UnitID == tem && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
+                        {
+
+                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusetrs.Auctions.AuctionNumber, tic.Clusetrs.Auctions.Name, tic.TichurNumber, tic.Clusetrs.DisplayNumber.Value.ToString(), tic.Clusetrs.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
+                            i++;
+
+                        }
+                        return Json(Res);
+                    }
+                    else if (data.auc_field == null)
+                    {
+                        Res = new GenModel();
+                        Res.Status = "K";
+                        Res.data = new List<string[]>();
+                        Res.data.Add(new string[] { "", "", "", "", "", "", "", "", "" });
+                        i = 0;
+                        int cl = Int32.Parse(data.clu_field);
+                        foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.ClusterID == cl && x.UnitID == tem && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
+                        {
+
+                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusetrs.Auctions.AuctionNumber, tic.Clusetrs.Auctions.Name, tic.TichurNumber, tic.Clusetrs.DisplayNumber.Value.ToString(), tic.Clusetrs.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
+                            i++;
+
+                        }
+                        return Json(Res);
+                    }
+                    else
+                    {
+                        Res = new GenModel();
+                        Res.Status = "K";
+                        Res.data = new List<string[]>();
+                        Res.data.Add(new string[] { "", "", "", "", "", "", "", "", "" });
+                        i = 0;
+                        int al = Int32.Parse(data.auc_field);
+                        int cl = Int32.Parse(data.clu_field);
+                        foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.Clusetrs.AuctionID == al && x.ClusterID == cl && x.UnitID == tem && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
+                        {
+
+                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusetrs.Auctions.AuctionNumber, tic.Clusetrs.Auctions.Name, tic.TichurNumber, tic.Clusetrs.DisplayNumber.Value.ToString(), tic.Clusetrs.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
+                            i++;
+
+                        }
+                        return Json(Res);
+                    }
+
+                }
+
+
+
+
+              
+                    
+              
+
+            }
+            return Json("");
+        }
+        public class TCanData
+        {
+            public string id { get; set; }
+            public string comment { get; set; }
+        }
+        [Authorize]
+        [HttpPost]
+        [AuthRestriections(Name = "/Main/TichurCancel")]
+        public ActionResult CancelTichur(TCanData can)
+        {
+            try
+            {
+                using (TimchurDatabaseEntities ent = new TimchurDatabaseEntities())
+                {
+                    Cache.gen_lock.WaitOne();
+                    int cid = Int32.Parse(can.id);
+                    Tichurim tic = ent.Tichurim.Where(x => x.ID == cid).First();
+                    foreach (SuppliersTichurim sti in tic.SuppliersTichurim)
+                    {
+                        if (sti.Suppliers.SuppliersClusetrs.Where(x2 => x2.ClusetrID == tic.ClusterID).First().LastTimeInList == tic.DateTimeCreated)
+                        {
+                            sti.Suppliers.SuppliersClusetrs.Where(x2 => x2.ClusetrID == tic.ClusterID).First().LastTimeInList = sti.Suppliers.SuppliersClusetrs.Where(x2 => x2.ClusetrID == tic.ClusterID).First().FormarLastTimeInList;
+
+                        }
+                    }
+                    tic.UpdatedUserID = ent.Users.Where(x => x.IDCardNumber == User.Identity.Name).First().ID;
+                    tic.DateTimeUpdated = DateTime.Now;
+                    tic.StatusID = 2;
+                    tic.UpdatedComment = can.comment;
+                    ent.SaveChanges();
+                    Cache.gen_lock.ReleaseMutex();
+                    return Json("ביטול תיחור הצליח");
+                }
+            }
+            catch(Exception e)
+            {
+                return Json("ביטול תיחור נכשל");
+            } 
         }
     }
 }

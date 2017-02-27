@@ -208,6 +208,10 @@
     <Content Include="Images\Emblem_of_Israel.svg.png" />
     <Content Include="Images\left_arrow.png" />
     <Content Include="Images\Loading_icon.gif" />
+    <Content Include="scripts\jquery.qtip.css" />
+    <Content Include="scripts\jquery.qtip.js" />
+    <Content Include="scripts\jquery.qtip.min.css" />
+    <Content Include="scripts\jquery.qtip.min.js" />
     <Content Include="scripts\angular-mocks.js" />
     <Content Include="scripts\angular.js" />
     <Content Include="scripts\angular.min.js" />
@@ -242,6 +246,7 @@
     <Content Include="scripts\html5shiv.js" />
     <Content Include="scripts\index.html" />
     <Content Include="scripts\angular.min.js.map" />
+    <Content Include="scripts\jquery.qtip.min.map" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
@@ -389,6 +394,7 @@
     <Compile Include="Infrastructure\CustomIdErrorAttribu.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Infrastructure\UpdateAndEditProcess.cs" />
+    <Compile Include="Models\GenModel.cs" />
     <Compile Include="Models\RoleModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\SupplierFModel.cs" />
@@ -404,7 +410,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -474,6 +479,7 @@
     <Content Include="Views\Main\AddSupplier.cshtml" />
     <Content Include="Views\Main\SupplierLoadingScreen.cshtml" />
     <Content Include="Views\Main\ESupplierLoadingScreen.cshtml" />
+    <Content Include="Views\web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

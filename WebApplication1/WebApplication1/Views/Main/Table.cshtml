@@ -1,0 +1,62 @@
+﻿@model WebApplication1.Models.TableModel
+
+    @{
+        Layout = null;
+        var i = 1;
+        var count = 0;
+     
+}
+
+
+    <br />
+    <div class="col-md-12 bg-primary">
+        
+            <div class="col-md-6"><h4>@Model.Title</h4></div>
+       
+
+        </div>
+  <div id="toExcel_wrapper" class="col-md-6 wrap_tab">
+
+</div>
+        <table class="table tabExcel" id="toExcel">
+
+            <thead>
+                <tr>
+
+                    @foreach (string str in Model.header)
+            {
+
+                        <th>@str</th>
+
+
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (List<string> li in Model.values)
+                {
+
+                    count = 0;
+
+                    <tr>
+
+                        @foreach (string str in li)
+                {
+                    if (count == 0)
+                    {
+                                <td>@i</td>
+                            }
+                            else
+                            {
+                                <td>@str</td>
+                            }
+                            count++;
+
+                        }
+                    </tr>
+                    i++;
+                }
+            </tbody>
+        </table>
+   
+

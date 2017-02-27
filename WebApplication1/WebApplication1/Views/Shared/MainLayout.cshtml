@@ -20,7 +20,8 @@
     <link rel="stylesheet" href="@Url.Content("~/Style/bootstrap-rtl.css")">
     <link rel="stylesheet" href="@Url.Content("~/Style/dropdown_search.css")">
 <script src="@Url.Content("~/scripts/bootstrap.min.js")"></script>
-  
+   <script src="@Url.Content("~/scripts/jquery.qtip.min.js")"></script>
+    <link rel="stylesheet" href="@Url.Content("~/scripts/jquery.qtip.min.css")">
 
  
 
@@ -43,9 +44,10 @@
                 });
             }
         });
-
+        var et = "";
+        var et2 = "";
         $(document).ready(function () {
-          
+           
             var d = new Date();
             var dstr = "|" + d.getFullYear() + "," + d.getMonth()+1 +"," + d.getDate()+"|";
             @RenderSection("Code1")
@@ -79,12 +81,14 @@
                 }
 
             });
-
-            $(".datepicker").datepicker({
+            var tod = new Date();
+            var yes = new Date(tod);
+            yes.setDate(yes.getDate() - 1);
+            $(".datepickerT,.datepickerY").datepicker({
                 showOtherMonths: true
-
             });
-           
+            $(".datepickerT").datepicker('setDate', tod);
+            $(".datepickerY").datepicker('setDate', yes);
         });
       
 

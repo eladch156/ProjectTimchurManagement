@@ -3,7 +3,70 @@
 @{
     ViewBag.Title = "יצירת רשימת תיחור חדשה";
     Layout = "~/Views/Shared/MainLayout.cshtml";
+
+    List<SelectListItem> unitli = new List<SelectListItem>();
+    List<SelectListItem> auctionli = new List<SelectListItem>();
+    using (TimchurDatabaseEntities ent = new TimchurDatabaseEntities())
+    {
+        if (User.IsInRole("Admin"))
+        {
+            foreach (Units un in ent.Units)
+            {
+                unitli.Add(new SelectListItem() { Value = un.ID.ToString(), Text = un.Name, Selected = false });
+            }
+        }
+        else
+        {
+            var rec = "<" + (ent.Users.Where(x => x.IDCardNumber == User.Identity.Name).First().Units.ID.ToString()) + "><" + (ent.Users.Where(x => x.IDCardNumber == User.Identity.Name).First().Units.Name) + ">.<" + ent.Users.Where(x => x.IDCardNumber == User.Identity.Name).First().FullName + "," + ent.Users.Where(x => x.IDCardNumber == User.Identity.Name).First().Roles.Name + ">";
+            unitli.Add(new SelectListItem() { Value = rec, Text = rec, Selected = true });
+        }
+        if (User.IsInRole("Admin") || ent.UnitsAuctions.Where(x => x.UnitID == ent.Users.Where(x2 => x2.IDCardNumber == User.Identity.Name).FirstOrDefault().Units.ID).Count() == 0)
+        {
+            foreach (Auctions un in ent.Auctions)
+            {
+                if (un.StatusID == 1)
+                {
+                    auctionli.Add(new SelectListItem() { Value = un.ID.ToString(), Text = un.Name, Selected = false });
+                }
+            }
+        }
+        else
+        {
+            foreach (UnitsAuctions un in ent.UnitsAuctions.Where(x => x.UnitID == ent.Users.Where(x2 => x2.IDCardNumber == User.Identity.Name).FirstOrDefault().Units.ID))
+            {
+                if (un.Auctions.StatusID == 1)
+                {
+                    auctionli.Add(new SelectListItem() { Value = un.Auctions.ID.ToString(), Text = un.Auctions.Name, Selected = false });
+                }
+            }
+        }
+    }
 }
+<script language="javascript" type="text/javascript">
+    function GetVal(_auctionId) {
+        var procemessage = "<option selected='selected'>המתן....</option>";
+        $("#sel_clust").html(procemessage).show();
+        var url = "/Main/GetCluByAuc/";
+
+        $.ajax({
+            url: url,
+            data: { auctionId: _auctionId },
+            cache: false,
+            type: "POST",
+            success: function (data) {
+                var markup = "<option selected='selected'>בחר/י ערך</option>";
+                for (var x = 0; x < data.length; x++) {
+                    markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                }
+                $("#sel_clust").html(markup).show();
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+
+    }
+</script>
 @section Code1
 {
   
@@ -32,7 +95,7 @@
                             <div class="dropdown-menu dropdown-menu-left" role="menu">
                                 <form id="form_search_area" class="form-horizontal" role="form">
                                     
-                                        @if (!User.IsInRole("Admin"))
+                                        @if (User.IsInRole("Admin"))
                                         {
 
                                             <div class="form-group">
@@ -44,10 +107,7 @@
                                                     </div>
                                                     <div class="col-sm-4">
 
-                                                        <select class="form-control" id="sel_unit">
-                                                            <option>בחר/י ערך</option>
-
-                                                        </select>
+                                                        @Html.DropDownList("D", unitli, "בחר/י ערך", new { @class = "form-control" })
 
                                                     </div>
                                                     <div class="col-sm-2">
@@ -55,7 +115,7 @@
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <select class="form-control" id="sel_clust">
-                                                            <option>בחר/י ערך</option>
+                                                            <option>אנא בחר מכרז</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -75,17 +135,14 @@
                                                         </div>
                                                         <div class="col-sm-5">
 
-                                                            <select class="form-control disabled" id="sel_unit">
-                                                                <option>בחר/י ערך</option>
-
-                                                            </select>
+                                                            @Html.DropDownList("D",unitli, new { @class = "form-control", @disabled = "disabled" })
                                                             </div>
                                                             <div class="col-sm-1">
                                                                 <label class="control-label" for="sel_clust">סל:</label>
                                                             </div>
                                                             <div class="col-sm-5">
                                                                 <select class="form-control" id="sel_clust">
-                                                                    <option>בחר/י ערך</option>
+                                                                    <option>אנא בחר מכרז</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -106,9 +163,7 @@
                                                         <label class="control-label" for="sel_auct">מכרז:</label>
                                                     </div>
                                                     <div class="col-sm-5">
-                                                        <select class="form-control" id="sel_unit">
-                                                            <option>בחר/י ערך</option>
-                                                        </select>
+                                                        @Html.DropDownList("A", auctionli, "בחר/י ערך", new { @class = "form-control", @onchange = "javascript:GetVal(this.value);" })
                                                     </div>
                                                 
 
