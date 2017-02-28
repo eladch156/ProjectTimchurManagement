@@ -30,20 +30,22 @@ namespace WebApplication1.AlgoTimchur
                 if (ent.Clusetrs.Where(x => x.ID == input.CluestrID).FirstOrDefault()!=null)
                suppliersRemaining = ent.Clusetrs.Where(x=>x.ID==input.CluestrID).FirstOrDefault().SuppliersInTichur.Value;
               
-
-                var sortByUsage = from sup in ent.Suppliers
+                
+                var sortByUsage = (from sup in ent.Suppliers
                          join supcluc in ent.SuppliersClusetrs
                          on sup.ID equals supcluc.SupplierID
                          where supcluc.ClusetrID == input.CluestrID && sup.StatusID == 1
                          orderby supcluc.LastTimeInList
                          group sup by new { supcluc.LastTimeInList, supcluc.SupplierID} into dateGroups
                          orderby dateGroups.Key.LastTimeInList
-                         select dateGroups;
+                         select dateGroups);
                 //Date-grouped iterator
-                var itr = sortByUsage.GetEnumerator();
+                var itr = sortByUsage.ToList().GetEnumerator();
+                itr.MoveNext();
                 var rnd = new Random();
                 while (suppliersRemaining > 0)
                 {
+                    
                     //oldest group of suppliers
                     var dateGroup = itr.Current;
                     //Need to pick a random subset of the suppliers

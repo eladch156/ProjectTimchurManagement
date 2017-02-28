@@ -74,6 +74,7 @@ namespace WebApplication1.AlgoTimchur
                     suptic.PositionInList = byte.Parse(i.ToString());
                     Suppliers supa = ent2.Suppliers.Where(x => x.ID == sup_id).First();
                     res2.data.Add(new string[] { i.ToString(),suptic.PositionInList.Value.ToString(),tich.Units.Name,tich.Clusetrs.Auctions.AuctionNumber, tich.Clusetrs.Auctions.Name,tich.TichurNumber,tich.Clusetrs.DisplayNumber.Value.ToString(),tich.Clusetrs.Name,supa.Name,supa.CompanyNumber,supa.ContactName,supa.EmailAddress,supa.PhoneNumber,tich.DateTimeCreated.ToString() });
+                    ent2.SuppliersTichurim.Add(suptic);
                     i++;
 
                 }
