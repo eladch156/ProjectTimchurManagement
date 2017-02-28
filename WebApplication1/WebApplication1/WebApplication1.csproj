@@ -320,9 +320,11 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlgoTimchur\EndResultTichur.cs" />
     <Compile Include="AlgoTimchur\ExtractSuppList.cs" />
     <Compile Include="AlgoTimchur\PullSuppList.cs" />
     <Compile Include="AlgoTimchur\TablePullResult.cs" />
+    <Compile Include="AlgoTimchur\TichurAlgo.cs" />
     <Compile Include="AlgoTimchur\TichurInfo.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />

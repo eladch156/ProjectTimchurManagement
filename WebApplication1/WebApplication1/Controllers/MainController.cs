@@ -16,6 +16,7 @@ using System.Collections;
 using System.Data;
 using System.Threading;
 using System.Text.RegularExpressions;
+using WebApplication1.AlgoTimchur;
 
 namespace WebApplication1.Controllers
 {
@@ -1067,6 +1068,38 @@ namespace WebApplication1.Controllers
             {
                 return Json("ביטול תיחור נכשל");
             } 
+        }
+        public class TichurNe
+        {
+            public string unit_id { get; set; }
+            public string clu_id { get; set; }
+            public string auc_id { get; set; }
+            public string tichur_id { get; set; }
+        }
+        [Authorize]
+        [HttpPost]
+        [AuthRestriections(Name = "/Main/TichurSuppCreate")]
+        public ActionResult GetTichurProcc(TichurNe NI)
+        {
+            if (NI.unit_id == null || NI.auc_id==null || NI.clu_id==null)
+            {
+                EndResultTichur res = new EndResultTichur();
+                res.Status = "error";
+                res.data = new List<string[]>();
+                res.data.Add(new string[] { "אנא מלא את כל הפרטים המתאימים" });
+                return Json(res);
+            }
+            else
+            {
+                TichurInfo inf=new TichurInfo();
+                inf.AuctionID = Int32.Parse(NI.auc_id);
+                inf.CluestrID = Int32.Parse(NI.clu_id);
+                inf.UnitID = Int32.Parse(NI.unit_id);
+                inf.TichurNumber = NI.tichur_id;
+                TichurAlgo ta = new TichurAlgo();
+                EndResultTichur er = ta.Execute(inf, User.Identity.Name);
+                return Json(er);
+            }
         }
     }
 }

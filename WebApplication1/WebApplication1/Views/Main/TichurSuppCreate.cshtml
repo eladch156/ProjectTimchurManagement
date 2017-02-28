@@ -44,17 +44,20 @@
 }
 <script language="javascript" type="text/javascript">
     function GetVal(_auctionId) {
-        var procemessage = "<option selected='selected'>המתן....</option>";
+
+        var procemessage = "<option value='' selected='selected'>המתן....</option>";
         $("#sel_clust").html(procemessage).show();
         var url = "/Main/GetCluByAuc/";
-
+        if (_auctionId == "") {
+            return;
+        }
         $.ajax({
             url: url,
             data: { auctionId: _auctionId },
             cache: false,
             type: "POST",
             success: function (data) {
-                var markup = "<option selected='selected'>בחר/י ערך</option>";
+                var markup = "<option value='' selected='selected'>בחר/י ערך</option>";
                 for (var x = 0; x < data.length; x++) {
                     markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
                 }
@@ -65,15 +68,83 @@
             }
         });
 
-    }
+    };
+    function TabRes() {
+        $('#tichur_num').css({ "background": "", "border": "" });
+        $(".qtip").remove();
+        var data = {
+
+            tichur_id: $('#tichur_num').val(),
+            unit_id: $('#sel_unit').val(),
+            clu_id: $('#sel_clust').val(),
+            auc_id: $('#sel_auct').val(),
+
+        };
+        var pattren = /[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9]/g;
+        if (pattren.test(data.tichur_id) == false) {
+            $('#tichur_num').css({ "background": "#FEF1EC", "border": "1px solid #CD0A0A" });
+            $('#tichur_num').qtip({ // Grab some elements to apply the tooltip to
+                content: 'מספר תיחור אינו תקין',
+                position: {
+                    target: 'mouse', // Track the mouse as the positioning target
+                    adjust: { x: 5, y: 5 } // Offset it slightly from under the mouse
+                }
+            });
+           
+            return;
+        }
+        $.ajax({
+            type: "POST",
+            url: "@Url.Content("~/Main/GetTichurProcc")",
+            content: "application/json; charset=utf-8",
+            dataType: "json",
+            data: data,
+            success: function (d) {
+                if (d.Status == "error") {
+                    $.bootstrapPurr(d.data[0][0]);
+                }
+                else {
+                    last_succ_id = id;
+
+                    $("#tab_1").css({ "display": "inline", "width": "100%" });
+
+                    $("#canc_tichur").prop("disabled", "");
+
+                    et.clear().draw();
+                    for (var i = 1; i < d.data.length; i++) {
+                        var arr = [];
+                        arr.push(i);
+                        for (var j = 1; j < d.data[i].length; j++) {
+                            arr.push(d.data[i][j]);
+                        }
+                        et.row.add(arr).draw();
+
+
+                    }
+
+
+
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                // TODO: Show error
+            }
+        });
+    };
+    function newEff() {
+
+        $("#form_search_area").trigger('reset');
+
+    };
 </script>
 @section Code1
 {
   
+      var texTab="";
     var table = $('.tabExcel').DataTable({
     buttons: ['copy', {
     extend: 'excel',
-    title: "מערכת שליפת ספקים לתיחור – רשימת משתמשים מורשים" +dstr
+    title: "" +dstr
     }],
     "oLanguage": {
     "sUrl": "//cdn.datatables.net/plug-ins/1.10.13/i18n/Hebrew.json"
@@ -81,6 +152,7 @@
     "dom": "<'row'<'col-sm-12'tr>><'row'<'col-sm-5'><'col-sm-2'i><'col-sm-5'>><'row'<'col-sm-4'><'col-sm-2'f><'col-sm-2'B><'col-sm-4'>><'row'<'col-sm-5'><'col-sm-2'p><'col-sm-5'>>"
 
     });
+    et=table;
 
 }
 <div class="container">
@@ -107,7 +179,7 @@
                                                     </div>
                                                     <div class="col-sm-4">
 
-                                                        @Html.DropDownList("D", unitli, "בחר/י ערך", new { @class = "form-control" })
+                                                        @Html.DropDownList("D", unitli, "בחר/י ערך", new { @id = "sel_unit", @class = "form-control" })
 
                                                     </div>
                                                     <div class="col-sm-2">
@@ -135,7 +207,7 @@
                                                         </div>
                                                         <div class="col-sm-5">
 
-                                                            @Html.DropDownList("D",unitli, new { @class = "form-control", @disabled = "disabled" })
+                                                            @Html.DropDownList("D",unitli, new { @id= "sel_unit", @class = "form-control", @disabled = "disabled" })
                                                             </div>
                                                             <div class="col-sm-1">
                                                                 <label class="control-label" for="sel_clust">סל:</label>
@@ -163,7 +235,7 @@
                                                         <label class="control-label" for="sel_auct">מכרז:</label>
                                                     </div>
                                                     <div class="col-sm-5">
-                                                        @Html.DropDownList("A", auctionli, "בחר/י ערך", new { @class = "form-control", @onchange = "javascript:GetVal(this.value);" })
+                                                        @Html.DropDownList("A", auctionli, "בחר/י ערך", new { @id = "sel_auct", @class = "form-control", @onchange = "javascript:GetVal(this.value);" })
                                                     </div>
                                                 
 
@@ -181,8 +253,8 @@
 </form>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true">&nbsp;</span>שלוף רשימה</button>
-                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-new-window" aria-hidden="true">&nbsp;</span>חדש</button>
+                        <button type="button" class="btn btn-primary" onclick="TabRes()"><span class="glyphicon glyphicon-search" aria-hidden="true">&nbsp;</span>שלוף רשימה</button>
+                        <button type="button" class="btn btn-primary" onclick="newEff()"><span class="glyphicon glyphicon-new-window" aria-hidden="true">&nbsp;</span>חדש</button>
                     </div>
                 </div>
             </div>
@@ -190,11 +262,54 @@
     </div>
 </div>
 
-@Html.Partial("Table", new TableModel()
-{
-    header = new List<string>() { "מס' שורה", "מס' תוצאות בשליפה", "יחידה", "מספר מכרז", "שם מכרז", "תיחור", "מס' סל", "שם סל", "שם ספק", "ת.פ.", "איש קשר", "כתובת אימייל", "טלפון", "תאריך ושעה" },
-    Title = "יצירת רשימת ספקים לתיחור",
-    values = new List<List<string>>() { new List<string>() { "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa" },
-    new List<string>() { "aaaaa", "abbaa", "aabaa", "aaaba", "abbaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa" }},
-    
-})
+<div style="" id="tab_1">
+    <table class="table tabExcel" id="toExcel">
+        <thead>
+            <tr>
+                <th>
+                    מספר שורה
+                </th>
+                <th>
+                    מס בתוצאת שליפה
+                </th>
+                <th>
+                    יחידה
+                </th>
+                <th>
+                    מס' מכרז
+                </th>
+                <th>
+                    שם מכרז
+                </th>
+                <th>
+                    תיחור
+                </th>
+                <th>
+                    מס' סל
+                </th>
+                <th>
+                    שם סל
+                </th>
+                <th>
+                    שם ספק
+                </th>
+                <th>
+                    ח.פ.
+                </th>
+                <th>
+                    איש קשר
+                </th>
+                <th>
+                    אימייל
+                </th>
+                <th>
+                    טלפון
+                </th>
+                <th>
+                    תאריך ושעה
+                </th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>

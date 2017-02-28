@@ -20,13 +20,16 @@ namespace WebApplication1.AlgoTimchur
             using (TimchurDatabaseEntities ent = new TimchurDatabaseEntities())
             {
                // Checking for duplicate tichurs
-               Database.Tichurim check = ent.Tichurim.Find(input.TichurNumber);
+               Database.Tichurim check = ent.Tichurim.Where(x=>x.TichurNumber==input.TichurNumber).FirstOrDefault();
                if (check != null && check.UnitID == input.UnitID && check.StatusID == 1)
                 {
                     throw new DuplicateKeyException(check);
                 }
                 TablePullResult res = new TablePullResult();
-                int suppliersRemaining = ent.Clusetrs.Find(input.CluestrID).SuppliersInTichur.Value;
+                int suppliersRemaining = 0;
+                if (ent.Clusetrs.Where(x => x.ID == input.CluestrID).FirstOrDefault()!=null)
+               suppliersRemaining = ent.Clusetrs.Where(x=>x.ID==input.CluestrID).FirstOrDefault().SuppliersInTichur.Value;
+              
 
                 var sortByUsage = from sup in ent.Suppliers
                          join supcluc in ent.SuppliersClusetrs
@@ -50,7 +53,7 @@ namespace WebApplication1.AlgoTimchur
                         // Going over the shuffled list until enough are extracted
                         foreach (var supplier in shuffled)
                         {
-                            res.table.Add(supplier.ToString());
+                            res.table.Add(supplier.ID.ToString());
                             if (--suppliersRemaining == 0)
                             {
                                 break;
@@ -61,7 +64,7 @@ namespace WebApplication1.AlgoTimchur
                         //Need at least one entire dategroup - adding all suppliers in current set.
                         foreach (var supplier in dateGroup)
                         {
-                            res.table.Add(supplier.ToString());
+                            res.table.Add(supplier.ID.ToString());
                         }
                         suppliersRemaining -= dateGroup.Count();
                         itr.MoveNext();
