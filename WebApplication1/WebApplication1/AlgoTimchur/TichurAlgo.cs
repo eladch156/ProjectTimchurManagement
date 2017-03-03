@@ -16,6 +16,7 @@ namespace WebApplication1.AlgoTimchur
             {
                 PullSuppList pull = new ExtractSuppList();
                 TRE = pull.TichurAlgorithem(info);
+               
             }
             catch (Exception e)
             {
@@ -50,6 +51,7 @@ namespace WebApplication1.AlgoTimchur
                     tichur.DateTimeUpdated = DateTime.Now;
                     tichur.CreatedUserID = user.ID;
                     tichur.UpdatedUserID = user.ID;
+                    tichur.UpdatedComment = "Created";
                     ent.Tichurim.Add(tichur);
                     ent.SaveChanges();
                 }

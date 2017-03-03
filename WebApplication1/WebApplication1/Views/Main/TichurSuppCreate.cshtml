@@ -104,14 +104,14 @@
                     $.bootstrapPurr(d.data[0][0]);
                 }
                 else {
-                    last_succ_id = id;
+                  
 
-                    $("#tab_1").css({ "display": "inline", "width": "100%" });
+                 
 
-                    $("#canc_tichur").prop("disabled", "");
+                 
 
                     et.clear().draw();
-                    for (var i = 1; i < d.data.length; i++) {
+                    for (var i = 0; i < d.data.length; i++) {
                         var arr = [];
                         arr.push(i);
                         for (var j = 1; j < d.data[i].length; j++) {
@@ -123,8 +123,9 @@
                     }
 
 
-
+                    $.bootstrapPurr("תיחור הצליח");
                 }
+                
             },
             error: function (xhr, textStatus, errorThrown) {
                 // TODO: Show error

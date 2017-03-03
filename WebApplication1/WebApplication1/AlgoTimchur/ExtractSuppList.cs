@@ -58,9 +58,11 @@ namespace WebApplication1.AlgoTimchur
                             res.table.Add(supplier.ID.ToString());
                             if (--suppliersRemaining == 0)
                             {
+                                
                                 break;
                             } 
                         }
+                        itr.MoveNext();
                     } else
                     {
                         //Need at least one entire dategroup - adding all suppliers in current set.

@@ -1040,13 +1040,14 @@ namespace WebApplication1.Controllers
         [AuthRestriections(Name = "/Main/TichurCancel")]
         public ActionResult CancelTichur(TCanData can)
         {
+            Cache.gen_lock.WaitOne();
             try
             {
                 using (TimchurDatabaseEntities ent = new TimchurDatabaseEntities())
                 {
-                    Cache.gen_lock.WaitOne();
-                    int cid = Int32.Parse(can.id);
-                    Tichurim tic = ent.Tichurim.Where(x => x.ID == cid).First();
+                   
+                
+                    Tichurim tic = ent.Tichurim.Where(x => x.TichurNumber == can.id).FirstOrDefault();
                     foreach (SuppliersTichurim sti in tic.SuppliersTichurim)
                     {
                         if (sti.Suppliers.SuppliersClusetrs.Where(x2 => x2.ClusetrID == tic.ClusterID).First().LastTimeInList == tic.DateTimeCreated)
@@ -1066,6 +1067,7 @@ namespace WebApplication1.Controllers
             }
             catch(Exception e)
             {
+                Cache.gen_lock.ReleaseMutex();
                 return Json("ביטול תיחור נכשל");
             } 
         }
