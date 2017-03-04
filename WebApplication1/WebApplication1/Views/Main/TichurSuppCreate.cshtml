@@ -42,6 +42,7 @@
         }
     }
 }
+<div id="filename" style="display:none;"></div>
 <script language="javascript" type="text/javascript">
     function GetVal(_auctionId) {
 
@@ -121,6 +122,8 @@
 
 
                     }
+                    $("#filename").html($('#sel_unit option:selected').text() + "-" + "תיחור " + ('#tichur_id').val() + " " + ('#sel_clust option:selected').text() + " " + ('#sel_auct option:selected').text() + " " + "- רשימת ספקים");
+                    $("#filename").trigger("click");
 
 
                     $.bootstrapPurr("תיחור הצליח");
@@ -145,7 +148,12 @@
     var table = $('.tabExcel').DataTable({
     buttons: ['copy', {
     extend: 'excel',
-    title: "" +dstr
+    title: "" +dstr,
+     init: function(dt, node, config) {
+        $("#filename").on('click', function() {
+            config.title = $("#filename").html()+dstr;
+        })
+     }
     }],
     "oLanguage": {
     "sUrl": "//cdn.datatables.net/plug-ins/1.10.13/i18n/Hebrew.json"

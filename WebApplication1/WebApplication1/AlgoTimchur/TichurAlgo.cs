@@ -8,6 +8,7 @@ namespace WebApplication1.AlgoTimchur
 {
     public class TichurAlgo
     {
+
         public EndResultTichur Execute(TichurInfo info, string user_id)
         {
             Cache.gen_lock.WaitOne();
@@ -24,17 +25,20 @@ namespace WebApplication1.AlgoTimchur
                 res.Status = "error";
                 res.data = new List<string[]>();
                 res.data.Add(new string[] { "תיחור כבר קיים בתוך המערכת" });
+                Cache.gen_lock.ReleaseMutex();
                 return res;
             }
             using (Database.TimchurDatabaseEntities ent = new Database.TimchurDatabaseEntities())
             {
+                DateTime tic_date = DateTime.Now;
                 foreach (string sup in TRE.table)
                 {
+                   
                     int sid = Int32.Parse(sup);
                     Suppliers supa = ent.Suppliers.Where(x => x.ID == sid).First();
                     SuppliersClusetrs scl = supa.SuppliersClusetrs.Where(x => x.ClusetrID == info.CluestrID).First();
                     scl.FormarLastTimeInList = scl.LastTimeInList;
-                    scl.LastTimeInList = DateTime.Now;
+                    scl.LastTimeInList = tic_date;
 
 
                 }

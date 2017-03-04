@@ -44,11 +44,17 @@
     }
 @section Code1
 {
-    var texTab="";
+    var texTab1="";
+    var texTab2="";
     var table = $('.tabExcel1').DataTable({
     buttons: ['copy', {
     extend: 'excel',
-    title: "" +dstr
+    title:  texTab1+dstr,
+    init: function(dt, node, config) {
+        $("#filename").on('click', function() {
+            config.title = $("#filename").html()+dstr;
+        })
+     }
     }],
     "oLanguage": {
     "sUrl": "//cdn.datatables.net/plug-ins/1.10.13/i18n/Hebrew.json"
@@ -61,7 +67,12 @@
     var table2 = $('.tabExcel2').DataTable({
     buttons: ['copy', {
     extend: 'excel',
-    title: "" +dstr
+    title: texTab2 +dstr,
+    init: function(dt, node, config) {
+        $("#filename").on('click', function() {
+            config.title = $("#filename").html()+dstr;
+        })
+     }
     }],
     "oLanguage": {
     "sUrl": "//cdn.datatables.net/plug-ins/1.10.13/i18n/Hebrew.json"
@@ -71,6 +82,7 @@
     });
     et2=table2;
 }
+<div id="filename" style="display:none;"></div>
 <script language="javascript" type="text/javascript">
     var id = 0;
     var last_succ_id = -1;
@@ -195,6 +207,8 @@
 
 
                                   }
+                                  $("#filename").html($('#uni_sel option:selected').text() + "-" + "תיחור " + $('#tichur_num').val() + " " + "- רשימת ספקים");
+                                  $("#filename").trigger("click");
 
 
 
@@ -204,6 +218,7 @@
                         // TODO: Show error
                     }
                 });
+                
                 break;
             case 2:
                 var data = {
@@ -244,7 +259,8 @@
 
 
                         }
-
+                        $("#filename").html($('#uni_sel option:selected').text() + "-" + "רשימת תיחורים מתאריך" + $('#datetimepicker1').val() + "עד תאריך" + $('#datetimepicker2').val());
+                        $("#filename").trigger("click");
 
 
                     }
@@ -252,8 +268,10 @@
                 error: function (xhr, textStatus, errorThrown) {
                     // TODO: Show error
                 }
-        });
+                });
+                
         break;
+
         }
     }
 </script>
