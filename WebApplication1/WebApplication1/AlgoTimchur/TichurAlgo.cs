@@ -31,7 +31,9 @@ namespace WebApplication1.AlgoTimchur
             using (Database.TimchurDatabaseEntities ent = new Database.TimchurDatabaseEntities())
             {
                 DateTime tic_date = DateTime.Now;
-                foreach (string sup in TRE.table)
+                try
+                {
+                    foreach (string sup in TRE.table)
                 {
                    
                     int sid = Int32.Parse(sup);
@@ -42,11 +44,10 @@ namespace WebApplication1.AlgoTimchur
 
 
                 }
-                try
-                {
+                
                     Users user = ent.Users.Where(x => x.IDCardNumber == user_id).First();
                     Tichurim tichur = new Tichurim();
-                    tichur.UnitID = user.UnitID;
+                    tichur.UnitID = info.UnitID;
                     tichur.ClusterID = info.CluestrID;
                     tichur.TichurNumber = info.TichurNumber;
                     tichur.StatusID = 1;
@@ -61,7 +62,7 @@ namespace WebApplication1.AlgoTimchur
                 }
                 catch(Exception e)
                 {
-
+                    
                 }
             }
             EndResultTichur res2 = new EndResultTichur();
@@ -69,8 +70,11 @@ namespace WebApplication1.AlgoTimchur
             res2.data = new List<string[]>();
             using (Database.TimchurDatabaseEntities ent2 = new Database.TimchurDatabaseEntities())
             {
+
+                try
+                {
+                    int i = 0;
                 Tichurim tich = ent2.Tichurim.Where(x => x.TichurNumber == info.TichurNumber && x.StatusID == 1).First();
-                int i = 1;
                 foreach (string supp in TRE.table)
                 {
                     int sup_id = Int32.Parse(supp);
@@ -85,8 +89,13 @@ namespace WebApplication1.AlgoTimchur
 
                 }
                 ent2.SaveChanges();
+                }
+                catch(Exception e)
+                {
 
-              
+                }
+
+
             }
             Cache.gen_lock.ReleaseMutex();
             return res2;

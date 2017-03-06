@@ -252,6 +252,7 @@
     <Content Include="scripts\index.html" />
     <Content Include="scripts\angular.min.js.map" />
     <Content Include="scripts\jquery.qtip.min.map" />
+    <None Include="Properties\PublishProfiles\TichurManagSys - Web Deploy.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
