@@ -252,6 +252,13 @@
     <Content Include="scripts\index.html" />
     <Content Include="scripts\angular.min.js.map" />
     <Content Include="scripts\jquery.qtip.min.map" />
+    <EntityDeploy Include="Database\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Database\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\TichurManagSys - Web Deploy.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
@@ -460,13 +467,6 @@
     <Content Include="scripts\tableExport.jquery.plugin-master\package.json" />
     <Content Include="scripts\tableExport.jquery.plugin-master\README.md" />
     <Content Include="Style\lang_datab.json" />
-    <EntityDeploy Include="Database\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Database\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
     <Content Include="Views\Main\EditUser.cshtml" />
     <Content Include="Views\Main\AddUser.cshtml" />
     <Content Include="Style\package.json" />

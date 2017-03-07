@@ -4,13 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6edcff4f65c943f2aef339b14e05add6" Name="Diagram1" ZoomLevel="88">
+      <Diagram DiagramId="6cf6bad9cec04a888e9c03718f801425" Name="Diagram1">
         <EntityTypeShape EntityType="TimchurDatabaseModel.Auctions" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TimchurDatabaseModel.Clusters" Width="1.5" PointX="5.25" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TimchurDatabaseModel.Roles" Width="1.5" PointX="6" PointY="18" IsExpanded="true" />
         <EntityTypeShape EntityType="TimchurDatabaseModel.Statuses" Width="1.5" PointX="0.75" PointY="12.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TimchurDatabaseModel.Suppliers" Width="1.5" PointX="3" PointY="12.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TimchurDatabaseModel.SuppliersClusters" Width="2" PointX="7.625" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimchurDatabaseModel.SuppliersClusters" Width="1.5" PointX="7.5" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TimchurDatabaseModel.SuppliersTichurim" Width="1.5" PointX="15.75" PointY="13.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TimchurDatabaseModel.SuppliersTimchurim" Width="1.5" PointX="15.75" PointY="10.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TimchurDatabaseModel.Tichurim" Width="1.5" PointX="10.5" PointY="12.75" IsExpanded="true" />
@@ -45,9 +45,7 @@
         <AssociationConnector Association="TimchurDatabaseModel.Timchurim_FK5" ManuallyRouted="false" />
         <AssociationConnector Association="TimchurDatabaseModel.UnitsAuctions_FK1" ManuallyRouted="false" />
         <AssociationConnector Association="TimchurDatabaseModel.Users_FK3" ManuallyRouted="false" />
-        <AssociationConnector Association="TimchurDatabaseModel.Clusters_FK1" />
-        <AssociationConnector Association="TimchurDatabaseModel.Clusters_FK2" />
-        </Diagram>
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
