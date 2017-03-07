@@ -431,7 +431,7 @@
     <Content Include="Views\Main\MangUsers.cshtml" />
     <Content Include="Views\Main\MangSuppliers.cshtml" />
     <Content Include="Views\Main\MangAuctions.cshtml" />
-    <Content Include="Views\Main\MangClusetrs.cshtml" />
+    <Content Include="Views\Main\MangClusters.cshtml" />
     <Content Include="Views\Main\MangUnits.cshtml" />
     <Content Include="Views\Main\UnAuthError.cshtml" />
     <Content Include="Views\Main\ExtraButtons.cshtml" />
@@ -476,10 +476,10 @@
     <Content Include="Views\Main\EditAuction.cshtml" />
     <Content Include="Views\Main\AuctionLoadingScreen.cshtml" />
     <Content Include="Views\Main\EAuctionLoadingScreen.cshtml" />
-    <Content Include="Views\Main\EditClusetr.cshtml" />
-    <Content Include="Views\Main\AddClusetr.cshtml" />
-    <Content Include="Views\Main\ClusetrLoadingScreen.cshtml" />
-    <Content Include="Views\Main\EClusetrLoadingScreen.cshtml" />
+    <Content Include="Views\Main\EditCluster.cshtml" />
+    <Content Include="Views\Main\AddCluster.cshtml" />
+    <Content Include="Views\Main\ClusterLoadingScreen.cshtml" />
+    <Content Include="Views\Main\EClusterLoadingScreen.cshtml" />
     <Content Include="Views\Main\EditUnit.cshtml" />
     <Content Include="Views\Main\AddUnit.cshtml" />
     <Content Include="Views\Main\UnitLoadingScreen.cshtml" />

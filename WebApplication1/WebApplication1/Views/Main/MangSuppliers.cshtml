@@ -81,16 +81,16 @@
     <tbody>
         @foreach (Suppliers Elem in Model)
         {
-            foreach(SuppliersClusetrs scl in Elem.SuppliersClusetrs)
+            foreach(SuppliersClusters scl in Elem.SuppliersClusters)
             { 
             <tr>
                 <td>@i</td>
                 <td>@Elem.Name</td>
                 <td>@Elem.CompanyNumber</td>
-                <td>@scl.Clusetrs.Auctions.AuctionNumber</td>
-                <td>@scl.Clusetrs.Auctions.Name</td>
-                <td>@scl.Clusetrs.DisplayNumber</td>
-                <td>@scl.Clusetrs.Name</td>
+                <td>@scl.Clusters.Auctions.AuctionNumber</td>
+                <td>@scl.Clusters.Auctions.Name</td>
+                <td>@scl.Clusters.DisplayNumber</td>
+                <td>@scl.Clusters.Name</td>
                 <td>@Elem.ContactName</td>
                 <td>@Elem.EmailAddress</td>
                 <td>@Elem.PhoneNumber</td>

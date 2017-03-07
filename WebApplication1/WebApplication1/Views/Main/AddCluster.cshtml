@@ -1,4 +1,4 @@
-﻿@model WebApplication1.Database.Clusetrs
+﻿@model WebApplication1.Database.Clusters
 @using WebApplication1.Database
 @{
     ViewBag.Title = "הוסף סל";
@@ -34,14 +34,37 @@
             Value = (sli.ID).ToString(),
             Selected = false,
         };
+
+        if (sli.Name == "פעיל")
+        {
+            item.Selected = true;
+        }
         slsl.Add(item);
-
     }
+    var x = 0;
+    var cf = 0;
+    if (Model != null)
+    {
+        if (Model.SuppliersInTichur != null)
+        {
+            cf = Model.SuppliersInTichur.Value;
+        }
+    }
+    using (TimchurDatabaseEntities entit = new TimchurDatabaseEntities())
+    {
+        if (Model != null && Model.DisplayNumber != null)
+        {
+            if (entit.Clusters.Where(x2 => x2.DisplayNumber == Model.DisplayNumber).Count() > 0)
+            {
+                x = entit.Clusters.Where(x2 => x2.DisplayNumber == Model.DisplayNumber).ToList().First().ID;
 
-
+            }
+        }
+    }
 }
 <script>
-    function ex_co() {
+    function ex_co()
+    {
         var r = confirm("האם אתה בטוח שאתה רוצה לבטל?");
         if (r == true) {
             $('form')
@@ -51,6 +74,18 @@
         }
     }
 </script>
+@if (ViewData.ModelState.Keys.Contains("Exist"))
+{
+    <script>
+        var r = confirm("הפריט קיים במסד,האם תרצה לערוך אותו?");
+        if (r == true) {
+            window.location = "/Main/EditCluster/"+@x ;
+        } else {
+
+        }
+
+    </script>
+}
 <style>
     input.input-validation-error,
     textarea.input-validation-error,
@@ -91,13 +126,13 @@
 
 
     <hr />
-    <div class="col-sm-offset-5">
-        @if (!ViewData.ModelState.IsValid)
-        {
-            <h4>שגיאות:</h4>
-        }
-        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-    </div>
+        <div class="col-sm-offset-5">
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <h4>שגיאות:</h4>
+            }
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        </div>
         <div class="col-sm-offset-5 form-group">
             @Html.LabelFor(model => model.AuctionID, "מכרז:")
 
@@ -113,15 +148,15 @@
             @Html.ValidationMessage("StatusID", "", new { @class = "text-danger" })
 
         </div>
-        <div class="col-sm-offset-5 form-group">
-            @Html.LabelFor(model => model.DisplayNumber, "מספר סל:")
-            <div>
-                @Html.EditorFor(model => model.DisplayNumber, new { htmlAttributes = new { @class = "form-control col-sm-2" } })
-                @Html.ValidationMessage("DisplayNumber", "", new { @class = "text-danger" })
+            <div class="col-sm-offset-5 form-group">
+                @Html.LabelFor(model => model.DisplayNumber, "מספר סל:")
+                <div>
+                    @Html.EditorFor(model => model.DisplayNumber, new { htmlAttributes = new { @class = "form-control col-sm-2" } })
+                    @Html.ValidationMessage("DisplayNumber", "", new { @class = "text-danger" })
+                </div>
+                <br />
+                <br />
             </div>
-            <br />
-            <br />
-        </div>
             <div class="col-sm-offset-5 form-group">
                 @Html.LabelFor(model => model.Name, "שם סל:")
                 <div>
@@ -136,7 +171,7 @@
             <div class="col-sm-offset-5 form-group">
                 @Html.LabelFor(model => model.SuppliersInTichur, "מס' ספקים בכל תיחור:")
                 <div>
-                    @Html.EditorFor(model => model.SuppliersInTichur, new { htmlAttributes = new { @class = "form-control col-sm-2" } })
+                    @Html.EditorFor(model => model.SuppliersInTichur, new { htmlAttributes = new { @class = "form-control col-sm-2" , @Value=cf} })
                     @Html.ValidationMessage("SuppliersInTichur", "", new { @class = "text-danger" })
                 </div>
 
@@ -144,7 +179,7 @@
 
             <br />
             <br />
-
+            
 
 
             <div class="form-group">

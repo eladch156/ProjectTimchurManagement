@@ -350,24 +350,24 @@ namespace WebApplication1.Controllers
         return View(target);
     }
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddClusetr")]
-        public ActionResult EditClusetr(int? id)
+        [AuthRestriections(Name = "/Main/EditOrAddCluster")]
+        public ActionResult EditCluster(int? id)
         {
 
             if (id == null)
             {
-                return View("EditClusetr");
+                return View("EditCluster");
             }
             using (TimchurDatabaseEntities entity = new TimchurDatabaseEntities())
             {
                 Clusters clu = entity.Clusters.Where(x => x.ID == id).First();
                 if (clu == null)
                 {
-                    return View("EditClusetr");
+                    return View("EditCluster");
                 }
                 else
                 {
-                    return View("EditClusetr", clu);
+                    return View("EditCluster", clu);
                 }
 
 
@@ -377,15 +377,15 @@ namespace WebApplication1.Controllers
 
 
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddClusetr")]
+        [AuthRestriections(Name = "/Main/EditOrAddCluster")]
         [HttpPost]
-        public ActionResult EditClusetr(Clusters clu)
+        public ActionResult EditCluster(Clusters clu)
         {
 
             if (ModelState.IsValid)
             {
                 SingletonCache.Instance().Storage[User.Identity.Name] = clu;
-                return RedirectToAction("EClusetrLoadingScreen", "Main");
+                return RedirectToAction("EClusterLoadingScreen", "Main");
 
             }
             else
@@ -398,8 +398,8 @@ namespace WebApplication1.Controllers
         }
 
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddClusetr")]
-        public ActionResult AddClusetr()
+        [AuthRestriections(Name = "/Main/EditOrAddCluster")]
+        public ActionResult AddCluster()
         {
 
 
@@ -407,9 +407,9 @@ namespace WebApplication1.Controllers
 
         }
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddClusetr")]
+        [AuthRestriections(Name = "/Main/EditOrAddCluster")]
         [HttpPost]
-        public ActionResult AddClusetr(Clusters clu)
+        public ActionResult AddCluster(Clusters clu)
         {
 
             if (ModelState.IsValid)
@@ -425,7 +425,7 @@ namespace WebApplication1.Controllers
                     else
                     {
                         SingletonCache.Instance().Storage[User.Identity.Name] = clu;
-                        return RedirectToAction("ClusetrLoadingScreen", "Main");
+                        return RedirectToAction("ClusterLoadingScreen", "Main");
                     }
                 }
 
@@ -438,14 +438,14 @@ namespace WebApplication1.Controllers
 
         }
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddClusetr")]
-        public ActionResult ClusetrLoadingScreen(Clusters target)
+        [AuthRestriections(Name = "/Main/EditOrAddCluster")]
+        public ActionResult ClusterLoadingScreen(Clusters target)
         {
             return View(target);
         }
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddClusetr")]
-        public ActionResult EClusetrLoadingScreen(Clusters target)
+        [AuthRestriections(Name = "/Main/EditOrAddCluster")]
+        public ActionResult EClusterLoadingScreen(Clusters target)
         {
             return View(target);
         }

@@ -174,7 +174,7 @@ namespace WebApplication1
             string to_s = string.Format("סטאטוס:" + msg);
             Clients.Caller.sendMessage(id.Value.ToString());
         }
-        public void AddClusetrOperation()
+        public void AddClusterOperation()
         {
 
             int? id = -1;
@@ -210,7 +210,7 @@ namespace WebApplication1
             string to_s = string.Format("סטאטוס:" + msg);
             Clients.Caller.sendMessage(id.Value.ToString());
         }
-        public void EditClusetrOperation()
+        public void EditClusterOperation()
         {
 
             int? id = -1;

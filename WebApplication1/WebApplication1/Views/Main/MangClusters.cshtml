@@ -1,5 +1,5 @@
 ﻿@using WebApplication1.Database
-@model List<WebApplication1.Database.Clusetrs>
+@model List<WebApplication1.Database.Clusters>
 @{
     ViewBag.Title = "ניהול סלים";
     Layout = "~/Views/Shared/MainLayout.cshtml";
@@ -33,7 +33,7 @@
 <div id="toExcel_wrapper" class="col-md-6 wrap_tab">
 
 </div>
-<div class="row bg-primary"><h4 class="col-sm-11">&nbsp;&nbsp;&nbsp;&nbsp;@ViewBag.Title</h4><div class="col-sm-1 center"><button class="btn-default" onclick="location.href='@Url.Action("AddClusetr", "Main", null)';return false;"><span class="glyphicon glyphicon-plus"></span></button></div></div>
+<div class="row bg-primary"><h4 class="col-sm-11">&nbsp;&nbsp;&nbsp;&nbsp;@ViewBag.Title</h4><div class="col-sm-1 center"><button class="btn-default" onclick="location.href='@Url.Action("AddCluster", "Main", null)';return false;"><span class="glyphicon glyphicon-plus"></span></button></div></div>
 
 
 <table class="table tabExcel" id="toExcel">
@@ -67,7 +67,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (Clusetrs Elem in Model)
+        @foreach (Clusters Elem in Model)
         {
             <tr>
                 <td>@i</td>
@@ -77,7 +77,7 @@
                 <td>@Elem.Name</td>
                 <td>@Elem.SuppliersInTichur</td>
                 <td>@Elem.Statuses.Name</td>
-                <td>@Html.ActionLink("ערוך", "EditClusetr", new { id = Elem.ID })</td>
+                <td>@Html.ActionLink("ערוך", "EditCluster", new { id = Elem.ID })</td>
             </tr>
             {
                 i += 1;

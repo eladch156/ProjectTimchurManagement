@@ -5,6 +5,9 @@ using System.Web;
 
 namespace WebApplication1.AlgoTimchur
 {
+    /// <summary>
+    /// A class container for the resut of the Tichur algorithm.
+    /// </summary>
     public class EndResultTichur
     {
         public string Status { get; set; }

@@ -8,12 +8,12 @@
 
     List<WebApplication1.Database.Statuses> sl;
     List<WebApplication1.Database.Auctions> al;
-    List<WebApplication1.Database.Clusetrs> cl;
+    List<WebApplication1.Database.Clusters> cl;
     using (TimchurDatabaseEntities ent = new TimchurDatabaseEntities())
     {
         al = ent.Auctions.ToList();
         sl = ent.Statuses.ToList();
-        cl = ent.Clusetrs.ToList();
+        cl = ent.Clusters.ToList();
     }
 
     List<SelectListItem> slsl = new List<SelectListItem>();
@@ -303,7 +303,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                          @foreach (WebApplication1.Database.Clusetrs cli in cl)
+                          @foreach (WebApplication1.Database.Clusters cli in cl)
                           {
                               if (cli.AuctionID == ali.ID && cli.StatusID==1)
                               {
