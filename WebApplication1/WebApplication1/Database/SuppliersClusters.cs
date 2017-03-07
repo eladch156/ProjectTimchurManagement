@@ -11,9 +11,12 @@ namespace WebApplication1.Database
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     public partial class SuppliersClusters
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
         public Nullable<int> ClusterID { get; set; }
         public Nullable<int> SupplierID { get; set; }

@@ -211,6 +211,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\Emblem_of_Israel.svg.png" />
+    <Content Include="Images\icon_inf.png" />
     <Content Include="Images\left_arrow.png" />
     <Content Include="Images\Loading_icon.gif" />
     <Content Include="scripts\jquery.qtip.css" />
@@ -398,6 +399,7 @@
     <Compile Include="Database\Users.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="GenHorizForm.cs" />
     <Compile Include="Infrastructure\AuthAbstract\AuthRestriections.cs" />
     <Compile Include="Infrastructure\AuthAbstract\DatabaseProvider.cs" />
     <Compile Include="Infrastructure\AuthAbstract\IAuthProvider.cs" />

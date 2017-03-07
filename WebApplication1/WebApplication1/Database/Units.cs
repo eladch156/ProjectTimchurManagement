@@ -11,7 +11,8 @@ namespace WebApplication1.Database
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     public partial class Units
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,10 +23,18 @@ namespace WebApplication1.Database
             this.UnitsAuctions = new HashSet<UnitsAuctions>();
             this.Users = new HashSet<Users>();
         }
-    
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
+        [Required]
+        [Display(Name = "UNIStatusID", ResourceType = typeof(Resources.BasicAno))]
         public Nullable<int> StatusID { get; set; }
+        [Required]
+        [Display(Name = "UNIName", ResourceType = typeof(Resources.BasicAno))]
         public string Name { get; set; }
+        [Required]
+        [RegularExpression("[0-9][0-9][0-9][0-9]", ErrorMessageResourceName = "NotMarkevaFit", ErrorMessageResourceType = typeof(Resources.BasicAno))]
+        [Display(Name = "UNIMerkavaID", ResourceType = typeof(Resources.BasicAno))]
         public string MerkavaID { get; set; }
     
         public virtual Statuses Statuses { get; set; }

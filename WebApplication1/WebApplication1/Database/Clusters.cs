@@ -11,7 +11,8 @@ namespace WebApplication1.Database
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     public partial class Clusters
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,12 +22,25 @@ namespace WebApplication1.Database
             this.Tichurim = new HashSet<Tichurim>();
             this.Timchurim = new HashSet<Timchurim>();
         }
-    
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
+        [Required]
+        [Display(Name = "CLAuctionID", ResourceType = typeof(Resources.BasicAno))]
         public Nullable<int> AuctionID { get; set; }
+        [Required]
+        [Display(Name = "CLStatusID", ResourceType = typeof(Resources.BasicAno))]
         public Nullable<int> StatusID { get; set; }
+        [Required]
+        [Range(1, 999, ErrorMessageResourceName = "NotThrDig", ErrorMessageResourceType = typeof(Resources.BasicAno))]
+        [Display(Name = "CLDisplayNumber", ResourceType = typeof(Resources.BasicAno))]
         public Nullable<byte> DisplayNumber { get; set; }
+        [Required]
+        [Range(1, Int64.MaxValue, ErrorMessageResourceName = "NotZEPDig", ErrorMessageResourceType = typeof(Resources.BasicAno))]
+        [Display(Name = "CLSuppliersInTichur", ResourceType = typeof(Resources.BasicAno))]
         public Nullable<byte> SuppliersInTichur { get; set; }
+        [Required]
+        [Display(Name = "CLName", ResourceType = typeof(Resources.BasicAno))]
         public string Name { get; set; }
     
         public virtual Auctions Auctions { get; set; }
