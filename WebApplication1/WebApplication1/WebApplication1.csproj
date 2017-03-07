@@ -338,7 +338,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Cache.cs" />
-    <Compile Include="Database\Clusetrs.cs">
+    <Compile Include="Database\Clusters.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Database.cs" />
@@ -367,7 +367,7 @@
     <Compile Include="Database\Suppliers.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\SuppliersClusetrs.cs">
+    <Compile Include="Database\SuppliersClusters.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\SuppliersTichurim.cs">

@@ -26,11 +26,11 @@ namespace WebApplication1.Database
         }
     
         public virtual DbSet<Auctions> Auctions { get; set; }
-        public virtual DbSet<Clusetrs> Clusetrs { get; set; }
+        public virtual DbSet<Clusters> Clusters { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Statuses> Statuses { get; set; }
         public virtual DbSet<Suppliers> Suppliers { get; set; }
-        public virtual DbSet<SuppliersClusetrs> SuppliersClusetrs { get; set; }
+        public virtual DbSet<SuppliersClusters> SuppliersClusters { get; set; }
         public virtual DbSet<SuppliersTichurim> SuppliersTichurim { get; set; }
         public virtual DbSet<SuppliersTimchurim> SuppliersTimchurim { get; set; }
         public virtual DbSet<Tichurim> Tichurim { get; set; }

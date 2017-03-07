@@ -31,14 +31,14 @@ namespace WebApplication1.AlgoTimchur
                 }
                 TablePullResult res = new TablePullResult();
                 int suppliersRemaining = 0;
-                if (ent.Clusetrs.Where(x => x.ID == input.CluestrID).FirstOrDefault() != null)
-                    suppliersRemaining = ent.Clusetrs.Where(x => x.ID == input.CluestrID).FirstOrDefault().SuppliersInTichur.Value;
+                if (ent.Clusters.Where(x => x.ID == input.ClusterID).FirstOrDefault() != null)
+                    suppliersRemaining = ent.Clusters.Where(x => x.ID == input.ClusterID).FirstOrDefault().SuppliersInTichur.Value;
                 
 
                 var sortByUsagePre = (from sup in ent.Suppliers
-                                   join supcluc in ent.SuppliersClusetrs
+                                   join supcluc in ent.SuppliersClusters
                                    on sup.ID equals supcluc.SupplierID
-                                   where supcluc.ClusetrID == input.CluestrID && sup.StatusID == 1
+                                   where supcluc.ClusterID == input.ClusterID && sup.StatusID == 1
                                    orderby supcluc.LastTimeInList
                                    select new { Sup = sup, SupCl = supcluc });
                 var sortByUsage = sortByUsagePre.AsExpandable().GroupBy(x => DbFunctions.AddMilliseconds(x.SupCl.LastTimeInList,-x.SupCl.LastTimeInList.Value.Millisecond)).OrderBy(x=>x.Key);

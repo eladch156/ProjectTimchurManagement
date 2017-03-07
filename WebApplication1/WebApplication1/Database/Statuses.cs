@@ -11,35 +11,33 @@ namespace WebApplication1.Database
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+    
     public partial class Statuses
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Statuses()
         {
             this.Auctions = new HashSet<Auctions>();
-            this.Clusetrs = new HashSet<Clusetrs>();
+            this.Clusters = new HashSet<Clusters>();
             this.Suppliers = new HashSet<Suppliers>();
-            this.SuppliersClusetrs = new HashSet<SuppliersClusetrs>();
+            this.SuppliersClusters = new HashSet<SuppliersClusters>();
             this.Tichurim = new HashSet<Tichurim>();
             this.Timchurim = new HashSet<Timchurim>();
             this.Units = new HashSet<Units>();
             this.Users = new HashSet<Users>();
         }
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    
         public int ID { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Auctions> Auctions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Clusetrs> Clusetrs { get; set; }
+        public virtual ICollection<Clusters> Clusters { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Suppliers> Suppliers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SuppliersClusetrs> SuppliersClusetrs { get; set; }
+        public virtual ICollection<SuppliersClusters> SuppliersClusters { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tichurim> Tichurim { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

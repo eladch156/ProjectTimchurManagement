@@ -11,7 +11,7 @@ namespace WebApplication1.AlgoTimchur
         כל אחד מאלה מייצג את אחד השדות אותם אתה מקבל כקלט
         ***/
         public int UnitID { get; set; }
-        public int CluestrID { get; set; }
+        public int ClusterID { get; set; }
         public int AuctionID { get; set; }
         public string TichurNumber { get; set; }
         

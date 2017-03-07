@@ -11,20 +11,17 @@ namespace WebApplication1.Database
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    public partial class SuppliersClusetrs
+
+    public partial class SuppliersClusters
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
-        public Nullable<int> ClusetrID { get; set; }
+        public Nullable<int> ClusterID { get; set; }
         public Nullable<int> SupplierID { get; set; }
         public Nullable<System.DateTime> LastTimeInList { get; set; }
         public Nullable<System.DateTime> FormarLastTimeInList { get; set; }
         public Nullable<int> StatusID { get; set; }
-    
-        public virtual Clusetrs Clusetrs { get; set; }
+
+        public virtual Clusters Clusters { get; set; }
         public virtual Statuses Statuses { get; set; }
         public virtual Suppliers Suppliers { get; set; }
     }

@@ -603,10 +603,10 @@
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="StatusID" Type="Int32" />
           <NavigationProperty Name="Statuses" Relationship="Self.Auctions_FK1" FromRole="Auctions" ToRole="Statuses" />
-          <NavigationProperty Name="Clusetrs" Relationship="Self.Clusetrs_FK1" FromRole="Auctions" ToRole="Clusetrs" />
+          <NavigationProperty Name="Clusters" Relationship="Self.Clusetrs_FK1" FromRole="Auctions" ToRole="Clusetrs" />
           <NavigationProperty Name="UnitsAuctions" Relationship="Self.UnitsAuctions_FK2" FromRole="Auctions" ToRole="UnitsAuctions" />
         </EntityType>
-        <EntityType Name="Clusetrs">
+        <EntityType Name="Clusters">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -618,7 +618,7 @@
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Auctions" Relationship="Self.Clusetrs_FK1" FromRole="Clusetrs" ToRole="Auctions" />
           <NavigationProperty Name="Statuses" Relationship="Self.Clusetrs_FK2" FromRole="Clusetrs" ToRole="Statuses" />
-          <NavigationProperty Name="SuppliersClusetrs" Relationship="Self.SuppliersClusetrs_FK1" FromRole="Clusetrs" ToRole="SuppliersClusetrs" />
+          <NavigationProperty Name="SuppliersClusters" Relationship="Self.SuppliersClusetrs_FK1" FromRole="Clusetrs" ToRole="SuppliersClusetrs" />
           <NavigationProperty Name="Tichurim" Relationship="Self.Tichurim_FK1" FromRole="Clusetrs" ToRole="Tichurim" />
           <NavigationProperty Name="Timchurim" Relationship="Self.Timchurim_FK1" FromRole="Clusetrs" ToRole="Timchurim" />
         </EntityType>
@@ -637,9 +637,9 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Auctions" Relationship="Self.Auctions_FK1" FromRole="Statuses" ToRole="Auctions" />
-          <NavigationProperty Name="Clusetrs" Relationship="Self.Clusetrs_FK2" FromRole="Statuses" ToRole="Clusetrs" />
+          <NavigationProperty Name="Clusters" Relationship="Self.Clusetrs_FK2" FromRole="Statuses" ToRole="Clusetrs" />
           <NavigationProperty Name="Suppliers" Relationship="Self.Suppliers_FK1" FromRole="Statuses" ToRole="Suppliers" />
-          <NavigationProperty Name="SuppliersClusetrs" Relationship="Self.SuppliersClusetrs_FK3" FromRole="Statuses" ToRole="SuppliersClusetrs" />
+          <NavigationProperty Name="SuppliersClusters" Relationship="Self.SuppliersClusetrs_FK3" FromRole="Statuses" ToRole="SuppliersClusetrs" />
           <NavigationProperty Name="Tichurim" Relationship="Self.Tichurim_FK3" FromRole="Statuses" ToRole="Tichurim" />
           <NavigationProperty Name="Timchurim" Relationship="Self.Timchurim_FK3" FromRole="Statuses" ToRole="Timchurim" />
           <NavigationProperty Name="Units" Relationship="Self.Units_FK1" FromRole="Statuses" ToRole="Units" />
@@ -666,12 +666,12 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClusetrID" Type="Int32" />
+          <Property Name="ClusterID" Type="Int32" />
           <Property Name="SupplierID" Type="Int32" />
           <Property Name="LastTimeInList" Type="DateTime" Precision="3" />
           <Property Name="FormarLastTimeInList" Type="DateTime" Precision="3" />
           <Property Name="StatusID" Type="Int32" />
-          <NavigationProperty Name="Clusetrs" Relationship="Self.SuppliersClusetrs_FK1" FromRole="SuppliersClusetrs" ToRole="Clusetrs" />
+          <NavigationProperty Name="Clusters" Relationship="Self.SuppliersClusetrs_FK1" FromRole="SuppliersClusetrs" ToRole="Clusetrs" />
           <NavigationProperty Name="Statuses" Relationship="Self.SuppliersClusetrs_FK3" FromRole="SuppliersClusetrs" ToRole="Statuses" />
           <NavigationProperty Name="Suppliers" Relationship="Self.SuppliersClusetrs_FK2" FromRole="SuppliersClusetrs" ToRole="Suppliers" />
         </EntityType>
@@ -712,7 +712,7 @@
           <Property Name="DateTimeUpdated" Type="DateTime" Precision="3" />
           <Property Name="UpdatedUserID" Type="Int32" />
           <Property Name="UpdatedComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Clusetrs" Relationship="Self.Tichurim_FK1" FromRole="Tichurim" ToRole="Clusetrs" />
+          <NavigationProperty Name="Clusters" Relationship="Self.Tichurim_FK1" FromRole="Tichurim" ToRole="Clusetrs" />
           <NavigationProperty Name="Statuses" Relationship="Self.Tichurim_FK3" FromRole="Tichurim" ToRole="Statuses" />
           <NavigationProperty Name="SuppliersTichurim" Relationship="Self.SuppliersTichurim_FK2" FromRole="Tichurim" ToRole="SuppliersTichurim" />
           <NavigationProperty Name="Users" Relationship="Self.Tichurim_FK2" FromRole="Tichurim" ToRole="Users" />
@@ -734,7 +734,7 @@
           <Property Name="DateTimeUpdated" Type="DateTime" Precision="3" />
           <Property Name="UpdatedUserID" Type="Int32" />
           <Property Name="UpdatedComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Clusetrs" Relationship="Self.Timchurim_FK1" FromRole="Timchurim" ToRole="Clusetrs" />
+          <NavigationProperty Name="Clusters" Relationship="Self.Timchurim_FK1" FromRole="Timchurim" ToRole="Clusetrs" />
           <NavigationProperty Name="Statuses" Relationship="Self.Timchurim_FK3" FromRole="Timchurim" ToRole="Statuses" />
           <NavigationProperty Name="SuppliersTimchurim" Relationship="Self.SuppliersTimchurim_FK2" FromRole="Timchurim" ToRole="SuppliersTimchurim" />
           <NavigationProperty Name="Users" Relationship="Self.Timchurim_FK2" FromRole="Timchurim" ToRole="Users" />
@@ -799,7 +799,7 @@
         </Association>
         <Association Name="Clusetrs_FK1">
           <End Role="Auctions" Type="Self.Auctions" Multiplicity="0..1" />
-          <End Role="Clusetrs" Type="Self.Clusetrs" Multiplicity="*" />
+          <End Role="Clusetrs" Type="TimchurDatabaseModel.Clusters" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Auctions">
               <PropertyRef Name="ID" />
@@ -823,7 +823,7 @@
         </Association>
         <Association Name="Clusetrs_FK2">
           <End Role="Statuses" Type="Self.Statuses" Multiplicity="0..1" />
-          <End Role="Clusetrs" Type="Self.Clusetrs" Multiplicity="*" />
+          <End Role="Clusetrs" Type="TimchurDatabaseModel.Clusters" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Statuses">
               <PropertyRef Name="ID" />
@@ -834,19 +834,19 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="SuppliersClusetrs_FK1">
-          <End Role="Clusetrs" Type="Self.Clusetrs" Multiplicity="0..1" />
+          <End Role="Clusetrs" Type="TimchurDatabaseModel.Clusters" Multiplicity="0..1" />
           <End Role="SuppliersClusetrs" Type="Self.SuppliersClusetrs" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Clusetrs">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="SuppliersClusetrs">
-              <PropertyRef Name="ClusetrID" />
+              <PropertyRef Name="ClusterID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="Tichurim_FK1">
-          <End Role="Clusetrs" Type="Self.Clusetrs" Multiplicity="0..1" />
+          <End Role="Clusetrs" Type="TimchurDatabaseModel.Clusters" Multiplicity="0..1" />
           <End Role="Tichurim" Type="Self.Tichurim" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Clusetrs">
@@ -858,7 +858,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Timchurim_FK1">
-          <End Role="Clusetrs" Type="Self.Clusetrs" Multiplicity="0..1" />
+          <End Role="Clusetrs" Type="TimchurDatabaseModel.Clusters" Multiplicity="0..1" />
           <End Role="Timchurim" Type="Self.Timchurim" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Clusetrs">
@@ -1111,7 +1111,7 @@
         </Association>
         <EntityContainer Name="TimchurDatabaseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Auctions" EntityType="Self.Auctions" />
-          <EntitySet Name="Clusetrs" EntityType="Self.Clusetrs" />
+          <EntitySet Name="Clusetrs" EntityType="TimchurDatabaseModel.Clusters" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
           <EntitySet Name="Statuses" EntityType="Self.Statuses" />
           <EntitySet Name="Suppliers" EntityType="Self.Suppliers" />
@@ -1231,7 +1231,19 @@
             <End Role="Units" EntitySet="Units" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="SuppliersClusetrs1" EntityType="TimchurDatabaseModel.SuppliersClusters" />
         </EntityContainer>
+        <EntityType Name="SuppliersClusters">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClusterID" Type="Int32" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="LastTimeInList" Type="DateTime" Precision="3" />
+          <Property Name="FormarLastTimeInList" Type="DateTime" Precision="3" />
+          <Property Name="StatusID" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1249,7 +1261,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Clusetrs">
-            <EntityTypeMapping TypeName="TimchurDatabaseModel.Clusetrs">
+            <EntityTypeMapping TypeName="TimchurDatabaseModel.Clusters">
               <MappingFragment StoreEntitySet="Clusetrs">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="AuctionID" ColumnName="AuctionID" />
@@ -1293,7 +1305,7 @@
             <EntityTypeMapping TypeName="TimchurDatabaseModel.SuppliersClusetrs">
               <MappingFragment StoreEntitySet="SuppliersClusetrs">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ClusetrID" ColumnName="ClusetrID" />
+                <ScalarProperty Name="ClusterID" ColumnName="ClusetrID" />
                 <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
                 <ScalarProperty Name="LastTimeInList" ColumnName="LastTimeInList" />
                 <ScalarProperty Name="FormarLastTimeInList" ColumnName="FormarLastTimeInList" />

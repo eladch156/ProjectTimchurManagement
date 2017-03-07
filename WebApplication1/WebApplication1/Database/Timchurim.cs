@@ -11,8 +11,7 @@ namespace WebApplication1.Database
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+    
     public partial class Timchurim
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,8 +19,7 @@ namespace WebApplication1.Database
         {
             this.SuppliersTimchurim = new HashSet<SuppliersTimchurim>();
         }
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    
         public int ID { get; set; }
         public string TichurNumber { get; set; }
         public Nullable<int> ClusterID { get; set; }
@@ -34,7 +32,7 @@ namespace WebApplication1.Database
         public Nullable<int> UpdatedUserID { get; set; }
         public string UpdatedComment { get; set; }
     
-        public virtual Clusetrs Clusetrs { get; set; }
+        public virtual Clusters Clusters { get; set; }
         public virtual Statuses Statuses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SuppliersTimchurim> SuppliersTimchurim { get; set; }

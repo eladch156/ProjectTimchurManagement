@@ -183,14 +183,14 @@ namespace WebApplication1
             {
                 using (TimchurDatabaseEntities entity = new TimchurDatabaseEntities())
                 {
-                    entity.Clusetrs.Add(((Clusetrs)SingletonCache.Instance().Storage[Context.User.Identity.Name]));
+                    entity.Clusters.Add(((Clusters)SingletonCache.Instance().Storage[Context.User.Identity.Name]));
                     entity.SaveChanges();
 
                 }
                 using (TimchurDatabaseEntities entity2 = new TimchurDatabaseEntities())
                 {
-                    byte strm = ((Clusetrs)(SingletonCache.Instance().Storage[Context.User.Identity.Name])).DisplayNumber.Value;
-                    id = entity2.Clusetrs.Where(x => x.DisplayNumber == strm).First().ID;
+                    byte strm = ((Clusters)(SingletonCache.Instance().Storage[Context.User.Identity.Name])).DisplayNumber.Value;
+                    id = entity2.Clusters.Where(x => x.DisplayNumber == strm).First().ID;
                 }
                 SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה,סל נוסף למערכת";
             }
@@ -220,11 +220,11 @@ namespace WebApplication1
                 using (TimchurDatabaseEntities entity = new TimchurDatabaseEntities())
                 {
 
-                    var original = entity.Clusetrs.Find(((Clusetrs)SingletonCache.Instance().Storage[Context.User.Identity.Name]).ID);
+                    var original = entity.Clusters.Find(((Clusters)SingletonCache.Instance().Storage[Context.User.Identity.Name]).ID);
 
                     if (original != null)
                     {
-                        entity.Entry(original).CurrentValues.SetValues(((Clusetrs)SingletonCache.Instance().Storage[Context.User.Identity.Name]));
+                        entity.Entry(original).CurrentValues.SetValues(((Clusters)SingletonCache.Instance().Storage[Context.User.Identity.Name]));
                         entity.SaveChanges();
                     }
 
@@ -233,8 +233,8 @@ namespace WebApplication1
                 }
                 using (TimchurDatabaseEntities entity2 = new TimchurDatabaseEntities())
                 {
-                    byte strm = ((Clusetrs)(SingletonCache.Instance().Storage[Context.User.Identity.Name])).DisplayNumber.Value;
-                    id = entity2.Clusetrs.Where(x => x.DisplayNumber == strm).First().ID;
+                    byte strm = ((Clusters)(SingletonCache.Instance().Storage[Context.User.Identity.Name])).DisplayNumber.Value;
+                    id = entity2.Clusters.Where(x => x.DisplayNumber == strm).First().ID;
                 }
                 SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה,סל עודכן במערכת";
             }
@@ -392,13 +392,13 @@ namespace WebApplication1
                     {
                         foreach (int i in mf.Limitions)
                         {
-                            SuppliersClusetrs ua = new SuppliersClusetrs();
-                            ua.ClusetrID = i;
+                            SuppliersClusters ua = new SuppliersClusters();
+                            ua.ClusterID = i;
                             ua.SupplierID = id;
                             ua.FormarLastTimeInList = new DateTime(2000,1,1);
                             ua.LastTimeInList = new DateTime(2000, 1, 1);
                             ua.StatusID = 1;
-                            entity2.SuppliersClusetrs.Add(ua);
+                            entity2.SuppliersClusters.Add(ua);
                         }
                     }
                     entity2.SaveChanges();
@@ -442,25 +442,25 @@ namespace WebApplication1
                         {
                             foreach (int i in mf.Limitions)
                             {
-                                SuppliersClusetrs ua = new SuppliersClusetrs();
-                                if (entity.SuppliersClusetrs.Where(x => x.ClusetrID == i && x.SupplierID == mf.supliers.ID).Count() > 0)
+                                SuppliersClusters ua = new SuppliersClusters();
+                                if (entity.SuppliersClusters.Where(x => x.ClusterID == i && x.SupplierID == mf.supliers.ID).Count() > 0)
                                 {
-                                    entity.SuppliersClusetrs.Where(x => x.ClusetrID == i && x.SupplierID == mf.supliers.ID).First().StatusID = 1;
+                                    entity.SuppliersClusters.Where(x => x.ClusterID == i && x.SupplierID == mf.supliers.ID).First().StatusID = 1;
                                 }
                                 else
                                 {
-                                    ua.ClusetrID = i;
+                                    ua.ClusterID = i;
                                     ua.SupplierID = id;
                                     ua.FormarLastTimeInList = new DateTime(2000, 1, 1);
                                     ua.LastTimeInList = new DateTime(2000, 1, 1);
                                     ua.StatusID = 1;
-                                    entity.SuppliersClusetrs.Add(ua);
+                                    entity.SuppliersClusters.Add(ua);
                                 }
                             }
                        
                            
                         }
-                        foreach (SuppliersClusetrs sc in entity.SuppliersClusetrs.Where(x => !mf.Limitions.Contains(x.ClusetrID) && x.SupplierID == mf.supliers.ID))
+                        foreach (SuppliersClusters sc in entity.SuppliersClusters.Where(x => !mf.Limitions.Contains(x.ClusterID) && x.SupplierID == mf.supliers.ID))
                         {
                             sc.StatusID = 2;
                         }

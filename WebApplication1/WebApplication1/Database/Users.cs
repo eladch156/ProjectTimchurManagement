@@ -11,9 +11,7 @@ namespace WebApplication1.Database
 {
     using System;
     using System.Collections.Generic;
-    using Infrastructure;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+    
     public partial class Users
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,31 +22,14 @@ namespace WebApplication1.Database
             this.Timchurim = new HashSet<Timchurim>();
             this.Timchurim1 = new HashSet<Timchurim>();
         }
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    
         public int ID { get; set; }
-        [Required]
-        [Display(Name = "USUnitID",ResourceType = typeof(Resources.BasicAno))]
         public Nullable<int> UnitID { get; set; }
-        [Required]
-        [Display(Name = "USRoleID", ResourceType = typeof(Resources.BasicAno))]
         public Nullable<int> RoleID { get; set; }
-        [Required]
-        [Display(Name = "USStatusID", ResourceType = typeof(Resources.BasicAno))]
         public Nullable<int> StatusID { get; set; }
-        [Required]
-        [RegularExpression("^[0-9]*$",ErrorMessageResourceName =  "numberExpe",ErrorMessageResourceType = typeof(Resources.BasicAno))]
-        [CustomIdErrorAttribu]
-        [Display(Name = "USIDCardNumber", ResourceType = typeof(Resources.BasicAno))]
         public string IDCardNumber { get; set; }
-        [Required]
-        [Display(Name = "USPhoneNumber", ResourceType = typeof(Resources.BasicAno))]
         public string PhoneNumber { get; set; }
-        [Required]
-        [Display(Name = "USFullName", ResourceType = typeof(Resources.BasicAno))]
         public string FullName { get; set; }
-        [Required]
-        [Display(Name = "USPassword", ResourceType = typeof(Resources.BasicAno))]
         public string Password { get; set; }
     
         public virtual Roles Roles { get; set; }
@@ -62,6 +43,5 @@ namespace WebApplication1.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Timchurim> Timchurim1 { get; set; }
         public virtual Units Units { get; set; }
-
     }
 }

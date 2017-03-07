@@ -11,12 +11,9 @@ namespace WebApplication1.Database
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+    
     public partial class UnitsAuctions
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
         public Nullable<int> UnitID { get; set; }
         public Nullable<int> AuctionID { get; set; }

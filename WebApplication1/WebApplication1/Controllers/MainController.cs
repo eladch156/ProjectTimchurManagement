@@ -91,7 +91,7 @@ namespace WebApplication1.Controllers
         {
 
             db = new TimchurDatabaseEntities();
-            List<Suppliers> li = db.Suppliers.OrderBy(s => s.Name).OrderBy(s=> s.SuppliersClusetrs.FirstOrDefault().Clusetrs.Auctions.AuctionNumber).OrderBy(s => s.SuppliersClusetrs.FirstOrDefault().Clusetrs.DisplayNumber).ToList();
+            List<Suppliers> li = db.Suppliers.OrderBy(s => s.Name).OrderBy(s=> s.SuppliersClusters.FirstOrDefault().Clusters.Auctions.AuctionNumber).OrderBy(s => s.SuppliersClusters.FirstOrDefault().Clusters.DisplayNumber).ToList();
 
             /** load from database user list **/
             /** transform loaded data into model fit for edit + present **/
@@ -114,12 +114,12 @@ namespace WebApplication1.Controllers
 
         }
         [Authorize]
-        [AuthRestriections(Name = "/Main/MangClusetrs")]
-        public ActionResult MangClusetrs()
+        [AuthRestriections(Name = "/Main/MangClusters")]
+        public ActionResult MangClusters()
         {
 
             db = new TimchurDatabaseEntities();
-            List<Clusetrs> li = db.Clusetrs.OrderBy(s => s.DisplayNumber).ToList();
+            List<Clusters> li = db.Clusters.OrderBy(s => s.DisplayNumber).ToList();
 
             /** load from database user list **/
             /** transform loaded data into model fit for edit + present **/
@@ -360,7 +360,7 @@ namespace WebApplication1.Controllers
             }
             using (TimchurDatabaseEntities entity = new TimchurDatabaseEntities())
             {
-                Clusetrs clu = entity.Clusetrs.Where(x => x.ID == id).First();
+                Clusters clu = entity.Clusters.Where(x => x.ID == id).First();
                 if (clu == null)
                 {
                     return View("EditClusetr");
@@ -379,7 +379,7 @@ namespace WebApplication1.Controllers
         [Authorize]
         [AuthRestriections(Name = "/Main/EditOrAddClusetr")]
         [HttpPost]
-        public ActionResult EditClusetr(Clusetrs clu)
+        public ActionResult EditClusetr(Clusters clu)
         {
 
             if (ModelState.IsValid)
@@ -409,14 +409,14 @@ namespace WebApplication1.Controllers
         [Authorize]
         [AuthRestriections(Name = "/Main/EditOrAddClusetr")]
         [HttpPost]
-        public ActionResult AddClusetr(Clusetrs clu)
+        public ActionResult AddClusetr(Clusters clu)
         {
 
             if (ModelState.IsValid)
             {
                 using (TimchurDatabaseEntities entity = new TimchurDatabaseEntities())
                 {
-                    int cou = entity.Clusetrs.Count(x => x.DisplayNumber == clu.DisplayNumber);
+                    int cou = entity.Clusters.Count(x => x.DisplayNumber == clu.DisplayNumber);
                     if (cou != 0)
                     {
                         ModelState.AddModelError("Exist", "ספק בעל מספר זה כבר קיים.");
@@ -439,13 +439,13 @@ namespace WebApplication1.Controllers
         }
         [Authorize]
         [AuthRestriections(Name = "/Main/EditOrAddClusetr")]
-        public ActionResult ClusetrLoadingScreen(Clusetrs target)
+        public ActionResult ClusetrLoadingScreen(Clusters target)
         {
             return View(target);
         }
         [Authorize]
         [AuthRestriections(Name = "/Main/EditOrAddClusetr")]
-        public ActionResult EClusetrLoadingScreen(Clusetrs target)
+        public ActionResult EClusetrLoadingScreen(Clusters target)
         {
             return View(target);
         }
@@ -580,10 +580,10 @@ namespace WebApplication1.Controllers
                     SupplierFModel fm = new SupplierFModel();
                     fm.supliers = sup;
                     List<int?> fl = new List<int?>();
-                    foreach (SuppliersClusetrs ua in sup.SuppliersClusetrs)
+                    foreach (SuppliersClusters ua in sup.SuppliersClusters)
                     {
                         if(ua.Statuses.ID==1)
-                        fl.Add(ua.ClusetrID);
+                        fl.Add(ua.ClusterID);
                     }
                    
                    
@@ -679,7 +679,7 @@ namespace WebApplication1.Controllers
             {
                 
                 List<SelectListItem> li = new List<SelectListItem>();
-                foreach(Clusetrs clu in ent.Clusetrs.Where(x => x.AuctionID == auctionId && x.StatusID==1).OrderBy(x=>x.DisplayNumber))
+                foreach(Clusters clu in ent.Clusters.Where(x => x.AuctionID == auctionId && x.StatusID==1).OrderBy(x=>x.DisplayNumber))
                 {
                     li.Add(new SelectListItem() { Value = clu.ID.ToString(), Text = clu.DisplayNumber+"-"+clu.Name });
                 }
@@ -729,7 +729,7 @@ namespace WebApplication1.Controllers
                 }
                
                 Tichurim tic = ent.Tichurim.Where(x => x.UnitID == tem && x.TichurNumber == data.id && (f || x.StatusID == 1)).First();
-                if (ent.UnitsAuctions.Where(x => x.UnitID==tem && x.AuctionID==tic.Clusetrs.AuctionID).Count()>0)
+                if (ent.UnitsAuctions.Where(x => x.UnitID==tem && x.AuctionID==tic.Clusters.AuctionID).Count()>0)
                 {
                     if (User.IsInRole("User"))
                     {
@@ -748,7 +748,7 @@ namespace WebApplication1.Controllers
                     {
                         Suppliers sup = ent.Suppliers.Where(x => x.ID == st.SupplierID).First();
                         i++;
-                        Res.data.Add(new string[] { i.ToString(), st.PositionInList.ToString(), tic.Units.Name, tic.Clusetrs.Auctions.AuctionNumber, tic.Clusetrs.Auctions.Name, tic.TichurNumber, tic.Clusetrs.DisplayNumber.Value.ToString(), tic.Clusetrs.Name, sup.Name, sup.CompanyNumber, sup.ContactName, sup.EmailAddress, sup.PhoneNumber, tic.DateTimeCreated.Value.ToString() });
+                        Res.data.Add(new string[] { i.ToString(), st.PositionInList.ToString(), tic.Units.Name, tic.Clusters.Auctions.AuctionNumber, tic.Clusters.Auctions.Name, tic.TichurNumber, tic.Clusters.DisplayNumber.Value.ToString(), tic.Clusters.Name, sup.Name, sup.CompanyNumber, sup.ContactName, sup.EmailAddress, sup.PhoneNumber, tic.DateTimeCreated.Value.ToString() });
 
 
                     }
@@ -817,7 +817,7 @@ namespace WebApplication1.Controllers
                         foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.UnitID==tem && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
                         {
 
-                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusetrs.Auctions.AuctionNumber, tic.Clusetrs.Auctions.Name, tic.TichurNumber, tic.Clusetrs.DisplayNumber.Value.ToString(), tic.Clusetrs.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
+                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusters.Auctions.AuctionNumber, tic.Clusters.Auctions.Name, tic.TichurNumber, tic.Clusters.DisplayNumber.Value.ToString(), tic.Clusters.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
                             i++;
 
                         }
@@ -831,10 +831,10 @@ namespace WebApplication1.Controllers
                         Res.data.Add(new string[] { "", "", "", "", "", "", "", "", "" });
                         i = 0;
                         int al = Int32.Parse(data.auc_field);
-                        foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.Clusetrs.AuctionID== al && x.UnitID == tem && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x =>x.DateTimeCreated))
+                        foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.Clusters.AuctionID== al && x.UnitID == tem && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x =>x.DateTimeCreated))
                         {
 
-                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusetrs.Auctions.AuctionNumber, tic.Clusetrs.Auctions.Name, tic.TichurNumber, tic.Clusetrs.DisplayNumber.Value.ToString(), tic.Clusetrs.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
+                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusters.Auctions.AuctionNumber, tic.Clusters.Auctions.Name, tic.TichurNumber, tic.Clusters.DisplayNumber.Value.ToString(), tic.Clusters.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
                             i++;
 
                         }
@@ -851,7 +851,7 @@ namespace WebApplication1.Controllers
                         foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.ClusterID == cl && x.UnitID == tem && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
                         {
 
-                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusetrs.Auctions.AuctionNumber, tic.Clusetrs.Auctions.Name, tic.TichurNumber, tic.Clusetrs.DisplayNumber.Value.ToString(), tic.Clusetrs.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
+                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusters.Auctions.AuctionNumber, tic.Clusters.Auctions.Name, tic.TichurNumber, tic.Clusters.DisplayNumber.Value.ToString(), tic.Clusters.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
                             i++;
 
                         }
@@ -866,10 +866,10 @@ namespace WebApplication1.Controllers
                         i = 0;
                         int al = Int32.Parse(data.auc_field);
                         int cl = Int32.Parse(data.clu_field);
-                        foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.Clusetrs.AuctionID == al && x.ClusterID == cl && x.UnitID == tem && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
+                        foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.Clusters.AuctionID == al && x.ClusterID == cl && x.UnitID == tem && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
                         {
 
-                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusetrs.Auctions.AuctionNumber, tic.Clusetrs.Auctions.Name, tic.TichurNumber, tic.Clusetrs.DisplayNumber.Value.ToString(), tic.Clusetrs.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
+                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusters.Auctions.AuctionNumber, tic.Clusters.Auctions.Name, tic.TichurNumber, tic.Clusters.DisplayNumber.Value.ToString(), tic.Clusters.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
                             i++;
 
                         }
@@ -888,7 +888,7 @@ namespace WebApplication1.Controllers
                         foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
                         {
 
-                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusetrs.Auctions.AuctionNumber, tic.Clusetrs.Auctions.Name, tic.TichurNumber, tic.Clusetrs.DisplayNumber.Value.ToString(), tic.Clusetrs.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
+                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusters.Auctions.AuctionNumber, tic.Clusters.Auctions.Name, tic.TichurNumber, tic.Clusters.DisplayNumber.Value.ToString(), tic.Clusters.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
                             i++;
 
                         }
@@ -902,10 +902,10 @@ namespace WebApplication1.Controllers
                         Res.data.Add(new string[] { "", "", "", "", "", "", "", "", "" });
                         i = 0;
                         int al = Int32.Parse(data.auc_field);
-                        foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.Clusetrs.AuctionID == al && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
+                        foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.Clusters.AuctionID == al && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
                         {
 
-                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusetrs.Auctions.AuctionNumber, tic.Clusetrs.Auctions.Name, tic.TichurNumber, tic.Clusetrs.DisplayNumber.Value.ToString(), tic.Clusetrs.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
+                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusters.Auctions.AuctionNumber, tic.Clusters.Auctions.Name, tic.TichurNumber, tic.Clusters.DisplayNumber.Value.ToString(), tic.Clusters.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
                             i++;
 
                         }
@@ -922,7 +922,7 @@ namespace WebApplication1.Controllers
                         foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.ClusterID == cl && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
                         {
 
-                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusetrs.Auctions.AuctionNumber, tic.Clusetrs.Auctions.Name, tic.TichurNumber, tic.Clusetrs.DisplayNumber.Value.ToString(), tic.Clusetrs.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
+                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusters.Auctions.AuctionNumber, tic.Clusters.Auctions.Name, tic.TichurNumber, tic.Clusters.DisplayNumber.Value.ToString(), tic.Clusters.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
                             i++;
 
                         }
@@ -937,10 +937,10 @@ namespace WebApplication1.Controllers
                         i = 0;
                         int al = Int32.Parse(data.auc_field);
                         int cl = Int32.Parse(data.clu_field);
-                        foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.Clusetrs.AuctionID == al && x.ClusterID == cl && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
+                        foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.Clusters.AuctionID == al && x.ClusterID == cl && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
                         {
 
-                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusetrs.Auctions.AuctionNumber, tic.Clusetrs.Auctions.Name, tic.TichurNumber, tic.Clusetrs.DisplayNumber.Value.ToString(), tic.Clusetrs.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
+                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusters.Auctions.AuctionNumber, tic.Clusters.Auctions.Name, tic.TichurNumber, tic.Clusters.DisplayNumber.Value.ToString(), tic.Clusters.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
                             i++;
 
                         }
@@ -959,7 +959,7 @@ namespace WebApplication1.Controllers
                         foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.UnitID == tem && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
                         {
 
-                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusetrs.Auctions.AuctionNumber, tic.Clusetrs.Auctions.Name, tic.TichurNumber, tic.Clusetrs.DisplayNumber.Value.ToString(), tic.Clusetrs.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
+                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusters.Auctions.AuctionNumber, tic.Clusters.Auctions.Name, tic.TichurNumber, tic.Clusters.DisplayNumber.Value.ToString(), tic.Clusters.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
                             i++;
 
                         }
@@ -973,10 +973,10 @@ namespace WebApplication1.Controllers
                         Res.data.Add(new string[] { "", "", "", "", "", "", "", "", "" });
                         i = 0;
                         int al = Int32.Parse(data.auc_field);
-                        foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.Clusetrs.AuctionID == al && x.UnitID == tem && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
+                        foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.Clusters.AuctionID == al && x.UnitID == tem && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
                         {
 
-                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusetrs.Auctions.AuctionNumber, tic.Clusetrs.Auctions.Name, tic.TichurNumber, tic.Clusetrs.DisplayNumber.Value.ToString(), tic.Clusetrs.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
+                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusters.Auctions.AuctionNumber, tic.Clusters.Auctions.Name, tic.TichurNumber, tic.Clusters.DisplayNumber.Value.ToString(), tic.Clusters.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
                             i++;
 
                         }
@@ -993,7 +993,7 @@ namespace WebApplication1.Controllers
                         foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.ClusterID == cl && x.UnitID == tem && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
                         {
 
-                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusetrs.Auctions.AuctionNumber, tic.Clusetrs.Auctions.Name, tic.TichurNumber, tic.Clusetrs.DisplayNumber.Value.ToString(), tic.Clusetrs.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
+                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusters.Auctions.AuctionNumber, tic.Clusters.Auctions.Name, tic.TichurNumber, tic.Clusters.DisplayNumber.Value.ToString(), tic.Clusters.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
                             i++;
 
                         }
@@ -1008,10 +1008,10 @@ namespace WebApplication1.Controllers
                         i = 0;
                         int al = Int32.Parse(data.auc_field);
                         int cl = Int32.Parse(data.clu_field);
-                        foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.Clusetrs.AuctionID == al && x.ClusterID == cl && x.UnitID == tem && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
+                        foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.Clusters.AuctionID == al && x.ClusterID == cl && x.UnitID == tem && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
                         {
 
-                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusetrs.Auctions.AuctionNumber, tic.Clusetrs.Auctions.Name, tic.TichurNumber, tic.Clusetrs.DisplayNumber.Value.ToString(), tic.Clusetrs.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
+                            Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusters.Auctions.AuctionNumber, tic.Clusters.Auctions.Name, tic.TichurNumber, tic.Clusters.DisplayNumber.Value.ToString(), tic.Clusters.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
                             i++;
 
                         }
@@ -1050,9 +1050,9 @@ namespace WebApplication1.Controllers
                     Tichurim tic = ent.Tichurim.Where(x => x.TichurNumber == can.id).FirstOrDefault();
                     foreach (SuppliersTichurim sti in tic.SuppliersTichurim)
                     {
-                        if (sti.Suppliers.SuppliersClusetrs.Where(x2 => x2.ClusetrID == tic.ClusterID).First().LastTimeInList == tic.DateTimeCreated)
+                        if (sti.Suppliers.SuppliersClusters.Where(x2 => x2.ClusterID == tic.ClusterID).First().LastTimeInList == tic.DateTimeCreated)
                         {
-                            sti.Suppliers.SuppliersClusetrs.Where(x2 => x2.ClusetrID == tic.ClusterID).First().LastTimeInList = sti.Suppliers.SuppliersClusetrs.Where(x2 => x2.ClusetrID == tic.ClusterID).First().FormarLastTimeInList;
+                            sti.Suppliers.SuppliersClusters.Where(x2 => x2.ClusterID == tic.ClusterID).First().LastTimeInList = sti.Suppliers.SuppliersClusters.Where(x2 => x2.ClusterID == tic.ClusterID).First().FormarLastTimeInList;
 
                         }
                     }
@@ -1095,7 +1095,7 @@ namespace WebApplication1.Controllers
             {
                 TichurInfo inf=new TichurInfo();
                 inf.AuctionID = Int32.Parse(NI.auc_id);
-                inf.CluestrID = Int32.Parse(NI.clu_id);
+                inf.ClusterID = Int32.Parse(NI.clu_id);
                 inf.UnitID = Int32.Parse(NI.unit_id);
                 inf.TichurNumber = NI.tichur_id;
                 TichurAlgo ta = new TichurAlgo();

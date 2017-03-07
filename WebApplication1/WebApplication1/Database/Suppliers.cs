@@ -11,39 +11,28 @@ namespace WebApplication1.Database
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+    
     public partial class Suppliers
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Suppliers()
         {
-            this.SuppliersClusetrs = new HashSet<SuppliersClusetrs>();
+            this.SuppliersClusters = new HashSet<SuppliersClusters>();
             this.SuppliersTichurim = new HashSet<SuppliersTichurim>();
             this.SuppliersTimchurim = new HashSet<SuppliersTimchurim>();
         }
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    
         public int ID { get; set; }
-        [Required]
-        [Display(Name = "SUPCompanyNumber", ResourceType = typeof(Resources.BasicAno))]
-        [RegularExpression("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]", ErrorMessageResourceName = "InvalidCN", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         public string CompanyNumber { get; set; }
         public string PhoneNumber { get; set; }
-        [Required]
-        [Display(Name = "SUPName", ResourceType = typeof(Resources.BasicAno))]
         public string Name { get; set; }
-        [Required]
-        [Display(Name = "SUPContactName", ResourceType = typeof(Resources.BasicAno))]
         public string ContactName { get; set; }
-        [Required]
-        [Display(Name = "SUPStatusID", ResourceType = typeof(Resources.BasicAno))]
         public Nullable<int> StatusID { get; set; }
         public string EmailAddress { get; set; }
+    
         public virtual Statuses Statuses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SuppliersClusetrs> SuppliersClusetrs { get; set; }
+        public virtual ICollection<SuppliersClusters> SuppliersClusters { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SuppliersTichurim> SuppliersTichurim { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

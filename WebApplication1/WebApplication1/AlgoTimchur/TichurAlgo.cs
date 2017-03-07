@@ -38,7 +38,7 @@ namespace WebApplication1.AlgoTimchur
                    
                     int sid = Int32.Parse(sup);
                     Suppliers supa = ent.Suppliers.Where(x => x.ID == sid).First();
-                    SuppliersClusetrs scl = supa.SuppliersClusetrs.Where(x => x.ClusetrID == info.CluestrID).First();
+                    SuppliersClusters scl = supa.SuppliersClusters.Where(x => x.ClusterID == info.ClusterID).First();
                     scl.FormarLastTimeInList = scl.LastTimeInList;
                     scl.LastTimeInList = tic_date;
 
@@ -48,7 +48,7 @@ namespace WebApplication1.AlgoTimchur
                     Users user = ent.Users.Where(x => x.IDCardNumber == user_id).First();
                     Tichurim tichur = new Tichurim();
                     tichur.UnitID = info.UnitID;
-                    tichur.ClusterID = info.CluestrID;
+                    tichur.ClusterID = info.ClusterID;
                     tichur.TichurNumber = info.TichurNumber;
                     tichur.StatusID = 1;
                     tichur.DateTimeCreated = DateTime.Now;
@@ -83,7 +83,7 @@ namespace WebApplication1.AlgoTimchur
                     suptic.SupplierID = sup_id;
                     suptic.PositionInList = byte.Parse(i.ToString());
                     Suppliers supa = ent2.Suppliers.Where(x => x.ID == sup_id).First();
-                    res2.data.Add(new string[] { i.ToString(),suptic.PositionInList.Value.ToString(),tich.Units.Name,tich.Clusetrs.Auctions.AuctionNumber, tich.Clusetrs.Auctions.Name,tich.TichurNumber,tich.Clusetrs.DisplayNumber.Value.ToString(),tich.Clusetrs.Name,supa.Name,supa.CompanyNumber,supa.ContactName,supa.EmailAddress,supa.PhoneNumber,tich.DateTimeCreated.ToString() });
+                    res2.data.Add(new string[] { i.ToString(),suptic.PositionInList.Value.ToString(),tich.Units.Name,tich.Clusters.Auctions.AuctionNumber, tich.Clusters.Auctions.Name,tich.TichurNumber,tich.Clusters.DisplayNumber.Value.ToString(),tich.Clusters.Name,supa.Name,supa.CompanyNumber,supa.ContactName,supa.EmailAddress,supa.PhoneNumber,tich.DateTimeCreated.ToString() });
                     ent2.SuppliersTichurim.Add(suptic);
                     i++;
 
