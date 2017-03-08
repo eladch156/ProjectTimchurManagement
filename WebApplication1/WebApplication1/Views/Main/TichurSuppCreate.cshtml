@@ -81,8 +81,8 @@
             auc_id: $('#sel_auct').val(),
 
         };
-        var pattren = /[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9]/g;
-        if (pattren.test(data.tichur_id) == false) {
+        var pattren = /[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9]#/g;
+        if (pattren.test(data.tichur_id + "#") == false) {
             $('#tichur_num').css({ "background": "#FEF1EC", "border": "1px solid #CD0A0A" });
             $('#tichur_num').qtip({ // Grab some elements to apply the tooltip to
                 content: 'מספר תיחור אינו תקין',
@@ -122,7 +122,7 @@
 
 
                     }
-                    $("#filename").html($('#sel_unit option:selected').text() + "-" + "תיחור " + ('#tichur_id').val() + " " + ('#sel_clust option:selected').text() + " " + ('#sel_auct option:selected').text() + " " + "- רשימת ספקים");
+                    $("#filename").html($('#sel_unit option:selected').text() + "-" + "תיחור " + $('#tichur_num').val() + " " + $('#sel_clust option:selected').text() + " " + $('#sel_auct option:selected').text() + " " + "- רשימת ספקים");
                     $("#filename").trigger("click");
 
 

@@ -164,8 +164,8 @@
                     id: $('#tichur_num').val(),
                     unit_field: $('#uni_sel').val()
                 };
-                var pattren = /[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9]/g;
-                if (pattren.test(data.id) == false)
+                var pattren = /[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9]#/g;
+                if (pattren.test(data.id + "#") == false)
                 {
                     $('#tichur_num').css({ "background": "#FEF1EC", "border": "1px solid #CD0A0A" });
                     $('#tichur_num').qtip({ // Grab some elements to apply the tooltip to
