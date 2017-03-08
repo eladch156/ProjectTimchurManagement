@@ -22,5 +22,13 @@
     });
 
 }
-<h2>MainIndex</h2>
+@if (User.IsInRole("Admin"))
+{
+    <p> עמוד למנהל רכש</p>
 
+}
+else
+{
+    <p>     עמוד לחשב</p>
+
+            }
