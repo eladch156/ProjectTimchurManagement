@@ -139,6 +139,8 @@
     {
         last_succ_id = -1;
         $("#form_search_area").trigger('reset');
+        $("#datetimepicker1").val("01/01/0001");
+        $("#datetimepicker2").val("01/01/0001");
         $("#tab_1").css({ "display": "none" });
     }
     function getList()
@@ -402,13 +404,13 @@
                                                             <label class="control-label col-xs-1">מ:</label>
                                                         </div>
                                                             <div class="form-group col-xs-5">
-                                                                <input type="text" class="datepickerY form-control col-xs-4" id="datetimepicker1">
+                                                                <input readonly type="text" class="datepickerY form-control col-xs-4" id="datetimepicker1">
                                                             </div>
                                                             <div class="form-group col-xs-1">
                                                                 <label class="control-label col-xs-1">עד:</label>
                                                                 </div>
                                                                 <div class="form-group col-xs-5">
-                                                                    <input type="text" class="datepickerT form-control col-xs-4" id="datetimepicker2">
+                                                                    <input readonly type="text" class="datepickerT form-control col-xs-4" id="datetimepicker2">
 
                                                                 </div>
                                                     </div>

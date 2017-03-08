@@ -18,7 +18,7 @@
         else
         {
             var rec = "<" + (ent.Users.Where(x => x.IDCardNumber == User.Identity.Name).First().Units.ID.ToString()) + "><" + (ent.Users.Where(x => x.IDCardNumber == User.Identity.Name).First().Units.Name) + ">.<" + ent.Users.Where(x => x.IDCardNumber == User.Identity.Name).First().FullName + "," + ent.Users.Where(x => x.IDCardNumber == User.Identity.Name).First().Roles.Name + ">";
-            unitli.Add(new SelectListItem() { Value = rec, Text = rec, Selected = true });
+            unitli.Add(new SelectListItem() { Value = ent.Users.Where(x => x.IDCardNumber == User.Identity.Name).First().Units.ID.ToString(), Text = rec, Selected = true });
         }
         if (User.IsInRole("Admin") || ent.UnitsAuctions.Where(x => x.UnitID == ent.Users.Where(x2 => x2.IDCardNumber == User.Identity.Name).FirstOrDefault().Units.ID).Count() == 0)
         {

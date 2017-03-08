@@ -783,6 +783,9 @@ namespace WebApplication1.Controllers
             DateTime to;
             string[] to_str = data.To.Split('/');
             to = new DateTime(Int32.Parse(to_str[2]), Int32.Parse(to_str[0]), Int32.Parse(to_str[1]));
+            to=to.AddMinutes(59.0);
+            to=to.AddHours(23.0);
+            to=to.AddSeconds(59.0);
             DateTime from;
             string[] from_str = data.From.Split('/');
             from = new DateTime(Int32.Parse(from_str[2]), Int32.Parse(from_str[0]), Int32.Parse(from_str[1]));
@@ -814,7 +817,7 @@ namespace WebApplication1.Controllers
                         Res.data = new List<string[]>();
                         Res.data.Add(new string[] { "", "", "", "", "", "", "", "", "" });
                         i = 0;
-                        foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.UnitID==tem && x.DateTimeCreated < to && x.DateTimeCreated > from).OrderBy(x => x.DateTimeCreated))
+                        foreach (Tichurim tic in ent.Tichurim.Where(x => (f || x.StatusID == 1) && x.UnitID==tem && x.DateTimeCreated <= to && x.DateTimeCreated >= from).OrderBy(x => x.DateTimeCreated))
                         {
 
                             Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusters.Auctions.AuctionNumber, tic.Clusters.Auctions.Name, tic.TichurNumber, tic.Clusters.DisplayNumber.Value.ToString(), tic.Clusters.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
