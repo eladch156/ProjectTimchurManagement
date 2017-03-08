@@ -6,11 +6,11 @@
             return;
         }
         setTimeout(function () {
-            window.location = "EditClusetr/" + id;
+            window.location = "EditCluster/" + id;
         }, 1000);
     };
     $.connection.hub.start().done(function () {
-        notifications.server.addClusetrOperation();
+        notifications.server.addClusterOperation();
 
     }).fail(function () {
         alert("Connection failed");
