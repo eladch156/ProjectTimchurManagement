@@ -210,6 +210,7 @@
     </Content>
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\digital_israel.png" />
     <Content Include="Images\Emblem_of_Israel.svg.png" />
     <Content Include="Images\icon_inf.png" />
     <Content Include="Images\left_arrow.png" />
@@ -328,6 +329,7 @@
     <Content Include="Style\bootstrap.min.css" />
     <Content Include="Style\datatables.min.css" />
     <Content Include="Style\dropdown_search.css" />
+    <Content Include="Style\foot_style.css" />
     <Content Include="Style\MainLayoutStyle.css" />
     <Content Include="Style\LoginStyle.css" />
     <Content Include="Web.config" />
@@ -491,6 +493,7 @@
     <Content Include="Views\Main\SupplierLoadingScreen.cshtml" />
     <Content Include="Views\Main\ESupplierLoadingScreen.cshtml" />
     <Content Include="Views\web.config" />
+    <Content Include="Views\Shared\footer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
