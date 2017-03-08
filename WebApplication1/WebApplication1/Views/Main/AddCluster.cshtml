@@ -93,6 +93,18 @@
         background: #FEF1EC;
         border: 1px solid #CD0A0A;
     }
+    .table-borderless tbody tr td,
+.table-borderless tbody tr th,
+.table-borderless thead tr th,
+.table-borderless thead tr td,
+.table-borderless tfoot tr th,
+.table-borderless tfoot tr td {
+    border: none;
+}
+
+  #bar {
+  border-right: 1px dashed #333;
+}
 </style>
 @section Code1
 {
@@ -119,76 +131,114 @@
     <div class="col-lg-offset-5 pull-right"><button onclick="ex_co()" class="btn btn-default">ביטול</button></div>
 
 </div>
-@using (Html.BeginForm())
+@using (Html.BeginHorizontalForm())
 {
 
 
 
 
     <hr />
-        <div class="col-sm-offset-5">
-            @if (!ViewData.ModelState.IsValid)
-            {
-                <h4>שגיאות:</h4>
-            }
-            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-        </div>
-        <div class="col-sm-offset-5 form-group">
-            @Html.LabelFor(model => model.AuctionID, "מכרז:")
+    <div class="col-sm-offset-4">
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <h4>שגיאות:</h4>
+        }
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-sm-3"></div>
+    <table class="table col-sm-5 table-borderless">
 
-            @Html.DropDownListFor(model => model.AuctionID, alsl, "בחר/י ערך", new { htmlAttributes = new { @class = "form-control col-sm-1" } })
-            @Html.ValidationMessage("AuctionID", "", new { @class = "text-danger" })
+        <tr>
+            <td>
 
-        </div>
+                @Html.LabelFor(model => model.AuctionID, "מכרז:", new { @class = "control-label" })
 
-        <div class="col-sm-offset-5 form-group">
-            @Html.LabelFor(model => model.StatusID, "סטאטוס:")
-
-            @Html.DropDownListFor(model => model.StatusID, slsl, "בחר/י ערך", new { htmlAttributes = new { @class = "form-control col-sm-1" } })
-            @Html.ValidationMessage("StatusID", "", new { @class = "text-danger" })
-
-        </div>
-            <div class="col-sm-offset-5 form-group">
-                @Html.LabelFor(model => model.DisplayNumber, "מספר סל:")
-                <div>
-                    @Html.EditorFor(model => model.DisplayNumber, new { htmlAttributes = new { @class = "form-control col-sm-2" } })
-                    @Html.ValidationMessage("DisplayNumber", "", new { @class = "text-danger" })
-                </div>
-                <br />
-                <br />
-            </div>
-            <div class="col-sm-offset-5 form-group">
-                @Html.LabelFor(model => model.Name, "שם סל:")
-                <div>
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control col-sm-2" } })
-                    @Html.ValidationMessage("Name", "", new { @class = "text-danger" })
-                </div>
-
-            </div>
-
-            <br />
-            <br />
-            <div class="col-sm-offset-5 form-group">
-                @Html.LabelFor(model => model.SuppliersInTichur, "מס' ספקים בכל תיחור:")
-                <div>
-                    @Html.EditorFor(model => model.SuppliersInTichur, new { htmlAttributes = new { @class = "form-control col-sm-2" , @Value=cf} })
-                    @Html.ValidationMessage("SuppliersInTichur", "", new { @class = "text-danger" })
-                </div>
-
-            </div>
-
-            <br />
-            <br />
-            
+            </td>
+            <td>
+                @Html.DropDownListFor(model => model.AuctionID, alsl, "בחר/י ערך", new { @class = "form-control" } )
+                @Html.ValidationMessage("AuctionID", "", new { @class = "text-danger" })
+            </td>
+            <td>
 
 
-            <div class="form-group">
-                <div class="col-md-offset-5 col-md-7">
-                    <input type="submit" value="שמירה" class="btn btn-default" />
+                <div id="bar" class="mycontent-right">
+                    <p style="font-size:xx-small">הערה כלשהיא לגביי התוכן של הטקסט</p>
 
                 </div>
-            </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => Model.StatusID, "סטאטוס:", new { @class = "control-label" })
+            </td>
+            <td>
+                @Html.DropDownListFor(model => model.StatusID, slsl, "בחר/י ערך", new { @class = "form-control" } )
+                @Html.ValidationMessage("StatusID", "", new { @class = "text-danger" })
+            </td>
+            <td>
+                <div id="bar" class="mycontent-right">
+                    <p style="font-size:xx-small">הערה כלשהיא לגביי התוכן של הטקסט</p>
+
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(model => model.DisplayNumber, "מספר סל:", new { @class = "control-label" })</td>
+            <td>
+                @Html.EditorFor(model => model.DisplayNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessage("DisplayNumber", "", new { @class = "text-danger" })
+            </td>
+            <td>
+                <div id="bar" class="mycontent-right">
+                    <p style="font-size:xx-small">הערה כלשהיא לגביי התוכן של הטקסט</p>
+
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(model => model.Name, "שם סל:", new { @class = "control-label" })</td>
+            <td>
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessage("Name", "", new { @class = "text-danger" })
+
+            </td>
+            <td>
+                <div id="bar" class="mycontent-right">
+                    <p style="font-size:xx-small">הערה כלשהיא לגביי התוכן של הטקסט</p>
+
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(model => model.SuppliersInTichur, "מס' ספקים בכל תיחור:", new { @class = "control-label" })</td>
+            <td>
+                @Html.EditorFor(model => model.SuppliersInTichur, new { htmlAttributes = new { @class = "form-control", @Value = cf } })
+                @Html.ValidationMessage("SuppliersInTichur", "", new { @class = "text-danger" })
+            </td>
+            <td>
+                <div id="bar" class="mycontent-right">
+                    <p style="font-size:xx-small">הערה כלשהיא לגביי התוכן של הטקסט</p>
+
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="שמירה" class="btn btn-default" /></td>
+            <td></td>
+        </tr>
+    
+    </table>
+  
+
+
+
+
+
+
+
+
+
+
 
 }
-
-
