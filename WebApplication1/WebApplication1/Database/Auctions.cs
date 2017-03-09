@@ -24,14 +24,14 @@ namespace WebApplication1.Database
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [RegularExpression("[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]", ErrorMessageResourceName = "patrNotMa", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Display(Name = "AUAuctionNumber", ResourceType = typeof(Resources.BasicAno))]
         public string AuctionNumber { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Display(Name = "AUName", ResourceType = typeof(Resources.BasicAno))]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Display(Name = "AUStatusID", ResourceType = typeof(Resources.BasicAno))]
         public Nullable<int> StatusID { get; set; }
     

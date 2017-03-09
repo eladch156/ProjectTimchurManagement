@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using WebApplication1.Infrastructure;
 using System.Web.Routing;
 using WebApplication1.App_Start;
+using System.Threading;
+using System.Globalization;
 
 namespace WebApplication1
 {
@@ -17,7 +19,7 @@ namespace WebApplication1
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-           
+          
         }
     }
 }

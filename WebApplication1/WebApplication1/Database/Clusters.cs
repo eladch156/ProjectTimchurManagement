@@ -25,21 +25,21 @@ namespace WebApplication1.Database
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Display(Name = "CLAuctionID", ResourceType = typeof(Resources.BasicAno))]
         public Nullable<int> AuctionID { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Display(Name = "CLStatusID", ResourceType = typeof(Resources.BasicAno))]
         public Nullable<int> StatusID { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Range(1, 999, ErrorMessageResourceName = "NotThrDig", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Display(Name = "CLDisplayNumber", ResourceType = typeof(Resources.BasicAno))]
         public Nullable<byte> DisplayNumber { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Range(1, Int64.MaxValue, ErrorMessageResourceName = "NotZEPDig", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Display(Name = "CLSuppliersInTichur", ResourceType = typeof(Resources.BasicAno))]
         public Nullable<byte> SuppliersInTichur { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Display(Name = "CLName", ResourceType = typeof(Resources.BasicAno))]
         public string Name { get; set; }
     

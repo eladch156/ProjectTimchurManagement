@@ -27,27 +27,27 @@ namespace WebApplication1.Database
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Display(Name = "USUnitID", ResourceType = typeof(Resources.BasicAno))]
         public Nullable<int> UnitID { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Display(Name = "USRoleID", ResourceType = typeof(Resources.BasicAno))]
         public Nullable<int> RoleID { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Display(Name = "USStatusID", ResourceType = typeof(Resources.BasicAno))]
         public Nullable<int> StatusID { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [RegularExpression("^[0-9]*$", ErrorMessageResourceName = "numberExpe", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [CustomIdErrorAttribu]
         [Display(Name = "USIDCardNumber", ResourceType = typeof(Resources.BasicAno))]
         public string IDCardNumber { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Display(Name = "USPhoneNumber", ResourceType = typeof(Resources.BasicAno))]
         public string PhoneNumber { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Display(Name = "USFullName", ResourceType = typeof(Resources.BasicAno))]
         public string FullName { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Display(Name = "USPassword", ResourceType = typeof(Resources.BasicAno))]
         public string Password { get; set; }
     

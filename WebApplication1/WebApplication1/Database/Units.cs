@@ -26,13 +26,13 @@ namespace WebApplication1.Database
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Display(Name = "UNIStatusID", ResourceType = typeof(Resources.BasicAno))]
         public Nullable<int> StatusID { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Display(Name = "UNIName", ResourceType = typeof(Resources.BasicAno))]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [RegularExpression("[0-9][0-9][0-9][0-9]", ErrorMessageResourceName = "NotMarkevaFit", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Display(Name = "UNIMerkavaID", ResourceType = typeof(Resources.BasicAno))]
         public string MerkavaID { get; set; }

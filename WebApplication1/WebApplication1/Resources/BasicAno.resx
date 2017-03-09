@@ -231,4 +231,7 @@
   <data name="SUPEmail" xml:space="preserve">
     <value>אימייל</value>
   </data>
+  <data name="Required" xml:space="preserve">
+    <value>השדה {0} נדרש, אנא מלא אותו</value>
+  </data>
 </root>

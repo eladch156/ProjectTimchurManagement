@@ -25,19 +25,19 @@ namespace WebApplication1.Database
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Display(Name = "SUPCompanyNumber", ResourceType = typeof(Resources.BasicAno))]
         [RegularExpression("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]", ErrorMessageResourceName = "InvalidCN", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         public string CompanyNumber { get; set; }
       
         public string PhoneNumber { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Display(Name = "SUPName", ResourceType = typeof(Resources.BasicAno))]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Display(Name = "SUPContactName", ResourceType = typeof(Resources.BasicAno))]
         public string ContactName { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Display(Name = "SUPStatusID", ResourceType = typeof(Resources.BasicAno))]
         public Nullable<int> StatusID { get; set; }
         public string EmailAddress { get; set; }
