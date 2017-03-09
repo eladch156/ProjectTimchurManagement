@@ -32,12 +32,12 @@ namespace WebApplication1
                     string strm = ((Users)(SingletonCache.Instance().Storage[Context.User.Identity.Name])).IDCardNumber;
                     id = entity2.Users.Where(x => x.IDCardNumber == strm).First().ID;
                 }
-                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה,משתמש נוסף למערכת";
+                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, משתמש נוסף למערכת";
             }
             catch (Exception e)
             {
                 
-                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה,הוספת משתמש נכשלה";
+                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, הוספת משתמש נכשלה";
               
             }
             Cache.gen_lock.ReleaseMutex();
@@ -76,12 +76,12 @@ namespace WebApplication1
                     string strm = ((Users)(SingletonCache.Instance().Storage[Context.User.Identity.Name])).IDCardNumber;
                     id = entity2.Users.Where(x => x.IDCardNumber == strm).First().ID;
                 }
-                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה,משתמש עודכן במערכת";
+                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, משתמש עודכן במערכת";
             }
             catch (Exception e)
             {
 
-                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה,עדכון משתמש נכשל";
+                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, עדכון משתמש נכשל";
                
             }
             Cache.gen_lock.ReleaseMutex();
@@ -112,12 +112,12 @@ namespace WebApplication1
                     string strm = ((Auctions)(SingletonCache.Instance().Storage[Context.User.Identity.Name])).AuctionNumber;
                     id = entity2.Auctions.Where(x => x.AuctionNumber == strm).First().ID;
                 }
-                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה,מכרז נוסף למערכת";
+                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, מכרז נוסף למערכת";
             }
             catch (Exception e)
             {
 
-                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה,הוספת מכרז נכשלה";
+                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, הוספת מכרז נכשלה";
                 
             }
             Cache.gen_lock.ReleaseMutex();
@@ -156,12 +156,12 @@ namespace WebApplication1
                     string strm = ((Auctions)(SingletonCache.Instance().Storage[Context.User.Identity.Name])).AuctionNumber;
                     id = entity2.Auctions.Where(x => x.AuctionNumber == strm).First().ID;
                 }
-                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה,מכרז עודכן במערכת";
+                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, מכרז עודכן במערכת";
             }
             catch (Exception e)
             {
 
-                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה,עדכון מכרז נכשל";
+                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, עדכון מכרז נכשל";
                 
             }
             Cache.gen_lock.ReleaseMutex();
@@ -192,12 +192,12 @@ namespace WebApplication1
                     byte strm = ((Clusters)(SingletonCache.Instance().Storage[Context.User.Identity.Name])).DisplayNumber.Value;
                     id = entity2.Clusters.Where(x => x.DisplayNumber == strm).First().ID;
                 }
-                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה,סל נוסף למערכת";
+                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, סל נוסף למערכת";
             }
             catch (Exception e)
             {
 
-                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה,הוספת סל נכשלה";
+                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, הוספת סל נכשלה";
               
             }
             Cache.gen_lock.ReleaseMutex();
@@ -236,12 +236,12 @@ namespace WebApplication1
                     byte strm = ((Clusters)(SingletonCache.Instance().Storage[Context.User.Identity.Name])).DisplayNumber.Value;
                     id = entity2.Clusters.Where(x => x.DisplayNumber == strm).First().ID;
                 }
-                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה,סל עודכן במערכת";
+                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, סל עודכן במערכת";
             }
             catch (Exception e)
             {
 
-                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה,עדכון סל נכשל";
+                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, עדכון סל נכשל";
                 
             }
             Cache.gen_lock.ReleaseMutex();
@@ -285,12 +285,12 @@ namespace WebApplication1
                     }
                     entity2.SaveChanges();
                 }
-                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה,יחידה נוספה למערכת";
+                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, יחידה נוספה למערכת";
             }
             catch (Exception e)
             {
 
-                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה,הוספת יחידה נכשלה";
+                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, הוספת יחידה נכשלה";
                 
             }
             Cache.gen_lock.ReleaseMutex();
@@ -342,12 +342,12 @@ namespace WebApplication1
                     int strm = mf.unit.ID;
                     id = entity2.Units.Where(x => x.ID == strm).First().ID;
                 }
-                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה,יחידה עודכה במערכת";
+                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, יחידה עודכה במערכת";
             }
             catch (Exception e)
             {
 
-                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה,הוספת יחידה נכשלה במערכת";
+                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, הוספת יחידה נכשלה במערכת";
                
             }
             Cache.gen_lock.ReleaseMutex();
@@ -403,12 +403,12 @@ namespace WebApplication1
                     }
                     entity2.SaveChanges();
                 }
-                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה,ספק נוספה למערכת";
+                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, ספק נוספה למערכת";
             }
             catch (Exception e)
             {
 
-                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה,הוספת ספק נכשלה";
+                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, הוספת ספק נכשלה";
 
             }
             Cache.gen_lock.ReleaseMutex();
@@ -486,12 +486,12 @@ namespace WebApplication1
                     int strm = mf.supliers.ID;
                     id = entity2.Suppliers.Where(x => x.ID == strm).First().ID;
                 }
-                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה,יחידה עודכה במערכת";
+                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, יחידה עודכה במערכת";
             }
             catch (Exception e)
             {
 
-                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה,הוספת יחידה נכשלה במערכת";
+                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, הוספת יחידה נכשלה במערכת";
 
             }
             Cache.gen_lock.ReleaseMutex();

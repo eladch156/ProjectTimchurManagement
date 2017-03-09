@@ -711,7 +711,7 @@ namespace WebApplication1.Controllers
                 {
                     GenModel failRes = new GenModel();
                     failRes.data = new List<string[]>();
-                    failRes.data.Add(new string[] { "תיחור אינו קיים בתוך השרת(או תחת היחידה הנתונה של המשתמש או שהוכנסה)" });
+                    failRes.data.Add(new string[] { "תיחור אינו קיים בתוך השרת (או תחת היחידה הנתונה של המשתמש או שהוכנסה)" });
                     failRes.Status = "error";
                     return Json(failRes); 
                 }

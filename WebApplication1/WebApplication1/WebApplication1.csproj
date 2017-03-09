@@ -212,6 +212,7 @@
     <Content Include="Global.asax" />
     <Content Include="Images\digital_israel.png" />
     <Content Include="Images\Emblem_of_Israel.svg.png" />
+    <Content Include="Images\i.jpg" />
     <Content Include="Images\icon_inf.png" />
     <Content Include="Images\left_arrow.png" />
     <Content Include="Images\Loading_icon.gif" />

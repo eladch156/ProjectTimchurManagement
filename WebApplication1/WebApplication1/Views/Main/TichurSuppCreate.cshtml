@@ -126,7 +126,7 @@
                     $("#filename").trigger("click");
 
 
-                    $.bootstrapPurr("תיחור הצליח");
+                    $.bootstrapPurr("השליפה התבצעה בהצלחה");
                 }
                 
             },
@@ -167,8 +167,18 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
+            <img id="help" src="@Url.Content("/Images/i.jpg")" height="25" width="25"
+                 title="דף זה נועד להפקת רשימת ספקים לצורך תיחור. יש למלא את השדות הדרושים,
+                  .▼ וללחוץ על 'שלוף רשימה'. למזעור החלונית, לחץ\י שוב על" 
+                 align="right" />
+            <img id="help" src="@Url.Content("/Images/i.jpg")" height="25" width="25"
+                 title="ניתן למיין את התוצאות ע&quot;פ עמודה מסויימת (מספר שורה, שם, וכו') ע&quot;י לחיצה על העמודה הרצויה.
+                      .לחיצה נוספת מחליפה את המיון מסדר עולה ליורד או להפך" 
+                 
+                 align="left" />
             <div class="input-group" id="adv-search">
-                <label class="form-control"  >ליצירת רשימה לחץ על <span class="glyphicon glyphicon-arrow-left"></span></label>
+                <label class="form-control" style="text-align:center;">
+                ליצירת רשימה לחץ על ▼</label>
                 <div id="search_grop_butts" class="input-group-btn">
                     <div  id="search_contain_buttns"  class="btn-group" role="group">
                         <div id="search_contain" class="dropdown dropdown-lg">

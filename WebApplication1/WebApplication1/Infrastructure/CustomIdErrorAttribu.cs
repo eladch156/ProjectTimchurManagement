@@ -26,7 +26,7 @@ namespace WebApplication1.Infrastructure
             }
             if (IDCardNumber.Length!=9)
             {
-                return new ValidationResult("התעודת זהות אינה באורך המתאים");
+                return new ValidationResult("תעודת זהות אינה באורך המתאים");
             }
             int [] id = new int[IDCardNumber.Length];
             int[] w = new int[IDCardNumber.Length];
@@ -58,7 +58,7 @@ namespace WebApplication1.Infrastructure
                 sumF += id[j];
             if(sumF%10!=0)
             {
-                return new ValidationResult("התעודת זהות אינה תקינה");
+                return new ValidationResult("תעודת זהות אינה תקינה");
             }
             return null;
         }
