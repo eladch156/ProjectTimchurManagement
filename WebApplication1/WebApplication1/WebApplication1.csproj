@@ -330,6 +330,7 @@
     <Content Include="Style\bootstrap.min.css" />
     <Content Include="Style\datatables.min.css" />
     <Content Include="Style\dropdown_search.css" />
+    <Content Include="Style\footer.css" />
     <Content Include="Style\foot_style.css" />
     <Content Include="Style\MainLayoutStyle.css" />
     <Content Include="Style\LoginStyle.css" />
