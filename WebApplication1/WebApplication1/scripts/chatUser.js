@@ -2,7 +2,7 @@
     var notifications = $.connection.notificationsHub;
     notifications.client.sendMessage = function (id) {
         if (id == "-1") {
-            alert("Error:Please Refer to database manager.")
+            window.location = "MainIndex";
             return;
         }
 
@@ -11,8 +11,10 @@
         }, 1000);
     };
     $.connection.hub.start().done(function () {
-        notifications.server.addUserOperation();
-       
+      
+        if (sessionStorage.getItem("is_reloaded"))
+            notifications.server.addUserOperation();
+        sessionStorage.setItem("is_reloaded", true);
     }).fail(function () {
         alert("Connection failed");
     });

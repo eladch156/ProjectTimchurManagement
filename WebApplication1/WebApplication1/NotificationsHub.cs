@@ -40,6 +40,7 @@ namespace WebApplication1
                 SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, הוספת משתמש נכשלה";
               
             }
+            SingletonCache.Instance().Storage[Context.User.Identity.Name] = null;
             Cache.gen_lock.ReleaseMutex();
             string str = Context.User.Identity.Name;
             string msg = "";
@@ -84,6 +85,7 @@ namespace WebApplication1
                 SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, עדכון משתמש נכשל";
                
             }
+            SingletonCache.Instance().Storage[Context.User.Identity.Name] = null;
             Cache.gen_lock.ReleaseMutex();
             string str = Context.User.Identity.Name;
             string msg = "";
@@ -120,6 +122,7 @@ namespace WebApplication1
                 SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, הוספת מכרז נכשלה";
                 
             }
+            SingletonCache.Instance().Storage[Context.User.Identity.Name] = null;
             Cache.gen_lock.ReleaseMutex();
             string str = Context.User.Identity.Name;
             string msg = "";
@@ -164,6 +167,7 @@ namespace WebApplication1
                 SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, עדכון מכרז נכשל";
                 
             }
+            SingletonCache.Instance().Storage[Context.User.Identity.Name] = null;
             Cache.gen_lock.ReleaseMutex();
             string str = Context.User.Identity.Name;
             string msg = "";
@@ -200,6 +204,7 @@ namespace WebApplication1
                 SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, הוספת סל נכשלה";
               
             }
+            SingletonCache.Instance().Storage[Context.User.Identity.Name] = null;
             Cache.gen_lock.ReleaseMutex();
             string str = Context.User.Identity.Name;
             string msg = "";
@@ -244,6 +249,7 @@ namespace WebApplication1
                 SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, עדכון סל נכשל";
                 
             }
+            SingletonCache.Instance().Storage[Context.User.Identity.Name] = null;
             Cache.gen_lock.ReleaseMutex();
             string str = Context.User.Identity.Name;
             string msg = "";
@@ -293,6 +299,7 @@ namespace WebApplication1
                 SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, הוספת יחידה נכשלה";
                 
             }
+            SingletonCache.Instance().Storage[Context.User.Identity.Name] = null;
             Cache.gen_lock.ReleaseMutex();
             string str = Context.User.Identity.Name;
             string msg = "";
@@ -308,7 +315,9 @@ namespace WebApplication1
 
             int? id = -1;
             Cache.gen_lock.WaitOne();
-            UnitFModel mf = ((UnitFModel)SingletonCache.Instance().Storage[Context.User.Identity.Name]);
+            UnitFModel mf = null;
+            if (SingletonCache.Instance().Storage.ContainsKey(Context.User.Identity.Name))
+            mf=((UnitFModel)SingletonCache.Instance().Storage[Context.User.Identity.Name]);
             try
             {
                 using (TimchurDatabaseEntities entity = new TimchurDatabaseEntities())
@@ -347,9 +356,10 @@ namespace WebApplication1
             catch (Exception e)
             {
 
-                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, הוספת יחידה נכשלה במערכת";
+                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, עדכון יחידה נכשל במערכת";
                
             }
+            SingletonCache.Instance().Storage[Context.User.Identity.Name] = null;
             Cache.gen_lock.ReleaseMutex();
             string str = Context.User.Identity.Name;
             string msg = "";
@@ -403,7 +413,7 @@ namespace WebApplication1
                     }
                     entity2.SaveChanges();
                 }
-                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, ספק נוספה למערכת";
+                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, ספק נוסף למערכת";
             }
             catch (Exception e)
             {
@@ -411,6 +421,7 @@ namespace WebApplication1
                 SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, הוספת ספק נכשלה";
 
             }
+            SingletonCache.Instance().Storage[Context.User.Identity.Name] = null;
             Cache.gen_lock.ReleaseMutex();
             string str = Context.User.Identity.Name;
             string msg = "";
@@ -486,14 +497,15 @@ namespace WebApplication1
                     int strm = mf.supliers.ID;
                     id = entity2.Suppliers.Where(x => x.ID == strm).First().ID;
                 }
-                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, יחידה עודכה במערכת";
+                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, ספק עודכן במערכת";
             }
             catch (Exception e)
             {
 
-                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, הוספת יחידה נכשלה במערכת";
+                SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, עדכון ספק נכשלה במערכת";
 
             }
+            SingletonCache.Instance().Storage[Context.User.Identity.Name] = null;
             Cache.gen_lock.ReleaseMutex();
             string str = Context.User.Identity.Name;
             string msg = "";

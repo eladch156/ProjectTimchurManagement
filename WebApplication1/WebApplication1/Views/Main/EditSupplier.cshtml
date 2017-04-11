@@ -147,7 +147,17 @@
     "dom": "<'row'<'col-sm-12'tr>><'row'<'col-sm-5'><'col-sm-2'i><'col-sm-5'>><'row'<'col-sm-4'><'col-sm-2'f><'col-sm-2'B><'col-sm-4'>><'row'<'col-sm-5'><'col-sm-2'p><'col-sm-5'>>"
 
     });
+      var tablei = $('.tabExceli').DataTable({
+    buttons: ['copy', {
+    extend: 'excel',
+    title: full
+    }],
+    "oLanguage": {
+    "sUrl": "//cdn.datatables.net/plug-ins/1.10.13/i18n/Hebrew.json"
+    },
+    "dom": "<'row'<'col-sm-12'tr>><'row'<'col-sm-3'><'col-sm-2'f><'col-sm-7'>>"
 
+    });
 }
 <meta charset="ISO-8859-1">
 
@@ -282,7 +292,7 @@
     <div class="row col-sm-12  form-group">
 
         <div class="col-sm-5">
-            <table class="table">
+            <table class="table tabExceli">
                 <thead>
                     <tr>
                         <th>
@@ -326,45 +336,48 @@
             {
                 if (ali.StatusID == 1)
                 {
-                    <table class="table" id="auctab_@ali.ID" style="display:none;">
-                        <thead>
-                            <tr>
-                                <th>
-                                    שיוך
-                                </th>
-                                <th>
-                                    מס' סל
-                                </th>
-                                <th>
-                                    שם סל
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (WebApplication1.Database.Clusters cli in cl)
-                            {
-                                if (cli.AuctionID == ali.ID && cli.StatusID == 1)
+                    <div id="auctab_@ali.ID" class="col-sm-12" style="display:none;">
+                        <table class="table tabExceli">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        שיוך
+                                    </th>
+                                    <th>
+                                        מס' סל
+                                    </th>
+                                    <th>
+                                        שם סל
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (WebApplication1.Database.Clusters cli in cl)
                                 {
-                                    <tr>
-                                        <th>
-                                            @if (Model != null && Model.Limitions != null && Model.Limitions.Where(x4 => x4.Value == cli.ID).Count() > 0)
-                                            { <input type="checkbox" checked="checked" name="Limitions" value="@cli.ID">}
-                                            else
-                                            { <input type="checkbox" name="Limitions" value="@cli.ID">}
-                                        </th>
-                                        <th>
-                                            @cli.DisplayNumber
-                                        </th>
-                                        <th>
-                                            @cli.Name
-                                        </th>
-                                    </tr>
+                                    if (cli.AuctionID == ali.ID && cli.StatusID == 1)
+                                    {
+                                        <tr>
+                                            <th>
+                                                @if (Model != null && Model.Limitions != null && Model.Limitions.Where(x4 => x4.Value == cli.ID).Count() > 0)
+                                                { <input type="checkbox" checked="checked" name="Limitions" value="@cli.ID">}
+                                                else
+                                                { <input type="checkbox" name="Limitions" value="@cli.ID">}
+                                            </th>
+                                            <th>
+                                                @cli.DisplayNumber
+                                            </th>
+                                            <th>
+                                                @cli.Name
+                                            </th>
+                                        </tr>
+                                    }
                                 }
-                            }
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 }
+
             }
         </div>
 
@@ -377,3 +390,5 @@
     </div>
 
 }
+
+<br />

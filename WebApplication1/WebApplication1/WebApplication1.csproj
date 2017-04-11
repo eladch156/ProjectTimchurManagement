@@ -211,11 +211,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\digital_israel.png" />
+    <Content Include="Images\dig_isre.jpg" />
     <Content Include="Images\Emblem_of_Israel.svg.png" />
     <Content Include="Images\i.jpg" />
     <Content Include="Images\icon_inf.png" />
+    <Content Include="Images\isreal_sym.png" />
     <Content Include="Images\left_arrow.png" />
     <Content Include="Images\Loading_icon.gif" />
+    <Content Include="Images\warning.png" />
+    <Content Include="scripts\Faq_Desc\FAQ_A.xml" />
+    <Content Include="scripts\Faq_Desc\FAQ_U.xml" />
+    <Content Include="scripts\Faq_Desc\ReadXML.js" />
     <Content Include="scripts\jquery.qtip.css" />
     <Content Include="scripts\jquery.qtip.js" />
     <Content Include="scripts\jquery.qtip.min.css" />
@@ -494,8 +500,11 @@
     <Content Include="Views\Main\AddSupplier.cshtml" />
     <Content Include="Views\Main\SupplierLoadingScreen.cshtml" />
     <Content Include="Views\Main\ESupplierLoadingScreen.cshtml" />
-    <Content Include="Views\web.config" />
+    <Content Include="Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Shared\footer.cshtml" />
+    <Content Include="Views\Main\Faq.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

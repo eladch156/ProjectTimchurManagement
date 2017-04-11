@@ -1106,5 +1106,11 @@ namespace WebApplication1.Controllers
                 return Json(er);
             }
         }
+        [Authorize]
+        [AuthRestriections(Name = "/Main/UnAuthError")]
+        public ActionResult Faq()
+        {
+            return View("Faq");
+        }
     }
 }

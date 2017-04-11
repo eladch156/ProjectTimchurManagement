@@ -93,7 +93,7 @@
             $(".datepickerT").datepicker('setDate', tod);
             $(".datepickerY").datepicker('setDate', yes);
         });
-      
+        sessionStorage.setItem("is_reloaded", false);
 
         
 
@@ -104,7 +104,7 @@
 </head>
 <body>
 <nav class="navbar navbar-default"><div class="container-fluid"><ul class="nav navbar-nav">
-                <li class="active"><a href="/Main/MainIndex">עמוד ראשי</a></li>
+                <li class=""><a href="/Main/MainIndex">עמוד ראשי</a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">ניהול שליפות<span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -125,6 +125,7 @@
                         </ul>
                     </li>
                 }
+                <li class=""><a data-toggle="modal" data-target="#myModalFaq" href="#"> לחץ כאן - לעזרה</a></li>
             </ul>
  
             <ul class="nav navbar-nav navbar-right">

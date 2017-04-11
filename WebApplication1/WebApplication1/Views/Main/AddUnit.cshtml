@@ -106,7 +106,17 @@
     "dom": "<'row'<'col-sm-12'tr>><'row'<'col-sm-5'><'col-sm-2'i><'col-sm-5'>><'row'<'col-sm-4'><'col-sm-2'f><'col-sm-2'B><'col-sm-4'>><'row'<'col-sm-5'><'col-sm-2'p><'col-sm-5'>>"
 
     });
+     var tablei = $('.tabExceli').DataTable({
+    buttons: ['copy', {
+    extend: 'excel',
+    title: full
+    }],
+    "oLanguage": {
+    "sUrl": "//cdn.datatables.net/plug-ins/1.10.13/i18n/Hebrew.json"
+    },
+    "dom": "<'row'<'col-sm-12'tr>><'row'<'col-sm-3'><'col-sm-2'f><'col-sm-7'>>"
 
+    });
 }
 <meta charset="ISO-8859-1">
 
@@ -235,7 +245,7 @@
             <div class="form-group">
 
                 <div>
-                    <table class="table">
+                    <table class="table tabExceli">
                         <thead>
                             <tr>
                                 <th>
@@ -296,8 +306,6 @@
 
 
 
-
-
-        }
+}
 
 

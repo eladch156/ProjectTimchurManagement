@@ -1,0 +1,39 @@
+﻿
+@{
+    Layout = null;
+}
+<link rel="stylesheet" href="@Url.Content("~/scripts/jquery-ui.css")">
+<script src="@Url.Content("~/scripts/jquery-1.12.4.js")"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+<script src="@Url.Content("~/scripts/jquery.signalR-2.1.2.js")"></script>
+
+<script src="@Url.Content("~/scripts/jquery-ui.js")"></script>
+<script src="@Url.Content("~/scripts/jquery.validate.mvc.js")"></script>
+
+<link rel="stylesheet" type="text/css" href="@Url.Content("~/Style/datatables.min.css")" />
+
+<link rel="stylesheet" href="@Url.Content("~/Style/bootstrap.css")">
+<link rel="stylesheet" href="@Url.Content("~/Style/bootstrap-rtl.css")">
+<link rel="stylesheet" href="@Url.Content("~/Style/dropdown_search.css")">
+<script src="@Url.Content("~/scripts/bootstrap.min.js")"></script>
+<script src="@Url.Content("~/scripts/jquery.qtip.min.js")"></script>
+<link rel="stylesheet" href="@Url.Content("~/scripts/jquery.qtip.min.css")">
+
+
+
+<script src="@Url.Content("~/scripts/datatables.min.js")"></script>
+<script src="@Url.Content("~/signalr/hubs")"></script>
+<script src="@Url.Content("~/scripts/angular.js")"></script>
+<script src="@Url.Content("~/scripts/jquery-bootstrap-purr.min.js")"></script>
+<script src="@Url.Content("~/scripts/chatGen.js")"></script>
+<script src="@Url.Content("~/scripts/Faq_Desc/ReadXML.js")"></script>
+
+<script>
+    var ID_DEF=@(User.IsInRole("Admin") ? "true" : "false");
+    loadDoc(ID_DEF,'@Url.Content("~/scripts/Faq_Desc/FAQ_A.xml")','@Url.Content("~/scripts/Faq_Desc/FAQ_U.xml")');
+</script>
+<div class="panel-group" id="faqAccordion">
+    
+
+</div>
+<!--/panel-group-->
