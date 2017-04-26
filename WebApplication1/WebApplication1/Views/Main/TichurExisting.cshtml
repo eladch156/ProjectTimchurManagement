@@ -83,11 +83,48 @@
     et2=table2;
 }
 <div id="filename" style="display:none;"></div>
+@if (User.IsInRole("Admin"))
+{
+    <script language="javascript" type="text/javascript">
+        var admin = true;
+    </script>
+}
+else
+{
+    <script language="javascript" type="text/javascript">
+        var admin = false;
+    </script>
+}
 <script language="javascript" type="text/javascript">
     var id = 0;
+
     var last_succ_id = -1;
-    function GetVal(_auctionId) {
+    function FirstReact(str,unit)
+    {
        
+
+     id = 1;
+     $('#tichur_num').val(str);
+     unit_id = "";
+     $("#uni_sel option").each(function () {
+         var value = $(this).val();
+         var text = $(this).html();
+         
+         if (text == unit)
+             unit_id = value;
+     });
+ 
+   
+    
+     if (admin)
+         getListMod(unit_id);
+        else
+         getList();
+     $('#tichur_num').val("");
+     id = 2;
+       }
+    function GetVal(_auctionId) {
+
         var procemessage = "<option value='' selected='selected'>המתן....</option>";
         $("#sel_clust").html(procemessage).show();
         var url = "/Main/GetCluByAuc/";
@@ -133,7 +170,7 @@
             $("#sel_auct").prop('disabled', true);
             id = 0;
         }
-        
+
     });
     function newEff()
     {
@@ -149,14 +186,14 @@
         $("#tab_2").css({ "display": "none" });
         $('#tichur_num').css({ "background": "", "border": "" });
         $(".qtip").remove();
-      
+
             $("#canc_tichur").prop("disabled", "disabled");
-       
-        
+
+
         last_succ_id = -1;
         switch(id)
         {
-           
+
             case 0:
                 $.bootstrapPurr("בחר שיטת שליפה בבקשה");
                 break;
@@ -193,11 +230,11 @@
                         else
                         {
                             last_succ_id = data.id;
-                                            
+
                             $("#tab_1").css({ "display": "inline", "width": "100%" });
-                           
+
                                        $("#canc_tichur").prop("disabled", "");
-                                  
+
                                   et.clear().draw();
                                   for (var i = 1; i < d.data.length; i++) {
                                       var arr = [];
@@ -220,7 +257,7 @@
                         // TODO: Show error
                     }
                 });
-                
+
                 break;
             case 2:
                 var data = {
@@ -244,12 +281,12 @@
                     }
                     else
                     {
-                        
-                                            
+
+
                         $("#tab_2").css({ "display": "inline", "width": "100%" });
-                           
+
                         $("#canc_tichur").prop("disabled", "disabled");
-                                  
+
                         et2.clear().draw();
                         for (var i = 1; i < d.data.length; i++) {
                             var arr = [];
@@ -257,6 +294,7 @@
                             for (var j = 1; j < d.data[i].length; j++) {
                                 arr.push(d.data[i][j]);
                             }
+                            arr.push("<a onclick='FirstReact(\"" + d.data[i][4] + "\",\"" + d.data[i][1] + "\")'>ראה תיחור</a>")
                             et2.row.add(arr).draw();
 
 
@@ -271,15 +309,150 @@
                     // TODO: Show error
                 }
                 });
-                
+
         break;
 
         }
+    }
+    function getListMod(unit)
+    {
+        $("#tab_1").css({ "display": "none" });
+        $("#tab_2").css({ "display": "none" });
+        $('#tichur_num').css({ "background": "", "border": "" });
+        $(".qtip").remove();
+
+        $("#canc_tichur").prop("disabled", "disabled");
+
+
+        last_succ_id = -1;
+        switch(id)
+        {
+
+            case 0:
+                $.bootstrapPurr("בחר שיטת שליפה בבקשה");
+                break;
+            case 1:
+                var data = {
+
+                    id: $('#tichur_num').val(),
+                    unit_field: unit
+                };
+                var pattren = /[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9]#/g;
+                if (pattren.test(data.id + "#") == false)
+                {
+                    $('#tichur_num').css({ "background": "#FEF1EC", "border": "1px solid #CD0A0A" });
+                    $('#tichur_num').qtip({ // Grab some elements to apply the tooltip to
+                        content: 'מספר תיחור אינו תקין',
+                        position: {
+                            target: 'mouse', // Track the mouse as the positioning target
+                            adjust: { x: 5, y: 5 } // Offset it slightly from under the mouse
+                        }
+                    });
+                    break;
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Content("~/Main/GetByTichurNumber")" ,
+                    content: "application/json; charset=utf-8",
+                dataType: "json",
+                data: data,
+                success: function (d) {
+                    if(d.Status=="error")
+                    {
+                        $.bootstrapPurr(d.data[0][0]);
+                    }
+                    else
+                    {
+                        last_succ_id = data.id;
+
+                        $("#tab_1").css({ "display": "inline", "width": "100%" });
+
+                        $("#canc_tichur").prop("disabled", "");
+
+                        et.clear().draw();
+                        for (var i = 1; i < d.data.length; i++) {
+                            var arr = [];
+                            arr.push(i);
+                            for (var j = 1; j < d.data[i].length; j++) {
+                                arr.push(d.data[i][j]);
+                            }
+                            et.row.add(arr).draw();
+
+
+                        }
+                        $("#filename").html($('#uni_sel option:selected').text() + "-" + "תיחור " + $('#tichur_num').val() + " " + "- רשימת ספקים");
+                        $("#filename").trigger("click");
+
+
+
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    // TODO: Show error
+                }
+        });
+
+        break;
+           case 2:
+                var data = {
+
+    From: $('#datetimepicker1').val(),
+    To: $('#datetimepicker2').val(),
+    unit_field: $('#uni_sel').val(),
+    clu_field: $('#sel_clust').val(),
+    auc_field: $('#sel_auct').val()
+    };
+                $.ajax({
+    type: "POST",
+    url: "@Url.Content("~/Main/GetByTichurDates")" ,
+    content: "application/json; charset=utf-8",
+    dataType: "json",
+    data: data,
+    success: function (d) {
+        if(d.Status=="error")
+        {
+            $.bootstrapPurr(d.data[0][0]);
+        }
+        else
+        {
+
+
+            $("#tab_2").css({ "display": "inline", "width": "100%" });
+
+            $("#canc_tichur").prop("disabled", "disabled");
+
+            et2.clear().draw();
+            for (var i = 1; i < d.data.length; i++) {
+                var arr = [];
+                arr.push(i);
+                for (var j = 1; j < d.data[i].length; j++) {
+                    arr.push(d.data[i][j]);
+                }
+                arr.push("<a onclick='FirstReact(\"" + d.data[i][4] + "\",\"" + d.data[i][1] + "\")'>ראה תיחור</a>")
+                et2.row.add(arr).draw();
+
+
+            }
+            $("#filename").html($('#uni_sel option:selected').text() + "-" + "רשימת תיחורים מתאריך" + $('#datetimepicker1').val() + "עד תאריך" + $('#datetimepicker2').val());
+            $("#filename").trigger("click");
+
+
+        }
+    },
+    error: function (xhr, textStatus, errorThrown) {
+        // TODO: Show error
+    }
+    });
+
+    break;
+
+    }
     }
 </script>
 @if(User.IsInRole("Admin"))
 {
     <script>
+      
         function handleCanc()
         {
             var data = { id: last_succ_id,
@@ -541,6 +714,9 @@
                 </th>
                 <th>
                     סטאטוס
+                </th>
+                <th>
+                    רשימת ספקים
                 </th>
             </tr>
         </thead>
