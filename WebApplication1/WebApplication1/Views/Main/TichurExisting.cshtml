@@ -97,7 +97,7 @@ else
 }
 <script language="javascript" type="text/javascript">
     var id = 0;
-
+   
     var last_succ_id = -1;
     function FirstReact(str,unit)
     {
@@ -195,7 +195,7 @@ else
         {
 
             case 0:
-                $.bootstrapPurr("בחר שיטת שליפה בבקשה");
+                jqAlert("בחר שיטת שליפה בבקשה", "Announce");
                 break;
             case 1:
                 var data = {
@@ -225,7 +225,8 @@ else
                     success: function (d) {
                         if(d.Status=="error")
                         {
-                            $.bootstrapPurr(d.data[0][0]);
+                            jqAlert(d.data[0][0], "Announce");
+                       
                         }
                         else
                         {
@@ -277,7 +278,7 @@ else
                 success: function (d) {
                     if(d.Status=="error")
                     {
-                        $.bootstrapPurr(d.data[0][0]);
+                        jqAlert(d.data[0][0], "Announce");
                     }
                     else
                     {
@@ -329,7 +330,7 @@ else
         {
 
             case 0:
-                $.bootstrapPurr("בחר שיטת שליפה בבקשה");
+                jqAlert("בחר שיטת שליפה בבקשה", "Announce"); 
                 break;
             case 1:
                 var data = {
@@ -359,7 +360,7 @@ else
                 success: function (d) {
                     if(d.Status=="error")
                     {
-                        $.bootstrapPurr(d.data[0][0]);
+                        jqAlert(d.data[0][0], "Announce");
                     }
                     else
                     {
@@ -411,7 +412,7 @@ else
     success: function (d) {
         if(d.Status=="error")
         {
-            $.bootstrapPurr(d.data[0][0]);
+            jqAlert(d.data[0][0], "Announce");
         }
         else
         {
@@ -471,7 +472,7 @@ else
                 data: data,
                 success: function (d) {
               
-                    $.bootstrapPurr(d);
+                    jqAlert(d, "Announce");
                 
                 },
                 error: function (xhr, textStatus, errorThrown) {

@@ -23,7 +23,25 @@
    <script src="@Url.Content("~/scripts/jquery.qtip.min.js")"></script>
     <link rel="stylesheet" href="@Url.Content("~/scripts/jquery.qtip.min.css")">
 
- 
+ <script>
+     function jqAlert(outputMsg, titleMsg) {
+         if (!outputMsg) return;
+
+         var div = $('<div></div>');
+         div.html(outputMsg).dialog({
+             title: titleMsg,
+             resizable: false,
+             modal: true,
+             buttons: {
+                 "OK": function () {
+                     $(this).dialog("close");
+                 }
+             }
+
+         });
+         if (!titleMsg) div.siblings('.ui-dialog-titlebar').hide();
+     }
+ </script>
 
    <script src="@Url.Content("~/scripts/datatables.min.js")"></script>
     <script src="@Url.Content("~/signalr/hubs")"></script>
