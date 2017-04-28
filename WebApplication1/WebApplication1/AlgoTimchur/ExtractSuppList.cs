@@ -53,7 +53,7 @@ namespace WebApplication1.AlgoTimchur
                     //oldest group of suppliers
                     var dateGroup = itr.Current;
                     //Need to pick a random subset of the suppliers
-                    if (dateGroup.Count() < suppliersRemaining)
+                    if (dateGroup.Count() > suppliersRemaining)
                     {
                         var shuffled = dateGroup.OrderBy(i => rnd.Next());
                         // Going over the shuffled list until enough are extracted

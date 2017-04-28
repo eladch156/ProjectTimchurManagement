@@ -404,7 +404,7 @@ namespace WebApplication1
                         {
                             SuppliersClusters ua = new SuppliersClusters();
                             ua.ClusterID = i;
-                            ua.SupplierID = id;
+                            ua.SupplierID = mf.supliers.ID;
                             ua.FormarLastTimeInList = new DateTime(2000,1,1);
                             ua.LastTimeInList = new DateTime(2000, 1, 1);
                             ua.StatusID = 1;
@@ -461,7 +461,7 @@ namespace WebApplication1
                                 else
                                 {
                                     ua.ClusterID = i;
-                                    ua.SupplierID = id;
+                                    ua.SupplierID = mf.supliers.ID;
                                     ua.FormarLastTimeInList = new DateTime(2000, 1, 1);
                                     ua.LastTimeInList = new DateTime(2000, 1, 1);
                                     ua.StatusID = 1;
