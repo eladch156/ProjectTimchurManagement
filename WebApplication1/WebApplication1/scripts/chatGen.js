@@ -1,9 +1,11 @@
-﻿$(function () {
+﻿/***
+$(function () {
+
     var notifications = $.connection.notificationsHub;
     notifications.client.broadcastNotification = function (message) {
+     alert(message);
        
-        jqAlert(message, "Announce")
-      
+       
     };
     $.connection.hub.start().done(function () {
         notifications.server.sendNotification();
@@ -12,4 +14,4 @@
         alert("Connection failed");
     });
 
-});
+});**/

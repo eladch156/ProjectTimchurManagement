@@ -222,6 +222,8 @@
     <Content Include="scripts\Faq_Desc\FAQ_A.xml" />
     <Content Include="scripts\Faq_Desc\FAQ_U.xml" />
     <Content Include="scripts\Faq_Desc\ReadXML.js" />
+    <Content Include="scripts\jqmig.js" />
+    <Content Include="scripts\jqmig2.js" />
     <Content Include="scripts\jquery.qtip.css" />
     <Content Include="scripts\jquery.qtip.js" />
     <Content Include="scripts\jquery.qtip.min.css" />
@@ -288,7 +290,7 @@
     <Content Include="scripts\jquery-1.10.2.min.map" />
     <None Include="scripts\jquery.validate-vsdoc.js" />
     <Content Include="scripts\jquery.signalR-2.1.2.js" />
-    <Content Include="scripts\jquery.signalR-2.1.2.min.js" />
+    <Content Include="scripts\jquery.signalR-2.2.1.min.js" />
     <Content Include="scripts\jquery.validate.js" />
     <Content Include="scripts\jquery.validate.min.js" />
     <Content Include="scripts\jquery.validate.mvc.js" />
@@ -505,6 +507,7 @@
     </Content>
     <Content Include="Views\Shared\footer.cshtml" />
     <Content Include="Views\Main\Faq.cshtml" />
+    <Content Include="scripts\package.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

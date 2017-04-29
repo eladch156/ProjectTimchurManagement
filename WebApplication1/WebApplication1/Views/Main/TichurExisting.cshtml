@@ -195,7 +195,7 @@ else
         {
 
             case 0:
-                jqAlert("בחר שיטת שליפה בבקשה", "Announce");
+                $.bootstrapPurr("בחר שיטת שליפה בבקשה");
                 break;
             case 1:
                 var data = {
@@ -225,7 +225,7 @@ else
                     success: function (d) {
                         if(d.Status=="error")
                         {
-                            jqAlert(d.data[0][0], "Announce");
+                            $.bootstrapPurr(d.data[0][0]);
                        
                         }
                         else
@@ -278,7 +278,7 @@ else
                 success: function (d) {
                     if(d.Status=="error")
                     {
-                        jqAlert(d.data[0][0], "Announce");
+                        $.bootstrapPurr(d.data[0][0]);
                     }
                     else
                     {
@@ -330,7 +330,7 @@ else
         {
 
             case 0:
-                jqAlert("בחר שיטת שליפה בבקשה", "Announce"); 
+                $.bootstrapPurr("בחר שיטת שליפה בבקשה");
                 break;
             case 1:
                 var data = {
@@ -360,7 +360,7 @@ else
                 success: function (d) {
                     if(d.Status=="error")
                     {
-                        jqAlert(d.data[0][0], "Announce");
+                        $.bootstrapPurr(d.data[0][0]);
                     }
                     else
                     {
@@ -412,7 +412,7 @@ else
     success: function (d) {
         if(d.Status=="error")
         {
-            jqAlert(d.data[0][0], "Announce");
+            $.bootstrapPurr(d.data[0][0]);
         }
         else
         {
@@ -472,7 +472,7 @@ else
                 data: data,
                 success: function (d) {
               
-                    jqAlert(d, "Announce");
+                    $.bootstrapPurr(d);
                 
                 },
                 error: function (xhr, textStatus, errorThrown) {

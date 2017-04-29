@@ -10,48 +10,49 @@
     <script src="@Url.Content("~/scripts/jquery-1.12.4.js")"></script>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
     <script src="@Url.Content("~/scripts/jquery.signalR-2.1.2.js")"></script>
-   
+
     <script src="@Url.Content("~/scripts/jquery-ui.js")"></script>
     <script src="@Url.Content("~/scripts/jquery.validate.mvc.js")"></script>
 
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/Style/datatables.min.css")" />
-    
-<link rel="stylesheet" href="@Url.Content("~/Style/bootstrap.css")">
+
+    <link rel="stylesheet" href="@Url.Content("~/Style/bootstrap.css")">
     <link rel="stylesheet" href="@Url.Content("~/Style/bootstrap-rtl.css")">
     <link rel="stylesheet" href="@Url.Content("~/Style/dropdown_search.css")">
-<script src="@Url.Content("~/scripts/bootstrap.min.js")"></script>
-   <script src="@Url.Content("~/scripts/jquery.qtip.min.js")"></script>
+    <script src="@Url.Content("~/scripts/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/scripts/jquery.qtip.min.js")"></script>
     <link rel="stylesheet" href="@Url.Content("~/scripts/jquery.qtip.min.css")">
 
- <script>
-     function jqAlert(outputMsg, titleMsg) {
-         if (!outputMsg) return;
 
-         var div = $('<div></div>');
-         div.html(outputMsg).dialog({
-             title: titleMsg,
-             resizable: false,
-             modal: true,
-             buttons: {
-                 "OK": function () {
-                     $(this).dialog("close");
-                 }
-             }
 
-         });
-         if (!titleMsg) div.siblings('.ui-dialog-titlebar').hide();
-     }
- </script>
-
-   <script src="@Url.Content("~/scripts/datatables.min.js")"></script>
+    <script src="@Url.Content("~/scripts/datatables.min.js")"></script>
     <script src="@Url.Content("~/signalr/hubs")"></script>
     <script src="@Url.Content("~/scripts/angular.js")"></script>
-    <script src="@Url.Content("~/scripts/jquery-bootstrap-purr.min.js")"></script>
-    <script src="@Url.Content("~/scripts/chatGen.js")"></script>
+    <script src="@Url.Content("~/scripts/jquery-bootstrap-purr.js")"></script>
+ 
+    <script type="text/javascript">
+        $(function () {
+
+    var notifications = $.connection.notificationsHub;
+    notifications.client.broadcastNotification = function (message) {
+        $.bootstrapPurr(message);
+
+
+    };
+    $.connection.hub.start().done(function () {
+        notifications.server.sendNotification();
+
+    }).fail(function () {
+        alert("Connection failed");
+    });
+
+});</script>
     <script type="text/javascript">
 
        
       
+        
+       
        
         var closable = true;
         jQuery.fn.extend({
