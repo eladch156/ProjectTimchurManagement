@@ -164,18 +164,15 @@
     et=table;
 
 }
+
+<div class="col-sm-12 bg-primary"><h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;הגדר תיחור</h5></div>
+<div class="col-sm-12">&nbsp;</div>
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
         
-            <div class="input-group" id="adv-search">
-                <label class="form-control" style="text-align:center;">
-                ליצירת רשימה לחץ על ▼</label>
-                <div id="search_grop_butts" class="input-group-btn">
-                    <div  id="search_contain_buttns"  class="btn-group" role="group">
-                        <div id="search_contain" class="dropdown dropdown-lg">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-                            <div class="dropdown-menu dropdown-menu-left" role="menu">
+           
                                 <form id="form_search_area" class="form-horizontal" role="form">
                                     
                                         @if (User.IsInRole("Admin"))
@@ -212,18 +209,18 @@
                                                 <div class="form-group">
                                                     <div class="row">
 
-                                                        <div class="col-sm-1">
+                                                        <div class="col-sm-2">
                                                             <label class="control-label" for="sel_unit">יחידה:</label>
 
                                                         </div>
-                                                        <div class="col-sm-5">
+                                                        <div class="col-sm-4">
 
                                                             @Html.DropDownList("D",unitli, new { @id= "sel_unit", @class = "form-control", @disabled = "disabled" })
                                                             </div>
-                                                            <div class="col-sm-1">
+                                                            <div class="col-sm-2">
                                                                 <label class="control-label" for="sel_clust">סל:</label>
                                                             </div>
-                                                            <div class="col-sm-5">
+                                                            <div class="col-sm-4">
                                                                 <select class="form-control" id="sel_clust">
                                                                     <option>אנא בחר מכרז</option>
                                                                 </select>
@@ -242,10 +239,10 @@
 
 
                                                 <div class="row">
-                                                    <div class="col-sm-1">
+                                                    <div class="col-sm-2">
                                                         <label class="control-label" for="sel_auct">מכרז:</label>
                                                     </div>
-                                                    <div class="col-sm-5">
+                                                    <div class="col-sm-4">
                                                         @Html.DropDownList("A", auctionli, "בחר/י ערך", new { @id = "sel_auct", @class = "form-control", @onchange = "javascript:GetVal(this.value);" })
                                                     </div>
                                                 
@@ -263,15 +260,18 @@
 
 </form>
                             </div>
+        <div class="col-md-3"></div>
                         </div>
-                        <button type="button" class="btn btn-primary" onclick="TabRes()"><span class="glyphicon glyphicon-search" aria-hidden="true">&nbsp;</span>שלוף רשימה</button>
-                        <button type="button" class="btn btn-primary" onclick="newEff()"><span class="glyphicon glyphicon-new-window" aria-hidden="true">&nbsp;</span>חדש</button>
+    <div class="row"><div class="col-sm-5"></div><div class="col-sm-4">
+                                                     <button type="button" class="btn btn-primary" onclick="TabRes()"><span class="glyphicon glyphicon-search" aria-hidden="true">&nbsp;</span>שלוף רשימה</button>
+                                                     <button type="button" class="btn btn-primary" onclick="newEff()"><span class="glyphicon glyphicon-new-window" aria-hidden="true">&nbsp;</span>איפוס נתונים</button>
+        </div><div class="col-sm-3"></div></div>
+                     
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+              <div class="col-sm-12">&nbsp;</div>
+
+<div class="col-sm-12 bg-primary"><h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;רשימת תוצאות</h5></div>
+<div class="col-sm-12">&nbsp;</div>
 
 <div style="" id="tab_1">
     <table class="table tabExcel" id="toExcel">

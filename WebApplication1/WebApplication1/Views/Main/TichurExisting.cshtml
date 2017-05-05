@@ -149,28 +149,26 @@ else
         });
 
     }
-    $(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
-        var target = $(e.target).attr("href"); // activated tab
-        if(target=="#menu1")
-        {
-            id = 1;
-            $("#sel_clust").prop('disabled', true);
-            $("#sel_auct").prop('disabled', true);
-        }
-        else if (target=="#menu2")
-        {
-            $("#sel_clust").prop('disabled', false);
-            $("#sel_auct").prop('disabled', false);
-            id = 2;
-
-        }
-        else
-        {
-            $("#sel_clust").prop('disabled', true);
-            $("#sel_auct").prop('disabled', true);
-            id = 0;
-        }
-
+    $(document).ready(function() {
+        $('input[type=radio][name=sopt]').change(function() {
+            if (this.value == '1') {
+                id = 1;
+                $("#sel_clust").prop('disabled', true);
+                $("#sel_auct").prop('disabled', true);
+            }
+            else if (this.value == '2') {
+                $("#sel_clust").prop('disabled', false);
+                $("#sel_auct").prop('disabled', false);
+                id = 2;
+            }
+            else
+            {
+                $("#sel_clust").prop('disabled', true);
+                $("#sel_auct").prop('disabled', true);
+                id = 0;
+            }
+       
+        })
     });
     function newEff()
     {
@@ -487,126 +485,154 @@ else
         
     </script>
 }
+
+
+<div class="col-sm-12 bg-primary"><h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;בחר חיפוש</h5></div>
+<div class="col-sm-12">&nbsp;</div>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-         
-            <div class="input-group" id="adv-search">
-                <label class="form-control" style="text-align:center;">לחיפוש לחץ על ▼ &nbsp;</label>
-                <div id="search_grop_butts" class="input-group-btn">
-                    <div id="search_contain_buttns" class="btn-group" role="group">
-                        <div id="search_contain" class="dropdown dropdown-lg stayopen">
-                            <button type="button" class="btn btn-default dropdown-toggle stayopenbut" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-                            <div class="dropdown-menu dropdown-menu-left" role="menu">
+  
                                 <form id="form_search_area" class="form-horizontal" role="form">
-                                    
+                                    <div class="row col-sm-12">
                                         @if (User.IsInRole("Admin"))
                                         {
-                                            <div class="form-group">
-                                              
-                                                    <div class="col-sm-2">
-                                                        <label class="control-label" for="sel_unit">יחידה:</label>
-                                                    </div>
-                                                    <div class="col-sm-10">
-                                                        @Html.DropDownList("D", unitli, "בחר/י ערך", new { @id = "uni_sel", @class = "form-control" })
-                                                        </div>
-                                                    
+                                            <div class="form-group col-sm-4">
+
+                                                <div class="col-sm-4">
+                                                    <label class="control-label" for="sel_unit">יחידה:</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    @Html.DropDownList("D", unitli, "בחר/י ערך", new { @id = "uni_sel", @class = "form-control" })
+                                                </div>
+
                                             </div>
 
                                         }
                                         else
                                         {
 
-                                            <div class="form-group">
-                                              
-                                                    <div class="col-sm-2">
-                                                        <label class="control-label" for="sel_unit">יחידה:</label>
-                                                    </div>
-                                                    <div class="col-sm-10">
-                                                       @Html.DropDownList("D", unitli, new { @id="uni_sel",@class = "form-control", @disabled = "disabled" })
-                                                    </div>
-                                                
+                                            <div class="form-group col-sm-4">
+
+                                                <div class="col-sm-4">
+                                                    <label class="control-label" for="sel_unit">יחידה:</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    @Html.DropDownList("D", unitli, new { @id = "uni_sel", @class = "form-control", @disabled = "disabled" })
+                                                </div>
+
                                             </div>
                                         }
 
+
+
+                                        <div class="form-group col-sm-4">
+                                            <div class="col-sm-4">
+                                                <label class="control-label" for="sel_auct">מכרז:</label>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownList("A", auctionli, "בחר/י ערך", new { @class = "form-control", @id = "sel_auct", @disabled = "disabled", @onchange = "javascript:GetVal(this.value);" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-sm-4">
+                                            <div class="col-sm-4">
+                                                <label class="control-label" for="sel_clust">סל:</label>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <select class="form-control" disabled="disabled" id="sel_clust">
+                                                    <option value="">אנא בחר מכרז</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                        <div class="form-group">
                                      
 
-                                        <div class="form-group">
-                                            <div class="col-sm-2">
-                                                <label class="control-label" for="sel_auct">מכרז:</label>
-                                                </div>
-                                            <div class="col-sm-10">
-                                               @Html.DropDownList("A", auctionli, "בחר/י ערך", new { @class = "form-control", @id = "sel_auct", @disabled = "disabled", @onchange = "javascript:GetVal(this.value);" })
-                                                </div>
-                                            </div>
-
-                                        <div class="form-group">
-                                            <div class="col-sm-2">
-                                                <label class="control-label" for="sel_clust">סל:</label>
-                                                </div>
-                                            <div class="col-sm-10">
-                                                <select class="form-control" disabled="disabled" id="sel_clust">
-                                                  <option value="">אנא בחר מכרז</option>
-                                                </select>
-                                                </div>
-                                            </div>
-                                        <div class="form-group">
-                                            <ul class="nav nav-tabs">
-                                                <li class="active"><a data-toggle="tab" href="#home">הסבר</a></li>
-                                                <li class=""><a data-toggle="tab" href="#menu1">מס' תיחור</a></li>
-                                                <li class=""><a data-toggle="tab" href="#menu2">תיחורים שרשימת הספקים שלהם נשלפה בתאריכים</a></li>
-                                            </ul>
-
                                             
-                                            <div class="tab-content">
-                                                <div id="home" class="tab-pane fade in active">
-                                                    <h3>חיפוש</h3>
-                                                    <p>בחר על פי מה יבוצע החיפוש על ידי לחיצה על הטאב המתאים</p>
-                                                </div>
-                                                <div id="menu1" class="tab-pane fade">
-                                                    <br />
-                                                    <div class="col-sm-2">
-                                                        <label class="control-label" for="tichur_num">מס' תיחור:</label>
+                                          
+                                               
+                                               
+                                                <div class="row col-sm-12">
+                                                    <div class="row col-sm-3">
+                                                        <label class="control-label">הסבר:</label>
+                                                    </div>
+                                                    <div class="row col-sm-3">
+
+
+                                                        <label class="control-label" for="tichur_num">     &nbsp;   &nbsp;   &nbsp;   &nbsp;   &nbsp;   &nbsp;מס' תיחור:</label>
+
+                                                    </div>
+
+                                                    <div class="row col-sm-6">
+
+                                                        <div class="row col-sm-7">
+                                                            <label class="control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;מ:</label>
                                                         </div>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="tichur_num">
+                                                        <div class="row col-sm-4">
+                                                            <label class="control-label">&nbsp;&nbsp;&nbsp;&nbsp;עד:</label>
                                                         </div>
                                                     </div>
-                                                <div id="menu2" class="tab-pane fade">
-                                                   <br />
-                                                    <div class="row">
-                                                        <div class="form-group col-xs-1">
-                                                            <label class="control-label col-xs-1">מ:</label>
-                                                        </div>
-                                                            <div class="form-group col-xs-5">
-                                                                <input readonly type="text" class="datepickerY form-control col-xs-4" id="datetimepicker1">
+                                                </div>
+                                                        <div class="row col-sm-12">
+                                                            <div class="row col-sm-3">
+                                                                <i>בחר שיטת חיפוש ע"י לחיצה על כפתור הרדיו המתאים</i>
                                                             </div>
-                                                            <div class="form-group col-xs-1">
-                                                                <label class="control-label col-xs-1">עד:</label>
+                                                            <div class="row col-sm-3">
+                                                                <div class="col-sm-1">
+                                                                    <input class="radio" type="radio" name="sopt" value="1">
                                                                 </div>
-                                                                <div class="form-group col-xs-5">
-                                                                    <input readonly type="text" class="datepickerT form-control col-xs-4" id="datetimepicker2">
+                                                                <div class="col-sm-9">
+                                                                    <input type="text" class="form-control" id="tichur_num">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row col-sm-3">
+                                                                <div class="col-sm-1">
+                                                                    <input class="radio" type="radio" name="sopt" value="2">
+                                                                </div>
+                                                                <div class="col-sm-9">
+                                                                    <input readonly type="text" class="datepickerY form-control" id="datetimepicker1">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row col-sm-3">
+                                                                <div class="row col-sm-3">
 
                                                                 </div>
-                                                    </div>
-                                                    </div>
+                                                                <div class="col-sm-9">
+                                                                    <input readonly type="text" class="datepickerT form-control" id="datetimepicker2">
+                                                                </div>
+                                                            </div>
+
+
+
+
+                                                   
+
+                                                </div>
                                         </div>
-                                            </div>
+                                          
 
                                 </form>
                             </div>
                         </div>
-                        <button type="button" onclick="getList()" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true">&nbsp;</span>שלוף רשימה</button>
-                       @if (User.IsInRole("Admin")) {
-                           <button id="canc_tichur" type = "button" disabled="disabled" class="btn btn-primary" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-close" aria-hidden="true">&nbsp;</span>בטל שליפה</button> 
-                       }
-                        <button type="button" onclick="newEff()" class="btn btn-primary"><span class="glyphicon glyphicon-new-window" aria-hidden="true">&nbsp;</span>חדש</button>
-                    </div>
-                </div>
-            </div>
+    <div class="row col-sm-12">
+        <div class="row col-sm-4"></div>
+        <div class="row col-sm-6"><button type="button" onclick="getList()" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true">&nbsp;</span>שלוף רשימה</button>
+@if (User.IsInRole("Admin"))
+            {
+    <button id="canc_tichur" type="button" disabled="disabled" class="btn btn-primary" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-close" aria-hidden="true">&nbsp;</span>בטל שליפה</button>
+}
+<button type="button" onclick="newEff()" class="btn btn-primary"><span class="glyphicon glyphicon-new-window" aria-hidden="true">&nbsp;</span>איפוס נתונים</button></div>
+        <div class="row col-sm-2"></div>
+            
         </div>
     </div>
-</div>
+<div class="col-sm-12">&nbsp;</div>
+
+<div class="col-sm-12 bg-primary"><h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;רשימת תוצאות</h5></div>
+<div class="col-sm-12">&nbsp;</div>
+         
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
