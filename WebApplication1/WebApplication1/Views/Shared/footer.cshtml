@@ -1,58 +1,19 @@
 ﻿<link href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
-<link href="@Url.Content("~/Style/footer.css")" rel="stylesheet">
+
 <!--footer start from here-->
 
 <footer class="col-lg-12">
     <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-sm-6 footerleft ">
-                <div class="logofooter">שייך ל&nbsp;<img src="@Url.Content("~/Images/isreal_sym.png")" style="width:70px;background-color:white" /> בשיתוף &nbsp;<img  style="width:100px;background-color:white" src="@Url.Content("~/Images/dig_isre.jpg")" /></div>
-                <p>שלום, וברוכים הבאים למערכת ניהול מכרזים ושליפות ספקים.
-מערכת זו נועדה להקל על תהליך התיחור ע"י הפקה של רשימת ספקים בעבור הסל הרלוונטי.
-ניתן לנווט באמצעות הלשונית בצד העליון של המסך.
- </p>
-                <p><i class="fa fa-map-pin"></i> כתובת : </p>
-                <p><i class="fa fa-phone"></i> טלפון : +972 9999 999 99</p>
-                <p><i class="fa fa-envelope"></i> מייל : web@gmail.com</p>
-
+        <div class="col-sm-5">
             </div>
-            <div class="col-md-2 col-sm-6 paddingtop-bottom">
-                <h6 class="heading7">ניווט מהיר</h6>
-                <ul class="footer-ul">
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <li><a href="/Main/MangUsers">ניהול משתמשים</a></li>
-                        <li><a href="/Main/MangSuppliers">ניהול ספקים</a></li>
-                            <li><a href="/Main/MangAuctions">ניהול מכרזים</a></li>
-                            <li><a href="/Main/MangClusters">ניהול סלים</a></li>
-                            <li><a href="/Main/MangUnits">ניהול יחידות</a></li>
-                    }
-                    <li><a href="/Main/TichurSuppCreate">יצירת רשימת ספקים לתיחור</a></li>
-                    <li><a href="/Main/TichurExisting">צפייה ברשימות קיימות</a></li>
-                    <li><a data-toggle="modal" data-target="#myModalFaq" href="#"> עזרה</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 col-sm-6 paddingtop-bottom">
-                <h6 class="heading7">חדשות ועדכונים</h6>
-                <div class="post">
-                    <p>האתר במתכונתו הראשונה<span>April 4,2017</span></p>
-                   
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 paddingtop-bottom">
-                <div class="fb-page" data-href="https://www.facebook.com/facebook" data-tabs="timeline" data-height="300" data-small-header="false" style="margin-bottom:15px;" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-                    <div class="fb-xfbml-parse-ignore">
-                        <blockquote cite="https://www.facebook.com/facebook"><a href="https://www.facebook.com/facebook">Facebook</a></blockquote>
-                    </div>
-                </div>
-                <div class="fb-page" data-href="" data-tabs="timeline" data-height="300" data-small-header="false" style="margin-bottom:15px;" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-                    <div class="fb-xfbml-parse-ignore">
-                        <blockquote cite=""><a data-toggle="modal" data-target="#myModalFaq" href="#"> לחץ על הקישור - לעזרה</a></blockquote>
-                    </div>
-                </div>
-            </div>
+        <div class="col-sm-3 ">
+            מיזם בשיתוף ישראל דיגיטלית© 
         </div>
-    </div>
+        <div class="col-sm-4">
+        </div>
+            
+        </div>
+    
 </footer>
 <!--footer start from here-->
 
