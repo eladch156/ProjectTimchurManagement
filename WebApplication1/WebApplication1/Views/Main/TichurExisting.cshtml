@@ -99,6 +99,7 @@ else
     var id = 0;
    
     var last_succ_id = -1;
+
     function FirstReact(str,unit)
     {
        
@@ -447,6 +448,46 @@ else
 
     }
     }
+    $.ajax({
+        type: "POST",
+        url: "@Url.Content("~/Main/GetByTichurAll")" ,
+        content: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function (d) {
+        if(d.Status=="error")
+        {
+            $.bootstrapPurr(d.data[0][0]);
+        }
+        else
+        {
+
+
+            $("#tab_2").css({ "display": "inline", "width": "100%" });
+
+            $("#canc_tichur").prop("disabled", "disabled");
+
+            et2.clear().draw();
+            for (var i = 1; i < d.data.length; i++) {
+                var arr = [];
+                arr.push(i);
+                for (var j = 1; j < d.data[i].length; j++) {
+                    arr.push(d.data[i][j]);
+                }
+                arr.push("<a onclick='FirstReact(\"" + d.data[i][4] + "\",\"" + d.data[i][1] + "\")'>ראה תיחור</a>")
+                et2.row.add(arr).draw();
+
+
+            }
+            $("#filename").html($('#uni_sel option:selected').text() + "-" + "רשימת תיחורים מתאריך" + $('#datetimepicker1').val() + "עד תאריך" + $('#datetimepicker2').val());
+            $("#filename").trigger("click");
+
+
+        }
+    },
+    error: function (xhr, textStatus, errorThrown) {
+        // TODO: Show error
+    }
+    });
 </script>
 @if(User.IsInRole("Admin"))
 {

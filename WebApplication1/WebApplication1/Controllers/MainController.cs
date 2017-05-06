@@ -777,6 +777,29 @@ namespace WebApplication1.Controllers
         [Authorize]
         [HttpPost]
         [AuthRestriections(Name = "/Main/TichurExisting")]
+        public ActionResult GetByTichurAll()
+        {
+            GenModel Res;
+            using (TimchurDatabaseEntities ent = new TimchurDatabaseEntities())
+            {
+                Res = new GenModel();
+                Res.Status = "K";
+                Res.data = new List<string[]>();
+                Res.data.Add(new string[] { "", "", "", "", "", "", "", "", "" });
+                int i = 0;
+                foreach (Tichurim tic in ent.Tichurim)
+                {
+
+                    Res.data.Add(new string[] { i.ToString(), tic.Units.Name, tic.Clusters.Auctions.AuctionNumber, tic.Clusters.Auctions.Name, tic.TichurNumber, tic.Clusters.DisplayNumber.Value.ToString(), tic.Clusters.Name, tic.DateTimeCreated.Value.ToString(), tic.Statuses.Name });
+                    i++;
+
+                }
+            }
+            return Json(Res);
+        }
+        [Authorize]
+        [HttpPost]
+        [AuthRestriections(Name = "/Main/TichurExisting")]
         public ActionResult GetByTichurDates(TEBDData data)
         {
         

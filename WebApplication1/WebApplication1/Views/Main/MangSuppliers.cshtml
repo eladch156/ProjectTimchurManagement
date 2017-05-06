@@ -49,18 +49,6 @@
                 ח.פ.
             </th>
             <th>
-                מספר מכרז
-            </th>
-            <th>
-                שם מכרז
-            </th>
-            <th>
-                מספר סל
-            </th>
-            <th>
-                שם סל
-            </th>
-            <th>
                 איש קשר
             </th>
             <th>
@@ -81,26 +69,21 @@
     <tbody>
         @foreach (Suppliers Elem in Model)
         {
-            foreach(SuppliersClusters scl in Elem.SuppliersClusters)
-            { 
+         
             <tr>
                 <td>@i</td>
                 <td>@Elem.Name</td>
                 <td>@Elem.CompanyNumber</td>
-                <td>@scl.Clusters.Auctions.AuctionNumber</td>
-                <td>@scl.Clusters.Auctions.Name</td>
-                <td>@scl.Clusters.DisplayNumber</td>
-                <td>@scl.Clusters.Name</td>
                 <td>@Elem.ContactName</td>
                 <td>@Elem.EmailAddress</td>
                 <td>@Elem.PhoneNumber</td>
-                <td>@scl.Statuses.Name</td>
+                <td>@Elem.Statuses.Name</td>
                 <td>@Html.ActionLink("ערוך", "EditSupplier", new { id = Elem.ID })</td>
             </tr>
                 {
                     i += 1;
                 }
-            }
+            
         }
     </tbody>
 </table>

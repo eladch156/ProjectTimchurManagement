@@ -31,6 +31,13 @@
     <script src="@Url.Content("~/scripts/jquery-bootstrap-purr.js")"></script>
  
     <script type="text/javascript">
+        $.bootstrapPurr.options.align = 'center';
+        $.bootstrapPurr.options.offset = {
+            amount: 200, // (number)
+            from: 'top' // ('top', 'bottom')
+        };
+        $.bootstrapPurr.options.type = 'danger';
+
         $(function () {
 
     var notifications = $.connection.notificationsHub;
