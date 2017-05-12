@@ -424,6 +424,7 @@
     <Compile Include="Infrastructure\CustomIdErrorAttribu.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Infrastructure\UpdateAndEditProcess.cs" />
+    <Compile Include="Models\AuctionFModel.cs" />
     <Compile Include="Models\GenModel.cs" />
     <Compile Include="Models\RoleModel.cs" />
     <Compile Include="Models\LoginModel.cs" />

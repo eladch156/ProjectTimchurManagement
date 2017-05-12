@@ -261,13 +261,21 @@ namespace WebApplication1.Controllers
         using (TimchurDatabaseEntities entity = new TimchurDatabaseEntities())
         {
             Auctions auc = entity.Auctions.Where(x => x.ID == id).First();
+                List<int?> fl = new List<int?>();
+                AuctionFModel af = new AuctionFModel();
+                af.auction = auc;
+               foreach (Clusters clu in entity.Clusters.Where(x => x.AuctionID==auc.ID))
+                {
+                    fl.Add(clu.ID);
+                }
+                af.cluestrs = fl;
             if (auc == null)
             {
                 return View("EditAuction");
             }
             else
             {
-                return View("EditAuction", auc);
+                return View("EditAuction", af);
             }
 
 
@@ -279,7 +287,7 @@ namespace WebApplication1.Controllers
     [Authorize]
     [AuthRestriections(Name = "/Main/EditOrAddAuction")]
     [HttpPost]
-    public ActionResult EditAuction(Auctions auc)
+    public ActionResult EditAuction(AuctionFModel auc)
     {
 
         if (ModelState.IsValid)
@@ -309,14 +317,14 @@ namespace WebApplication1.Controllers
     [Authorize]
     [AuthRestriections(Name = "/Main/EditOrAddAuction")]
     [HttpPost]
-    public ActionResult AddAuction(Auctions auc)
+    public ActionResult AddAuction(AuctionFModel auc)
     {
 
         if (ModelState.IsValid)
         {
             using (TimchurDatabaseEntities entity = new TimchurDatabaseEntities())
             {
-                int cou = entity.Auctions.Count(x => x.AuctionNumber == auc.AuctionNumber);
+                int cou = entity.Auctions.Count(x => x.AuctionNumber == auc.auction.AuctionNumber);
                 if (cou != 0)
                 {
                     ModelState.AddModelError("Exist", "מכרז בעל מספר זה כבר קיים.");
@@ -339,13 +347,13 @@ namespace WebApplication1.Controllers
     }
     [Authorize]
     [AuthRestriections(Name = "/Main/EditOrAddAuction")]
-    public ActionResult AuctionLoadingScreen(Auctions target)
+    public ActionResult AuctionLoadingScreen(AuctionFModel target)
     {
         return View(target);
     }
     [Authorize]
     [AuthRestriections(Name = "/Main/EditOrAddAuction")]
-    public ActionResult EAuctionLoadingScreen(Auctions target)
+    public ActionResult EAuctionLoadingScreen(AuctionFModel target)
     {
         return View(target);
     }
