@@ -70,7 +70,7 @@ namespace WebApplication1.Controllers
 
                 return Redirect(GetRedirectUrl(model.ReturnUrl));
             }
-            ModelState.AddModelError("", "Invalid username or password");
+            ModelState.AddModelError("FailedLogin", "Invalid username or password");
             return View(model);
         }
         private void Logout()

@@ -1,0 +1,277 @@
+﻿@model WebApplication1.Models.StatsModel
+@using WebApplication1.Database
+@{
+    ViewBag.Title = "סטטיסטיקה - תיחורים";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+    List<SelectListItem> unitli = new List<SelectListItem>();
+    List<SelectListItem> auctionli = new List<SelectListItem>();
+    using (TimchurDatabaseEntities ent = new TimchurDatabaseEntities())
+    {
+
+        foreach (Units un in ent.Units)
+        {
+            unitli.Add(new SelectListItem() { Value = un.ID.ToString(), Text = un.Name, Selected = false });
+        }
+
+
+
+        foreach (Auctions un in ent.Auctions)
+        {
+            if (un.StatusID == 1)
+            {
+                auctionli.Add(new SelectListItem() { Value = un.ID.ToString(), Text = un.Name, Selected = false });
+            }
+        }
+
+
+    }
+    Random rand = new Random();
+}
+@section Code1
+{
+
+}
+
+   
+
+    <script>
+        function GetVal(_auctionId) {
+
+            var procemessage = "<option value='' selected='selected'>המתן....</option>";
+            $("#sel_clust").html(procemessage).show();
+            var url = "/Main/GetCluByAuc/";
+            if (_auctionId == "") {
+                return;
+            }
+            $.ajax({
+                url: url,
+                data: { auctionId: _auctionId },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    var markup = "<option value='' selected='selected'>בחר/י ערך</option>";
+                    for (var x = 0; x < data.length; x++) {
+                        markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>" ;
+                    }
+                    $("#cl_id").html(markup).show();
+                },
+                error: function (reponse) {
+                    alert("error" + reponse);
+                }
+            });
+        }
+       
+
+    </script>
+<style>
+    #grap_canv
+    {
+        width:800px;
+        height:800px;
+        margin-right:270px;
+    }
+</style>
+ @using (Html.BeginHorizontalForm())
+ {
+    <div class="col-sm-offset-4">
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <h4>שגיאות:</h4>
+        }
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-sm-8"></div>
+    <div class="row col-sm-12">
+       
+            <div class="form-group col-sm-4">
+
+                <div class="col-sm-4">
+                    <label class="control-label" for="sel_unit">יחידה:</label>
+                </div>
+                <div class="col-sm-8">
+                    @Html.DropDownListFor(model => Model.ul_id, unitli, "בחר/י ערך", new { @class = "form-control" })
+                </div>
+
+            </div>
+        <div class="form-group col-sm-4">
+            <div class="col-sm-4">
+                <label class="control-label" for="sel_auct">מכרז:</label>
+            </div>
+            <div class="col-sm-8">
+                @Html.DropDownList("A", auctionli, "בחר/י ערך", new { @class = "form-control", @id = "sel_auct", @onchange = "javascript:GetVal(this.value);" })
+            </div>
+        </div>
+
+        <div class="form-group col-sm-4">
+            <div class="col-sm-4">
+                <label class="control-label" for="sel_clust">סל:</label>
+            </div>
+            <div class="col-sm-8">
+                @Html.DropDownListFor(model => Model.cl_id, new List<SelectListItem>(), "בחר/י ערך", new { @class = "form-control", @id = "cl_id" })
+           
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6"></div>
+    <input type="submit" value="שלח" class="btn btn-default" />
+    <br />
+ } 
+
+  
+    <div id="grap_canv">
+        <canvas id="myChart"></canvas>
+        
+@if (Model!=null && Model.SupplierInTichur != null && Model.SupplierName != null && Model.TichurName != null)
+{
+    int sx = 0;
+    int sx2 = 0;
+    <script>
+        var ctx = document.getElementById("myChart");
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            // Boolean - whether or not the chart should be responsive and resize when the browser does.
+            options: {
+                scales: {
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'האם ספק בתיחור(1 כן, 0 לא)'
+                        },
+                        ticks: {
+                            max: 1,
+                            min: 0,
+                            stepSize: 1
+                        }
+                    }],
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'תיחורים שונים לפי סדר הוספה'
+                        }
+                    }]
+                }
+            },
+            responsive: true,
+
+            // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+
+            maintainAspectRatio: true,
+            data:
+              {
+                  labels: [
+                      @foreach(int k in Model.TichurName.Keys)
+            {
+            if(sx==0)
+            {
+                @Html.Raw("\"" + Model.TichurName[k] + "\"");
+                sx++;
+            }
+            else
+            {
+                @Html.Raw(",\"" + Model.TichurName[k] + "\"");
+            }
+
+        }
+                  ],
+                  datasets: [
+                     @foreach (int j in Model.SupplierName.Keys)
+           {
+               String curr = Model.SupplierName[j];
+                if(sx2==0)
+            {
+                 @Html.Raw("{");
+                  @Html.Raw("label:'"+curr+"',")
+                             @Html.Raw("data:[")
+                             int sx3 = 0;
+                             foreach(int y in Model.TichurName.Keys)
+                             {
+                                 if(sx3==0)
+                                 {
+                                     if(Model.SupplierInTichur[y].Contains(j))
+                                     {
+                                         @Html.Raw("1");
+                                     }
+                                     else
+                                     {
+                                         @Html.Raw("0");
+                                     }
+                                     sx3++;
+                                 }
+                                 else
+                                 {
+
+                                     @Html.Raw(", ");
+                                     if (Model.SupplierInTichur[y].Contains(j))
+                                     {
+                                         @Html.Raw("1");
+                                     }
+                                     else
+                                     {
+                                         @Html.Raw("0");
+                                     }
+                                 }
+                             }
+
+                                 @Html.Raw("],");
+                          @Html.Raw("backgroundColor:\"rgba("+rand.Next(0,255)+","+ rand.Next(0, 255) + ","+ rand.Next(0, 255) + ","+ rand.NextDouble() + ")\" }");
+                             sx2++;
+                         }
+                         else
+                         {
+                @Html.Raw(",{");
+                               @Html.Raw("label:'"+curr+"',")
+                             @Html.Raw("data:[")
+                             int sx3 = 0;
+                             foreach(int y in Model.TichurName.Keys)
+                             {
+                                 if(sx3==0)
+                                 {
+                                     if(Model.SupplierInTichur[y].Contains(j))
+                                     {
+                                         @Html.Raw("1");
+                                     }
+                                     else
+                                     {
+                                         @Html.Raw("0");
+                                     }
+                                     sx3++;
+                                 }
+                                 else
+                                 {
+
+                                     @Html.Raw(", ");
+                                     if (Model.SupplierInTichur[y].Contains(j))
+                                     {
+                                         @Html.Raw("1");
+                                     }
+                                     else
+                                     {
+                                         @Html.Raw("0");
+                                     }
+                                 }
+                             }
+
+                                 @Html.Raw("],");
+                             @Html.Raw("backgroundColor:\"rgba("+rand.Next(0,255)+","+ rand.Next(0, 255) + ","+ rand.Next(0, 255) + ","+ rand.NextDouble() + ")\" }");
+            }
+
+           }
+                  ]
+              }
+        });
+
+
+
+
+
+
+    </script>
+}
+
+   
+
+
+
+    </div>
+
+

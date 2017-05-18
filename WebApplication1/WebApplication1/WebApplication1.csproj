@@ -428,6 +428,7 @@
     <Compile Include="Models\GenModel.cs" />
     <Compile Include="Models\RoleModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\StatsModel.cs" />
     <Compile Include="Models\SupplierFModel.cs" />
     <Compile Include="Models\TableModel.cs" />
     <Compile Include="Models\UnitFModel.cs" />
@@ -509,6 +510,7 @@
     <Content Include="Views\Shared\footer.cshtml" />
     <Content Include="Views\Main\Faq.cshtml" />
     <Content Include="scripts\package.json" />
+    <Content Include="Views\Main\Stats.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

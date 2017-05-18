@@ -29,7 +29,7 @@
     <script src="@Url.Content("~/signalr/hubs")"></script>
     <script src="@Url.Content("~/scripts/angular.js")"></script>
     <script src="@Url.Content("~/scripts/jquery-bootstrap-purr.js")"></script>
- 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
     <script type="text/javascript">
         $.bootstrapPurr.options.align = 'center';
         $.bootstrapPurr.options.offset = {
@@ -150,8 +150,11 @@
                             <li><a href="/Main/MangUnits">ניהול יחידות</a></li>
                         </ul>
                     </li>
+                    <li class=""><a href="/Main/Stats">סטטיסטיקה - תיחורים</a></li>
                 }
                 <li class=""><a data-toggle="modal" data-target="#myModalFaq" href="#"> לחץ כאן - לעזרה</a></li>
+
+                                                                    <li><a href="#"><span class="glyphicon glyphicon-globe"></span> <b>מיקום:@ViewBag.Title</b></a></li>
             </ul>
  
             <ul class="nav navbar-nav navbar-right">
@@ -169,7 +172,7 @@
                 }
                 <li><a href="#"><span class="glyphicon glyphicon-user"></span> @name.Value,@job</a></li>
                 <li><a href="/Login/LoginOut"><span class="glyphicon glyphicon-log-out"></span> התנתק</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-globe"></span> @ViewBag.Title</a></li>
+             
             </ul>
         </div>
     </nav>

@@ -1143,5 +1143,64 @@ namespace WebApplication1.Controllers
         {
             return View("Faq");
         }
+        [Authorize]
+        [AuthRestriections(Name = "/Main/Stats")]
+        public ActionResult Stats()
+        {
+            StatsModel mode = new StatsModel();
+            return View(mode);
+        }
+        [HttpPost]
+        [Authorize]
+        [AuthRestriections(Name = "/Main/Stats")]
+        public ActionResult Stats(StatsModel mod)
+        {
+            if(mod.cl_id==null || mod.ul_id==null)
+            {
+                ModelState.AddModelError("Null", "אנא הכנס ערכים");
+                return View();
+            }
+            int u_id = Int32.Parse(mod.ul_id);
+            int c_id = Int32.Parse(mod.cl_id);
+            StatsModel stat = new StatsModel();
+            stat.SupplierInTichur = new SortedDictionary<int, List<int>>();
+            stat.SupplierName = new SortedDictionary<int, string>();
+            stat.TichurName = new SortedDictionary<int, string>();
+            int tn = 0;
+            int sn = 0;
+            using (TimchurDatabaseEntities ent = new TimchurDatabaseEntities())
+            {
+                foreach(Tichurim tic in ent.Tichurim.Where(x => x.ClusterID == c_id && x.UnitID== u_id).OrderBy(m=>m.DateTimeCreated))
+                {
+                    tn++;
+                    stat.TichurName.Add(tn, tic.TichurNumber);
+                    stat.SupplierInTichur[tn] = new List<int>();
+                    foreach(SuppliersTichurim st in tic.SuppliersTichurim)
+                    {
+                        int ckey = -1;
+                        foreach(int tk in stat.SupplierName.Keys)
+                        {
+                            if(stat.SupplierName[tk]==(st.Suppliers.CompanyNumber + "|" + st.Suppliers.Name))
+                            {
+                                ckey=tk;
+                            }
+                        }
+                        if(ckey==-1)
+                        {
+                            stat.SupplierName.Add(sn, (st.Suppliers.CompanyNumber + "|" + st.Suppliers.Name));
+                            ckey = sn;
+                            sn++;
+                        }
+                        stat.SupplierInTichur[tn].Add(ckey);
+                    }
+                }
+                if(tn==0)
+                {
+                    ModelState.AddModelError("Empty", "לא קיימים תחורים תחת היחידה והסל");
+                    return View();
+                }
+            }
+            return View(stat);
+        }
     }
 }
