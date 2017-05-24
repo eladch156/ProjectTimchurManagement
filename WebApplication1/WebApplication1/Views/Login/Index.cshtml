@@ -15,32 +15,42 @@
 
     
 
-    <link rel="stylesheet" href="@Url.Content("~/Style/LoginStyle.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Style/index_style.css")">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,700">
     
         @if (!ViewData.ModelState.IsValid)
         {
           
-            <script> alert(" Invalid Password or Username ");</script>
+            <script> alert(" שם משתמש או סיסמא לא נכונים ");</script>
         }
 
-          
-</head>
+    </head>      
+
 <body>
-    <div id="symbol"><img id="symb_img" src="@Url.Content("/Images/Emblem_of_Israel.svg.png")" /><br /><h3>מערכת לניהול מכרזים</h3></div>
-    <div id="login">
-       
-       @using (Html.BeginForm()) { 
 
-            <span class="fontawesome-user"></span>
-            @Html.EditorFor(model => model.Username)
+        <div class="container">
+            <section id="content">
+                @using (Html.BeginForm())
+                {
+                    <h1><br />מערכת<br /> לניהול מכרזים</h1>
+                    <div>
+                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @placeholder = "שם משתמש" } })
+                    </div>
+                    <div>
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @placeholder = "סיסמא" } })
+                    </div>
+                    <div>
+                        <input type="submit" value="התחבר" />
+                        <a href="#">ישראל דיגיטלית</a>
+                        <a href="#">מדינת ישראל</a>
+                    </div>
+            
+             
+                }
+            </section><!-- content -->
+        </div><!-- container -->
+   
 
-            <span class="fontawesome-lock"></span>
-          @Html.EditorFor(model => model.Password)
-
-            <input type="submit" value="Login">
-        
-       }
-      </div>
+    <script src="js/index.js"></script>
 </body>
 </html>

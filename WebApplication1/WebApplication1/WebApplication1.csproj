@@ -222,6 +222,7 @@
     <Content Include="scripts\Faq_Desc\FAQ_A.xml" />
     <Content Include="scripts\Faq_Desc\FAQ_U.xml" />
     <Content Include="scripts\Faq_Desc\ReadXML.js" />
+    <Content Include="scripts\index.js" />
     <Content Include="scripts\jqmig.js" />
     <Content Include="scripts\jqmig2.js" />
     <Content Include="scripts\jquery.qtip.css" />
@@ -342,6 +343,7 @@
     <Content Include="Style\foot_style.css" />
     <Content Include="Style\MainLayoutStyle.css" />
     <Content Include="Style\LoginStyle.css" />
+    <Content Include="Style\index_style.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

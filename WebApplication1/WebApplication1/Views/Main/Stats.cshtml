@@ -1,7 +1,7 @@
 ﻿@model WebApplication1.Models.StatsModel
 @using WebApplication1.Database
 @{
-    ViewBag.Title = "סטטיסטיקה - תיחורים";
+    ViewBag.Title = "סטטיסטיקה - שליפות";
     Layout = "~/Views/Shared/MainLayout.cshtml";
     List<SelectListItem> unitli = new List<SelectListItem>();
     List<SelectListItem> auctionli = new List<SelectListItem>();
@@ -135,7 +135,7 @@
                     yAxes: [{
                         scaleLabel: {
                             display: true,
-                            labelString: 'האם ספק בתיחור(1 כן, 0 לא)'
+                            labelString: 'האם ספק בשליפה(1 כן, 0 לא)'
                         },
                         ticks: {
                             max: 1,
@@ -146,7 +146,7 @@
                     xAxes: [{
                         scaleLabel: {
                             display: true,
-                            labelString: 'תיחורים שונים לפי סדר הוספה'
+                            labelString: 'שליפות שונות לפי סדר הוספה'
                         }
                     }]
                 }
