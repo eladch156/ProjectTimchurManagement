@@ -81,6 +81,8 @@
         @Html.ValidationSummary(false, "", new { @class = "text-danger" })
     </div>
     <div class="col-sm-8"></div>
+   
+   
     <div class="row col-sm-12">
        
             <div class="form-group col-sm-4">
@@ -116,13 +118,18 @@
     <input type="submit" value="שלח" class="btn btn-default" />
     <br />
  } 
-
+<div class="row col-sm-12">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4"><h4>&nbsp;&nbsp;לחץ על שם ספק בשביל להוסיף/הוריד אותו מהגרף</h4></div>
+    <div class="col-sm-4"></div>
+</div>
   
     <div id="grap_canv">
         <canvas id="myChart"></canvas>
         
-@if (Model!=null && Model.SupplierInTichur != null && Model.SupplierName != null && Model.TichurName != null)
+@if (Model != null && Model.SupplierInTichur != null && Model.SupplierName != null && Model.TichurName != null)
 {
+    
     int sx = 0;
     int sx2 = 0;
     <script>

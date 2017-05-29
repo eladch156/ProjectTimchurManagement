@@ -45,7 +45,7 @@
 <div id="filename" style="display:none;"></div>
 <script language="javascript" type="text/javascript">
     function GetVal(_auctionId) {
-
+        $("#sel_clust").prop("disabled", "");
         var procemessage = "<option value='' selected='selected'>המתן....</option>";
         $("#sel_clust").html(procemessage).show();
         var url = "/Main/GetCluByAuc/";
@@ -94,6 +94,10 @@
            
             return;
         }
+        $('#model_process').modal({
+            backdrop: 'static',
+            keyboard: false
+        });
         $.ajax({
             type: "POST",
             url: "@Url.Content("~/Main/GetTichurProcc")",
@@ -102,6 +106,7 @@
             data: data,
             success: function (d) {
                 if (d.Status == "error") {
+                    $('#model_process').modal('hide');
                     $.bootstrapPurr(d.data[0][0]);
                 }
                 else {
@@ -110,7 +115,7 @@
                  
 
                  
-
+                    $('#model_process').modal('hide');
                     et.clear().draw();
                     for (var i = 0; i < d.data.length; i++) {
                         var arr = [];
@@ -194,7 +199,7 @@
                                                         <label class="control-label" for="sel_clust">סל:</label>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <select class="form-control" id="sel_clust">
+                                                        <select class="form-control" disabled="disabled" id="sel_clust">
                                                             <option>אנא בחר מכרז</option>
                                                         </select>
                                                     </div>
@@ -221,7 +226,7 @@
                                                                 <label class="control-label" for="sel_clust">סל:</label>
                                                             </div>
                                                             <div class="col-sm-4">
-                                                                <select class="form-control" id="sel_clust">
+                                                                <select class="form-control" disabled="disabled" id="sel_clust">
                                                                     <option>אנא בחר מכרז</option>
                                                                 </select>
                                                             </div>
@@ -323,4 +328,19 @@
         </thead>
         <tbody></tbody>
     </table>
+</div>
+<div id="model_process" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">מבצע תהליך, אנא המתן....</h4>
+            </div>
+            <div class="modal-body">
+                <p><img src="@Url.Content("~/Images/loading_icon2.gif")" /></p>
+            </div>
+        </div>
+
+    </div>
 </div>
