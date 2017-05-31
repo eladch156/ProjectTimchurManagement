@@ -294,10 +294,11 @@ else
                             for (var j = 1; j < d.data[i].length; j++) {
                                 arr.push(d.data[i][j]);
                             }
-                            arr.push("<a onclick='FirstReact(\"" + d.data[i][4] + "\",\"" + d.data[i][1] + "\")'>ראה תיחור</a>")
+                            arr.push("<a onclick='FirstReact(\"" + d.data[i][4] + "\",\"" + d.data[i][1] + "\")'>ראה תיחור</a>");
                             et2.row.add(arr).draw();
+                           
 
-
+                          
                         }
                         $("#filename").html($('#uni_sel option:selected').text() + "-" + "רשימת תיחורים מתאריך" + $('#datetimepicker1').val() + "עד תאריך" + $('#datetimepicker2').val());
                         $("#filename").trigger("click");
@@ -430,6 +431,7 @@ else
                 }
                 arr.push("<a onclick='FirstReact(\"" + d.data[i][4] + "\",\"" + d.data[i][1] + "\")'>ראה תיחור</a>")
                 et2.row.add(arr).draw();
+              
 
 
             }
@@ -475,8 +477,7 @@ else
                 }
                 arr.push("<a onclick='FirstReact(\"" + d.data[i][4] + "\",\"" + d.data[i][1] + "\")'>ראה תיחור</a>")
                 et2.row.add(arr).draw();
-
-
+               
             }
             $("#filename").html($('#uni_sel option:selected').text() + "-" + "רשימת תיחורים מתאריך" + $('#datetimepicker1').val() + "עד תאריך" + $('#datetimepicker2').val());
             $("#filename").trigger("click");
@@ -660,7 +661,7 @@ else
                         </div>
     <div class="row col-sm-12">
         <div class="row col-sm-4"></div>
-        <div class="row col-sm-6"><button type="button" onclick="getList()" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true">&nbsp;</span>שלוף רשימה</button>
+        <div class="row col-sm-6"><button type="button" onclick="getList()" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true">&nbsp;</span>צפה ברשימה</button>
 @if (User.IsInRole("Admin"))
             {
     <button id="canc_tichur" type="button" disabled="disabled" class="btn btn-primary" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-close" aria-hidden="true">&nbsp;</span>בטל שליפה</button>

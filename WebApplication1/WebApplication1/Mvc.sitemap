@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+
+  <mvcSiteMapNode title="עמוד ראשי" controller="Main" action="MainIndex">
+    
+  
+ 
+  <mvcSiteMapNode title="ניהול שליפות" clickable="false">
+    <mvcSiteMapNode title="שלוף ספקים" controller="Main" action="TichurSuppCreate" />
+  
+   <mvcSiteMapNode title="צפייה ברשימות קיימות" controller="Main" action="TichurExisting" />
+  </mvcSiteMapNode>
+  <mvcSiteMapNode title="ניהול מערכת" clickable="false">
+    <mvcSiteMapNode title="ניהול משתמשים" controller="Main" action="MangUsers" >
+        <mvcSiteMapNode title="הוסף משתמש" controller="Main" action="AddUser" />
+      <mvcSiteMapNode title="ערוך משתמש" controller="Main" action="EditUser" preservedRouteParameters="id" />
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="ניהול ספקים" controller="Main" action="MangSuppliers" >
+       <mvcSiteMapNode title="הוסף ספק" controller="Main" action="AddSupplier" />
+      <mvcSiteMapNode title="ערוך ספק" controller="Main" action="EditSupplier" preservedRouteParameters="id" />
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="ניהול מכרזים" controller="Main" action="MangAuctions">
+       <mvcSiteMapNode title="הוסף מכרז" controller="Main" action="AddAuction" />
+      <mvcSiteMapNode title="ערוך מכרז" controller="Main" action="EditAuction" preservedRouteParameters="id" />
+    </mvcSiteMapNode>
+   <mvcSiteMapNode title="ניהול סלים" controller="Main" action="MangClusters">
+      <mvcSiteMapNode title="הוסף סל" controller="Main" action="AddCluster" />
+      <mvcSiteMapNode title="ערוך סל" controller="Main" action="EditCluster" preservedRouteParameters="id" />
+     </mvcSiteMapNode>
+   <mvcSiteMapNode title="ניהול יחידות" controller="Main" action="MangUnits">
+      <mvcSiteMapNode title="הוסף יחידה" controller="Main" action="AddUnit" />
+      <mvcSiteMapNode title="ערוך יחידה" controller="Main" action="EditUnit" preservedRouteParameters="id" />
+     </mvcSiteMapNode>
+  </mvcSiteMapNode>   
+    <mvcSiteMapNode title="סטטיסטיקה-שליפות" controller="Main" action="Stats" />
+ 
+ </mvcSiteMapNode>
+ 
+</mvcSiteMap>

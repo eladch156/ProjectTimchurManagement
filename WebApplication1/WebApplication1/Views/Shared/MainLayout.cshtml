@@ -134,7 +134,7 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">ניהול שליפות<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/Main/TichurSuppCreate">יצירת רשימת ספקים לתיחור</a></li>
+                        <li><a href="/Main/TichurSuppCreate">שלוף ספקים</a></li>
                         <li><a href="/Main/TichurExisting">צפייה ברשימות קיימות</a></li>
                     </ul>
                 </li>
@@ -176,6 +176,7 @@
             </ul>
         </div>
     </nav>
+    <div class="col-sm-12 panel panel-default"><div class="panel-body"> @Html.MvcSiteMap().SiteMapPath() </div> </div>
         @RenderBody()
     @RenderPage("footer.cshtml")
      

@@ -27,7 +27,11 @@ namespace WebApplication1.AlgoTimchur
                 Database.Tichurim check = ent.Tichurim.Where(x => x.TichurNumber == input.TichurNumber).FirstOrDefault();
                 if (ent.Tichurim.Where(x => x.TichurNumber == input.TichurNumber).Count() != 0 && check.UnitID == input.UnitID && check.StatusID == 1)
                 {
-                    throw new DuplicateKeyException(check);
+                    throw new Exception("תיחור כבר קיים בתוך המערכת");
+                }
+                if (ent.Clusters.Where(x => x.ID == input.ClusterID).First().SuppliersClusters.Count() < ent.Clusters.Where(x => x.ID == input.ClusterID).First().SuppliersInTichur)
+                {
+                    throw new Exception("אין מספיק ספקים על מנת לבצע תיחור נא שנה בסל את מס' הספקים בתיחור");
                 }
                 TablePullResult res = new TablePullResult();
                 int suppliersRemaining = 0;

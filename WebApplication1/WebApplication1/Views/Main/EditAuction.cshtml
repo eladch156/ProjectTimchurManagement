@@ -92,7 +92,7 @@
     <div class="col-lg-6">
         <h4>&nbsp;&nbsp;&nbsp; ערוך מכרז</h4>
     </div>
-    <div class="col-lg-offset-5 pull-right"><button onclick="ex_co()" class="btn btn-default">ביטול</button></div>
+    <div class="col-lg-offset-5 pull-right"><button onclick="ex_co()" class="btn btn-default">איפוס</button></div>
 
 </div>
 @using (Html.BeginHorizontalForm())
@@ -185,11 +185,11 @@
                                 <th>
                                     @if (Model.cluestrs.Contains(new int?(cli.ID)))
                                     {
-                                        <input type="checkbox" name="Limitions" checked="checked" value="@cli.ID">
+                                        <input type="checkbox" name="cluestrs" checked="checked" value="@cli.ID">
                                     }
                                     else
                                     {
-                                        <input type="checkbox" name="Limitions" value="@cli.ID">
+                                        <input type="checkbox" name="cluestrs" value="@cli.ID">
                                     }
                                 </th>
                                 <th>

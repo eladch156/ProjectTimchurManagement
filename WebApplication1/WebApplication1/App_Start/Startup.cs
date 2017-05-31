@@ -20,7 +20,7 @@ namespace WebApplication1.App_Start
             {
                 AuthenticationType = "ApplicationCookie",
                 LoginPath = new PathString("/Login/Index"),
-                  ExpireTimeSpan = TimeSpan.FromMinutes(3)
+                  ExpireTimeSpan = TimeSpan.FromMinutes(10)
             });
             SingletonCache.Instance();
             // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=316888

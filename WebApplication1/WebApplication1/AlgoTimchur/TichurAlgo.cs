@@ -24,7 +24,7 @@ namespace WebApplication1.AlgoTimchur
                 EndResultTichur res = new EndResultTichur();
                 res.Status = "error";
                 res.data = new List<string[]>();
-                res.data.Add(new string[] { "תיחור כבר קיים בתוך המערכת" });
+                res.data.Add(new string[] { e.Message });
                 Cache.gen_lock.ReleaseMutex();
                 return res;
             }
@@ -83,7 +83,7 @@ namespace WebApplication1.AlgoTimchur
                     suptic.SupplierID = sup_id;
                     suptic.PositionInList = byte.Parse(i.ToString());
                     Suppliers supa = ent2.Suppliers.Where(x => x.ID == sup_id).First();
-                    res2.data.Add(new string[] { i.ToString(),suptic.PositionInList.Value.ToString(),tich.Units.Name,tich.Clusters.Auctions.AuctionNumber, tich.Clusters.Auctions.Name,tich.TichurNumber,tich.Clusters.DisplayNumber.Value.ToString(),tich.Clusters.Name,supa.Name,supa.CompanyNumber,supa.ContactName,supa.EmailAddress,supa.PhoneNumber,tich.DateTimeCreated.ToString() });
+                    res2.data.Add(new string[] { i.ToString(),suptic.PositionInList.Value.ToString(),tich.Units.Name,tich.Clusters.Auctions.AuctionNumber, tich.Clusters.Auctions.Name,tich.TichurNumber,tich.Clusters.DisplayNumber.Value.ToString(),tich.Clusters.Name,supa.Name,supa.CompanyNumber,supa.ContactName,supa.EmailAddress,supa.PhoneNumber,tich.DateTimeCreated.Value.ToString("yyyy:MM:dd:HH:mm:ss") });
                     ent2.SuppliersTichurim.Add(suptic);
                     i++;
 
