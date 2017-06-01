@@ -5,13 +5,22 @@
     Layout = "~/Views/Shared/MainLayout.cshtml";
     List<SelectListItem> unitli = new List<SelectListItem>();
     List<SelectListItem> auctionli = new List<SelectListItem>();
+
     using (TimchurDatabaseEntities ent = new TimchurDatabaseEntities())
     {
+        var my_id = (ent.Users.Where(x => x.IDCardNumber == User.Identity.Name).First().Units.ID.ToString());
         if (User.IsInRole("Admin"))
         {
             foreach (Units un in ent.Units)
             {
-                unitli.Add(new SelectListItem() { Value = un.ID.ToString(), Text = un.Name, Selected = false });
+                if (un.ID.ToString() == my_id)
+                {
+                    unitli.Add(new SelectListItem() { Value = un.ID.ToString(), Text = un.Name, Selected = true });
+                }
+                else
+                {
+                    unitli.Add(new SelectListItem() { Value = un.ID.ToString(), Text = un.Name, Selected = false });
+                }
             }
         }
         else
@@ -41,7 +50,7 @@
         }
     }
 
-    }
+}
 @section Code1
 {
     var texTab1="";
@@ -150,7 +159,8 @@ else
         });
 
     }
-    $(document).ready(function() {
+    $(document).ready(function () {
+
         $('input[type=radio][name=sopt]').change(function() {
             if (this.value == '1') {
                 id = 1;
