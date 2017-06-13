@@ -105,31 +105,14 @@ namespace WebApplication1
             {
                 using (TimchurDatabaseEntities entity = new TimchurDatabaseEntities())
                 {
-                    AuctionFModel curr = ((AuctionFModel)SingletonCache.Instance().Storage[Context.User.Identity.Name]);
-                    if(curr.cluestrs!=null)
-                    { 
-                    foreach(int? num in curr.cluestrs)
-                    {
-                        var original = entity.Clusters.Find(num.Value);
-                        var modded = new Clusters();
-                       
-                        if (original != null)
-                        {
-                            original.AuctionID = curr.auction.ID;
-                          
-                          
-                        }
-
-                      
-                    }
-                    }
-                    entity.Auctions.Add(curr.auction);
+                    Auctions curr = ((Auctions)SingletonCache.Instance().Storage[Context.User.Identity.Name]);
+                    entity.Auctions.Add(curr);
                     entity.SaveChanges();
 
                 }
                 using (TimchurDatabaseEntities entity2 = new TimchurDatabaseEntities())
                 {
-                    string strm = ((AuctionFModel)(SingletonCache.Instance().Storage[Context.User.Identity.Name])).auction.AuctionNumber;
+                    string strm = ((Auctions)(SingletonCache.Instance().Storage[Context.User.Identity.Name])).AuctionNumber;
                     id = entity2.Auctions.Where(x => x.AuctionNumber == strm).First().ID;
                 }
                 SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, מכרז נוסף למערכת";
@@ -161,29 +144,13 @@ namespace WebApplication1
                 using (TimchurDatabaseEntities entity = new TimchurDatabaseEntities())
                 {
 
-                    var original = entity.Auctions.Find(((AuctionFModel)SingletonCache.Instance().Storage[Context.User.Identity.Name]).auction.ID);
+                    var original = entity.Auctions.Find(((Auctions)SingletonCache.Instance().Storage[Context.User.Identity.Name]).ID);
 
                     if (original != null)
                     {
-                        AuctionFModel curr = ((AuctionFModel)SingletonCache.Instance().Storage[Context.User.Identity.Name]);
-                        if(curr.cluestrs!=null)
-                        { 
-                        foreach (int? num in curr.cluestrs)
-                        {
-                            var original2 = entity.Clusters.Find(num.Value);
-                            var modded = new Clusters();
-
-                            if (original2 != null)
-                            {
-                                original2.AuctionID = curr.auction.ID;
-
-
-                            }
-
-
-                        }
-                        }
-                        entity.Entry(original).CurrentValues.SetValues(((AuctionFModel)SingletonCache.Instance().Storage[Context.User.Identity.Name]).auction);
+                        Auctions curr = ((Auctions)SingletonCache.Instance().Storage[Context.User.Identity.Name]);
+                      
+                        entity.Entry(original).CurrentValues.SetValues(((Auctions)SingletonCache.Instance().Storage[Context.User.Identity.Name]));
                         entity.SaveChanges();
                     }
                    
@@ -192,7 +159,7 @@ namespace WebApplication1
                 }
                 using (TimchurDatabaseEntities entity2 = new TimchurDatabaseEntities())
                 {
-                    string strm = ((AuctionFModel)(SingletonCache.Instance().Storage[Context.User.Identity.Name])).auction.AuctionNumber;
+                    string strm = ((Auctions)(SingletonCache.Instance().Storage[Context.User.Identity.Name])).AuctionNumber;
                     id = entity2.Auctions.Where(x => x.AuctionNumber == strm).First().ID;
                 }
                 SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, מכרז עודכן במערכת";
