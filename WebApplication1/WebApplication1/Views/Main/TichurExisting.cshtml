@@ -147,6 +147,7 @@ else
             cache: false,
             type: "POST",
             success: function (data) {
+       
                 var markup = "<option value='' selected='selected'>בחר/י ערך</option>";
                 for (var x = 0; x < data.length; x++) {
                     markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
@@ -184,6 +185,7 @@ else
     function newEff()
     {
         last_succ_id = -1;
+        id = 0;
         $("#form_search_area").trigger('reset');
         $("#datetimepicker1").val("01/01/0001");
         $("#datetimepicker2").val("01/01/0001");

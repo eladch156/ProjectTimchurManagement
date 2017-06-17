@@ -449,6 +449,7 @@
     <Compile Include="Models\GenModel.cs" />
     <Compile Include="Models\RoleModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\SCTSModel.cs" />
     <Compile Include="Models\StatsModel.cs" />
     <Compile Include="Models\SupplierFModel.cs" />
     <Compile Include="Models\TableModel.cs" />
@@ -540,6 +541,7 @@
     <Content Include="Views\Shared\DisplayTemplates\MetaRobotsHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
+    <Content Include="Views\Main\ConSupToAuctions.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

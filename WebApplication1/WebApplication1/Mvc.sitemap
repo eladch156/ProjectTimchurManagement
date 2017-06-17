@@ -13,6 +13,8 @@
    <mvcSiteMapNode title="צפייה ברשימות קיימות" controller="Main" action="TichurExisting" />
   </mvcSiteMapNode>
   <mvcSiteMapNode title="ניהול מערכת" clickable="false">
+    <mvcSiteMapNode title="שיוך סל למכרז" controller="Main" action="ConSupToAuctions" >
+    </mvcSiteMapNode>
     <mvcSiteMapNode title="ניהול משתמשים" controller="Main" action="MangUsers" >
         <mvcSiteMapNode title="הוסף משתמש" controller="Main" action="AddUser" />
       <mvcSiteMapNode title="ערוך משתמש" controller="Main" action="EditUser" preservedRouteParameters="id" />

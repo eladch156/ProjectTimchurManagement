@@ -1195,5 +1195,85 @@ namespace WebApplication1.Controllers
             }
             return View(stat);
         }
+        [Authorize]
+        [AuthRestriections(Name = "/Main/ConSupToAuctions")]
+        public ActionResult GetTableSupToAuctions()
+        {
+            String[][] table=null;
+            using (TimchurDatabaseEntities ent = new TimchurDatabaseEntities())
+            {
+                table = new String[ent.Auctions.Count()+1][];
+
+                List<Clusters> li_cl = ent.Clusters.ToList();
+                List<Auctions> li_al = ent.Auctions.ToList();
+                
+                for (int i=0;i<ent.Auctions.Count()+1;i++)
+                {
+                    table[i] = new String[ent.Clusters.Count() + 1];
+                    for (int j=0;j < ent.Clusters.Count() + 1; j++)
+                    {
+                        
+                        if(i==0 && j==0)
+                        {
+                            table[0][0] = "שם מכרז/שם סל";
+                        }
+                        else if(i==0)
+                        {
+                            table[i][j] = (li_cl.ElementAt(j-1).ID + "<=>" + li_cl.ElementAt(j-1).Name);
+                        }
+                        else if(j==0)
+                        {
+                            table[i][j] = (li_al.ElementAt(i-1).ID + "<=>" + li_al.ElementAt(i-1).Name);
+                        }
+                        else
+                        {
+                            if(li_al.ElementAt(i-1).ID== li_cl.ElementAt(j-1).AuctionID)
+                            {
+                                table[i][j] = "1";
+                            }
+                            else
+                            {
+                                table[i][j] = "0";
+                            }
+                        }
+                        
+                    }
+                  
+                }
+               
+            }
+            if (table == null) return Json("");
+                return Json(table,JsonRequestBehavior.AllowGet);
+        }
+        [Authorize]
+        [AuthRestriections(Name = "/Main/ConSupToAuctions")]
+        public ActionResult ConSupToAuctions()
+        {
+           
+            
+
+            
+            return View();
+        }
+        [HttpPost]
+        [Authorize]
+        [AuthRestriections(Name = "/Main/ConSupToAuctions")]
+        public ActionResult ConnOpSupToAuctions(int auc_id, int clu_id)
+        {
+            Cache.gen_lock.WaitOne();
+            using (TimchurDatabaseEntities ent=new TimchurDatabaseEntities())
+            {
+                var my_clu = ent.Clusters.Where(x => x.ID == clu_id);
+               foreach(Clusters clu in my_clu)
+                {
+                    clu.AuctionID = auc_id;
+                }
+                ent.SaveChanges();
+            }
+
+                Cache.gen_lock.ReleaseMutex();
+            return Json("Finished");
+        }
     }
 }
+

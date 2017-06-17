@@ -32,6 +32,7 @@ namespace WebApplication1.Database
                {"/Main/EditOrAddSupplier" ,"Admin"    },
             { "/Main/TichurCancel" ,"Admin"  },
               { "/Main/Stats" ,"Admin"  },
+                  { "/Main/ConSupToAuctions" ,"Admin"  },
     };
      
     }

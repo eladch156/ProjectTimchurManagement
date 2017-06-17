@@ -1,0 +1,220 @@
+﻿@using WebApplication1.Database
+@{
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "שיוך סל למכרז";
+
+}
+    
+<script>
+    var col_js_regex = "";
+    var row_js_regex = "";
+    var row_page = 0;
+    var row_limit = 4;
+    var col_page = 0;
+    var col_limit = 4;
+    var jcol = col_limit - col_page;
+    var jrow = row_limit - row_page;
+    var size_of_rows = 0;
+    var size_of_cols = 0;
+    var curr_table = 0;
+    function ajax_click(id)
+    {
+        var str = id.substring(1, id.length - 1);
+        var parts = str.split(",");
+        var auction_id = parts[0];
+        var cluster_id = parts[1];
+        var post_data = {
+            auc_id: auction_id,
+            clu_id : cluster_id
+        };
+        $.ajax({
+            url: "/Main/ConnOpSupToAuctions",
+            type: "POST",
+            data : post_data,
+            success: function (result) {
+                $.bootstrapPurr("עודכן שיוך");
+                table_update();
+            }
+        });
+    }
+    function loading()
+    {
+        InitialLoading();
+        $("#main_table").empty();
+        $("#main_table").append("<div class='col-sm-6'></div><div class='col-sm-1'><h3>אנא המתן...</h3></div><div class='col-sm-5'></div>");
+    }
+    function change_row_num(op)
+    {
+        
+        if(op>0)
+        {
+            row_page += jrow;
+            row_limit += jrow;
+            setTable(curr_table);
+        }
+        else
+        {
+            row_page -= jrow;
+            row_limit -= jrow;
+            setTable(curr_table);
+        }
+    }
+    function change_col_num(op) {
+
+        if (op > 0) {
+            col_page += jcol;
+            col_limit += jcol;
+            setTable(curr_table);
+        }
+        else {
+         
+                col_page -= jcol;
+            col_limit -= jcol;
+            setTable(curr_table);
+        }
+    }
+    function CreateRowPaging()
+    {
+        $("#rpbf").prop("disabled", "disabled");
+        $("#rpbp").prop("disabled", "disabled");
+        
+            if (row_limit < curr_table.length)
+                $("#rpbf").prop("disabled", "");
+       
+            if ((row_page) > 0)
+                $("#rpbp").prop("disabled", "");
+        
+    }
+    function CreateColPaging() {
+        $("#cpbf").prop("disabled", "disabled");
+        $("#cpbp").prop("disabled", "disabled");
+        if (col_limit < curr_table[0].length) {
+            $("#cpbf").prop("disabled", "");
+        }
+        if ((col_page)  > 0)
+        {
+            $("#cpbp").prop("disabled", "");
+        }
+    }
+    function table_update()
+    {
+        loading();
+        $.ajax({
+            url: "/Main/GetTableSupToAuctions",
+            type: "GET",
+            success: function (result) {
+                curr_table = result;
+                size_of_cols = curr_table[1].length;
+                size_of_rows = curr_table.length;
+                setTable(curr_table);
+               
+            }
+    });
+    }
+    function setTable(result)
+    {
+        CreateRowPaging();
+        CreateColPaging();
+        var text='<table class="table">'
+        var frow = true;
+        var result2 = [];
+        var t = 0;
+       
+        for (var k = Math.max(1,Math.min(row_page, result.length)); k <Math.min(row_limit, result.length) ; k++)
+        {
+            if (t == 0)
+            {
+                var x = [result[0][0]];
+                result2.push(x);
+                for (var p = Math.max(1, Math.min(col_page, result[k].length)) ; p < Math.min(col_limit, result[k].length) ; p++) {
+                    result2[result2.length - 1].push(result[0][p])
+
+                }
+                t++;
+            }
+            var x = [result[k][0]];
+            result2.push(x);
+            for (var p = Math.max(1, Math.min(col_page, result[k].length)) ; p < Math.min(col_limit, result[k].length ) ; p++)
+            {
+               result2[result2.length-1].push(result[k][p]);
+               
+            }
+        }
+        for (var i = 0; i < result2.length; i++)
+        {
+            if (frow) {
+                frow = false;
+                text+="<thead><tr>"
+                for (var j = 0; j < result2[i].length; j++) {
+                    if (j == 0) {
+                        text += ("<td>" + result[i][j] + "</td>");
+                    }
+                    else {
+
+                        var words= result2[i][j].split("<=>");
+                        text += ("<td>" + words[1] + "</td>");
+                    }
+                }
+                text += "</tr></thead><tbody>"
+            }
+            else {
+                text += "<tr>"
+                for (var j = 0; j < result2[i].length; j++) {
+                    if (result2[i][j]=="1")
+                        text += ("<td><img src='@Url.Content("~/Images/approve.png")'/></td>");
+                    else if (result2[i][j] == "0") {
+                        col = result2[0][j];
+                        row = result2[i][0];
+                        col_nu = col.substring(0, col.indexOf("<=>"));
+                        row_nu = row.substring(0, row.indexOf("<=>"));
+                        text += ("<td> <button onclick='ajax_click(this.id)' id='(" + row_nu + "," + col_nu + ")' type='button'>+</button> </td>");
+                    }
+                    else
+                    {                     
+
+
+                        var words = result2[i][j].split("<=>");
+                        text += ("<td>" + words[1] + "</td>");
+                        
+                    }
+                       
+                }
+                text += "</tr>"
+            }
+        }
+        text += "</tbody></table>";
+        $("#main_table").empty();
+        $("#main_table").append(text);
+    }
+    $(document).ready(function () {
+        loading();
+    });
+    function InitialLoading() {
+        $("#rpbf").prop("disabled", "disabled");
+        $("#rpbp").prop("disabled", "disabled");
+        $("#cpbf").prop("disabled", "disabled");
+        $("#cpbp").prop("disabled", "disabled");
+    }
+    table_update();
+
+
+
+
+</script>
+@section Code1
+{
+    
+}
+<div class="col-sm-12 row" id="search_contain">
+    <div class="col-sm-3" id="bla2">  </div>
+    <div class="col-sm-2" id="search_label"> כלים לחיפוש:שנה קבוצה:</div>
+    <div class="col-sm-2" id="row_pag"> שורה : <button type="button" id="rpbp" onclick="change_row_num(-1)" class="btn btn-default btn-arrow-left">הקודם</button><button onclick="change_row_num(1)" id="rpbf" type="button" class="btn btn-default btn-arrow-right">הבא</button> </div>
+    <div class="col-sm-2" id="col_pag"> עמודה : <button type="button" id="cpbp" onclick="change_col_num(-1)" class="btn btn-default btn-arrow-left">הקודם</button><button id="cpbf" onclick="change_col_num(1)" type="button" class="btn btn-default btn-arrow-right">הבא</button>  </div>
+    <div class="col-sm-3" id="bla1">  </div>
+</div>
+
+<div class="col-sm-12 row" id="main_table"></div>
+
+
+
+
