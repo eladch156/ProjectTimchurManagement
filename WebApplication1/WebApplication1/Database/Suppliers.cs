@@ -29,7 +29,7 @@ namespace WebApplication1.Database
         [Display(Name = "SUPCompanyNumber", ResourceType = typeof(Resources.BasicAno))]
         [RegularExpression("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]", ErrorMessageResourceName = "InvalidCN", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         public string CompanyNumber { get; set; }
-      
+
         public string PhoneNumber { get; set; }
         [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Display(Name = "SUPName", ResourceType = typeof(Resources.BasicAno))]
@@ -41,7 +41,7 @@ namespace WebApplication1.Database
         [Display(Name = "SUPStatusID", ResourceType = typeof(Resources.BasicAno))]
         public Nullable<int> StatusID { get; set; }
         public string EmailAddress { get; set; }
-    
+
         public virtual Statuses Statuses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SuppliersClusters> SuppliersClusters { get; set; }

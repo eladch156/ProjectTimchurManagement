@@ -277,15 +277,15 @@
     <Content Include="scripts\index.html" />
     <Content Include="scripts\angular.min.js.map" />
     <Content Include="scripts\jquery.qtip.min.map" />
+    <Content Include="Mvc.sitemap">
+      <SubType>Designer</SubType>
+    </Content>
     <EntityDeploy Include="Database\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="Database\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
-    <Content Include="Mvc.sitemap">
-      <SubType>Designer</SubType>
     </Content>
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
@@ -542,6 +542,7 @@
     <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
     <Content Include="Views\Main\ConSupToAuctions.cshtml" />
+    <Content Include="Views\Login\ResetPassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

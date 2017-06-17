@@ -33,7 +33,7 @@ namespace WebApplication1.Database
         public Nullable<System.DateTime> DateTimeUpdated { get; set; }
         public Nullable<int> UpdatedUserID { get; set; }
         public string UpdatedComment { get; set; }
-    
+
         public virtual Clusters Clusters { get; set; }
         public virtual Statuses Statuses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

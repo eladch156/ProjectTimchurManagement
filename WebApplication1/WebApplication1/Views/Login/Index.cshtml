@@ -14,8 +14,41 @@
     <title>Login Form</title>
 
     
+    <link rel="stylesheet" href="@Url.Content("~/scripts/jquery-ui.css")">
+    <script src="@Url.Content("~/scripts/jquery-1.12.4.js")"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+    <script src="@Url.Content("~/scripts/jquery.signalR-2.1.2.js")"></script>
+
+    <script src="@Url.Content("~/scripts/jquery-ui.js")"></script>
+    <script src="@Url.Content("~/scripts/jquery.validate.mvc.js")"></script>
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Style/datatables.min.css")" />
+
+    <link rel="stylesheet" href="@Url.Content("~/Style/bootstrap.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Style/bootstrap-rtl.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Style/dropdown_search.css")">
+    <script src="@Url.Content("~/scripts/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/scripts/jquery.qtip.min.js")"></script>
+    <link rel="stylesheet" href="@Url.Content("~/scripts/jquery.qtip.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/scripts/jquery-ui.css")">
+    <script src="@Url.Content("~/scripts/jquery-1.12.4.js")"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+    <script src="@Url.Content("~/scripts/jquery.signalR-2.1.2.js")"></script>
+
+    <script src="@Url.Content("~/scripts/jquery-ui.js")"></script>
+    <script src="@Url.Content("~/scripts/jquery.validate.mvc.js")"></script>
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Style/datatables.min.css")" />
+
+    <link rel="stylesheet" href="@Url.Content("~/Style/bootstrap.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Style/bootstrap-rtl.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Style/dropdown_search.css")">
+    <script src="@Url.Content("~/scripts/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/scripts/jquery.qtip.min.js")"></script>
+    <link rel="stylesheet" href="@Url.Content("~/scripts/jquery.qtip.min.css")">
 
     <link rel="stylesheet" href="@Url.Content("~/Style/index_style.css")">
+ 
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,700">
     
         @if (!ViewData.ModelState.IsValid)
@@ -41,12 +74,13 @@
                     </div>
                     <div>
                         <input type="submit" value="התחבר" />
-                        <a href="http://digitalisrael.consultationzone.com/digil/home">ישראל דיגיטלית</a>
-                        <a href="https://www.mr.gov.il/Pages/HomePage.aspx">מדינת ישראל</a>
+       
+                        
                     </div>
             
              
                 }
+                <button class="btn btn-default" data-toggle="modal" data-target="#myModal">אפס סיסמא</button><br /><br />
             <div id="ca_indi" style="font-size:medium;">Caps Lock is :  </div>
             <br>
             </section><!-- content -->
@@ -54,5 +88,33 @@
    
     
     <script src="@Url.Content("~/scripts/index.js")"></script>
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">איפוס סיסמא</h4>
+                </div>
+                <div class="modal-body">
+                    
+                       
+                       <input type="text" class="form-control" placeholder="אימייל לאיפוס" />
+                       
+             
+                </div>
+                <div class="modal-footer">
+                    <h5>אנא הקלד את האימייל בו השתמש על מנת להרשם, הוראות נוספות ישלחו למייל</h5>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">סגור</button>
+                    <button type="button" class="btn btn-default">שלח</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </body>
 </html>
+
+

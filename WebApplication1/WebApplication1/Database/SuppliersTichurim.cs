@@ -21,7 +21,7 @@ namespace WebApplication1.Database
         public Nullable<int> SupplierID { get; set; }
         public Nullable<int> TichurID { get; set; }
         public Nullable<byte> PositionInList { get; set; }
-    
+
         public virtual Suppliers Suppliers { get; set; }
         public virtual Tichurim Tichurim { get; set; }
     }

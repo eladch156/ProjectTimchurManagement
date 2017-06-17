@@ -16,7 +16,7 @@ namespace WebApplication1.Database
     public partial class TimchurDatabaseEntities : DbContext
     {
         public TimchurDatabaseEntities()
-            : base("name=TimchurDatabaseEntities")
+            : base("name=TimchurDatabaseEntities1")
         {
         }
     

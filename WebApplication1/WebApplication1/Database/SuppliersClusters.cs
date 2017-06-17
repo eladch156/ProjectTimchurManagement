@@ -23,7 +23,7 @@ namespace WebApplication1.Database
         public Nullable<System.DateTime> LastTimeInList { get; set; }
         public Nullable<System.DateTime> FormarLastTimeInList { get; set; }
         public Nullable<int> StatusID { get; set; }
-    
+
         public virtual Clusters Clusters { get; set; }
         public virtual Statuses Statuses { get; set; }
         public virtual Suppliers Suppliers { get; set; }

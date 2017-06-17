@@ -50,7 +50,11 @@ namespace WebApplication1.Database
         [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Display(Name = "USPassword", ResourceType = typeof(Resources.BasicAno))]
         public string Password { get; set; }
-    
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Resources.BasicAno))]
+        [Display(Name = "USEmail", ResourceType = typeof(Resources.BasicAno))]
+        [EmailAddress(ErrorMessageResourceName = "InvalidEmail", ErrorMessageResourceType = typeof(Resources.BasicAno))]
+        public string Email { get; set; }
+
         public virtual Roles Roles { get; set; }
         public virtual Statuses Statuses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

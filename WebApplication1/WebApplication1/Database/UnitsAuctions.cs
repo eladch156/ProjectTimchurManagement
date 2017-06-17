@@ -20,7 +20,7 @@ namespace WebApplication1.Database
         public int ID { get; set; }
         public Nullable<int> UnitID { get; set; }
         public Nullable<int> AuctionID { get; set; }
-    
+
         public virtual Auctions Auctions { get; set; }
         public virtual Units Units { get; set; }
     }

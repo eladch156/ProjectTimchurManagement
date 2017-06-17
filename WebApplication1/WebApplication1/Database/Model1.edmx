@@ -141,6 +141,7 @@
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="10" />
           <Property Name="FullName" Type="nvarchar" MaxLength="50" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Association Name="Auctions_FK1">
           <End Role="Statuses" Type="Self.Statuses" Multiplicity="0..1" />
@@ -777,6 +778,7 @@
           <Property Name="PhoneNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Roles" Relationship="Self.Users_FK2" FromRole="Users" ToRole="Roles" />
           <NavigationProperty Name="Statuses" Relationship="Self.Users_FK1" FromRole="Users" ToRole="Statuses" />
           <NavigationProperty Name="Tichurim" Relationship="Self.Tichurim_FK2" FromRole="Users" ToRole="Tichurim" />
@@ -1109,7 +1111,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="TimchurDatabaseEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="TimchurDatabaseEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Auctions" EntityType="Self.Auctions" />
           <EntitySet Name="Clusters" EntityType="Self.Clusters" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
@@ -1237,7 +1239,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TimchurDatabaseModelStoreContainer" CdmEntityContainer="TimchurDatabaseEntities1">
+        <EntityContainerMapping StorageEntityContainer="TimchurDatabaseModelStoreContainer" CdmEntityContainer="TimchurDatabaseEntities2">
           <EntitySetMapping Name="Auctions">
             <EntityTypeMapping TypeName="TimchurDatabaseModel.Auctions">
               <MappingFragment StoreEntitySet="Auctions">
@@ -1385,6 +1387,7 @@
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

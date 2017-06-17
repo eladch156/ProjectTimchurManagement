@@ -234,4 +234,7 @@
   <data name="Required" xml:space="preserve">
     <value>השדה {0} נדרש, אנא מלא אותו</value>
   </data>
+  <data name="USEmail" xml:space="preserve">
+    <value>אימייל</value>
+  </data>
 </root>

@@ -199,6 +199,19 @@
     </div>
 </td>
 </tr>
+        <tr>
+            <td>@Html.LabelFor(model => model.Email, "אימייל:", new { @class = "control-label" })</td>
+            <td>
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessage("Email", "", new { @class = "text-danger" })
+            </td>
+            <td>
+                <div id="bar" class="mycontent-right">
+                    <p style="font-size:xx-small">הפורמט המתאים הוא ***@Html.Raw("@")***.*** </p>
+
+                </div>
+            </td>
+        </tr>
 <tr>
     <td>@Html.LabelFor(model => model.RoleID, "תפקיד:", new { @class = "control-label" })</td>
     <td>

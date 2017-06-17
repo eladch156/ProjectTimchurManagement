@@ -349,6 +349,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to אימייל.
+        /// </summary>
+        public static string USEmail {
+            get {
+                return ResourceManager.GetString("USEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to שם מלא.
         /// </summary>
         public static string USFullName {

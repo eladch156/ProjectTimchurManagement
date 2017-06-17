@@ -36,7 +36,7 @@ namespace WebApplication1.Database
         [RegularExpression("[0-9][0-9][0-9][0-9]", ErrorMessageResourceName = "NotMarkevaFit", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Display(Name = "UNIMerkavaID", ResourceType = typeof(Resources.BasicAno))]
         public string MerkavaID { get; set; }
-    
+
         public virtual Statuses Statuses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tichurim> Tichurim { get; set; }

@@ -42,7 +42,7 @@ namespace WebApplication1.Database
         [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Display(Name = "CLName", ResourceType = typeof(Resources.BasicAno))]
         public string Name { get; set; }
-    
+
         public virtual Auctions Auctions { get; set; }
         public virtual Statuses Statuses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
