@@ -1,23 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Database;
 using WebApplication1.Infrastructure.AuthAbstract;
 using WebApplication1.Models;
-
-using Microsoft.Owin;
-using System.Security.Claims;
 using System.Web.UI.WebControls;
-using System.IO;
-using System.Web.UI;
-using System.Collections;
 using System.Data;
-using System.Threading;
-using System.Text.RegularExpressions;
 using WebApplication1.AlgoTimchur;
 
+/// <summary>
+/// Controller for the application's primary function.
+/// </summary>
 namespace WebApplication1.Controllers
 {
     public class MainController : Controller
@@ -27,7 +21,6 @@ namespace WebApplication1.Controllers
         [AuthRestriections(Name = "/Main/ApproveMsg")]
         public ActionResult ApproveMsg()
         {
-
             return View();
         }
         // GET: Main
@@ -712,7 +705,7 @@ namespace WebApplication1.Controllers
                 {
                     GenModel failRes = new GenModel();
                     failRes.data = new List<string[]>();
-                    failRes.data.Add(new string[] { "תיחור אינו קיים בתוך השרת (או תחת היחידה הנתונה של המשתמש או שהוכנסה)" });
+                    failRes.data.Add(new string[] { "תיחור אינו קיים ביחידה של המשתמש" });
                     failRes.Status = "error";
                     return Json(failRes); 
                 }
@@ -803,7 +796,6 @@ namespace WebApplication1.Controllers
         [AuthRestriections(Name = "/Main/TichurExisting")]
         public ActionResult GetByTichurDates(TEBDData data)
         {
-        
             DateTime to;
             string[] to_str = data.To.Split('/');
             to = new DateTime(Int32.Parse(to_str[2]), Int32.Parse(to_str[0]), Int32.Parse(to_str[1]));

@@ -7,15 +7,16 @@ using WebApplication1.Database;
 using Microsoft.AspNet.SignalR;
 
 [assembly: OwinStartup(typeof(WebApplication1.App_Start.Startup))]
-
+/// <summary>
+/// Application initialization, specifying configurations regarding
+/// authentication and login expiration.
+/// </summary>
 namespace WebApplication1.App_Start
 {
     public class Startup
     {
         public void Configuration(IAppBuilder app)
         {
-          
-
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = "ApplicationCookie",
