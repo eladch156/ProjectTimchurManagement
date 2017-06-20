@@ -1,23 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Database;
 using WebApplication1.Infrastructure.AuthAbstract;
 using WebApplication1.Models;
-
-using Microsoft.Owin;
-using System.Security.Claims;
 using System.Web.UI.WebControls;
-using System.IO;
-using System.Web.UI;
-using System.Collections;
 using System.Data;
-using System.Threading;
-using System.Text.RegularExpressions;
 using WebApplication1.AlgoTimchur;
 
+/// <summary>
+/// Controller for the application's primary function.
+/// </summary>
 namespace WebApplication1.Controllers
 {
     public class MainController : Controller
@@ -27,7 +21,6 @@ namespace WebApplication1.Controllers
         [AuthRestriections(Name = "/Main/ApproveMsg")]
         public ActionResult ApproveMsg()
         {
-
             return View();
         }
         // GET: Main

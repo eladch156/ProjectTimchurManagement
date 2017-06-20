@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Data;
+﻿using System.Collections.Generic;
+
 
 /***
  * This class is returned as a result of a data-extraction algorithm,

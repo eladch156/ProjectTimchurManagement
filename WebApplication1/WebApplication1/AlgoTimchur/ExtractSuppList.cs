@@ -18,8 +18,12 @@ namespace WebApplication1.AlgoTimchur
 {
     public class ExtractSuppList : PullSuppList
     {
-
-        public TablePullResult TichurAlgorithem(TichurInfo input)
+        /// <summary>
+        /// Extraction algorithm proper.
+        /// </summary>
+        /// <param name="input">The information required for the list extraction.</param>
+        /// <returns>Result of the algorithm dictated above.</returns>
+        public TablePullResult TichurExtract(TichurInfo input)
         {
             using (TimchurDatabaseEntities ent = new TimchurDatabaseEntities())
             {
