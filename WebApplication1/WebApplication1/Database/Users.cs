@@ -10,6 +10,7 @@
 namespace WebApplication1.Database
 {
     using Infrastructure;
+  
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -53,6 +54,7 @@ namespace WebApplication1.Database
         [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Resources.BasicAno))]
         [Display(Name = "USEmail", ResourceType = typeof(Resources.BasicAno))]
         [EmailAddress(ErrorMessageResourceName = "InvalidEmail", ErrorMessageResourceType = typeof(Resources.BasicAno))]
+     
         public string Email { get; set; }
 
         public virtual Roles Roles { get; set; }

@@ -46,11 +46,28 @@
     <script src="@Url.Content("~/scripts/bootstrap.min.js")"></script>
     <script src="@Url.Content("~/scripts/jquery.qtip.min.js")"></script>
     <link rel="stylesheet" href="@Url.Content("~/scripts/jquery.qtip.min.css")">
-
+    <script src="@Url.Content("~/scripts/jquery-bootstrap-purr.js")"></script>
     <link rel="stylesheet" href="@Url.Content("~/Style/index_style.css")">
  
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,700">
-    
+    <script>
+        $( document ).ready(function() {
+        $("#send_email").click(function () {
+            var rq_data={
+                email:$("#send_email_cont").val()
+            }
+            $.ajax({
+                type: "GET",
+                data: rq_data,
+                url: "@Url.Content("~/Login/SendResetEmail")",
+                success: function (d) {
+                    $.bootstrapPurr("אנא וודא שהיינך בודק את תיקיית הספאם,נשלח");
+                }
+
+            });
+        });
+        });
+    </script>
         @if (!ViewData.ModelState.IsValid)
         {
           
@@ -73,14 +90,14 @@
                         @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @placeholder = "סיסמא" } })
                     </div>
                     <div>
-                        <input type="submit" value="התחבר" />
-       
-                        
+                        <input class="btn btn-default" type="submit" value="התחבר" />
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">אפס סיסמא</button>
+                       
                     </div>
             
              
                 }
-                <button class="btn btn-default" data-toggle="modal" data-target="#myModal">אפס סיסמא</button><br /><br />
+                <br />
             <div id="ca_indi" style="font-size:medium;">Caps Lock is :  </div>
             <br>
             </section><!-- content -->
@@ -101,14 +118,14 @@
                 <div class="modal-body">
                     
                        
-                       <input type="text" class="form-control" placeholder="אימייל לאיפוס" />
+                       <input type="text" id="send_email_cont" class="form-control" placeholder="אימייל לאיפוס" />
                        
              
                 </div>
                 <div class="modal-footer">
                     <h5>אנא הקלד את האימייל בו השתמש על מנת להרשם, הוראות נוספות ישלחו למייל</h5>
                     <button type="button" class="btn btn-default" data-dismiss="modal">סגור</button>
-                    <button type="button" class="btn btn-default">שלח</button>
+                    <button type="button" id="send_email" class="btn btn-default">שלח</button>
                 </div>
             </div>
 

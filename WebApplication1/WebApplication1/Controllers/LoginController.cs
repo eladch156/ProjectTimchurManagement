@@ -13,15 +13,112 @@ using WebApplication1.Models;
 using System.Net;
 using System.Web.Security;
 using WebApplication1.Database;
+using System.Collections.Generic;
+using System.Net.Mail;
 
 namespace WebApplication1.Controllers
 {
     [AllowAnonymous]
     public class LoginController : Controller
     {
+        public static Dictionary<String, String> email_key = new Dictionary<String, String>();
         IAuthProvider prov;
         // GET: Login
-      
+        public ActionResult SendResetEmail(string email)
+        {
+            Random rand = new Random();
+            string key = "";
+            int i = 0;
+            for (i = 0; i < 16; i++)
+            {
+                int[] randoms = new int [] { rand.Next(48, 58), rand.Next(65, 91), rand.Next(97, 123) };
+                int rand_indx = rand.Next(0, 3);
+                int curr_byte = randoms[rand_indx];
+                char c = (char)curr_byte;
+                key += c;
+            }
+            var urlBuilder =
+    new System.UriBuilder(Request.Url.AbsoluteUri)
+    {
+        Path = Url.Action("ResetPassword", "Login"),
+        Query = null,
+    };
+
+            Uri uri = urlBuilder.Uri;
+            string url = urlBuilder.ToString();
+            String m = "<a href='"+ url +"?key=" + key + "'>לחץ כאן להמשך איפוס סיסמא</a>";
+            GMailer.GmailUsername = "tichurmanagsys@gmail.com";
+            GMailer.GmailPassword = "Manymany55";
+            var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
+            GMailer mailer = new GMailer();
+            mailer.ToEmail = email;
+            mailer.Subject = "מערכת ניהול מכרזים - איפוס סיסמא";
+            mailer.Body = string.Format(body, "tichurmanagsys@gmail.com", "מערכת לניהול מכרזים, לא להגיב!", m);
+            mailer.IsHtml = true;
+            
+            mailer.Send();
+            bool exist = false;
+            foreach (String s in LoginController.email_key.Keys)
+            {
+                if (s.CompareTo(email) == 0)
+                    exist = true;
+            }
+            if(exist)
+            LoginController.email_key.Remove(email);
+
+            LoginController.email_key.Add(email, key);
+          
+
+ 
+                return Json("Sent",JsonRequestBehavior.AllowGet);
+            
+        }
+
+        [HttpPost]
+        public ActionResult ResetPassword(ResetPassModel mod)
+        {
+           
+            using (TimchurDatabaseEntities ent = new TimchurDatabaseEntities())
+            {
+
+                bool valid = ent.Users.Where(x => x.IDCardNumber == mod.Id && x.Email == mod.Email).Count()>0;
+                bool exist = false;
+                foreach(String s in LoginController.email_key.Keys)
+                {
+                    if (s.CompareTo(mod.Email) == 0)
+                        exist = true;
+                }
+                bool key_email_validation = exist && LoginController.email_key[mod.Email].CompareTo(mod.Key)==0;
+                if(valid && key_email_validation)
+                {
+                    Cache.gen_lock.WaitOne();
+                    var my_use = ent.Users.Where(x => x.IDCardNumber == mod.Id && x.Email == mod.Email);
+                    foreach (Users use in my_use)
+                    {
+                        use.Password = mod.NewPass.ToString();
+                    }
+                    ent.SaveChanges();
+                    Cache.gen_lock.ReleaseMutex();
+                    ModelState.AddModelError("הצליח", "שינוי פרטים הצליח");
+                    return View(mod);
+                }
+                else
+                {
+                    ModelState.AddModelError("שגיאה","פרטים לא נכונים, אנא וודא את השדות ושלח שוב");
+                    return View(mod);
+                }
+            }
+                
+        }
+        public ActionResult ResetPassword(string key)
+        {
+            ResetPassModel mod = new ResetPassModel();
+            mod.Id = "";
+            mod.Key = key;
+            mod.Email = "";
+            mod.NewPass = "";
+            return View(mod);
+        }
         public LoginController(IAuthProvider prove)
         {
 
