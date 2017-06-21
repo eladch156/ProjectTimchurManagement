@@ -3,11 +3,12 @@
 @{
     ViewBag.Title = "סטטיסטיקה - שליפות";
     Layout = "~/Views/Shared/MainLayout.cshtml";
+    List<Suppliers> supp;
     List<SelectListItem> unitli = new List<SelectListItem>();
     List<SelectListItem> auctionli = new List<SelectListItem>();
     using (TimchurDatabaseEntities ent = new TimchurDatabaseEntities())
     {
-
+        supp = ent.Suppliers.ToList();
         foreach (Units un in ent.Units)
         {
             unitli.Add(new SelectListItem() { Value = un.ID.ToString(), Text = un.Name, Selected = false });
@@ -24,12 +25,237 @@
         }
 
 
+
+
     }
     Random rand = new Random();
 }
+<script>
+    Chart.types.Line.extend({
+        // Passing in a name registers this chart in the Chart namespace in the same way
+        name: "MissingLine",
+        initialize: function (data) {
+            var helpers = Chart.helpers;
+            //Declare the extension of the default point, to cater for the options passed in to the constructor
+            this.PointClass = Chart.Point.extend({
+                strokeWidth: this.options.pointDotStrokeWidth,
+                radius: this.options.pointDotRadius,
+                display: this.options.pointDot,
+                hitDetectionRadius: this.options.pointHitDetectionRadius,
+                ctx: this.chart.ctx,
+                inRange: function (mouseX) {
+                    return (Math.pow(mouseX - this.x, 2) < Math.pow(this.radius + this.hitDetectionRadius, 2));
+                }
+            });
+
+            this.datasets = [];
+
+            //Set up tooltip events on the chart
+            if (this.options.showTooltips) {
+                helpers.bindEvents(this, this.options.tooltipEvents, function (evt) {
+                    var activePoints = (evt.type !== 'mouseout') ? this.getPointsAtEvent(evt) : [];
+                    this.eachPoints(function (point) {
+                        point.restore(['fillColor', 'strokeColor']);
+                    });
+                    helpers.each(activePoints, function (activePoint) {
+                        activePoint.fillColor = activePoint.highlightFill;
+                        activePoint.strokeColor = activePoint.highlightStroke;
+                    });
+                    this.showTooltip(activePoints);
+                });
+            }
+
+            //Iterate through each of the datasets, and build this into a property of the chart
+            helpers.each(data.datasets, function (dataset) {
+
+                var datasetObject = {
+                    label: dataset.label || null,
+                    fillColor: dataset.fillColor,
+                    strokeColor: dataset.strokeColor,
+                    pointColor: dataset.pointColor,
+                    pointStrokeColor: dataset.pointStrokeColor,
+                    points: []
+                };
+
+                this.datasets.push(datasetObject);
+
+
+                helpers.each(dataset.data, function (dataPoint, index) {
+                    /**
+                     *
+                     * Check for datapoints that are null
+                     */
+                    if (helpers.isNumber(dataPoint) || dataPoint === null) {
+                        //Add a new point for each piece of data, passing any required data to draw.
+                        datasetObject.points.push(new this.PointClass({
+                            /**
+                             * add ignore field so we can skip them later
+                             *
+                             */
+                            ignore: dataPoint === null,
+                            value: dataPoint,
+                            label: data.labels[index],
+                            datasetLabel: dataset.label,
+                            strokeColor: dataset.pointStrokeColor,
+                            fillColor: dataset.pointColor,
+                            highlightFill: dataset.pointHighlightFill || dataset.pointColor,
+                            highlightStroke: dataset.pointHighlightStroke || dataset.pointStrokeColor
+                        }));
+                    }
+                }, this);
+
+                this.buildScale(data.labels);
+
+
+                this.eachPoints(function (point, index) {
+                    helpers.extend(point, {
+                        x: this.scale.calculateX(index),
+                        y: this.scale.endPoint
+                    });
+                    point.save();
+                }, this);
+
+            }, this);
+
+
+            this.render();
+        },
+
+        draw: function (ease) {
+            var helpers = Chart.helpers;
+            var easingDecimal = ease || 1;
+            this.clear();
+
+            var ctx = this.chart.ctx;
+
+            this.scale.draw(easingDecimal);
+
+
+            helpers.each(this.datasets, function (dataset) {
+
+                //Transition each point first so that the line and point drawing isn't out of sync
+                //We can use this extra loop to calculate the control points of this dataset also in this loop
+
+                helpers.each(dataset.points, function (point, index) {
+                    point.transition({
+                        y: this.scale.calculateY(point.value),
+                        x: this.scale.calculateX(index)
+                    }, easingDecimal);
+
+                }, this);
+
+
+                // Control points need to be calculated in a seperate loop, because we need to know the current x/y of the point
+                // This would cause issues when there is no animation, because the y of the next point would be 0, so beziers would be skewed
+                if (this.options.bezierCurve) {
+                    helpers.each(dataset.points, function (point, index) {
+                        //If we're at the start or end, we don't have a previous/next point
+                        //By setting the tension to 0 here, the curve will transition to straight at the end
+                        if (index === 0) {
+                            point.controlPoints = helpers.splineCurve(point, point, dataset.points[index + 1], 0);
+                        } else if (index >= dataset.points.length - 1) {
+                            point.controlPoints = helpers.splineCurve(dataset.points[index - 1], point, point, 0);
+                        } else {
+                            point.controlPoints = helpers.splineCurve(dataset.points[index - 1], point, dataset.points[index + 1], this.options.bezierCurveTension);
+                        }
+                    }, this);
+                }
+
+
+                //Draw the line between all the points
+                ctx.lineWidth = this.options.datasetStrokeWidth;
+                ctx.strokeStyle = dataset.strokeColor;
+
+
+                var penDown = false;
+                var start = null
+
+                helpers.each(dataset.points, function (point, index) {
+
+                    /**
+                     * no longer draw if the last point was ignore (as we don;t have anything to draw from)
+                     * or if this point is ignore
+                     * or if it's the first
+                     */
+                    if (!point.ignore && !penDown) {
+                        ctx.beginPath();
+                        penDown = true;
+                        start = point;
+                    }
+                    if (index > 0 && !dataset.points[index - 1].ignore && !point.ignore) {
+                        if (this.options.bezierCurve) {
+                            ctx.bezierCurveTo(
+                                dataset.points[index - 1].controlPoints.outer.x,
+                                dataset.points[index - 1].controlPoints.outer.y,
+                                point.controlPoints.inner.x,
+                                point.controlPoints.inner.y,
+                                point.x,
+                                point.y
+                            );
+                        } else {
+                            ctx.lineTo(point.x, point.y);
+                        }
+
+                    } else if (index === 0 || dataset.points[index - 1].ignore) {
+                        ctx.moveTo(point.x, point.y);
+                    }
+
+                    if (((dataset.points.length > index + 1 && dataset.points[index + 1].ignore) ||
+                        dataset.points.length == index + 1) && !point.ignore) {
+                        ctx.stroke();
+
+                        if (this.options.datasetFill) {
+                            ctx.lineTo(point.x, this.scale.endPoint);
+                            ctx.lineTo(start.x, this.scale.endPoint);
+                            ctx.fillStyle = dataset.fillColor;
+                            ctx.closePath();
+                            if (point.x != start.x) {
+                                ctx.fill();
+                            }
+                        }
+                        penDown = false;
+                    }
+
+                }, this);
+
+
+                //Now draw the points over the line
+                //A little inefficient double looping, but better than the line
+                //lagging behind the point positions
+                helpers.each(dataset.points, function (point) {
+                    /**
+                     * don't draw the dot if we are ignoring
+                     */
+                    if (!point.ignore)
+                        point.draw();
+                });
+
+            }, this);
+        }
+    });
+
+
+
+    
+
+</script>
+
+
+
 @section Code1
 {
+        var full="מערכת שליפת ספקים לתיחור – רשימת משתמשים מורשים" + dstr;
+    var table = $('.tabExcel').DataTable({
+    buttons: ['copy', {
+    extend: 'excel',
+    title: full
+    }],
+    "oLanguage": {
+    "sUrl": "//cdn.datatables.net/plug-ins/1.10.13/i18n/Hebrew.json"
+    },
+    "dom": "<'row'<'col-sm-12'tr>><'row'<'col-sm-5'><'col-sm-2'i><'col-sm-5'>><'row'<'col-sm-4'><'col-sm-4'f><'col-sm-4'>><'row'<'col-sm-1'><'col-sm-10'p><'col-sm-1'>>"
 
+    });
 }
 
    
@@ -118,167 +344,115 @@
     <input type="submit" value="שלח" class="btn btn-default" />
     <br />
  } 
-<div class="row col-sm-12">
-    <div class="col-sm-4"></div>
-    <div class="col-sm-4"><h4>&nbsp;&nbsp;לחץ על שם ספק בשביל להוסיף/הוריד אותו מהגרף</h4></div>
-    <div class="col-sm-4"></div>
-</div>
-  
-    <div id="grap_canv">
-        <canvas id="myChart"></canvas>
+
+ 
         
 @if (Model != null && Model.SupplierInTichur != null && Model.SupplierName != null && Model.TichurName != null)
 {
-    
-    int sx = 0;
-    int sx2 = 0;
-    <script>
-        var ctx = document.getElementById("myChart");
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            // Boolean - whether or not the chart should be responsive and resize when the browser does.
-            options: {
-                scales: {
-                    yAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'האם ספק בשליפה(1 כן, 0 לא)'
-                        },
-                        ticks: {
-                            max: 1,
-                            min: 0,
-                            stepSize: 1
-                        }
-                    }],
-                    xAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'שליפות שונות לפי סדר הוספה'
-                        }
-                    }]
-                }
-            },
-            responsive: true,
+    <div class="row col-sm-12">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <canvas id="chart" width="450" height="450"></canvas>
+        </div>
+        <div class="col-sm-4">
+           
+               </div>
+              </div>
+            <div class="row col-sm-12">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                    <table class="table tabExcel">
+                        <thead>
+                            <tr>
+                                <th>
+                                    מספר
+                                </th>
+                                <th>
+                                    מס' תיחור
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (int k in Model.TichurName.Keys)
+                            {
+                                <tr>
+                                    <td>
+                                        @k
+                                    </td>
+                                    <td>
+                                        @Model.TichurName[k]
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    </div>
+                    <div class="col-sm-4"></div>
+                </div>
+    int K1 = 0;
 
-            // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-
-            maintainAspectRatio: true,
-            data:
+                <script>
+                    var ctx = document.getElementById("chart").getContext("2d");
+                    var data = {
+                        labels:
+                             [
+                          @foreach (int k in Model.SupplierName.Keys)
               {
-                  labels: [
-                      @foreach(int k in Model.TichurName.Keys)
-            {
-            if(sx==0)
-            {
-                @Html.Raw("\"" + Model.TichurName[k] + "\"");
-                sx++;
-            }
-            else
-            {
-                @Html.Raw(",\"" + Model.TichurName[k] + "\"");
-            }
 
-        }
-                  ],
-                  datasets: [
-                     @foreach (int j in Model.SupplierName.Keys)
-           {
-               String curr = Model.SupplierName[j];
-                if(sx2==0)
-            {
-                 @Html.Raw("{");
-                  @Html.Raw("label:'"+curr+"',")
-                             @Html.Raw("data:[")
-                             int sx3 = 0;
-                             foreach(int y in Model.TichurName.Keys)
-                             {
-                                 if(sx3==0)
-                                 {
-                                     if(Model.SupplierInTichur[y].Contains(j))
-                                     {
-                                         @Html.Raw("1");
-                                     }
-                                     else
-                                     {
-                                         @Html.Raw("0");
-                                     }
-                                     sx3++;
-                                 }
-                                 else
-                                 {
+                  if (K1 != 0) { @Html.Raw(","); }
+                  @Html.Raw("\'" + Model.SupplierName[k] + "\'\n");
+                  K1++;
 
-                                     @Html.Raw(", ");
-                                     if (Model.SupplierInTichur[y].Contains(j))
-                                     {
-                                         @Html.Raw("1");
-                                     }
-                                     else
-                                     {
-                                         @Html.Raw("0");
-                                     }
-                                 }
-                             }
-
-                                 @Html.Raw("],");
-                          @Html.Raw("backgroundColor:\"rgba("+rand.Next(0,255)+","+ rand.Next(0, 255) + ","+ rand.Next(0, 255) + ","+ rand.NextDouble() + ")\" }");
-                             sx2++;
-                         }
-                         else
-                         {
-                @Html.Raw(",{");
-                               @Html.Raw("label:'"+curr+"',")
-                             @Html.Raw("data:[")
-                             int sx3 = 0;
-                             foreach(int y in Model.TichurName.Keys)
-                             {
-                                 if(sx3==0)
-                                 {
-                                     if(Model.SupplierInTichur[y].Contains(j))
-                                     {
-                                         @Html.Raw("1");
-                                     }
-                                     else
-                                     {
-                                         @Html.Raw("0");
-                                     }
-                                     sx3++;
-                                 }
-                                 else
-                                 {
-
-                                     @Html.Raw(", ");
-                                     if (Model.SupplierInTichur[y].Contains(j))
-                                     {
-                                         @Html.Raw("1");
-                                     }
-                                     else
-                                     {
-                                         @Html.Raw("0");
-                                     }
-                                 }
-                             }
-
-                                 @Html.Raw("],");
-                             @Html.Raw("backgroundColor:\"rgba("+rand.Next(0,255)+","+ rand.Next(0, 255) + ","+ rand.Next(0, 255) + ","+ rand.NextDouble()/50 + ")\" }");
-            }
-
-           }
-                  ]
               }
-        });
+                             ],
+                        datasets: [
+                              @foreach (int j in Model.TichurName.Keys)
+                  {
+
+                      @Html.Raw("{");
+
+
+                      @Html.Raw("label:\"" + j.ToString() + "\",");
+                      int R = rand.Next(0, 255);
+                      int G = rand.Next(0, 255);
+                      int B = rand.Next(0, 255);
+                      @Html.Raw("fillColor: \"rgba("+R.ToString()+ "," + G.ToString() + "," + B.ToString() + ",0.0)\",strokeColor: \"rgba(" + R.ToString() + "," + G.ToString() + "," + B.ToString() + ",1)\",pointColor: \"rgba(" + R.ToString() + "," + G.ToString() + "," + B.ToString() + ",1)\",pointStrokeColor: \"#fff\",pointHighlightFill: \"#fff\",pointHighlightStroke: \"rgba(" + R.ToString() + "," + G.ToString() + "," + B.ToString() + ",1)\",");
+                      @Html.Raw("data:[");
+                      int K2 = 0;
+                      foreach (int k in Model.SupplierName.Keys)
+                      {
+                          if (K2 != 0) { @Html.Raw(","); }
+                          if(Model.SupplierInTichur[j].Contains(k))
+                          {
+                              @Html.Raw(""+j.ToString()+"");
+                          }
+                          else
+                          {
+                              @Html.Raw("null");
+                          }
+                          K2++;
+                      }
+                      @Html.Raw("]},");
+
+
+
+                  }
+
+
+                        ]
+                         ,
+
+
+
+                    };
+                    var myLineChart = new Chart(ctx).MissingLine(data);
+                </script>
+                }
 
 
 
 
 
 
-    </script>
-}
-
-   
-
-
-
-    </div>
 
 

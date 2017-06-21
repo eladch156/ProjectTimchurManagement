@@ -10,7 +10,7 @@ using WebApplication1.Models;
 using WebApplication1.Database;
 using System.Collections.Generic;
 using System.Net.Mail;
-
+using System.Diagnostics;
 /// <summary>
 /// Controller for the login mechanism of the application.
 /// </summary>

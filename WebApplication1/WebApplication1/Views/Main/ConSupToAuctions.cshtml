@@ -4,7 +4,29 @@
     ViewBag.Title = "שיוך סל למכרז";
 
 }
-    
+   <style>
+       div.pager {
+    text-align: center;
+    margin: 1em 0;
+}
+
+div.pager span {
+    display: inline-block;
+    width: 1.8em;
+    height: 1.8em;
+    line-height: 1.8;
+    text-align: center;
+    cursor: pointer;
+    background: #000;
+    color: #fff;
+    margin-right: 0.5em;
+}
+
+div.pager span.active {
+    background: #c00;
+}
+
+   </style>
 <script>
     var col_js_regex = "";
     var row_js_regex = "";
@@ -37,64 +59,41 @@
             }
         });
     }
+    function paginate()
+    {
+        $('table.paginated').each(function() {
+            var currentPage = 0;
+   
+            var numPerPage = 4;
+            var $table = $(this);
+            $table.bind('repaginate', function() {
+                $table.find('tbody tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
+            });
+    
+            $table.trigger('repaginate');
+      
+            var numRows = $table.find('tbody tr').length;
+            var numPages = Math.ceil(numRows / numPerPage);
+            var $pager = $('<div class="col-sm-12 pager"></div>');
+ 
+            for (var page = 0; page < numPages; page++) {
+                $('<span class="page-number"></span>').text(page + 1).bind('click', {
+                    newPage: page
+                }, function(event) {
+                    currentPage = event.data['newPage'];
+                    $table.trigger('repaginate');
+                    $(this).addClass('active').siblings().removeClass('active');
+                }).appendTo($pager).addClass('clickable');
+            }
+       
+            $pager.insertBefore($table).find('span.page-number:first').addClass('active');
+          
+        });
+    }
     function loading()
     {
-        InitialLoading();
         $("#main_table").empty();
         $("#main_table").append("<div class='col-sm-6'></div><div class='col-sm-1'><h3>אנא המתן...</h3></div><div class='col-sm-5'></div>");
-    }
-    function change_row_num(op)
-    {
-        
-        if(op>0)
-        {
-            row_page += jrow;
-            row_limit += jrow;
-            setTable(curr_table);
-        }
-        else
-        {
-            row_page -= jrow;
-            row_limit -= jrow;
-            setTable(curr_table);
-        }
-    }
-    function change_col_num(op) {
-
-        if (op > 0) {
-            col_page += jcol;
-            col_limit += jcol;
-            setTable(curr_table);
-        }
-        else {
-         
-                col_page -= jcol;
-            col_limit -= jcol;
-            setTable(curr_table);
-        }
-    }
-    function CreateRowPaging()
-    {
-        $("#rpbf").prop("disabled", "disabled");
-        $("#rpbp").prop("disabled", "disabled");
-        
-            if (row_limit < curr_table.length)
-                $("#rpbf").prop("disabled", "");
-       
-            if ((row_page) > 0)
-                $("#rpbp").prop("disabled", "");
-        
-    }
-    function CreateColPaging() {
-        $("#cpbf").prop("disabled", "disabled");
-        $("#cpbp").prop("disabled", "disabled");
-        if (col_limit < curr_table[0].length) {
-            $("#cpbf").prop("disabled", "");
-        }
-        if ((col_page)  > 0)
-        {
-            $("#cpbp").prop("disabled", "");
-        }
     }
     function table_update()
     {
@@ -104,8 +103,6 @@
             type: "GET",
             success: function (result) {
                 curr_table = result;
-                size_of_cols = curr_table[1].length;
-                size_of_rows = curr_table.length;
                 setTable(curr_table);
                
             }
@@ -113,45 +110,23 @@
     }
     function setTable(result)
     {
-        CreateRowPaging();
-        CreateColPaging();
-        var text='<table class="table">'
+       
+        var text = '<table class="table paginated">'
         var frow = true;
-        var result2 = [];
         var t = 0;
        
-        for (var k = Math.max(1,Math.min(row_page, result.length)); k <Math.min(row_limit, result.length) ; k++)
-        {
-            if (t == 0)
-            {
-                var x = [result[0][0]];
-                result2.push(x);
-                for (var p = Math.max(1, Math.min(col_page, result[k].length)) ; p < Math.min(col_limit, result[k].length) ; p++) {
-                    result2[result2.length - 1].push(result[0][p])
-
-                }
-                t++;
-            }
-            var x = [result[k][0]];
-            result2.push(x);
-            for (var p = Math.max(1, Math.min(col_page, result[k].length)) ; p < Math.min(col_limit, result[k].length ) ; p++)
-            {
-               result2[result2.length-1].push(result[k][p]);
-               
-            }
-        }
-        for (var i = 0; i < result2.length; i++)
+        for (var i = 0; i < result.length; i++)
         {
             if (frow) {
                 frow = false;
                 text+="<thead><tr>"
-                for (var j = 0; j < result2[i].length; j++) {
+                for (var j = 0; j < result[i].length; j++) {
                     if (j == 0) {
                         text += ("<td>" + result[i][j] + "</td>");
                     }
                     else {
 
-                        var words= result2[i][j].split("<=>");
+                        var words= result[i][j].split("<=>");
                         text += ("<td>" + words[1] + "</td>");
                     }
                 }
@@ -159,12 +134,12 @@
             }
             else {
                 text += "<tr>"
-                for (var j = 0; j < result2[i].length; j++) {
-                    if (result2[i][j]=="1")
+                for (var j = 0; j < result[i].length; j++) {
+                    if (result[i][j]=="1")
                         text += ("<td><img src='@Url.Content("~/Images/approve.png")'/></td>");
-                    else if (result2[i][j] == "0") {
-                        col = result2[0][j];
-                        row = result2[i][0];
+                    else if (result[i][j] == "0") {
+                        col = result[0][j];
+                        row = result[i][0];
                         col_nu = col.substring(0, col.indexOf("<=>"));
                         row_nu = row.substring(0, row.indexOf("<=>"));
                         text += ("<td> <button onclick='ajax_click(this.id)' id='(" + row_nu + "," + col_nu + ")' type='button'>+</button> </td>");
@@ -173,7 +148,7 @@
                     {                     
 
 
-                        var words = result2[i][j].split("<=>");
+                        var words = result[i][j].split("<=>");
                         text += ("<td>" + words[1] + "</td>");
                         
                     }
@@ -185,16 +160,12 @@
         text += "</tbody></table>";
         $("#main_table").empty();
         $("#main_table").append(text);
+        paginate();
     }
     $(document).ready(function () {
         loading();
     });
-    function InitialLoading() {
-        $("#rpbf").prop("disabled", "disabled");
-        $("#rpbp").prop("disabled", "disabled");
-        $("#cpbf").prop("disabled", "disabled");
-        $("#cpbp").prop("disabled", "disabled");
-    }
+   
     table_update();
 
 
@@ -205,13 +176,7 @@
 {
     
 }
-<div class="col-sm-12 row" id="search_contain">
-    <div class="col-sm-3" id="bla2">  </div>
-    <div class="col-sm-2" id="search_label"> כלים לחיפוש:שנה קבוצה:</div>
-    <div class="col-sm-2" id="row_pag"> שורה : <button type="button" id="rpbp" onclick="change_row_num(-1)" class="btn btn-default btn-arrow-left">הקודם</button><button onclick="change_row_num(1)" id="rpbf" type="button" class="btn btn-default btn-arrow-right">הבא</button> </div>
-    <div class="col-sm-2" id="col_pag"> עמודה : <button type="button" id="cpbp" onclick="change_col_num(-1)" class="btn btn-default btn-arrow-left">הקודם</button><button id="cpbf" onclick="change_col_num(1)" type="button" class="btn btn-default btn-arrow-right">הבא</button>  </div>
-    <div class="col-sm-3" id="bla1">  </div>
-</div>
+
 
 <div class="col-sm-12 row" id="main_table"></div>
 
