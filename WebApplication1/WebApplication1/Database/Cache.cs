@@ -8,6 +8,9 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Database
 {
+    /// <summary>
+    /// Class representation of the cache storage; used for data context and authorization. 
+    /// </summary>
     public class Cache
     {
         public Dictionary<string, string> last_msg = new Dictionary<string, string>();
