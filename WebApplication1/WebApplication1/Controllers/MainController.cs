@@ -1038,16 +1038,8 @@ namespace WebApplication1.Controllers
                     }
 
                 }
-
-
-
-
-              
-                    
-              
-
             }
-            return Json("");
+            //return Json("");
         }
         public class TCanData
         {
@@ -1087,6 +1079,7 @@ namespace WebApplication1.Controllers
             catch(Exception e)
             {
                 Cache.gen_lock.ReleaseMutex();
+                System.Diagnostics.Trace.Write(e.ToString());
                 return Json("ביטול תיחור נכשל");
             } 
         }

@@ -36,9 +36,8 @@ namespace WebApplication1
             }
             catch (Exception e)
             {
-                
                 SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, הוספת משתמש נכשלה";
-              
+                System.Diagnostics.Trace.Write(e.ToString());
             }
             SingletonCache.Instance().Storage[Context.User.Identity.Name] = null;
             Cache.gen_lock.ReleaseMutex();
@@ -81,7 +80,7 @@ namespace WebApplication1
             }
             catch (Exception e)
             {
-
+                System.Diagnostics.Trace.Write(e.ToString());
                 SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, עדכון משתמש נכשל";
                
             }
@@ -119,7 +118,7 @@ namespace WebApplication1
             }
             catch (Exception e)
             {
-
+                System.Diagnostics.Trace.Write(e.ToString());
                 SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, הוספת מכרז נכשלה";
                 
             }
@@ -166,7 +165,7 @@ namespace WebApplication1
             }
             catch (Exception e)
             {
-
+                System.Diagnostics.Trace.Write(e.ToString());
                 SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, עדכון מכרז נכשל";
                 
             }
@@ -203,7 +202,7 @@ namespace WebApplication1
             }
             catch (Exception e)
             {
-
+                System.Diagnostics.Trace.Write(e.ToString());
                 SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, הוספת סל נכשלה";
               
             }
@@ -248,7 +247,7 @@ namespace WebApplication1
             }
             catch (Exception e)
             {
-
+                System.Diagnostics.Trace.Write(e.ToString());
                 SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, עדכון סל נכשל";
                 
             }
@@ -298,7 +297,7 @@ namespace WebApplication1
             }
             catch (Exception e)
             {
-
+                System.Diagnostics.Trace.Write(e.ToString());
                 SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, הוספת יחידה נכשלה";
                 
             }
@@ -358,7 +357,7 @@ namespace WebApplication1
             }
             catch (Exception e)
             {
-
+                System.Diagnostics.Trace.Write(e.ToString());
                 SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, עדכון יחידה נכשל במערכת";
                
             }
@@ -420,7 +419,7 @@ namespace WebApplication1
             }
             catch (Exception e)
             {
-
+                System.Diagnostics.Trace.Write(e.ToString());
                 SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, הוספת ספק נכשלה";
 
             }
@@ -504,7 +503,7 @@ namespace WebApplication1
             }
             catch (Exception e)
             {
-
+                System.Diagnostics.Trace.Write(e.ToString());
                 SingletonCache.Instance().last_msg[Context.User.Identity.Name] = "בפעולה האחרונה, עדכון ספק נכשלה במערכת";
 
             }
