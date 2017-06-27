@@ -28,10 +28,12 @@ namespace WebApplication1.Controllers
         [AuthRestriections(Name = "/Main/MainIndex")]
         public ActionResult MainIndex()
         {
-         
-         
             return View();
         }
+        /// <summary>
+        /// GET: Create new supplier page
+        /// </summary>
+        /// <returns>ViewResult of the given page</returns>
         [Authorize]
         [AuthRestriections(Name = "/Main/TichurSuppCreate")]
         public ActionResult TichurSuppCreate()
@@ -40,21 +42,26 @@ namespace WebApplication1.Controllers
             return View();
 
         }
-
+        /// <summary>
+        /// GET: Existing Tichurim
+        /// </summary>
+        /// <returns>ViewResult of the given page</returns>
         [Authorize]
         [AuthRestriections(Name = "/Main/TichurExisting")]
         public ActionResult TichurExisting()
         {
-
             return View();
-
         }
+        /// <summary>
+        /// POST: User management page
+        /// </summary>
+        /// <param name="user">The user to be managed</param>
+        /// <returns>ViewResult of the given page</returns>
         [HttpPost]
         [Authorize]
         [AuthRestriections(Name = "/Main/MangUsers")]
         public ActionResult MangUsers(Users user)
         {
-
             db = new TimchurDatabaseEntities();
             List<Users> li = db.Users.OrderBy(s => s.IDCardNumber).ToList();
 
@@ -64,11 +71,14 @@ namespace WebApplication1.Controllers
             return View(li);
 
         }
+        /// <summary>
+        /// User management page, full list
+        /// </summary>
+        /// <returns>ViewResult of the given page</returns>
         [Authorize]
         [AuthRestriections(Name = "/Main/MangUsers")]
         public ActionResult MangUsers()
         {
-
             db = new TimchurDatabaseEntities();
             List<Users> li = db.Users.OrderBy(s => s.IDCardNumber).ToList();
 
@@ -78,11 +88,14 @@ namespace WebApplication1.Controllers
             return View(li);
 
         }
+        /// <summary>
+        /// Suppliers management page
+        /// </summary>
+        /// <returns>ViewResult of the given page</returns>
         [Authorize]
         [AuthRestriections(Name = "/Main/MangSuppliers")]
         public ActionResult MangSuppliers()
         {
-
             db = new TimchurDatabaseEntities();
             List<Suppliers> li = db.Suppliers.OrderBy(s => s.Name).OrderBy(s=> s.SuppliersClusters.FirstOrDefault().Clusters.Auctions.AuctionNumber).OrderBy(s => s.SuppliersClusters.FirstOrDefault().Clusters.DisplayNumber).ToList();
 
@@ -91,12 +104,14 @@ namespace WebApplication1.Controllers
 
             return View(li);
         }
-
+        /// <summary>
+        /// Auctions management page
+        /// </summary>
+        /// <returns>ViewResult of the given page</returns>
         [Authorize]
         [AuthRestriections(Name = "/Main/MangAuctions")]
         public ActionResult MangAuctions()
         {
-
             db = new TimchurDatabaseEntities();
             List<Auctions> li = db.Auctions.OrderBy(s => s.AuctionNumber).ToList();
 
@@ -106,6 +121,10 @@ namespace WebApplication1.Controllers
             return View(li);
 
         }
+        /// <summary>
+        /// Cluster management page
+        /// </summary>
+        /// <returns>ViewResult of the given page</returns>
         [Authorize]
         [AuthRestriections(Name = "/Main/MangClusters")]
         public ActionResult MangClusters()
@@ -120,6 +139,10 @@ namespace WebApplication1.Controllers
             return View(li);
 
         }
+        /// <summary>
+        /// Units management page
+        /// </summary>
+        /// <returns>ViewResult of the given page</returns>
         [Authorize]
         [AuthRestriections(Name = "/Main/MangUnits")]
         public ActionResult MangUnits()
@@ -134,18 +157,25 @@ namespace WebApplication1.Controllers
             return View(li);
 
         }
+        /// <summary>
+        /// User unauthorized to perform action ViewResult
+        /// </summary>
+        /// <returns>ViewResult of the given page</returns>
         [Authorize]
         [AuthRestriections(Name = "/Main/UnAuthError")]
         public ActionResult UnAuthError()
         {
             return View();
         }
+        /// <summary>
+        /// User edit by ID
+        /// </summary>
+        /// <param name="id">ID of the user at hand.</param>
+        /// <returns>ViewResult of the given page</returns>
         [Authorize]
         [AuthRestriections(Name = "/Main/EditOrAddUser")]
-
         public ActionResult EditUser(int? id)
         {
-          
                 if (id == null)
                 {
                     return View("EditUser");
@@ -162,42 +192,43 @@ namespace WebApplication1.Controllers
                     return View("EditUser",use);
                 }
                 
-
-
             }
         }
-            
-            
+        /// <summary>
+        /// POST: Edit existing user
+        /// </summary>
+        /// <param name="use">The user edited</param>
+        /// <returns>ViewResult of the given page</returns>
         [Authorize]
         [AuthRestriections(Name = "/Main/EditOrAddUser")]
         [HttpPost]
         public ActionResult EditUser(Users use)
         {
-
             if (ModelState.IsValid)
             {
                        SingletonCache.Instance().Storage[User.Identity.Name] = use;
                         return RedirectToAction("EUserLoadingScreen", "Main");
-                   
             }
             else
             {
                 return View(use);
             }
-
-
-
         }
-
+        /// <summary>
+        /// Adds a mew user to the database.
+        /// </summary>
+        /// <returns>ViewResult of the given page.</returns>
         [Authorize]
         [AuthRestriections(Name = "/Main/EditOrAddUser")]
         public ActionResult AddUser()
         {
-
-         
                     return View();
-        
         }
+        /// <summary>
+        /// Adds a mew user to the database.
+        /// </summary>
+        /// <param name="use">The user we wish to add.</param>
+        /// <returns>ViewResult depending on the result of the query.</returns>
         [Authorize]
         [AuthRestriections(Name = "/Main/EditOrAddUser")]
         [HttpPost]
@@ -220,33 +251,43 @@ namespace WebApplication1.Controllers
                         return RedirectToAction("UserLoadingScreen", "Main");
                     }
                 }
-                   
             }
             else
             {
                 return View(use);
             }
-
-
         }
+        /// <summary>
+        /// User creation loading screen
+        /// </summary>
+        /// <param name="target">The user modification which sent the query.</param>
+        /// <returns>The view relevant to the given user.</returns>
         [Authorize]
         [AuthRestriections(Name = "/Main/EditOrAddUser")]
         public ActionResult UserLoadingScreen(Users target)
         {
             return View(target);
         }
+        /// <summary>
+        /// User edit loading screen
+        /// </summary>
+        /// <param name="target">The user modification which sent the query.</param>
+        /// <returns>The view relevant to the given user.</returns>
         [Authorize]
         [AuthRestriections(Name = "/Main/EditOrAddUser")]
         public ActionResult EUserLoadingScreen(Users target)
         {
             return View(target);
         }
-    
-    [Authorize]
+        /// <summary>
+        /// Edit auction view.
+        /// </summary>
+        /// <param name="id">ID of the auction to be edited.</param>
+        /// <returns>ViewResult of the given page.</returns>
+        [Authorize]
     [AuthRestriections(Name = "/Main/EditOrAddAuction")]
     public ActionResult EditAuction(int? id)
     {
-
         if (id == null)
         {
             return View("EditAuction");
@@ -254,7 +295,6 @@ namespace WebApplication1.Controllers
         using (TimchurDatabaseEntities entity = new TimchurDatabaseEntities())
         {
             Auctions auc = entity.Auctions.Where(x => x.ID == id).First();
-             
             if (auc == null)
             {
                 return View("EditAuction");
@@ -263,44 +303,44 @@ namespace WebApplication1.Controllers
             {
                 return View("EditAuction", auc);
             }
-
-
-
         }
     }
-
-
-    [Authorize]
+        /// <summary>
+        /// Edit auction view.
+        /// </summary>
+        /// <param name="auc">Object representation of said auction.</param>
+        /// <returns>ViewResult of the given page.</returns>
+        [Authorize]
     [AuthRestriections(Name = "/Main/EditOrAddAuction")]
     [HttpPost]
     public ActionResult EditAuction(Auctions auc)
     {
-
         if (ModelState.IsValid)
         {
             SingletonCache.Instance().Storage[User.Identity.Name] = auc;
             return RedirectToAction("EAuctionLoadingScreen", "Main");
-
         }
         else
         {
             return View(auc);
         }
-
-
-
     }
-
-    [Authorize]
+        /// <summary>
+        /// Add auction page.
+        /// </summary>
+        /// <returns>ViewResult of the given page.</returns>
+        [Authorize]
     [AuthRestriections(Name = "/Main/EditOrAddAuction")]
     public ActionResult AddAuction()
     {
-
-
         return View();
-
     }
-    [Authorize]
+        /// <summary>
+        /// POST: Add new auction.
+        /// </summary>
+        /// <param name="auc">The auction we wish to add.</param>
+        /// <returns>ViewResult depending of the result of the query..</returns>
+        [Authorize]
     [AuthRestriections(Name = "/Main/EditOrAddAuction")]
     [HttpPost]
     public ActionResult AddAuction(Auctions auc)
@@ -322,32 +362,43 @@ namespace WebApplication1.Controllers
                     return RedirectToAction("AuctionLoadingScreen", "Main");
                 }
             }
-
         }
         else
         {
             return View(auc);
         }
-
-
     }
-    [Authorize]
-    [AuthRestriections(Name = "/Main/EditOrAddAuction")]
-    public ActionResult AuctionLoadingScreen(Auctions target)
-    {
-        return View(target);
-    }
-    [Authorize]
-    [AuthRestriections(Name = "/Main/EditOrAddAuction")]
-    public ActionResult EAuctionLoadingScreen(Auctions target)
-    {
-        return View(target);
-    }
+        /// <summary>
+        /// Auction loading screen view
+        /// </summary>
+        /// <param name="target">The auction sent which directed to the page.</param>
+        /// <returns>ViewResult of the given page.</returns>
+        [Authorize]
+        [AuthRestriections(Name = "/Main/EditOrAddAuction")]
+        public ActionResult AuctionLoadingScreen(Auctions target)
+        {
+            return View(target);
+        }
+        /// <summary>
+        /// Auction edit loading screen view.
+        /// </summary>
+        /// <param name="target">The auction sent which directed to this page.</param>
+        /// <returns>ViewResult of the given page.</returns>
+        [Authorize]
+        [AuthRestriections(Name = "/Main/EditOrAddAuction")]
+        public ActionResult EAuctionLoadingScreen(Auctions target)
+        {
+            return View(target);
+        }
+        /// <summary>
+        /// Edit cluster view.
+        /// </summary>
+        /// <param name="id">ID of the cluster wish to edit.</param>
+        /// <returns>ViewResult of the given page.</returns>
         [Authorize]
         [AuthRestriections(Name = "/Main/EditOrAddCluster")]
         public ActionResult EditCluster(int? id)
         {
-
             if (id == null)
             {
                 return View("EditCluster");
@@ -363,42 +414,29 @@ namespace WebApplication1.Controllers
                 {
                     return View("EditCluster", clu);
                 }
-
-
-
             }
         }
-
 
         [Authorize]
         [AuthRestriections(Name = "/Main/EditOrAddCluster")]
         [HttpPost]
         public ActionResult EditCluster(Clusters clu)
         {
-
             if (ModelState.IsValid)
             {
                 SingletonCache.Instance().Storage[User.Identity.Name] = clu;
                 return RedirectToAction("EClusterLoadingScreen", "Main");
-
             }
             else
             {
                 return View(clu);
             }
-
-
-
         }
-
         [Authorize]
         [AuthRestriections(Name = "/Main/EditOrAddCluster")]
         public ActionResult AddCluster()
         {
-
-
             return View();
-
         }
         [Authorize]
         [AuthRestriections(Name = "/Main/EditOrAddCluster")]
