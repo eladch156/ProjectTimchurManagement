@@ -10,7 +10,7 @@
   <mvcSiteMapNode title="ניהול שליפות" clickable="false">
     <mvcSiteMapNode title="שלוף ספקים" controller="Main" action="TichurSuppCreate" />
   
-   <mvcSiteMapNode title="צפייה ברשימות קיימות" controller="Main" action="TichurExisting" />
+   <mvcSiteMapNode title="צפייה בתיחורים קודמים" controller="Main" action="TichurExisting" />
   </mvcSiteMapNode>
   <mvcSiteMapNode title="ניהול מערכת" clickable="false">
     <mvcSiteMapNode title="שיוך סל למכרז" controller="Main" action="ConSupToAuctions" >
