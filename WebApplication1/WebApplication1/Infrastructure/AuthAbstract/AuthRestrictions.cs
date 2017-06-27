@@ -10,9 +10,17 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Infrastructure.AuthAbstract
 {
-    public class AuthRestriections : AuthorizeAttribute
+    /// <summary>
+    /// Class representation of user authorization management through the singleton cache.
+    /// </summary>
+    public class AuthRestrictions : AuthorizeAttribute
     {
         public string Name { get; set; }
+        /// <summary>
+        /// Checks for authorization to the given request.
+        /// </summary>
+        /// <param name="context">Context checked for authorization.</param>
+        /// <returns>Whether user is authorized or not given the context.</returns>
         protected override bool AuthorizeCore(HttpContextBase context)
         {
             var isAuthorized=base.AuthorizeCore(context);
@@ -20,17 +28,19 @@ namespace WebApplication1.Infrastructure.AuthAbstract
                 return false;
             var claimsIdentity = context.User.Identity as System.Security.Claims.ClaimsIdentity;
             var name = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);
-
             string[] prem_list = SingletonCache.Instance().role_map[Name].Split(',');
             string role= claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Role).Value;
             //redirection to error page in this case
             if (!prem_list.Contains(role))
             {
-               
                 return false; 
             }
             return true;
         }
+        /// <summary>
+        /// Handles a request by an unauthorized source.
+        /// </summary>
+        /// <param name="filterContext">The context checked for authorization.</param>
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
             if (!filterContext.HttpContext.User.Identity.IsAuthenticated)
@@ -43,7 +53,5 @@ namespace WebApplication1.Infrastructure.AuthAbstract
                 RouteValueDictionary(new { controller = "Main", action = "UnAuthError" }));
             }
         }
-
-
     }
 }

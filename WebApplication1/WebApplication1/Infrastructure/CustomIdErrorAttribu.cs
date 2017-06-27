@@ -7,18 +7,26 @@ using WebApplication1.Database;
 
 namespace WebApplication1.Infrastructure
 {
+    /// <summary>
+    /// Result for specific user ID invalidation errors. 
+    /// </summary>
     public class CustomIdErrorAttribu : ValidationAttribute
     {
+        /// <summary>
+        /// Empty constructor.
+        /// </summary>
         public CustomIdErrorAttribu()
         {
           
         }
-
-      
-
+        /// <summary>
+        /// Check for specific user ID conditions.
+        /// </summary>
+        /// <param name="value">the ID card number.</param>
+        /// <param name="validationContext">Context for validation.</param>
+        /// <returns>The validation result of the query.</returns>
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-           
             var IDCardNumber = (string)value;
             if (IDCardNumber == null)
             {

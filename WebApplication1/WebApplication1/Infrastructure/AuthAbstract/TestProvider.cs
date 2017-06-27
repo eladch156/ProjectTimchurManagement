@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
+﻿/*
 namespace WebApplication1.AuthAbstract
 {
+    /// <summary>
+    /// Backdoor login authetication with default user data.
+    /// </summary>
     public class TestProvider : IAuthProvider
     {
+        /// <summary>
+        /// Attempts to login with the default data.
+        /// </summary>
+        /// <param name="Username">Given username.</param>
+        /// <param name="Password">Given password.</param>
+        /// <returns></returns>
         public bool Authenticate(string Username, string Password)
         {
            if(Username.Equals("Admin") && Password.Equals("pass1234"))
@@ -20,4 +25,4 @@ namespace WebApplication1.AuthAbstract
             return false;
         }
     }
-}
+}*/

@@ -14,7 +14,7 @@ namespace WebApplication1.Database
     public class Cache
     {
         public Dictionary<string, string> last_msg = new Dictionary<string, string>();
-       public static Mutex gen_lock=new Mutex();
+        public static Mutex gen_lock=new Mutex();
         public Dictionary<string, Object> Storage = new Dictionary<string, object>();
         public Dictionary<string, string> role_map = new Dictionary<string, string>()
         {

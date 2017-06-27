@@ -18,14 +18,14 @@ namespace WebApplication1.Controllers
     {
         private TimchurDatabaseEntities db = new TimchurDatabaseEntities();
         [Authorize]
-        [AuthRestriections(Name = "/Main/ApproveMsg")]
+        [AuthRestrictions(Name = "/Main/ApproveMsg")]
         public ActionResult ApproveMsg()
         {
             return View();
         }
         // GET: Main
         [Authorize]
-        [AuthRestriections(Name = "/Main/MainIndex")]
+        [AuthRestrictions(Name = "/Main/MainIndex")]
         public ActionResult MainIndex()
         {
             return View();
@@ -35,7 +35,7 @@ namespace WebApplication1.Controllers
         /// </summary>
         /// <returns>ViewResult of the given page</returns>
         [Authorize]
-        [AuthRestriections(Name = "/Main/TichurSuppCreate")]
+        [AuthRestrictions(Name = "/Main/TichurSuppCreate")]
         public ActionResult TichurSuppCreate()
         {
 
@@ -47,7 +47,7 @@ namespace WebApplication1.Controllers
         /// </summary>
         /// <returns>ViewResult of the given page</returns>
         [Authorize]
-        [AuthRestriections(Name = "/Main/TichurExisting")]
+        [AuthRestrictions(Name = "/Main/TichurExisting")]
         public ActionResult TichurExisting()
         {
             return View();
@@ -59,7 +59,7 @@ namespace WebApplication1.Controllers
         /// <returns>ViewResult of the given page</returns>
         [HttpPost]
         [Authorize]
-        [AuthRestriections(Name = "/Main/MangUsers")]
+        [AuthRestrictions(Name = "/Main/MangUsers")]
         public ActionResult MangUsers(Users user)
         {
             db = new TimchurDatabaseEntities();
@@ -76,7 +76,7 @@ namespace WebApplication1.Controllers
         /// </summary>
         /// <returns>ViewResult of the given page</returns>
         [Authorize]
-        [AuthRestriections(Name = "/Main/MangUsers")]
+        [AuthRestrictions(Name = "/Main/MangUsers")]
         public ActionResult MangUsers()
         {
             db = new TimchurDatabaseEntities();
@@ -93,7 +93,7 @@ namespace WebApplication1.Controllers
         /// </summary>
         /// <returns>ViewResult of the given page</returns>
         [Authorize]
-        [AuthRestriections(Name = "/Main/MangSuppliers")]
+        [AuthRestrictions(Name = "/Main/MangSuppliers")]
         public ActionResult MangSuppliers()
         {
             db = new TimchurDatabaseEntities();
@@ -109,7 +109,7 @@ namespace WebApplication1.Controllers
         /// </summary>
         /// <returns>ViewResult of the given page</returns>
         [Authorize]
-        [AuthRestriections(Name = "/Main/MangAuctions")]
+        [AuthRestrictions(Name = "/Main/MangAuctions")]
         public ActionResult MangAuctions()
         {
             db = new TimchurDatabaseEntities();
@@ -126,7 +126,7 @@ namespace WebApplication1.Controllers
         /// </summary>
         /// <returns>ViewResult of the given page</returns>
         [Authorize]
-        [AuthRestriections(Name = "/Main/MangClusters")]
+        [AuthRestrictions(Name = "/Main/MangClusters")]
         public ActionResult MangClusters()
         {
 
@@ -144,7 +144,7 @@ namespace WebApplication1.Controllers
         /// </summary>
         /// <returns>ViewResult of the given page</returns>
         [Authorize]
-        [AuthRestriections(Name = "/Main/MangUnits")]
+        [AuthRestrictions(Name = "/Main/MangUnits")]
         public ActionResult MangUnits()
         {
 
@@ -162,7 +162,7 @@ namespace WebApplication1.Controllers
         /// </summary>
         /// <returns>ViewResult of the given page</returns>
         [Authorize]
-        [AuthRestriections(Name = "/Main/UnAuthError")]
+        [AuthRestrictions(Name = "/Main/UnAuthError")]
         public ActionResult UnAuthError()
         {
             return View();
@@ -173,7 +173,7 @@ namespace WebApplication1.Controllers
         /// <param name="id">ID of the user at hand.</param>
         /// <returns>ViewResult of the given page</returns>
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddUser")]
+        [AuthRestrictions(Name = "/Main/EditOrAddUser")]
         public ActionResult EditUser(int? id)
         {
                 if (id == null)
@@ -200,7 +200,7 @@ namespace WebApplication1.Controllers
         /// <param name="use">The user edited</param>
         /// <returns>ViewResult of the given page</returns>
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddUser")]
+        [AuthRestrictions(Name = "/Main/EditOrAddUser")]
         [HttpPost]
         public ActionResult EditUser(Users use)
         {
@@ -219,7 +219,7 @@ namespace WebApplication1.Controllers
         /// </summary>
         /// <returns>ViewResult of the given page.</returns>
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddUser")]
+        [AuthRestrictions(Name = "/Main/EditOrAddUser")]
         public ActionResult AddUser()
         {
                     return View();
@@ -230,7 +230,7 @@ namespace WebApplication1.Controllers
         /// <param name="use">The user we wish to add.</param>
         /// <returns>ViewResult depending on the result of the query.</returns>
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddUser")]
+        [AuthRestrictions(Name = "/Main/EditOrAddUser")]
         [HttpPost]
         public ActionResult AddUser(Users use)
         {
@@ -263,7 +263,7 @@ namespace WebApplication1.Controllers
         /// <param name="target">The user modification which sent the query.</param>
         /// <returns>The view relevant to the given user.</returns>
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddUser")]
+        [AuthRestrictions(Name = "/Main/EditOrAddUser")]
         public ActionResult UserLoadingScreen(Users target)
         {
             return View(target);
@@ -274,7 +274,7 @@ namespace WebApplication1.Controllers
         /// <param name="target">The user modification which sent the query.</param>
         /// <returns>The view relevant to the given user.</returns>
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddUser")]
+        [AuthRestrictions(Name = "/Main/EditOrAddUser")]
         public ActionResult EUserLoadingScreen(Users target)
         {
             return View(target);
@@ -285,7 +285,7 @@ namespace WebApplication1.Controllers
         /// <param name="id">ID of the auction to be edited.</param>
         /// <returns>ViewResult of the given page.</returns>
         [Authorize]
-    [AuthRestriections(Name = "/Main/EditOrAddAuction")]
+    [AuthRestrictions(Name = "/Main/EditOrAddAuction")]
     public ActionResult EditAuction(int? id)
     {
         if (id == null)
@@ -311,7 +311,7 @@ namespace WebApplication1.Controllers
         /// <param name="auc">Object representation of said auction.</param>
         /// <returns>ViewResult of the given page.</returns>
         [Authorize]
-    [AuthRestriections(Name = "/Main/EditOrAddAuction")]
+    [AuthRestrictions(Name = "/Main/EditOrAddAuction")]
     [HttpPost]
     public ActionResult EditAuction(Auctions auc)
     {
@@ -330,7 +330,7 @@ namespace WebApplication1.Controllers
         /// </summary>
         /// <returns>ViewResult of the given page.</returns>
         [Authorize]
-    [AuthRestriections(Name = "/Main/EditOrAddAuction")]
+    [AuthRestrictions(Name = "/Main/EditOrAddAuction")]
     public ActionResult AddAuction()
     {
         return View();
@@ -341,7 +341,7 @@ namespace WebApplication1.Controllers
         /// <param name="auc">The auction we wish to add.</param>
         /// <returns>ViewResult depending of the result of the query..</returns>
         [Authorize]
-    [AuthRestriections(Name = "/Main/EditOrAddAuction")]
+    [AuthRestrictions(Name = "/Main/EditOrAddAuction")]
     [HttpPost]
     public ActionResult AddAuction(Auctions auc)
     {
@@ -374,7 +374,7 @@ namespace WebApplication1.Controllers
         /// <param name="target">The auction sent which directed to the page.</param>
         /// <returns>ViewResult of the given page.</returns>
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddAuction")]
+        [AuthRestrictions(Name = "/Main/EditOrAddAuction")]
         public ActionResult AuctionLoadingScreen(Auctions target)
         {
             return View(target);
@@ -385,7 +385,7 @@ namespace WebApplication1.Controllers
         /// <param name="target">The auction sent which directed to this page.</param>
         /// <returns>ViewResult of the given page.</returns>
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddAuction")]
+        [AuthRestrictions(Name = "/Main/EditOrAddAuction")]
         public ActionResult EAuctionLoadingScreen(Auctions target)
         {
             return View(target);
@@ -396,7 +396,7 @@ namespace WebApplication1.Controllers
         /// <param name="id">ID of the cluster wish to edit.</param>
         /// <returns>ViewResult of the given page.</returns>
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddCluster")]
+        [AuthRestrictions(Name = "/Main/EditOrAddCluster")]
         public ActionResult EditCluster(int? id)
         {
             if (id == null)
@@ -418,7 +418,7 @@ namespace WebApplication1.Controllers
         }
 
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddCluster")]
+        [AuthRestrictions(Name = "/Main/EditOrAddCluster")]
         [HttpPost]
         public ActionResult EditCluster(Clusters clu)
         {
@@ -433,13 +433,13 @@ namespace WebApplication1.Controllers
             }
         }
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddCluster")]
+        [AuthRestrictions(Name = "/Main/EditOrAddCluster")]
         public ActionResult AddCluster()
         {
             return View();
         }
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddCluster")]
+        [AuthRestrictions(Name = "/Main/EditOrAddCluster")]
         [HttpPost]
         public ActionResult AddCluster(Clusters clu)
         {
@@ -470,19 +470,19 @@ namespace WebApplication1.Controllers
 
         }
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddCluster")]
+        [AuthRestrictions(Name = "/Main/EditOrAddCluster")]
         public ActionResult ClusterLoadingScreen(Clusters target)
         {
             return View(target);
         }
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddCluster")]
+        [AuthRestrictions(Name = "/Main/EditOrAddCluster")]
         public ActionResult EClusterLoadingScreen(Clusters target)
         {
             return View(target);
         }
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddUnit")]
+        [AuthRestrictions(Name = "/Main/EditOrAddUnit")]
         public ActionResult EditUnit(int? id)
         {
 
@@ -518,7 +518,7 @@ namespace WebApplication1.Controllers
 
 
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddUnit")]
+        [AuthRestrictions(Name = "/Main/EditOrAddUnit")]
         [HttpPost]
         public ActionResult EditUnit(UnitFModel uni)
         {
@@ -539,7 +539,7 @@ namespace WebApplication1.Controllers
         }
 
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddUnit")]
+        [AuthRestrictions(Name = "/Main/EditOrAddUnit")]
         public ActionResult AddUnit()
         {
 
@@ -548,7 +548,7 @@ namespace WebApplication1.Controllers
 
         }
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddUnit")]
+        [AuthRestrictions(Name = "/Main/EditOrAddUnit")]
         [HttpPost]
         public ActionResult AddUnit(UnitFModel uni)
         {
@@ -579,19 +579,19 @@ namespace WebApplication1.Controllers
 
         }
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddUnit")]
+        [AuthRestrictions(Name = "/Main/EditOrAddUnit")]
         public ActionResult UnitLoadingScreen(UnitFModel target)
         {
             return View(target);
         }
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddUnit")]
+        [AuthRestrictions(Name = "/Main/EditOrAddUnit")]
         public ActionResult EUnitLoadingScreen(UnitFModel target)
         {
             return View(target);
         }
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddSupplier")]
+        [AuthRestrictions(Name = "/Main/EditOrAddSupplier")]
         public ActionResult EditSupplier(int? id)
         {
 
@@ -630,7 +630,7 @@ namespace WebApplication1.Controllers
 
 
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddSupplier")]
+        [AuthRestrictions(Name = "/Main/EditOrAddSupplier")]
         [HttpPost]
         public ActionResult EditSupplier(SupplierFModel sup)
         {
@@ -651,7 +651,7 @@ namespace WebApplication1.Controllers
         }
 
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddSupplier")]
+        [AuthRestrictions(Name = "/Main/EditOrAddSupplier")]
         public ActionResult AddSupplier()
         {
 
@@ -660,7 +660,7 @@ namespace WebApplication1.Controllers
 
         }
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddSupplier")]
+        [AuthRestrictions(Name = "/Main/EditOrAddSupplier")]
         [HttpPost]
         public ActionResult AddSupplier(SupplierFModel sup)
         {
@@ -691,20 +691,20 @@ namespace WebApplication1.Controllers
 
         }
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddSupplier")]
+        [AuthRestrictions(Name = "/Main/EditOrAddSupplier")]
         public ActionResult SupplierLoadingScreen(SupplierFModel target)
         {
             return View(target);
         }
         [Authorize]
-        [AuthRestriections(Name = "/Main/EditOrAddSupplier")]
+        [AuthRestrictions(Name = "/Main/EditOrAddSupplier")]
         public ActionResult ESupplierLoadingScreen(SupplierFModel target)
         {
             return View(target);
         }
         [Authorize]
         [HttpPost]
-        [AuthRestriections(Name = "/Main/TichurSuppCreate")]
+        [AuthRestrictions(Name = "/Main/TichurSuppCreate")]
         public ActionResult GetCluByAuc(int auctionId)
         {
             using (TimchurDatabaseEntities ent = new TimchurDatabaseEntities())
@@ -726,7 +726,7 @@ namespace WebApplication1.Controllers
         }
         [Authorize]
         [HttpPost]
-        [AuthRestriections(Name = "/Main/TichurExisting")]
+        [AuthRestrictions(Name = "/Main/TichurExisting")]
         public ActionResult GetByTichurNumber(TNData data)
         {
            
@@ -808,7 +808,7 @@ namespace WebApplication1.Controllers
         }
         [Authorize]
         [HttpPost]
-        [AuthRestriections(Name = "/Main/TichurExisting")]
+        [AuthRestrictions(Name = "/Main/TichurExisting")]
         public ActionResult GetByTichurAll()
         {
             GenModel Res;
@@ -831,7 +831,7 @@ namespace WebApplication1.Controllers
         }
         [Authorize]
         [HttpPost]
-        [AuthRestriections(Name = "/Main/TichurExisting")]
+        [AuthRestrictions(Name = "/Main/TichurExisting")]
         public ActionResult GetByTichurDates(TEBDData data)
         {
             DateTime to;
@@ -1086,7 +1086,7 @@ namespace WebApplication1.Controllers
         }
         [Authorize]
         [HttpPost]
-        [AuthRestriections(Name = "/Main/TichurCancel")]
+        [AuthRestrictions(Name = "/Main/TichurCancel")]
         public ActionResult CancelTichur(TCanData can)
         {
             Cache.gen_lock.WaitOne();
@@ -1130,7 +1130,7 @@ namespace WebApplication1.Controllers
         }
         [Authorize]
         [HttpPost]
-        [AuthRestriections(Name = "/Main/TichurSuppCreate")]
+        [AuthRestrictions(Name = "/Main/TichurSuppCreate")]
         public ActionResult GetTichurProcc(TichurNe NI)
         {
             if (NI.unit_id == null || NI.auc_id==null || NI.clu_id==null)
@@ -1154,13 +1154,13 @@ namespace WebApplication1.Controllers
             }
         }
         [Authorize]
-        [AuthRestriections(Name = "/Main/UnAuthError")]
+        [AuthRestrictions(Name = "/Main/UnAuthError")]
         public ActionResult Faq()
         {
             return View("Faq");
         }
         [Authorize]
-        [AuthRestriections(Name = "/Main/Stats")]
+        [AuthRestrictions(Name = "/Main/Stats")]
         public ActionResult Stats()
         {
             StatsModel mode = new StatsModel();
@@ -1168,7 +1168,7 @@ namespace WebApplication1.Controllers
         }
         [HttpPost]
         [Authorize]
-        [AuthRestriections(Name = "/Main/Stats")]
+        [AuthRestrictions(Name = "/Main/Stats")]
         public ActionResult Stats(StatsModel mod)
         {
             if(mod.cl_id==null || mod.ul_id==null)
@@ -1219,7 +1219,7 @@ namespace WebApplication1.Controllers
             return View(stat);
         }
         [Authorize]
-        [AuthRestriections(Name = "/Main/ConSupToAuctions")]
+        [AuthRestrictions(Name = "/Main/ConSupToAuctions")]
         public ActionResult GetTableSupToAuctions()
         {
             String[][] table=null;
@@ -1269,7 +1269,7 @@ namespace WebApplication1.Controllers
                 return Json(table,JsonRequestBehavior.AllowGet);
         }
         [Authorize]
-        [AuthRestriections(Name = "/Main/ConSupToAuctions")]
+        [AuthRestrictions(Name = "/Main/ConSupToAuctions")]
         public ActionResult ConSupToAuctions()
         {
            
@@ -1280,7 +1280,7 @@ namespace WebApplication1.Controllers
         }
         [HttpPost]
         [Authorize]
-        [AuthRestriections(Name = "/Main/ConSupToAuctions")]
+        [AuthRestrictions(Name = "/Main/ConSupToAuctions")]
         public ActionResult ConnOpSupToAuctions(int auc_id, int clu_id)
         {
             Cache.gen_lock.WaitOne();

@@ -390,6 +390,7 @@
     <Compile Include="Database\Clusters.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\Database.cs" />
     <Compile Include="Database\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -440,10 +441,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="GenHorizForm.cs" />
-    <Compile Include="Infrastructure\AuthAbstract\AuthRestriections.cs" />
+    <Compile Include="Infrastructure\AuthAbstract\AuthRestrictions.cs" />
     <Compile Include="Infrastructure\AuthAbstract\DatabaseProvider.cs" />
     <Compile Include="Infrastructure\AuthAbstract\IAuthProvider.cs" />
-    <Compile Include="Infrastructure\AuthAbstract\TestProvider.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Global.asax.cs">

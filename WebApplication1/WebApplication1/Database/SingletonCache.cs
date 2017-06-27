@@ -6,17 +6,17 @@
     public class SingletonCache
     {
         private static Cache _instance;
-        // Constructor is 'protected'
-        protected SingletonCache() 
+        // Empty constructor, protected.
+        protected SingletonCache()
         {
 
         }
-
+        /// <summary>
+        /// Gets the singleton stance via lazy initialization.
+        /// </summary>
+        /// <returns>Instance of the singleton Cache.</returns>
         public static Cache Instance()
         {
-
-            // Uses lazy initialization.
-
             // Note: this is not thread safe.
             if (_instance == null)
             {
