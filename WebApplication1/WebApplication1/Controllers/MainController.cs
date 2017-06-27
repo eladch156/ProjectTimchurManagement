@@ -617,7 +617,10 @@ namespace WebApplication1.Controllers
                         if(ua.Statuses.ID==1)
                         fl.Add(ua.ClusterID);
                     }
-                   
+                    if(sup.EmailAddress!=null)
+                    {
+                        fm.ActualEmail = sup.EmailAddress;
+                    }
                    
                     fm.Limitions = fl;
                     return View("EditSupplier", fm);

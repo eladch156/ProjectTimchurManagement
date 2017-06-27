@@ -226,6 +226,7 @@
     </Content>
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\approve.png" />
     <Content Include="Images\digital_israel.png" />
     <Content Include="Images\dig_isre.jpg" />
     <Content Include="Images\Emblem_of_Israel.svg.png" />
