@@ -372,7 +372,6 @@
     <Content Include="Style\MainLayoutStyle.css" />
     <Content Include="Style\LoginStyle.css" />
     <Content Include="Style\index_style.css" />
-    <Content Include="Videos\Hashav Video Guide.mp4" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
