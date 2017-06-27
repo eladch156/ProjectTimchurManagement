@@ -8,12 +8,23 @@ using WebApplication1.Models;
 
 namespace WebApplication1
 {
+    /// <summary>
+    /// Extension of the hub class, used for notifications
+    /// via SignalR connections.
+    /// </summary>
     public class NotificationsHub : Hub
     {
+        /// <summary>
+        /// Sends hello to all clients.
+        /// </summary>
         public void Hello()
         {
             Clients.All.hello();
         }
+        /// <summary>
+        /// Saves the stored addition of a user into the database,
+        /// and sends a cache message of the operation's completion status.
+        /// </summary>
         public void AddUserOperation()
         {
             
@@ -50,6 +61,10 @@ namespace WebApplication1
             string to_s=string.Format("סטאטוס:" + msg);
             Clients.Caller.sendMessage(id.Value.ToString());
         }
+        /// <summary>
+        /// Saves the stored update of a user into the database,
+        /// and sends a cache message of the operation's completion status.
+        /// </summary>
         public void EditUserOperation()
         {
 
@@ -95,6 +110,10 @@ namespace WebApplication1
             string to_s = string.Format("סטאטוס:" + msg);
             Clients.Caller.sendMessage(id.Value.ToString());
         }
+        /// <summary>
+        /// Saves the stored creation of an auction into the database,
+        /// and sends a cache message of the operation's completion status.
+        /// </summary>
         public void AddAuctionOperation()
         {
 
@@ -133,6 +152,10 @@ namespace WebApplication1
             string to_s = string.Format("סטאטוס:" + msg);
             Clients.Caller.sendMessage(id.Value.ToString());
         }
+        /// <summary>
+        /// Saves the stored update of an auction into the database,
+        /// and sends a cache message of the operation's completion status.
+        /// </summary>
         public void EditAuctionOperation()
         {
 
@@ -180,6 +203,10 @@ namespace WebApplication1
             string to_s = string.Format("סטאטוס:" + msg);
             Clients.Caller.sendMessage(id.Value.ToString());
         }
+        /// <summary>
+        /// Saves the stored creation of a cluster into the database,
+        /// and sends a cache message of the operation's completion status.
+        /// </summary>
         public void AddClusterOperation()
         {
 
@@ -217,6 +244,10 @@ namespace WebApplication1
             string to_s = string.Format("סטאטוס:" + msg);
             Clients.Caller.sendMessage(id.Value.ToString());
         }
+        /// <summary>
+        /// Saves the stored update of a cluster into the database,
+        /// and sends a cache message of the operation's completion status.
+        /// </summary>
         public void EditClusterOperation()
         {
 
@@ -262,6 +293,10 @@ namespace WebApplication1
             string to_s = string.Format("סטאטוס:" + msg);
             Clients.Caller.sendMessage(id.Value.ToString());
         }
+        /// <summary>
+        /// Saves the stored creation of a unit into the database,
+        /// and sends a cache message of the operation's completion status.
+        /// </summary>
         public void AddUnitOperation()
         {
 
@@ -312,6 +347,10 @@ namespace WebApplication1
             string to_s = string.Format("סטאטוס:" + msg);
             Clients.Caller.sendMessage(id.Value.ToString());
         }
+        /// <summary>
+        /// Saves the stored update of a unit into the database,
+        /// and sends a cache message of the operation's completion status.
+        /// </summary>
         public void editUnitOperation()
         {
 
@@ -372,6 +411,10 @@ namespace WebApplication1
             string to_s = string.Format("סטאטוס:" + msg);
             Clients.Caller.sendMessage(id.Value.ToString());
         }
+        /// <summary>
+        /// Saves the stored creation of a supplier into the database,
+        /// and sends a cache message of the operation's completion status.
+        /// </summary>
         public void AddSupplierOperation()
         {
             
@@ -434,6 +477,10 @@ namespace WebApplication1
             string to_s = string.Format("סטאטוס:" + msg);
             Clients.Caller.sendMessage(id.Value.ToString());
         }
+        /// <summary>
+        /// Saves the stored update of a supplier into the database,
+        /// and sends a cache message of the operation's completion status.
+        /// </summary>
         public void editSupplierOperation()
         {
 
@@ -490,9 +537,6 @@ namespace WebApplication1
                         entity.Entry(original).CurrentValues.SetValues(((SupplierFModel)SingletonCache.Instance().Storage[Context.User.Identity.Name]).supliers);
                         entity.SaveChanges();
                     }
-
-
-
                 }
                 using (TimchurDatabaseEntities entity2 = new TimchurDatabaseEntities())
                 {
@@ -518,6 +562,9 @@ namespace WebApplication1
             string to_s = string.Format("סטאטוס:" + msg);
             Clients.Caller.sendMessage(id.Value.ToString());
         }
+        /// <summary>
+        /// Sends the notification saved in the singleton cache and broadcasts it the caller client.
+        /// </summary>
         public void SendNotification()
         {
             if (SingletonCache.Instance().last_msg[Context.User.Identity.Name] != null)
