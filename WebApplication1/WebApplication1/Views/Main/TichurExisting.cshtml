@@ -510,10 +510,7 @@ else
         {
             var data = { id: last_succ_id,
                 comment: $("#comment").val() };
-               
-             
-            
-            var r = confirm("התהליך אינו ניתן לביטול,האם אתה בטוח?");
+            var r = confirm("לא ניתן לבטל את המחיקה לאחר השלמתה. להמשיך?");
             if (r == true) {
                
             $.ajax({
@@ -699,7 +696,7 @@ else
             </div>
             <div class="modal-body">
                 <p><h5><b>חובה להזין הערה לפני ביטול שליפה</b></h5></p>
-                <p><h5 class="text-info">שים לב, הערה זה אינה ניתנת לעריכה במועד מאוחר יותר</h5></p>
+                <p><h5 class="text-info">שים לב: הערה זה אינה ניתנת לעריכה במועד מאוחר יותר</h5></p>
                 
                 <div class="form-group">
                   
