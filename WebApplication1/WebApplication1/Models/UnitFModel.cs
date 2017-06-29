@@ -6,13 +6,22 @@ using WebApplication1.Database;
 
 namespace WebApplication1.Models
 {
+    /// <summary>
+    /// Model representing the Unit database entity.
+    /// </summary>
     public class UnitFModel
     {
+        /// <summary>
+        /// The unit proper.
+        /// </summary>
         public Units unit
         {
             get;
-                set;
+            set;
         }
-        public IEnumerable<int?> Limitions { get; set; }
+        /// <summary>
+        /// ID of the auctions to which this unit is limited.
+        /// </summary>
+        public IEnumerable<int?> Limitations { get; set; }
     }
 }

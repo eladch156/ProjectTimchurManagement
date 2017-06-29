@@ -11,6 +11,12 @@ namespace WebApplication1.AuthAbstract
     /// </summary>
     public interface IAuthProvider
     {
+        /// <summary>
+        /// Function representing user authentication.
+        /// </summary>
+        /// <param name="username">The username by which the authentication is done.</param>
+        /// <param name="Password">The user's password.</param>
+        /// <returns>Whether authentication completed successfully.</returns>
         bool Authenticate(String username, String Password);
     }
 }

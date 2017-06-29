@@ -316,9 +316,9 @@ namespace WebApplication1
                 {
                     string strm = mf.unit.Name;
                     id = entity2.Units.Where(x => x.Name == strm).First().ID;
-                    if (mf.Limitions != null)
+                    if (mf.Limitations != null)
                     {
-                        foreach (int i in mf.Limitions)
+                        foreach (int i in mf.Limitations)
                         {
                             UnitsAuctions ua = new UnitsAuctions();
                             ua.AuctionID = i;
@@ -370,9 +370,9 @@ namespace WebApplication1
                     if (original != null)
                     {
                          entity.UnitsAuctions.RemoveRange(entity.UnitsAuctions.Where(x => x.UnitID == mf.unit.ID));
-                        if (mf.Limitions != null)
+                        if (mf.Limitations != null)
                         {
-                            foreach (int i in mf.Limitions)
+                            foreach (int i in mf.Limitations)
                             {
                                 UnitsAuctions ua = new UnitsAuctions();
                                 ua.AuctionID = i;
@@ -443,9 +443,9 @@ namespace WebApplication1
                 {
                     string strm = mf.supliers.Name;
                     id = entity2.Suppliers.Where(x => x.Name == strm).First().ID;
-                    if (mf.Limitions != null)
+                    if (mf.Limitations != null)
                     {
-                        foreach (int i in mf.Limitions)
+                        foreach (int i in mf.Limitations)
                         {
                             SuppliersClusters ua = new SuppliersClusters();
                             ua.ClusterID = i;
@@ -498,9 +498,9 @@ namespace WebApplication1
                     if (original != null)
                     {
                         
-                        if (mf.Limitions != null)
+                        if (mf.Limitations != null)
                         {
-                            foreach (int i in mf.Limitions)
+                            foreach (int i in mf.Limitations)
                             {
                                 SuppliersClusters ua = new SuppliersClusters();
                                 if (entity.SuppliersClusters.Where(x => x.ClusterID == i && x.SupplierID == mf.supliers.ID).Count() > 0)
@@ -520,7 +520,7 @@ namespace WebApplication1
                        
                            
                         }
-                        foreach (SuppliersClusters sc in entity.SuppliersClusters.Where(x => !mf.Limitions.Contains(x.ClusterID) && x.SupplierID == mf.supliers.ID))
+                        foreach (SuppliersClusters sc in entity.SuppliersClusters.Where(x => !mf.Limitations.Contains(x.ClusterID) && x.SupplierID == mf.supliers.ID))
                         {
                             sc.StatusID = 2;
                         }

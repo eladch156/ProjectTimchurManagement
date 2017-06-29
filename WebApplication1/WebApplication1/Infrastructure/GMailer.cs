@@ -5,14 +5,41 @@ using System.Net.Mail;
 /// </summary>
 public class GMailer
 {
+    /// <summary>
+    /// The username of the Gmail account.
+    /// </summary>
     public static string GmailUsername { get; set; }
+    /// <summary>
+    /// The password of the Gmail account.
+    /// </summary>
     public static string GmailPassword { get; set; }
+    /// <summary>
+    /// String representation of the Gmail host.
+    /// </summary>
     public static string GmailHost { get; set; }
+    /// <summary>
+    /// Port used for mail delivery.
+    /// </summary>
     public static int GmailPort { get; set; }
+    /// <summary>
+    /// Whether the smtpClient used SSL to encrypt the connection.
+    /// </summary>
     public static bool GmailSSL { get; set; }
+    /// <summary>
+    /// String representing mail recipient 
+    /// </summary>
     public string ToEmail { get; set; }
+    /// <summary>
+    /// Email topic/subject
+    /// </summary>
     public string Subject { get; set; }
+    /// <summary>
+    /// Body/content of Email
+    /// </summary>
     public string Body { get; set; }
+    /// <summary>
+    /// Whether the mail message body is in HTML form.
+    /// </summary>
     public bool IsHtml { get; set; }
 
     /// <summary>
